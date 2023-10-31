@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 import "@splidejs/react-splide/css/core";
-import ImageContainer from "@/app/_components/_hooks/image-container";
+import ImageContainer from "@/app/_components/image-container";
 
 const PageItemGallerySlider = ({ imageList }) => {
   const slider1 = useRef();

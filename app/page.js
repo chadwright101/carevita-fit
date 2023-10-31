@@ -3,6 +3,7 @@ import PageItemHeroSlider from "@/app/_components/sliders/page-item-hero-slider"
 import data from "@/app/data/general-data.json";
 
 import "@/app/styles/partials/pages/home.module.scss";
+import About from "./_components/pages/home/about";
 
 const {
   homePage: {
@@ -13,11 +14,14 @@ const {
 export default function Home() {
   return (
     <main>
-      <PageItemHeroSlider imageList={images} />
-      <div className="hero-text">
-        <h2 className="white-text">{paragraph[0]}</h2>
-        <h2 className="white-text">{paragraph[1]}</h2>
-      </div>
+      <section>
+        <PageItemHeroSlider imageList={images} />
+        <div className="hero-text">
+          <h2 className="white-text">{paragraph[0]}</h2>
+          <h2 className="white-text">{paragraph[1]}</h2>
+        </div>
+      </section>
+      <About />
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi nulla
         repudiandae quasi suscipit at quis officiis est eveniet quia? Esse

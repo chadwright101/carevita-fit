@@ -17,6 +17,14 @@
         "Are you looking for a way to improve the wellbeing of your residents in care centres and retirement estates?",
         "Look no further than our fitness programme!"
       ]
+    },
+    "about": {
+      "images": ["/images/20230420_144516.jpg", "/images/20230420_142646.jpg"],
+      "paragraphs": [
+        "Our fitness programme is designed specifically by qualified trainers, Physiotherapists and Medical practitioners to ensure their safety for our Senior members. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
+        " Regular exercise has been shown to have numerous benefits for Seniors, including improved cardiovascular health, increased strength and flexibility, and a reduced risk of falls and injuries. It also improves mood and sleep, and reduces stress and anxiety.",
+        "The exercise programmes are led by certified fitness professionals that understand the unique challenges that come with ageing."
+      ]
     }
   },
   "contact": {

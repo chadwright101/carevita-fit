@@ -1,10 +1,10 @@
-const Heading = (
+const Heading = ({
   cssClasses,
   children,
   pageHeading,
   sectionHeading,
-  subheading
-) => {
+  subheading,
+}) => {
   if (pageHeading) {
     return <h1 className={`${cssClasses}`}>{children}</h1>;
   } else if (sectionHeading) {
