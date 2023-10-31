@@ -25,7 +25,27 @@
         " Regular exercise has been shown to have numerous benefits for Seniors, including improved cardiovascular health, increased strength and flexibility, and a reduced risk of falls and injuries. It also improves mood and sleep, and reduces stress and anxiety.",
         "The exercise programmes are led by certified fitness professionals that understand the unique challenges that come with ageing."
       ]
-    }
+    },
+    "testimonials": [
+      {
+        "name": "John Doe",
+        "paragraph": [
+          "The fitness company offers a wide range of classes and programs suitable for all fitness levels. The trainers are knowledgeable and motivating, creating a supportive and inclusive environment for members to achieve their health goals."
+        ]
+      },
+      {
+        "name": "Jane Doe",
+        "paragraph": [
+          "I highly recommend the fitness company for its top-notch facilities and equipment. The gym is clean and well-maintained, providing a comfortable space for workouts. The staff is friendly and helpful, ensuring a positive experience for every visitor."
+        ]
+      },
+      {
+        "name": "Jimmy Doe",
+        "paragraph": [
+          "The fitness company's online platform is fantastic, offering virtual workout options that can be accessed anytime, anywhere. The variety of classes available ensures there's something for everyone, making it convenient for busy individuals to stay active and healthy."
+        ]
+      }
+    ]
   },
   "contact": {
     "social": {

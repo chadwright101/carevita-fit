@@ -1,29 +1,71 @@
 @import "../utils/variables.module.scss";
 @import "../utils/mixins/media.module.scss";
 
-.hero-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-  text-align: center;
-  padding: 7rem 1.5rem;
-  background: $blue;
-  margin: -0.75rem -1.5rem 3rem -1.5rem;
+/* hero section */
+.hero-section {
+  .splide {
+    margin: 0 -2.5rem;
 
-  @include media("tabletLarge") {
-    padding: 6rem 3rem;
-    margin: -0.75rem -3rem 4rem -3rem;
+    @include media("tabletLarge") {
+      margin: 0 -3rem;
+    }
+
+    @include media("desktop") {
+      margin: 0;
+    }
   }
 
-  @include media("desktop") {
-    padding: 7rem 3rem;
-    margin: -0.75rem 0 5rem 0;
-  }
+  .splide__slide {
+    height: 275px;
 
-  h2:first-of-type {
-    font-weight: $thin;
+    @include media("phone") {
+      height: 350px;
+    }
+    @include media("tablet") {
+      height: 450px;
+    }
+    @include media("tabletLarge") {
+      height: 525px;
+    }
+    @include media("desktopSmall") {
+      height: 600px;
+    }
+    @include media("desktop") {
+      height: 650px;
+    }
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    text-align: center;
+    padding: 7rem 1.5rem;
+    background: $blue;
+    margin: -0.75rem -1.5rem 3rem -1.5rem;
+
+    @include media("tabletLarge") {
+      padding: 6rem 3rem;
+      margin: -0.75rem -3rem 4rem -3rem;
+    }
+
+    @include media("desktop") {
+      padding: 7rem 3rem;
+      margin: -0.75rem 0 5rem 0;
+    }
+
+    h2:first-of-type {
+      font-weight: $thin;
+    }
   }
 }
+
+/* about section */
 
 .about-section {
   display: grid;
@@ -70,5 +112,55 @@
     img:last-child {
       display: none;
     }
+  }
+}
+
+/* testimonials section */
+
+.testimonials-section {
+  padding: 4rem 3rem;
+  background-color: $blue;
+  margin-bottom: 3rem;
+
+  @include media("desktopSmall") {
+    padding: 6rem 0;
+  }
+
+  h2,
+  blockquote,
+  cite {
+    color: $white;
+  }
+
+  cite {
+    font-weight: $light;
+  }
+
+  h2 {
+    margin-bottom: 3rem;
+    @include media("desktopSmall") {
+      padding: 0 3rem;
+    }
+  }
+  article {
+    @include media("desktopSmall") {
+      padding: 0 8rem;
+    }
+
+    blockquote {
+      line-height: 1.75rem;
+      margin-bottom: 1rem;
+      text-align: justify;
+
+      span {
+        font-size: $heading;
+        color: $white;
+        font-family: "Times New Roman", Times, serif;
+        translate: 30px;
+      }
+    }
+  }
+  .splide__arrows {
+    top: 30%;
   }
 }

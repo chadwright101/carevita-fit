@@ -4,6 +4,7 @@ import data from "@/app/data/general-data.json";
 
 import "@/app/styles/partials/pages/home.module.scss";
 import About from "./_components/pages/home/about";
+import Testimonials from "./_components/pages/home/testimonials";
 
 const {
   homePage: {
@@ -14,7 +15,7 @@ const {
 export default function Home() {
   return (
     <main>
-      <section>
+      <section className="hero-section">
         <PageItemHeroSlider imageList={images} />
         <div className="hero-text">
           <h2 className="white-text">{paragraph[0]}</h2>
@@ -22,6 +23,7 @@ export default function Home() {
         </div>
       </section>
       <About />
+      <Testimonials />
       <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi nulla
         repudiandae quasi suscipit at quis officiis est eveniet quia? Esse
