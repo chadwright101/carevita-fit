@@ -1,0 +1,13 @@
+@import "../utils/mixins/media.module.scss";
+
+.layout-inner {
+  padding: 0 1.5rem;
+  @include media("tabletLarge") {
+    padding: 0 3rem;
+  }
+}
+
+.layout-outer {
+  max-width: 1400px;
+  margin: 0 auto;
+}
