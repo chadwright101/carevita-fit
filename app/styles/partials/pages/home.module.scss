@@ -1,0 +1,26 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  text-align: center;
+  padding: 7rem 1.5rem;
+  background: $blue;
+  margin: -0.75rem -1.5rem 2rem -1.5rem;
+
+  @include media("tabletLarge") {
+    padding: 6rem 3rem;
+    margin: -0.75rem -3rem 2rem -3rem;
+  }
+
+  @include media("desktop") {
+    padding: 7rem 3rem;
+    margin: -0.75rem 0 3rem 0;
+  }
+
+  h2:first-of-type {
+    font-weight: $thin;
+  }
+}
