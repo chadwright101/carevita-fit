@@ -1,0 +1,49 @@
+/* utils */
+@import "./partials/utils/resets.module.scss";
+@import "./partials/utils/variables.module.scss";
+@import "./partials/utils/fonts.module.scss";
+@import "./partials/components/splide.module.scss";
+@import "./partials/utils/mixins/media.module.scss";
+@import "./partials/utils/utils.module.scss";
+
+/* components */
+@import "./partials/components/header.module.scss";
+@import "./partials/components/layout.module.scss";
+
+/* pages */
+@import "./partials/pages/home.module.scss";
+
+* {
+  font-family: "Raleway";
+  color: #222222;
+}
+
+h1,
+h2 {
+  font-weight: 500;
+  font-size: 2.25rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+p,
+ul {
+  font-size: 1.125rem;
+  font-weight: 200;
+}
+
+p {
+  text-align: justify;
+}
+
+@include media("tabletLarge") {
+  a {
+    cursor: pointer;
+  }
+}
