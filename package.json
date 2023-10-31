@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@splidejs/react-splide": "^0.7.12",
+    "classnames": "^2.3.2",
+    "combine-mq": "^0.8.1",
+    "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.0.0"
+    "sass": "^1.69.5"
   },
   "devDependencies": {
     "eslint": "^8",
