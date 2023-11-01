@@ -11,36 +11,18 @@ const currentYear = new Date().getFullYear();
 const Footer = () => {
   return (
     <footer>
-      <div>
-        <div>
+      <div className="footer-container">
+        <div className="desktop-flex">
           <nav>
             <ul>
-              {navigation.general.map(({ title, url }, index) => (
+              {navigation.map(({ title, url }, index) => (
                 <li key={index}>
                   <Link href={url}>{title}</Link>
                 </li>
               ))}
-              <li>
-                <Link href={generalData.social.facebook.url} target="_blank">
-                  <Image
-                    src="/carevita-fit-logo.jpg"
-                    alt="Facebook logo"
-                    width={35}
-                    height={35}
-                  />
-                </Link>
-              </li>
             </ul>
           </nav>
-          <div>
-            <Link href={generalData.social.facebook.url} target="_blank">
-              <Image
-                src="/carevita-fit-logo.jpg"
-                alt="Facebook logo"
-                width={45}
-                height={45}
-              />
-            </Link>
+          <div className="logo">
             <ImageContainer
               src="/carevita-fit-logo.jpg"
               alt="CareVita logo"
@@ -51,18 +33,18 @@ const Footer = () => {
               desktopSmall={10}
               desktop={10}
             />
-            <p className="text-[16px] flex flex-col items-center tabletLarge:items-end tabletLarge:text-right tabletLarge:mt-2 tabletLarge:text-[15px]">
+            <p className="developed-by">
               Designed & developed by:
               <a href="https://www.thewrightdesigns.co.za" target="_blank">
                 The Wright Designs
               </a>
             </p>
           </div>
+          <hr />
         </div>
-        <hr />
-        <p>
+        <p className="copyright">
           © CareVita {currentYear}
-          <Link href="https://www.carevita.co.za">www.carevita.co.za</Link>
+          <Link href="https://www.carevita.co.za">fit.carevita.co.za</Link>
         </p>
       </div>
     </footer>

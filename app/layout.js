@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         <div className="layout-outer">
           <div className="layout-inner">{children}</div>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </html>
   );
