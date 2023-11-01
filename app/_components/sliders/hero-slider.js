@@ -5,7 +5,7 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
 import ImageContainer from "@/app/_components/image-container";
 
-const PageItemHeroSlider = ({ imageList }) => {
+const HeroSlider = ({ imageList }) => {
   return (
     <Splide
       options={{
@@ -76,4 +76,4 @@ const PageItemHeroSlider = ({ imageList }) => {
   );
 };
 
-export default PageItemHeroSlider;
+export default HeroSlider;

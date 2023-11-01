@@ -1,0 +1,28 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
+.slider {
+  height: 275px;
+
+  @include media("phone") {
+    height: 300px;
+  }
+  @include media("tablet") {
+    height: 400px;
+  }
+  @include media("tabletLarge") {
+    height: 500px;
+  }
+
+  .splide__slide {
+    height: 100%;
+    width: 100%;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+}

@@ -11,7 +11,6 @@
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "classnames": "^2.3.2",
-    "combine-mq": "^0.8.1",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",
