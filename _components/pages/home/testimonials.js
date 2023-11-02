@@ -4,7 +4,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 
 import Heading from "../../heading";
 
-import data from "@/app/data/general-data.json";
+import data from "@/data/general-data.json";
 
 import "@splidejs/react-splide/css/core";
 

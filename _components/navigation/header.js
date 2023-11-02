@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import navigation from "@/app/data/navigation-data.json";
-import ImageContainer from "@/app/_components/image-container";
+import navigation from "@/data/navigation-data.json";
+import ImageContainer from "@/_components/image-container";
 
 import menuIcon from "public/icons/menu-icon.svg";
 import closeIcon from "public/icons/close-icon.svg";

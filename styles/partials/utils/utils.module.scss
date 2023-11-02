@@ -1,0 +1,34 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
+.white-text {
+  color: $white;
+}
+.hidden {
+  display: none;
+}
+
+.grid {
+  display: grid;
+}
+
+.nav-point {
+  transform: translateY(-150px);
+}
+
+.page-heading {
+  font-size: $heading;
+  margin: 3rem 0;
+  text-align: center;
+
+  @include media("tablet") {
+    text-align: left;
+  }
+}
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: $green;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+}

@@ -57,7 +57,63 @@
       "/images/9U7A5127.jpg"
     ]
   },
-  "contact": {
+  "locationsPage": {
+    "properties": {
+      "property1": {
+        "propertyName": "Property 1",
+        "propertyLocation": {
+          "suburb": "Fourways",
+          "city": "Johannesburg"
+        },
+        "image": "/images/9U7A5096.jpg",
+        "description": "Location description goes here...",
+        "instructor": {
+          "name": "Kathy",
+          "image": "/images/9U7A5120.jpg"
+        }
+      },
+      "property2": {
+        "propertyName": "Property 2",
+        "propertyLocation": {
+          "suburb": "Menlyn",
+          "city": "Pretoria"
+        },
+        "image": "/images/Resized/20230420_143721.jpg",
+        "description": "Location description goes here...",
+        "instructor": {
+          "name": "John",
+          "image": "/images/20230420_143400.jpg"
+        }
+      },
+      "property3": {
+        "propertyName": "Property 3",
+        "propertyLocation": {
+          "suburb": "Menlyn",
+          "city": "Pretoria"
+        },
+        "image": "/images/20230420_143903.jpg",
+        "description": "Location description goes here...",
+        "instructor": {
+          "name": "Sipho",
+          "image": "/images/9U7A5106.jpg"
+        }
+      },
+      "property4": {
+        "propertyName": "Property 4",
+        "propertyLocation": {
+          "suburb": "Heralds View",
+          "city": "Mossel Bay"
+        },
+        "image": "/images/9U7A5126.jpg",
+        "description": "Location description goes here...",
+        "instructor": {
+          "name": "Charlotte",
+          "image": "/images/9U7A5126.jpg"
+        }
+      }
+    }
+  },
+  "contactPage": {
     "social": {
       "facebook": {
         "url": "https://www.facebook.com/CareLifeRetirement",

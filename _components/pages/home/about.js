@@ -1,7 +1,7 @@
 import Heading from "../../heading";
 import ImageContainer from "../../image-container";
 
-import data from "@/app/data/general-data.json";
+import data from "@/data/general-data.json";
 
 const {
   homePage: {

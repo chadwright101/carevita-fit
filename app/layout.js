@@ -1,6 +1,7 @@
-import Footer from "./_components/navigation/footer";
-import Header from "./_components/navigation/header";
-import "./styles/globals.scss";
+import { LocationsProvider } from "@/_context/locations-provider";
+import Footer from "../_components/navigation/footer";
+import Header from "../_components/navigation/header";
+import "@/styles/globals.scss";
 
 export const metadata = {
   title: "Create Next App",
@@ -12,9 +13,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Header />
-        <div className="layout-outer">
-          <div className="layout-inner">{children}</div>
-        </div>
+        <LocationsProvider>
+          <div className="layout-outer">
+            <div className="layout-inner">{children}</div>
+          </div>
+        </LocationsProvider>
         <Footer />
       </body>
     </html>

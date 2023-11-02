@@ -6,7 +6,7 @@ const Heading = ({
   subheading,
 }) => {
   if (pageHeading) {
-    return <h1 className={`${cssClasses}`}>{children}</h1>;
+    return <h1 className={`page-heading ${cssClasses}`}>{children}</h1>;
   } else if (sectionHeading) {
     return <h2 className={`${cssClasses}`}>{children}</h2>;
   } else if (subheading) {
