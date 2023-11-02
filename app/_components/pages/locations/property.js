@@ -27,6 +27,8 @@ const Property = ({ data, eager }) => {
           width={1100}
           height={500}
           eager={eager}
+          smallest={95}
+          desktopSmall={50}
         />
       </div>
       <div className="property-description">
@@ -38,6 +40,8 @@ const Property = ({ data, eager }) => {
             width={50}
             height={50}
             eager={eager}
+            smallest={10}
+            tabletLarge={5}
           />
         </Link>
       </div>

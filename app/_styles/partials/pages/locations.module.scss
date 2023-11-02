@@ -7,7 +7,7 @@
   display: grid;
   row-gap: 3rem;
 
-  @include media("tabletLarge") {
+  @include media("desktopSmall") {
     grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
   }
@@ -53,6 +53,13 @@
 
 .property-component {
   display: grid;
+  border-bottom: solid $black 1px;
+  padding-bottom: 2rem;
+
+  @include media("tabletLarge") {
+    border-bottom: none;
+  }
+
   .property-heading {
     margin-bottom: 2rem;
 
@@ -103,7 +110,7 @@
         height: 375px;
       }
       @include media("tabletLarge") {
-        height: 350px;
+        height: 450px;
       }
       @include media("desktopSmall") {
         height: 400px;

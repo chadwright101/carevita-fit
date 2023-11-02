@@ -24,6 +24,10 @@ const MeetTheTeam = () => {
                 alt={`CareVita #fit - ${instructorName}`}
                 width={400}
                 height={400}
+                smallest={95}
+                tablet={50}
+                desktopSmall={40}
+                desktop={30}
               />
               <h4>{instructorName}</h4>
               <p>{bio}</p>

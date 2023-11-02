@@ -16,11 +16,8 @@
   }
 
   .splide__slide {
-    height: 275px;
+    height: 60vh;
 
-    @include media("phone") {
-      height: 350px;
-    }
     @include media("tablet") {
       height: 450px;
     }

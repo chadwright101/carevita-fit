@@ -35,12 +35,8 @@ const BasicSlider = ({ imageList }) => {
             width={900}
             height={500}
             eager={index < 2 ? true : false}
-            smallest={90}
-            phone={65}
-            tablet={55}
-            tabletLarge={50}
-            desktopSmall={45}
-            desktop={35}
+            smallest={100}
+            desktop={95}
           />
         </SplideSlide>
       ))}

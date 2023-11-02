@@ -66,9 +66,8 @@ const HeroSlider = ({ imageList }) => {
               alt={`CareVita #fit - Image ${index + 1}`}
               width={1400}
               height={1000}
-              phone={100}
-              desktopSmall={80}
-              desktop={100}
+              smallest={100}
+              desktop={95}
               eager={index < 2 ? true : false}
             />
           </SplideSlide>

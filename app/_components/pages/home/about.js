@@ -17,9 +17,8 @@ const About = () => {
         alt="CareVita #fit - Group"
         width="1100"
         height="660"
-        phone="90"
-        desktopSmall="40"
-        cssClasses=""
+        smallest="90"
+        tabletLarge="50"
       />
       <article>
         <Heading sectionHeading>About</Heading>
@@ -34,9 +33,7 @@ const About = () => {
         alt="CareVita #fit - Group"
         width="1100"
         height="660"
-        phone="90"
-        desktopSmall="40"
-        cssClasses=""
+        smallest="90"
       />
     </section>
   );

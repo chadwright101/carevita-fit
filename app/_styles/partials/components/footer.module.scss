@@ -8,10 +8,10 @@
   gap: 1.5rem;
   padding: 3rem 3rem 1rem 3rem;
   max-width: 1300px;
-  margin: 0 auto;
+  margin: 4rem auto 0 auto;
+  border-top: solid 1px $black;
 
   @include media("desktopSmall") {
-    border-top: solid 1px $black;
     margin-top: 3rem;
   }
 
@@ -50,7 +50,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 1.5rem;
 
     @include media("desktopSmall") {
       align-items: end;
