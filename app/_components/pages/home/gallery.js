@@ -1,7 +1,7 @@
-import Heading from "../../heading";
-import BasicSlider from "../../sliders/basic-slider";
+import Heading from "@/app/_components/heading";
+import BasicSlider from "@/app/_components/sliders/basic-slider";
 
-import data from "@/data/general-data.json";
+import data from "@/app/_data/general-data.json";
 
 const {
   homePage: { gallery },

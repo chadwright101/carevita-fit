@@ -2,12 +2,13 @@
 
 import { useContext } from "react";
 
-import Heading from "@/_components/heading";
-import { LocationsContext } from "@/_context/locations-provider";
-import Property from "@/_components/pages/locations/property";
-import PropertyFilter from "@/_components/pages/locations/property-filter";
+import Heading from "@/app/_components/heading";
+import { LocationsContext } from "@/app/_context/locations-provider";
+import Property from "@/app/_components/pages/locations/property";
+import PropertyFilter from "@/app/_components/pages/locations/property-filter";
+import MeetTheTeam from "../_components/pages/locations/meet-the-team";
 
-import data from "@/data/general-data.json";
+import data from "@/app/_data/general-data.json";
 
 const {
   locationsPage: { properties },
@@ -21,11 +22,13 @@ const Locations = () => {
       <Heading pageHeading>Locations</Heading>
       <PropertyFilter />
       <section className="property-page">
-        {showJohannesburg && <Property data={properties.property1} eager />}
-        {showPretoria && <Property data={properties.property2} eager />}
-        {showMosselBay && <Property data={properties.property3} />}
-        {showGeorge && <Property data={properties.property4} />}
+        {showJohannesburg && <Property data={properties[0]} eager />}
+        {showPretoria && <Property data={properties[1]} eager />}
+        {showMosselBay && <Property data={properties[2]} />}
+        {showGeorge && <Property data={properties[3]} />}
       </section>
+      <div className="nav-point" id="team"></div>
+      <MeetTheTeam />
     </main>
   );
 };

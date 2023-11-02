@@ -58,8 +58,8 @@
     ]
   },
   "locationsPage": {
-    "properties": {
-      "property1": {
+    "properties": [
+      {
         "propertyName": "Property 1",
         "propertyLocation": {
           "suburb": "Fourways",
@@ -69,10 +69,11 @@
         "description": "Location description goes here...",
         "instructor": {
           "name": "Kathy",
-          "image": "/images/9U7A5120.jpg"
+          "image": "/images/_7affa782-7351-4faa-a3d9-4a1989929797.jpeg",
+          "bio": "Olivia Smith is a highly skilled and dedicated fitness instructor with over 10 years of experience in the industry. She is passionate about helping individuals achieve their fitness goals and live a healthy lifestyle. With her dynamic and motivational approach, Olivia creates engaging workout routines that combine cardio, strength training, and flexibility exercises."
         }
       },
-      "property2": {
+      {
         "propertyName": "Property 2",
         "propertyLocation": {
           "suburb": "Menlyn",
@@ -81,11 +82,12 @@
         "image": "/images/Resized/20230420_143721.jpg",
         "description": "Location description goes here...",
         "instructor": {
-          "name": "John",
-          "image": "/images/20230420_143400.jpg"
+          "name": "Joanne",
+          "image": "/images/_994693aa-175c-4e13-9e0e-38ff65a00fb5.jpeg",
+          "bio": "Olivia Smith is a highly skilled and dedicated fitness instructor with over 10 years of experience in the industry. She is passionate about helping individuals achieve their fitness goals and live a healthy lifestyle. With her dynamic and motivational approach, Olivia creates engaging workout routines that combine cardio, strength training, and flexibility exercises."
         }
       },
-      "property3": {
+      {
         "propertyName": "Property 3",
         "propertyLocation": {
           "suburb": "Menlyn",
@@ -95,10 +97,11 @@
         "description": "Location description goes here...",
         "instructor": {
           "name": "Sipho",
-          "image": "/images/9U7A5106.jpg"
+          "image": "/images/_2f39fc4e-25ec-454e-9de3-c590591a4c04.jpeg",
+          "bio": "Olivia Smith is a highly skilled and dedicated fitness instructor with over 10 years of experience in the industry. She is passionate about helping individuals achieve their fitness goals and live a healthy lifestyle. With her dynamic and motivational approach, Olivia creates engaging workout routines that combine cardio, strength training, and flexibility exercises."
         }
       },
-      "property4": {
+      {
         "propertyName": "Property 4",
         "propertyLocation": {
           "suburb": "Heralds View",
@@ -108,10 +111,11 @@
         "description": "Location description goes here...",
         "instructor": {
           "name": "Charlotte",
-          "image": "/images/9U7A5126.jpg"
+          "image": "/images/_62e25621-017a-46fa-965d-c83d1fa07857.jpeg",
+          "bio": "Olivia Smith is a highly skilled and dedicated fitness instructor with over 10 years of experience in the industry. She is passionate about helping individuals achieve their fitness goals and live a healthy lifestyle. With her dynamic and motivational approach, Olivia creates engaging workout routines that combine cardio, strength training, and flexibility exercises."
         }
       }
-    }
+    ]
   },
   "contactPage": {
     "social": {

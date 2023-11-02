@@ -1,7 +1,7 @@
-import { LocationsProvider } from "@/_context/locations-provider";
-import Footer from "../_components/navigation/footer";
-import Header from "../_components/navigation/header";
-import "@/styles/globals.scss";
+import { LocationsProvider } from "@/app/_context/locations-provider";
+import Footer from "./_components/navigation/footer";
+import Header from "./_components/navigation/header";
+import "@/app/_styles/globals.scss";
 
 export const metadata = {
   title: "Create Next App",

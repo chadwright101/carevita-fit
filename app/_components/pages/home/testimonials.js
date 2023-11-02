@@ -2,9 +2,9 @@
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 
-import Heading from "../../heading";
+import Heading from "@/app/_components/heading";
 
-import data from "@/data/general-data.json";
+import data from "@/app/_data/general-data.json";
 
 import "@splidejs/react-splide/css/core";
 

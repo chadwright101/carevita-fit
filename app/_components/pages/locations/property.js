@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import Heading from "@/_components/heading";
-import ImageContainer from "@/_components/image-container";
-import Button from "@/_components/button";
+import Heading from "@/app/_components/heading";
+import ImageContainer from "@/app/_components/image-container";
+import Button from "@/app/_components/button";
 
 const Property = ({ data, eager }) => {
   const {

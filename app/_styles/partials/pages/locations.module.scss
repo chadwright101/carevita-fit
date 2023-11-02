@@ -118,5 +118,47 @@
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
+    column-gap: 2rem;
+  }
+}
+
+.team-section {
+  margin-top: 4rem;
+  text-align: center;
+
+  @include media("tablet") {
+    text-align: left;
+  }
+
+  h2 {
+    margin-bottom: 3rem;
+  }
+
+  ul {
+    display: grid;
+    row-gap: 4rem;
+    column-gap: 2rem;
+
+    @include media("tablet") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media("desktopSmall") {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include media("desktop") {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    li {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.5rem;
+      align-items: center;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 }

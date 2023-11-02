@@ -1,9 +1,7 @@
-import About from "../_components/pages/home/about";
-import Testimonials from "../_components/pages/home/testimonials";
-import Gallery from "../_components/pages/home/gallery";
-import Hero from "@/_components/pages/home/hero";
-
-import "@/styles/partials/pages/home.module.scss";
+import About from "./_components/pages/home/about";
+import Testimonials from "./_components/pages/home/testimonials";
+import Gallery from "./_components/pages/home/gallery";
+import Hero from "./_components/pages/home/hero";
 
 export default function Home() {
   return (

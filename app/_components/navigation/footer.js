@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import ImageContainer from "@/_components/image-container";
+import ImageContainer from "@/app/_components/image-container";
 
-import navigation from "@/data/navigation-data.json";
+import navigation from "@/app/_data/navigation-data.json";
 
 const currentYear = new Date().getFullYear();
 

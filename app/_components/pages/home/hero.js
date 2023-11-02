@@ -1,8 +1,6 @@
-import HeroSlider from "@/_components/sliders/hero-slider";
+import HeroSlider from "@/app/_components/sliders/hero-slider";
 
-import data from "@/data/general-data.json";
-
-import "@/styles/partials/pages/home.module.scss";
+import data from "@/app/_data/general-data.json";
 
 const {
   homePage: {
