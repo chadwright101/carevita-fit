@@ -23,8 +23,10 @@ export default function Home() {
           <h2 className="white-text">{paragraph[1]}</h2>
         </div>
       </section>
+      <div id="about" className="nav-point"></div>
       <About />
       <Testimonials />
+      <div id="gallery" className="nav-point"></div>
       <Gallery />
     </main>
   );

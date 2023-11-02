@@ -18,6 +18,12 @@ const BasicSlider = ({ imageList }) => {
         autoplay: true,
         drag: false,
         arrows: true,
+        breakpoints: {
+          900: {
+            arrows: false,
+            drag: true,
+          },
+        },
       }}
       className="slider"
     >

@@ -13,10 +13,12 @@ const HeroSlider = ({ imageList }) => {
         type: "fade",
         interval: 5000,
         rewind: true,
+        drag: false,
         dragMinThreshold: { mouse: 50, touch: 150 },
         breakpoints: {
           900: {
             arrows: false,
+            drag: true,
           },
         },
       }}
