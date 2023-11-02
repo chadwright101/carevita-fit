@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import Heading from "@/_components/heading";
 import ImageContainer from "@/_components/image-container";
+import Button from "@/_components/button";
 
 const Property = ({ data, eager }) => {
   const {
@@ -40,6 +41,7 @@ const Property = ({ data, eager }) => {
           />
         </Link>
       </div>
+      <Button url="/contact">Enquire Now</Button>
     </article>
   );
 };
