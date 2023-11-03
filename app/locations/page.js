@@ -1,32 +1,43 @@
-"use client";
-
-import { useContext } from "react";
-
 import Heading from "@/app/_components/heading";
-import { LocationsContext } from "@/app/_context/locations-provider";
-import Property from "@/app/_components/pages/locations/property";
+
 import PropertyFilter from "@/app/_components/pages/locations/property-filter";
 import MeetTheTeam from "../_components/pages/locations/meet-the-team";
+import Properties from "../_components/pages/locations/properties";
 
-import data from "@/app/_data/general-data.json";
-
-const {
-  locationsPage: { properties },
-} = data;
+export const metadata = {
+  title: "Locations - #fit",
+  description: "",
+  keywords:
+    "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
+  openGraph: {
+    title: "Locations - #fit",
+    description: "",
+    type: "website",
+    locale: "en_ZA",
+    siteName: "#fit - CareVita",
+    url: "",
+    keywords:
+      "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
+    images: [
+      {
+        url: "",
+      },
+      {
+        url: "",
+      },
+      {
+        url: "",
+      },
+    ],
+  },
+};
 
 const Locations = () => {
-  const { showJohannesburg, showPretoria, showGeorge, showMosselBay } =
-    useContext(LocationsContext);
   return (
     <main>
       <Heading pageHeading>Locations</Heading>
       <PropertyFilter />
-      <section className="property-page">
-        {showJohannesburg && <Property data={properties[0]} eager />}
-        {showPretoria && <Property data={properties[1]} eager />}
-        {showMosselBay && <Property data={properties[2]} />}
-        {showGeorge && <Property data={properties[3]} />}
-      </section>
+      <Properties />
       <div className="nav-point" id="team"></div>
       <MeetTheTeam />
     </main>
