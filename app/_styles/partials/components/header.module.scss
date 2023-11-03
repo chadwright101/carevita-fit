@@ -52,11 +52,12 @@ header {
           font-size: $subheading;
           padding: 1rem;
           margin: -1rem;
+
+          a:hover {
+            color: $green;
+            font-weight: $light;
+          }
         }
-      }
-      li:hover {
-        color: $green;
-        font-weight: $light;
       }
     }
 

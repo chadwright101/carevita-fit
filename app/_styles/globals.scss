@@ -16,6 +16,7 @@
 /* pages */
 @import "./partials/pages/home.module.scss";
 @import "./partials/pages/locations.module.scss";
+@import "./partials/pages/contact.module.scss";
 
 * {
   font-family: "Raleway";
@@ -37,7 +38,11 @@ h6 {
 }
 
 p,
-ul {
+ul,
+label,
+input,
+textarea,
+select {
   font-size: 1.125rem;
   font-weight: 200;
   line-height: 1.5rem;

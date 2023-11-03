@@ -36,6 +36,9 @@
 
     ul {
       font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
 
       a:hover {
         text-decoration: underline;
@@ -82,6 +85,7 @@
   hr {
     margin-top: 1rem;
     margin-bottom: -0.5rem;
+    width: 10vw;
 
     @include media("desktopSmall") {
       display: none;
@@ -99,11 +103,15 @@
       color: $link;
     }
 
-    @include media("tabletLarge") {
+    @include media("desktopSmall") {
       font-size: 15px;
       flex-direction: row;
       justify-content: center;
       gap: 0.5rem;
+      margin-top: 1rem;
+      border-top: solid $black 1px;
+      width: 400px;
+      padding-top: 1rem;
     }
   }
 }

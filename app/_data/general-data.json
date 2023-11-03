@@ -118,11 +118,12 @@
     ]
   },
   "contactPage": {
-    "social": {
-      "facebook": {
-        "url": "https://www.facebook.com/CareLifeRetirement",
-        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita/facebook-logo.png"
-      }
-    }
+    "phone": "+27 83 567 8901",
+    "email": "julie@carevita.co.za",
+    "form": {
+      "propertyList": ["Property 1", "Property 2", "Property 3", "Property 4"],
+      "formAction": ""
+    },
+    "image": "/images/9U7A5106.jpg"
   }
 }
