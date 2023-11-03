@@ -18,7 +18,8 @@ const Form = () => {
   return (
     <section className="form-container">
       <p>
-        Please fill out the form below, and we'll be in touch with you ASAP...
+        Please fill out the form below, and we&apos;ll be in touch with you
+        ASAP...
       </p>
       <form action={`https://formsubmit.co/${formAction}`} method="POST">
         <input
