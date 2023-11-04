@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import navigation from "@/app/_data/navigation-data.json";
+import data from "@/app/_data/navigation-data.json";
 import ImageContainer from "@/app/_components/image-container";
 
 import menuIcon from "public/icons/menu-icon.svg";
 import closeIcon from "public/icons/close-icon.svg";
+
+const { general, admin } = data;
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -37,14 +39,14 @@ const Header = () => {
       {toggleMenu && (
         <nav className="mobile-nav">
           <ul>
-            {navigation.map(({ title, url }, index) => (
+            {general.map(({ title, url }, index) => (
               <>
                 <li key={index}>
                   <Link href={url} onClick={() => setToggleMenu(false)}>
                     {title}
                   </Link>
                 </li>
-                {index < navigation.length - 1 && <hr />}
+                {index < general.length - 2 && <hr />}
               </>
             ))}
           </ul>
@@ -69,7 +71,7 @@ const Header = () => {
           </Link>
           <nav>
             <ul className="flex gap-6">
-              {navigation.map(({ title, url }, index) => (
+              {general.map(({ title, url }, index) => (
                 <li key={index}>
                   <Link href={url}>{title}</Link>
                 </li>

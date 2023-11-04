@@ -2,9 +2,11 @@ import Link from "next/link";
 
 import ImageContainer from "@/app/_components/image-container";
 
-import navigation from "@/app/_data/navigation-data.json";
+import data from "@/app/_data/navigation-data.json";
 
 const currentYear = new Date().getFullYear();
+
+const { general, admin } = data;
 
 const Footer = () => {
   return (
@@ -13,7 +15,7 @@ const Footer = () => {
         <div className="desktop-flex">
           <nav>
             <ul>
-              {navigation.map(({ title, url }, index) => (
+              {general.map(({ title, url }, index) => (
                 <li key={index}>
                   <Link href={url}>{title}</Link>
                 </li>

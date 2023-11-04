@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { LocationsContext } from "@/app/_context/locations-provider";
+import { LocationsContext } from "@/app/_context/locations-context";
 import SingleProperty from "@/app/_components/pages/locations/single-property";
 import data from "@/app/_data/general-data.json";
 
