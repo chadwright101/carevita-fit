@@ -30,9 +30,9 @@ const ImageContainer = ({
       height={height}
       quality={isLoading ? 5 : quality || 50}
       loading={eager ? "eager" : "lazy"}
-      className={classNames(`ease-in-out duration-500 ${cssClasses}`, {
-        "blur-xl": isLoading,
-        "blur-none": !isLoading,
+      className={classNames(`image-transition ${cssClasses}`, {
+        blur: isLoading,
+        "no-blur": !isLoading,
       })}
       onClick={onClick}
       onLoadStart={() => setLoading(true)}

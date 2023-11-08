@@ -15,7 +15,9 @@ const {
 const Testimonials = () => {
   return (
     <section className="testimonials-section">
-      <Heading sectionHeading>Testimonials</Heading>
+      <Heading sectionHeading cssClasses="testimonials-section__heading">
+        Testimonials
+      </Heading>
       <Splide
         options={{
           type: "loop",
@@ -37,13 +39,17 @@ const Testimonials = () => {
       >
         {testimonials.map(({ name: person, paragraph }, index) => (
           <SplideSlide key={index}>
-            <article>
-              <blockquote>
-                <span className="quotation-marks">&#8220;</span>
+            <article className="testimonials-section__container">
+              <blockquote className="testimonials-section__quote">
+                <span className="testimonials-section__quotation-marks">
+                  &#8220;
+                </span>
                 {paragraph}
-                <span className="quotation-marks">&#8221;</span>
+                <span className="testimonials-section__quotation-marks">
+                  &#8221;
+                </span>
               </blockquote>
-              <cite>{person}</cite>
+              <cite className="testimonials-section__name">{person}</cite>
             </article>
           </SplideSlide>
         ))}

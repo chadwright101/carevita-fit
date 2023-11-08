@@ -14,13 +14,18 @@ const SingleProperty = ({ data, eager }) => {
   } = data;
   return (
     <article className="property-component">
-      <div className="property-heading">
-        <Heading sectionHeading>{propertyName}</Heading>
-        <Link href="#">
+      <div className="property-component__heading-container">
+        <Heading
+          cssClasses="property-component__heading-container--heading"
+          sectionHeading
+        >
+          {propertyName}
+        </Heading>
+        <Link className="property-component__heading-container--link" href="#">
           {suburb}, {city}
         </Link>
       </div>
-      <div className="property-image">
+      <div className="property-component__image">
         <ImageContainer
           src={image}
           alt={`CareVita #fit - ${propertyName}`}
@@ -31,7 +36,7 @@ const SingleProperty = ({ data, eager }) => {
           desktopSmall={50}
         />
       </div>
-      <div className="property-description">
+      <div className="property-component__description">
         <p>{description}</p>
         <Link href={`/locations#${name.toLowerCase()}`}>
           <ImageContainer

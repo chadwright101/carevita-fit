@@ -14,7 +14,7 @@ const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   return (
-    <header>
+    <header className="header-container">
       {/* mobile nav */}
       <div className="mobile-header">
         <Link href="/">
@@ -31,16 +31,24 @@ const Header = () => {
           />
         </Link>
         <button onClick={() => setToggleMenu(true)}>
-          <Image src={menuIcon} alt="Menu icon" className="menu" />
+          <Image
+            src={menuIcon}
+            alt="Menu icon"
+            className="mobile-header__menu-button"
+          />
         </button>
       </div>
       {toggleMenu && (
         <nav className="mobile-nav">
-          <ul>
+          <ul className="mobile-nav__list">
             {navigation.map(({ title, url }, index) => (
               <>
-                <li key={index}>
-                  <Link href={url} onClick={() => setToggleMenu(false)}>
+                <li className="mobile-nav__list-item" key={index}>
+                  <Link
+                    className="mobile-nav__link"
+                    href={url}
+                    onClick={() => setToggleMenu(false)}
+                  >
                     {title}
                   </Link>
                 </li>
@@ -48,7 +56,10 @@ const Header = () => {
               </>
             ))}
           </ul>
-          <button onClick={() => setToggleMenu(false)}>
+          <button
+            className="mobile-nav__close-button"
+            onClick={() => setToggleMenu(false)}
+          >
             <Image src={closeIcon} alt="Close menu icon" />
           </button>
         </nav>
@@ -56,7 +67,7 @@ const Header = () => {
 
       {/* desktop navigation */}
       <div className="desktop-header">
-        <div>
+        <div className="desktop-header__container">
           <Link href="/">
             <Image
               src="/carevita-fit-logo.jpg"
@@ -67,10 +78,10 @@ const Header = () => {
               sizes="(max-width: 900px) 65px, (max-width: 1400px) 65px, 65px"
             />
           </Link>
-          <nav>
-            <ul className="flex gap-6">
+          <nav className="desktop-nav">
+            <ul className="desktop-nav__list">
               {navigation.map(({ title, url }, index) => (
-                <li key={index}>
+                <li className="desktop-nav__list-item" key={index}>
                   <Link href={url}>{title}</Link>
                 </li>
               ))}

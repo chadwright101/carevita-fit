@@ -4,34 +4,32 @@
 /* contact info */
 
 .contact-section {
-  .desktop-grid {
+  &__grid {
     @include media("tabletLarge") {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
+  }
 
-    /* contact image */
+  &__image {
+    width: 100%;
+    height: 300px;
+    margin-top: 4rem;
+    object-fit: cover;
 
-    .contact-image {
-      width: 100%;
-      height: 300px;
-      margin-top: 4rem;
-      object-fit: cover;
-
-      @include media("tabletLarge") {
-        height: 100%;
-        margin-top: 0;
-      }
+    @include media("tabletLarge") {
+      height: 100%;
+      margin-top: 0;
     }
   }
 
-  ul {
+  .contact-info {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 
-    li {
+    &__item {
       display: grid;
       grid-template-columns: 75px 1fr;
       font-weight: $light;
@@ -40,27 +38,27 @@
       @include media("tabletLarge") {
         cursor: pointer;
       }
+    }
 
-      span,
-      a {
-        padding: 0.5rem;
-        margin: -0.5rem;
-        font-weight: $thin;
-
-        @include media("tabletLarge") {
-          padding: 0;
-          margin: 0;
-        }
-      }
+    &__show,
+    &__link {
+      padding: 0.5rem;
+      margin: -0.5rem;
+      font-weight: $thin;
 
       @include media("tabletLarge") {
-        a:hover,
-        span:hover {
-          text-decoration: underline;
-          text-decoration-color: $green;
-          text-decoration-thickness: 2px;
-          text-underline-offset: 6px;
-        }
+        padding: 0;
+        margin: 0;
+      }
+    }
+
+    @include media("tabletLarge") {
+      &__link:hover,
+      &__show:hover {
+        text-decoration: underline;
+        text-decoration-color: $green;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 6px;
       }
     }
   }
@@ -68,7 +66,7 @@
 
 /* form */
 
-.form-container {
+.contact-form-container {
   margin-top: 2rem;
   background: $blue;
   padding: 2rem 1.5rem;
@@ -78,7 +76,7 @@
     padding: 2.75rem 1.5rem;
   }
 
-  p {
+  &__paragraph {
     color: $white;
 
     @include media("desktopSmall") {
@@ -86,13 +84,13 @@
     }
   }
 
-  form {
+  &__form {
     display: flex;
     flex-direction: column;
     gap: 2rem;
     margin-top: 1rem;
 
-    div {
+    .contact-form-container__form--group {
       display: inherit;
       flex-direction: inherit;
       gap: 0.75rem;

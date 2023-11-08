@@ -10,17 +10,17 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer-container">
-        <div className="desktop-flex">
-          <nav>
-            <ul>
+        <div className="footer__flex">
+          <nav className="footer-nav">
+            <ul className="footer-nav__list">
               {navigation.map(({ title, url }, index) => (
-                <li key={index}>
+                <li className="footer-nav__list-item" key={index}>
                   <Link href={url}>{title}</Link>
                 </li>
               ))}
             </ul>
           </nav>
-          <div className="logo">
+          <div className="footer__flex--logo">
             <ImageContainer
               src="/carevita-fit-logo.jpg"
               alt="CareVita logo"
@@ -31,16 +31,16 @@ const Footer = () => {
               desktopSmall={10}
               desktop={10}
             />
-            <p className="developed-by">
+            <p className="footer__flex--developed-by">
               Designed & developed by:
               <a href="https://www.thewrightdesigns.co.za" target="_blank">
                 The Wright Designs
               </a>
             </p>
           </div>
-          <hr />
+          <hr className="footer__flex--line" />
         </div>
-        <p className="copyright">
+        <p className="footer-container__copyright">
           © CareVita {currentYear}
           <Link href="https://www.carevita.co.za">fit.carevita.co.za</Link>
         </p>

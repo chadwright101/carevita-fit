@@ -11,11 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className="layout">
         <Header />
         <LocationsProvider>
-          <div className="layout-outer">
-            <div className="layout-inner">{children}</div>
+          <div className="layout__outer">
+            <div className="layout__inner">{children}</div>
           </div>
         </LocationsProvider>
         <Footer />

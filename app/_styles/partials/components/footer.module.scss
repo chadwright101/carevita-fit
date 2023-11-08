@@ -19,80 +19,7 @@
     padding: 3rem 0 1rem 0;
   }
 
-  .desktop-flex {
-    @include media("desktopSmall") {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-  }
-
-  nav {
-    display: none;
-
-    @include media("desktopSmall") {
-      display: block;
-    }
-
-    ul {
-      font-size: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-
-      a:hover {
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        text-decoration-color: $green;
-        text-decoration-thickness: 2px;
-      }
-    }
-  }
-
-  .logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-
-    @include media("desktopSmall") {
-      align-items: end;
-    }
-
-    img {
-      height: auto;
-    }
-  }
-
-  .developed-by {
-    font-size: 16px;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    a {
-      color: $link;
-    }
-    @include media("desktopSmall") {
-      align-items: end;
-      text-align: right;
-      margin-top: 0.5rem;
-      font-size: 15px;
-    }
-  }
-
-  hr {
-    margin-top: 1rem;
-    margin-bottom: -0.5rem;
-    width: 10vw;
-
-    @include media("desktopSmall") {
-      display: none;
-    }
-  }
-
-  .copyright {
+  &__copyright {
     font-size: 16px;
     display: flex;
     align-items: center;
@@ -112,6 +39,79 @@
       border-top: solid $black 1px;
       width: 400px;
       padding-top: 1rem;
+    }
+  }
+}
+.footer__flex {
+  @include media("desktopSmall") {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .footer-nav {
+    display: none;
+
+    @include media("desktopSmall") {
+      display: block;
+    }
+
+    &__list {
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    &__list-item {
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        text-decoration-color: $green;
+        text-decoration-thickness: 2px;
+      }
+    }
+  }
+
+  .footer__flex--logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    @include media("desktopSmall") {
+      align-items: end;
+    }
+
+    img {
+      height: auto;
+    }
+  }
+
+  .footer__flex--developed-by {
+    font-size: 16px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      color: $link;
+    }
+    @include media("desktopSmall") {
+      align-items: end;
+      text-align: right;
+      margin-top: 0.5rem;
+      font-size: 15px;
+    }
+  }
+
+  .footer__flex--line {
+    margin-top: 1rem;
+    margin-bottom: -0.5rem;
+    width: 10vw;
+
+    @include media("desktopSmall") {
+      display: none;
     }
   }
 }

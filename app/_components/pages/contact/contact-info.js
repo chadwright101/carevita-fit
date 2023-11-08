@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import classNames from "classnames";
-
 import data from "@/app/_data/general-data.json";
 
 const {
@@ -14,21 +12,38 @@ const ContactInfo = () => {
   const [showPhone, setShowPhone] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   return (
-    <ul>
-      <li>
+    <ul className="contact-info">
+      <li className="contact-info__item">
         Tel:{" "}
         {!showPhone ? (
-          <span onClick={() => setShowPhone(true)}>Show phone number</span>
+          <span
+            className="contact-info__show"
+            onClick={() => setShowPhone(true)}
+          >
+            Show phone number
+          </span>
         ) : (
-          <a href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a>
+          <a
+            href={`tel:${phone.replace(/\s/g, "")}`}
+            className="contact-info__link"
+          >
+            {phone}
+          </a>
         )}
       </li>
-      <li>
+      <li className="contact-info__item">
         Email:{" "}
         {!showEmail ? (
-          <span onClick={() => setShowEmail(true)}>Show email address</span>
+          <span
+            className="contact-info__show"
+            onClick={() => setShowEmail(true)}
+          >
+            Show email address
+          </span>
         ) : (
-          <a href={`mailto:${email}`}>{email}</a>
+          <a href={`mailto:${email}`} className="contact-info__link">
+            {email}
+          </a>
         )}
       </li>
     </ul>

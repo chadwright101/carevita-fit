@@ -36,3 +36,16 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
+
+.image-transition {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.blur {
+  filter: blur(24px);
+}
+
+.no-blur {
+  filter: blur(0);
+}

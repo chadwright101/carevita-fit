@@ -19,10 +19,13 @@ const About = () => {
         height="660"
         smallest="90"
         tabletLarge="50"
+        cssClasses="about-section__image"
       />
       <article>
-        <Heading sectionHeading>About</Heading>
-        <div>
+        <Heading cssClasses="about-section__heading" sectionHeading>
+          About
+        </Heading>
+        <div className="about-section__paragraph-container">
           {paragraphs.map((item, index) => (
             <p key={index}>{item}</p>
           ))}
@@ -34,6 +37,7 @@ const About = () => {
         width="1100"
         height="660"
         smallest="90"
+        cssClasses="about-section__image"
       />
     </section>
   );

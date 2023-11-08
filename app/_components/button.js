@@ -4,7 +4,7 @@ import Image from "next/image";
 const Button = ({ children, form, cssClasses, url, onClick, formNext }) => {
   if (form) {
     return (
-      <button className={`button button-arrow ${cssClasses}`} type="submit">
+      <button className={`button button--arrow ${cssClasses}`} type="submit">
         {children}
         <Image
           src="/icons/arrow_forward.svg"
@@ -16,7 +16,10 @@ const Button = ({ children, form, cssClasses, url, onClick, formNext }) => {
     );
   } else if (formNext) {
     return (
-      <button className={`button button-arrow ${cssClasses}`} onClick={onClick}>
+      <button
+        className={`button button--arrow ${cssClasses}`}
+        onClick={onClick}
+      >
         Next
         <Image
           src="/icons/arrow_forward.svg"
@@ -28,7 +31,7 @@ const Button = ({ children, form, cssClasses, url, onClick, formNext }) => {
     );
   } else {
     return (
-      <Link href={url} className={`button button-normal ${cssClasses}`}>
+      <Link href={url} className={`button button--normal ${cssClasses}`}>
         {children || "View More"}
       </Link>
     );

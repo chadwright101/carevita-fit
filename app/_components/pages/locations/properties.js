@@ -14,7 +14,7 @@ const Properties = () => {
   const { showJohannesburg, showPretoria, showGeorge, showMosselBay } =
     useContext(LocationsContext);
   return (
-    <section className="property-page">
+    <section className="property-section">
       {showJohannesburg && <SingleProperty data={properties[0]} eager />}
       {showPretoria && <SingleProperty data={properties[1]} eager />}
       {showMosselBay && <SingleProperty data={properties[2]} />}
