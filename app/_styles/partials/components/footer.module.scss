@@ -40,25 +40,6 @@
       flex-direction: column;
       gap: 0.25rem;
 
-      li:last-of-type {
-        background: $green;
-        padding: 0.25rem 0.5rem;
-
-        a {
-          color: $white;
-        }
-        a:hover {
-          text-decoration: none;
-          text-underline-offset: 4px;
-          text-decoration-color: $green;
-          text-decoration-thickness: 2px;
-        }
-      }
-
-      li:last-of-type:hover {
-        background: $blue;
-      }
-
       a:hover {
         text-decoration: underline;
         text-underline-offset: 4px;

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { AuthContext } from "@/app/_context/auth-context";
 import { loginWithEmailAndPassword } from "@/app/_firebase/firebase";
+import Heading from "../_components/heading";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -38,28 +39,31 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <label>
-        Email:
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="username"
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-        />
-      </label>
-      <br />
-      <button type="submit">Log in</button>
-    </form>
+    <main>
+      <Heading pageHeading>Admin Login</Heading>
+      <form onSubmit={handleLogin}>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="username"
+          />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </label>
+        <br />
+        <button type="submit">Log in</button>
+      </form>
+    </main>
   );
 }

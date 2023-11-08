@@ -23,9 +23,9 @@
     column-gap: 0.5rem;
     row-gap: 1rem;
 
-    @include media("desktopSmall") {
+    @include media("tabletLarge") {
       gap: 0.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
 
       li:hover {
         color: $green;
@@ -38,7 +38,7 @@
       margin: -0.5rem;
       font-style: italic;
 
-      @include media("desktopSmall") {
+      @include media("tabletLarge") {
         padding: 0;
         margin: 0;
         cursor: pointer;
@@ -54,7 +54,7 @@
     font-size: $paragraph;
     margin-top: 1rem;
 
-    @include media("desktopSmall") {
+    @include media("tabletLarge") {
       padding: 0;
       margin: 0;
       cursor: pointer;

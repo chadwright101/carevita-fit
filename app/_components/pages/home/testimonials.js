@@ -1,18 +1,29 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/app/_firebase/firebase";
 
 import Heading from "@/app/_components/heading";
 
-import data from "@/app/_data/general-data.json";
-
 import "@splidejs/react-splide/css/core";
 
-const {
-  homePage: { testimonials },
-} = data;
-
 const Testimonials = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const testimonialsCollectionRef = collection(db, "testimonials");
+
+  useEffect(() => {
+    const getTestimonials = async () => {
+      const testimonialsData = await getDocs(testimonialsCollectionRef);
+      setTestimonials(
+        testimonialsData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+
+    getTestimonials();
+  }, []);
   return (
     <section className="testimonials-section">
       <Heading sectionHeading>Testimonials</Heading>

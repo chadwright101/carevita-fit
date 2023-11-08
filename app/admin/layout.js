@@ -1,11 +1,36 @@
 "use client";
 
-import { useContext } from "react";
-import { AuthContext } from "@/app/_context/auth-context";
 import Link from "next/link";
+import { useContext, useEffect } from "react";
+import { useRouter } from "next/navigation";
+
+import { AuthContext } from "@/app/_context/auth-context";
+import { logoutUser } from "@/app/_firebase/firebase";
 
 const AdminLayout = ({ children }) => {
-  const { loggedInUser } = useContext(AuthContext);
+  const router = useRouter();
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+
+  const handleSignOut = async (e) => {
+    logoutUser();
+    router.push("/login");
+    setLoggedInUser(false);
+    localStorage.removeItem("loggedInUser");
+  };
+
+  useEffect(() => {
+    const handlePageHide = (e) => {
+      e.preventDefault();
+      handleSignOut();
+    };
+
+    window.addEventListener("pagehide", handlePageHide);
+
+    return () => {
+      window.removeEventListener("pagehide", handlePageHide);
+    };
+  }, []);
+
   if (loggedInUser) {
     return <section>{children}</section>;
   } else {
