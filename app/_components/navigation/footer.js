@@ -1,6 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useContext } from "react";
+import { useRouter } from "next/navigation";
 
 import ImageContainer from "@/app/_components/image-container";
+import { AuthContext } from "@/app/_context/auth-context";
+import { logoutUser } from "@/app/_firebase/firebase";
 
 import data from "@/app/_data/navigation-data.json";
 
@@ -9,17 +15,43 @@ const currentYear = new Date().getFullYear();
 const { general, admin } = data;
 
 const Footer = () => {
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleSignOut = async (e) => {
+    logoutUser();
+    router.push("/login");
+    setLoggedInUser(false);
+    localStorage.removeItem("loggedInUser");
+  };
+
   return (
     <footer>
       <div className="footer-container">
         <div className="footer__flex">
           <nav className="footer-nav">
             <ul className="footer-nav__list">
-              {general.map(({ title, url }, index) => (
-                <li className="footer-nav__list-item" key={index}>
-                  <Link href={url}>{title}</Link>
+              {loggedInUser
+                ? admin.map(({ title, url }, index) => (
+                    <li className="footer-nav__list-item" key={index}>
+                      <Link
+                        href={url}
+                        onClick={title === "Sign Out" ? handleSignOut : null}
+                      >
+                        {title}
+                      </Link>
+                    </li>
+                  ))
+                : general.map(({ title, url }, index) => (
+                    <li className="footer-nav__list-item" key={index}>
+                      <Link href={url}>{title}</Link>
+                    </li>
+                  ))}
+              {!loggedInUser && (
+                <li>
+                  <Link href="/login">Admin Login</Link>
                 </li>
-              ))}
+              )}
             </ul>
           </nav>
           <div className="footer__flex--logo">
