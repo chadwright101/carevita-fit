@@ -1,21 +1,34 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/app/_firebase/firebase";
 
 import Heading from "@/app/_components/heading";
 
-import data from "@/app/_data/general-data.json";
-
 import "@splidejs/react-splide/css/core";
 
-const {
-  homePage: { testimonials },
-} = data;
-
 const Testimonials = () => {
+  const [testimonials, setTestimonials] = useState([]);
+  const testimonialsCollectionRef = collection(db, "testimonials");
+
+  useEffect(() => {
+    const getTestimonials = async () => {
+      const testimonialsData = await getDocs(testimonialsCollectionRef);
+      setTestimonials(
+        testimonialsData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+
+    getTestimonials();
+  }, []);
   return (
     <section className="testimonials-section">
-      <Heading sectionHeading>Testimonials</Heading>
+      <Heading sectionHeading cssClasses="testimonials-section__heading">
+        Testimonials
+      </Heading>
       <Splide
         options={{
           type: "loop",
@@ -37,13 +50,17 @@ const Testimonials = () => {
       >
         {testimonials.map(({ name: person, paragraph }, index) => (
           <SplideSlide key={index}>
-            <article>
-              <blockquote>
-                <span className="quotation-marks">&#8220;</span>
+            <article className="testimonials-section__container">
+              <blockquote className="testimonials-section__quote">
+                <span className="testimonials-section__quotation-marks">
+                  &#8220;
+                </span>
                 {paragraph}
-                <span className="quotation-marks">&#8221;</span>
+                <span className="testimonials-section__quotation-marks">
+                  &#8221;
+                </span>
               </blockquote>
-              <cite>{person}</cite>
+              <cite className="testimonials-section__name">{person}</cite>
             </article>
           </SplideSlide>
         ))}

@@ -3,7 +3,7 @@
 
 /* property page */
 
-.property-page {
+.property-section {
   display: grid;
   row-gap: 3rem;
 
@@ -17,7 +17,7 @@
 
 .property-filter {
   margin-bottom: 3rem;
-  ul {
+  &__list {
     display: flex;
     flex-wrap: wrap;
     column-gap: 0.5rem;
@@ -25,27 +25,26 @@
 
     @include media("desktopSmall") {
       gap: 0.5rem;
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
 
-      li:hover {
+      .property-filter__list-item:hover {
         color: $green;
       }
     }
+  }
+  &__list-item {
+    color: $link;
+    padding: 0.5rem;
+    margin: -0.5rem;
+    font-style: italic;
 
-    li {
-      color: $link;
-      padding: 0.5rem;
-      margin: -0.5rem;
-      font-style: italic;
-
-      @include media("desktopSmall") {
-        padding: 0;
-        margin: 0;
-        cursor: pointer;
-      }
+    @include media("desktopSmall") {
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
     }
   }
-  #clear-filter {
+  .property-filter--clear-filter {
     font-weight: $light;
     color: $link;
     padding: 0.5rem;
@@ -73,14 +72,14 @@
     border-bottom: none;
   }
 
-  .property-heading {
+  &__heading-container {
     margin-bottom: 2rem;
 
-    h2 {
+    .property-component__heading-container--heading {
       margin-bottom: 0.75rem;
     }
 
-    a {
+    .property-component__heading-container--link {
       color: $link;
       font-weight: $thin;
       font-size: $paragraph;
@@ -91,29 +90,26 @@
     @include media("desktopSmall") {
       margin-bottom: 1.25rem;
 
-      h2 {
+      .property-component__heading-container--heading {
         margin-bottom: 0.75rem;
       }
 
-      a {
+      .property-component__heading-container--link {
         padding: 0;
         margin: 0;
       }
 
-      a:hover {
+      .property-component__heading-container--link:hover {
         color: $green;
       }
     }
   }
 
-  img {
-    object-fit: cover;
-  }
-
-  .property-image {
+  &__image {
     img {
       max-width: 100%;
       height: 250px;
+      object-fit: cover;
 
       @include media("phone") {
         height: 300px;
@@ -133,7 +129,7 @@
     }
   }
 
-  .property-description {
+  &__description {
     display: flex;
     justify-content: space-between;
     margin-top: 1.5rem;
@@ -151,11 +147,11 @@
     text-align: left;
   }
 
-  h2 {
+  &__heading {
     margin-bottom: 3rem;
   }
 
-  ul {
+  &__list {
     display: grid;
     row-gap: 4rem;
     column-gap: 2rem;
@@ -169,17 +165,17 @@
     @include media("desktop") {
       grid-template-columns: repeat(4, 1fr);
     }
+  }
 
-    li {
-      display: flex;
-      flex-direction: column;
-      row-gap: 1.5rem;
-      align-items: center;
+  &__list-item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.5rem;
+    align-items: center;
+  }
 
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
+  &__image {
+    width: 100%;
+    height: auto;
   }
 }

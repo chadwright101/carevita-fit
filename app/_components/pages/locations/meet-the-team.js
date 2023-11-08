@@ -10,11 +10,13 @@ const {
 const MeetTheTeam = () => {
   return (
     <section className="team-section">
-      <Heading sectionHeading>Meet the Team</Heading>
-      <ul>
+      <Heading className="team-section__heading" sectionHeading>
+        Meet the Team
+      </Heading>
+      <ul className="team-section__list">
         {properties.map(
           ({ instructor: { name: instructorName, image, bio } }, index) => (
-            <li key={index}>
+            <li className="team-section__list-item" key={index}>
               <div
                 className="nav-point"
                 id={instructorName.toLowerCase()}
@@ -28,6 +30,7 @@ const MeetTheTeam = () => {
                 tablet={50}
                 desktopSmall={40}
                 desktop={30}
+                cssClasses="team-section__image"
               />
               <h4>{instructorName}</h4>
               <p>{bio}</p>

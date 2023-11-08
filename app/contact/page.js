@@ -41,7 +41,7 @@ const Contact = () => {
   return (
     <main className="contact-section">
       <Heading pageHeading>Contact</Heading>
-      <div className="desktop-grid">
+      <div className="contact-section__grid">
         <div>
           <ContactInfo />
           <Form />
@@ -51,7 +51,7 @@ const Contact = () => {
             src={image}
             width={900}
             height={900}
-            cssClasses="contact-image"
+            cssClasses="contact-section__image"
           />
         </div>
       </div>

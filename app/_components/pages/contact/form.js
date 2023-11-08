@@ -16,12 +16,16 @@ const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
 
   return (
-    <section className="form-container">
-      <p>
+    <section className="contact-form-container">
+      <p className="contact-form-container__paragraph">
         Please fill out the form below, and we&apos;ll be in touch with you
         ASAP...
       </p>
-      <form action={`https://formsubmit.co/${formAction}`} method="POST">
+      <form
+        className="contact-form-container__form"
+        action={`https://formsubmit.co/${formAction}`}
+        method="POST"
+      >
         <input
           type="text"
           name="subject"
@@ -29,7 +33,7 @@ const Form = () => {
           className="hidden"
         />
         <input type="text" name="_honey" className="hidden" />
-        <div>
+        <div className="contact-form-container__form--group">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -41,7 +45,7 @@ const Form = () => {
         </div>
         {showMessage && (
           <>
-            <div>
+            <div className="contact-form-container__form--group">
               <label htmlFor="phone">Phone:</label>
               <input
                 type="text"
@@ -51,7 +55,7 @@ const Form = () => {
                 placeholder="Phone number"
               />
             </div>
-            <div>
+            <div className="contact-form-container__form--group">
               <label htmlFor="email">Email:</label>
               <input
                 type="text"
@@ -61,7 +65,7 @@ const Form = () => {
                 placeholder="Email address"
               />
             </div>
-            <div>
+            <div className="contact-form-container__form--group">
               <label htmlFor="property">Property:</label>
               <select id="property" name="property">
                 {propertyList.map((property, index) => (
@@ -71,7 +75,7 @@ const Form = () => {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="contact-form-container__form--group">
               <label htmlFor="email">Message:</label>
               <textarea
                 id="message"

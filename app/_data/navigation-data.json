@@ -23,11 +23,13 @@
     {
       "title": "Contact",
       "url": "/contact"
-    },
-    {
-      "title": "Admin login",
-      "url": "/login"
     }
   ],
-  "admin": [{ "title": "Dashboard", "url": "/admin/dashboard" }]
+  "admin": [
+    { "title": "Dashboard", "url": "/admin/dashboard" },
+    { "title": "Home Page", "url": "/" },
+    { "title": "Locations Page", "url": "/locations" },
+    { "title": "Contact Page", "url": "/contact" },
+    { "title": "Sign Out", "url": "#" }
+  ]
 }

@@ -22,7 +22,7 @@ const PropertyFilter = () => {
 
   return (
     <div className="property-filter">
-      <ul>
+      <ul className="property-filter__list">
         <li
           onClick={() => {
             setShowJohannesburg(true);
@@ -31,7 +31,7 @@ const PropertyFilter = () => {
             setShowPretoria(false);
             setShowClearFilter(true);
           }}
-          className={classNames("", {
+          className={classNames("property-filter__list-item", {
             underline: showJohannesburg && showClearFilter,
           })}
         >
@@ -46,7 +46,7 @@ const PropertyFilter = () => {
             setShowJohannesburg(false);
             setShowClearFilter(true);
           }}
-          className={classNames("", {
+          className={classNames("property-filter__list-item", {
             underline: showPretoria && showClearFilter,
           })}
         >
@@ -61,7 +61,7 @@ const PropertyFilter = () => {
             setShowPretoria(false);
             setShowClearFilter(true);
           }}
-          className={classNames("", {
+          className={classNames("property-filter__list-item", {
             underline: showMosselBay && showClearFilter,
           })}
         >
@@ -76,7 +76,7 @@ const PropertyFilter = () => {
             setShowPretoria(false);
             setShowClearFilter(true);
           }}
-          className={classNames("", {
+          className={classNames("property-filter__list-item", {
             underline: showGeorge && showClearFilter,
           })}
         >
@@ -92,7 +92,7 @@ const PropertyFilter = () => {
             setShowMosselBay(true);
             setShowPretoria(true);
           }}
-          id="clear-filter"
+          className="property-filter--clear-filter"
         >
           Clear filter
         </button>
