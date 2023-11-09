@@ -6,13 +6,15 @@
   font-size: $subheading;
   border: solid $green 2px;
   border-radius: 30px;
-  box-shadow: 0 2px 2px rgb(0 0 0 / 0.06);
+  box-shadow: 0 2px 2px rgb(0 0 0 / 0.16);
   text-align: center;
-}
 
-@include media("desktopSmall") {
-  .button:hover {
-    cursor: pointer;
+  @include media("desktopSmall") {
+    &:hover {
+      cursor: pointer;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+    }
   }
 }
 
@@ -23,7 +25,7 @@
 
   @include media("desktopSmall") {
     &:hover {
-      background: rgb(19, 66, 102, 0.9);
+      background: rgb(19, 66, 102, 0.75);
     }
   }
 }

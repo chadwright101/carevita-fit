@@ -1,0 +1,62 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
+.login-page {
+  &__heading {
+    text-align: center;
+  }
+  &__form {
+    display: grid;
+    row-gap: 1rem;
+
+    @include media("tablet") {
+      width: 300px;
+    }
+
+    input {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+
+    &__group {
+      display: grid;
+      row-gap: 0.5rem;
+      align-items: center;
+
+      @include media("tablet") {
+        grid-template-columns: 100px 1fr;
+      }
+
+      &__password {
+        display: grid;
+        position: relative;
+
+        &__button {
+          position: absolute;
+          right: 1rem;
+          top: 25%;
+          padding: 0.5rem;
+          margin: -0.5rem;
+
+          @include media("desktopSmall") {
+            padding: 0;
+            margin: 0;
+
+            &:hover {
+              scale: 1.025;
+              cursor: pointer;
+              transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+              transition-duration: 300ms;
+            }
+          }
+        }
+      }
+    }
+
+    &__button {
+      @include media("tablet") {
+        width: 100px;
+      }
+    }
+  }
+}

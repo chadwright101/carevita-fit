@@ -1,16 +1,29 @@
 "use client";
 
 import { createContext, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/app/_firebase/firebase";
+import { ToastContainer, toast } from "react-toastify";
 
 import { testimonialsCollectionRef } from "../_components/pages/admin/testimonials-section";
 
-// Create the Context
+import "react-toastify/dist/ReactToastify.css";
+
 export const AdminContext = createContext();
 
-// Create a Provider component
+const toastProps = {
+  position: "bottom-left",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+};
+
 export const AdminProvider = ({ children }) => {
   const [testimonialsArray, setTestimonialsArray] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
@@ -18,12 +31,14 @@ export const AdminProvider = ({ children }) => {
   const [editedParagraph, setEditedParagraph] = useState("");
   const [newTestimonialName, setNewTestimonialName] = useState("");
   const [newTestimonialParagraph, setNewTestimonialParagraph] = useState("");
+  const router = useRouter();
 
   const handleTestimonialEdit = (testimonialIndex) => {
     setEditIndex(testimonialIndex);
     const testimonial = testimonialsArray[testimonialIndex];
     setEditedName(testimonial.name);
     setEditedParagraph(testimonial.paragraph);
+    router.push(`/admin/dashboard#testimonial-${testimonialIndex}`);
   };
 
   const handleTestimonialSave = async (testimonialId) => {
@@ -33,10 +48,13 @@ export const AdminProvider = ({ children }) => {
         paragraph: editedParagraph,
       });
       setEditIndex(null);
+      toast.success("Success! Testimonial saved.", toastProps);
     } catch (error) {
-      alert(
-        "Failed to update testimonial, please try again. If the problem persists, please contact the developer."
+      toast.error(
+        "Error! Testimonial could not be saved. Please try again and contact the developer if the problem persists.",
+        toastProps
       );
+      console.log(error);
     }
   };
 
@@ -69,21 +87,19 @@ export const AdminProvider = ({ children }) => {
         setTestimonialsArray(
           testimonialsArray.filter((t) => t.id !== testimonialId)
         );
+        toast.success("Success! Testimonial deleted.", toastProps);
       } catch (error) {
-        alert(
-          "Failed to delete testimonial, please try again. If the problem persists, please contact the developer."
+        toast.error(
+          "Error! Testimonial could not be deleted. Please try again and contact the developer if the problem persists.",
+          toastProps
         );
+        console.log(error);
       }
     }
   };
 
   const handleTestimonialAdd = async (e) => {
     e.preventDefault();
-
-    if (testimonialsArray.length >= 10) {
-      alert("You have reached the maximum limit of testimonials.");
-      return;
-    }
 
     try {
       const newTestimonial = {
@@ -97,28 +113,48 @@ export const AdminProvider = ({ children }) => {
       ]);
       setNewTestimonialName("");
       setNewTestimonialParagraph("");
+      toast.success("Success! Testimonial added.", toastProps);
     } catch (error) {
-      alert(
-        "Failed to add testimonial, please try again. If the problem persists, please contact the developer."
+      toast.error(
+        "Error! Testimonial could not be added. Please try again and contact the developer if the problem persists."
       );
+      console.log(error);
     }
   };
 
   const moveTestimonialUp = (testimonialIndex) => {
     if (testimonialIndex > 0) {
-      const updatedArray = [...testimonialsArray];
-      const [testimonialToMove] = updatedArray.splice(testimonialIndex, 1);
-      updatedArray.splice(testimonialIndex - 1, 0, testimonialToMove);
-      setTestimonialsArray(updatedArray);
+      try {
+        const updatedArray = [...testimonialsArray];
+        const [testimonialToMove] = updatedArray.splice(testimonialIndex, 1);
+        updatedArray.splice(testimonialIndex - 1, 0, testimonialToMove);
+        setTestimonialsArray(updatedArray);
+        toast.success("Success! Testimonial has been moved up.", toastProps);
+      } catch (error) {
+        toast.error(
+          "Error! Testimonial could not be moved. Please try again and contact the developer if the problem persists.",
+          toastProps
+        );
+        console.log(error);
+      }
     }
   };
 
   const moveTestimonialDown = (testimonialIndex) => {
     if (testimonialIndex < testimonialsArray.length - 1) {
-      const updatedArray = [...testimonialsArray];
-      const [testimonialToMove] = updatedArray.splice(testimonialIndex, 1);
-      updatedArray.splice(testimonialIndex + 1, 0, testimonialToMove);
-      setTestimonialsArray(updatedArray);
+      try {
+        const updatedArray = [...testimonialsArray];
+        const [testimonialToMove] = updatedArray.splice(testimonialIndex, 1);
+        updatedArray.splice(testimonialIndex + 1, 0, testimonialToMove);
+        setTestimonialsArray(updatedArray);
+        toast.success("Testimonial has been moved down.", toastProps);
+      } catch (error) {
+        toast.error(
+          "Error! Testimonial could not be moved. Please try again and contact the developer if the problem persists.",
+          toastProps
+        );
+        console.log(error);
+      }
     }
   };
 
@@ -147,6 +183,18 @@ export const AdminProvider = ({ children }) => {
       }}
     >
       {children}
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </AdminContext.Provider>
   );
 };

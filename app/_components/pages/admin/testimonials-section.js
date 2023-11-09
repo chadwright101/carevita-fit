@@ -63,6 +63,7 @@ const TestimonialsSection = () => {
       <ol className="testimonial-list">
         {testimonialsArray.map(({ name: person, paragraph, id }, index) => (
           <li className="testimonial-list__item" key={id}>
+            <div id={`testimonial-${index}`} className="nav-point"></div>
             {editIndex === index ? (
               <>
                 <p className="testimonial-list__item__index">{index + 1}</p>
@@ -154,27 +155,31 @@ const TestimonialsSection = () => {
             className="admin-testimonials-section__add-testimonial__form"
             onSubmit={handleTestimonialAdd}
           >
-            <label htmlFor="testimonial">Testimonial:</label>
-            <textarea
-              name="testimonial"
-              id="testimonial"
-              placeholder="Add your testimonial here... (Maximum 300 characters)"
-              value={newTestimonialParagraph}
-              onChange={(event) =>
-                setNewTestimonialParagraph(event.target.value)
-              }
-              maxLength={300}
-              rows={5}
-            />
-            <label htmlFor="name">Name:</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Add your client's full name here..."
-              value={newTestimonialName}
-              onChange={(event) => setNewTestimonialName(event.target.value)}
-            />
+            <label htmlFor="testimonial">
+              Testimonial:
+              <textarea
+                name="testimonial"
+                id="testimonial"
+                placeholder="Add your testimonial here... (Maximum 300 characters)"
+                value={newTestimonialParagraph}
+                onChange={(event) =>
+                  setNewTestimonialParagraph(event.target.value)
+                }
+                maxLength={300}
+                rows={5}
+              />
+            </label>
+            <label htmlFor="name">
+              Name:
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="Add your client's full name here..."
+                value={newTestimonialName}
+                onChange={(event) => setNewTestimonialName(event.target.value)}
+              />
+            </label>
             <button className="admin-button" type="submit">
               Add Testimonial
             </button>

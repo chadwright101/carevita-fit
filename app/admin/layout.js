@@ -40,9 +40,13 @@ const AdminLayout = ({ children }) => {
     );
   } else {
     return (
-      <section>
-        <h2>You need to be logged in to view this page</h2>
-        <Link href="/login">Login</Link>
+      <section className="admin-layout">
+        <h2 className="admin-layout__heading">
+          You need to be logged in to view this page...
+        </h2>
+        <Link className="admin-layout__link admin-button" href="/login">
+          Login here
+        </Link>
       </section>
     );
   }

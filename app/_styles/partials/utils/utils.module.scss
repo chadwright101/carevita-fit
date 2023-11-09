@@ -17,7 +17,7 @@
 }
 
 .nav-point {
-  transform: translateY(-150px);
+  transform: translateY(-175px);
 }
 
 .page-heading {
@@ -48,4 +48,21 @@
 
 .no-blur {
   filter: blur(0);
+}
+
+.admin-button {
+  padding: 0.5rem 1rem;
+  font-size: $paragraph;
+  background-color: $green;
+  color: $white;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 0.15);
+
+  @include media("tabletLarge") {
+    &:hover {
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 300ms;
+      background-color: $lightGreen;
+      cursor: pointer;
+    }
+  }
 }
