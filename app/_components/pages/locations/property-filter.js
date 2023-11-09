@@ -92,7 +92,7 @@ const PropertyFilter = () => {
             setShowMosselBay(true);
             setShowPretoria(true);
           }}
-          className="property-filter--clear-filter"
+          className="property-filter__clear-filter"
         >
           Clear filter
         </button>

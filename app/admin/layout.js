@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { AuthContext } from "@/app/_context/auth-context";
 import { logoutUser } from "@/app/_firebase/firebase";
+import { AdminProvider } from "../_context/admin-contect";
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
@@ -32,7 +33,11 @@ const AdminLayout = ({ children }) => {
   }, []);
 
   if (loggedInUser) {
-    return <section>{children}</section>;
+    return (
+      <AdminProvider>
+        <section>{children}</section>
+      </AdminProvider>
+    );
   } else {
     return (
       <section>

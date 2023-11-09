@@ -54,7 +54,7 @@ const Footer = () => {
               )}
             </ul>
           </nav>
-          <div className="footer__flex--logo">
+          <div className="footer__flex__logo">
             <ImageContainer
               src="/carevita-fit-logo.jpg"
               alt="CareVita logo"
@@ -65,14 +65,14 @@ const Footer = () => {
               desktopSmall={10}
               desktop={10}
             />
-            <p className="footer__flex--developed-by">
+            <p className="footer__flex__developed-by">
               Designed & developed by:
               <a href="https://www.thewrightdesigns.co.za" target="_blank">
                 The Wright Designs
               </a>
             </p>
           </div>
-          <hr className="footer__flex--line" />
+          <hr className="footer__flex__line" />
         </div>
         <p className="footer-container__copyright">
           © CareVita {currentYear}

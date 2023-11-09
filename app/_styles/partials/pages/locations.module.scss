@@ -44,7 +44,7 @@
       cursor: pointer;
     }
   }
-  .property-filter--clear-filter {
+  .property-filter__clear-filter {
     font-weight: $light;
     color: $link;
     padding: 0.5rem;
@@ -75,11 +75,11 @@
   &__heading-container {
     margin-bottom: 2rem;
 
-    .property-component__heading-container--heading {
+    .property-component__heading-container__heading {
       margin-bottom: 0.75rem;
     }
 
-    .property-component__heading-container--link {
+    .property-component__heading-container__link {
       color: $link;
       font-weight: $thin;
       font-size: $paragraph;
@@ -90,16 +90,16 @@
     @include media("desktopSmall") {
       margin-bottom: 1.25rem;
 
-      .property-component__heading-container--heading {
+      .property-component__heading-container__heading {
         margin-bottom: 0.75rem;
       }
 
-      .property-component__heading-container--link {
+      .property-component__heading-container__link {
         padding: 0;
         margin: 0;
       }
 
-      .property-component__heading-container--link:hover {
+      .property-component__heading-container__link:hover {
         color: $green;
       }
     }

@@ -91,7 +91,7 @@ const Header = () => {
                   </>
                 ))}
             {!loggedInUser && (
-              <li id="admin-button-mobile">
+              <li class="mobile-nav__admin-button">
                 <Link href="/login" onClick={() => setToggleMenu(false)}>
                   Admin Login
                 </Link>

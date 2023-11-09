@@ -33,7 +33,7 @@ const Form = () => {
           className="hidden"
         />
         <input type="text" name="_honey" className="hidden" />
-        <div className="contact-form-container__form--group">
+        <div className="contact-form-container__form__group">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
@@ -45,7 +45,7 @@ const Form = () => {
         </div>
         {showMessage && (
           <>
-            <div className="contact-form-container__form--group">
+            <div className="contact-form-container__form__group">
               <label htmlFor="phone">Phone:</label>
               <input
                 type="text"
@@ -55,7 +55,7 @@ const Form = () => {
                 placeholder="Phone number"
               />
             </div>
-            <div className="contact-form-container__form--group">
+            <div className="contact-form-container__form__group">
               <label htmlFor="email">Email:</label>
               <input
                 type="text"
@@ -65,7 +65,7 @@ const Form = () => {
                 placeholder="Email address"
               />
             </div>
-            <div className="contact-form-container__form--group">
+            <div className="contact-form-container__form__group">
               <label htmlFor="property">Property:</label>
               <select id="property" name="property">
                 {propertyList.map((property, index) => (
@@ -75,7 +75,7 @@ const Form = () => {
                 ))}
               </select>
             </div>
-            <div className="contact-form-container__form--group">
+            <div className="contact-form-container__form__group">
               <label htmlFor="email">Message:</label>
               <textarea
                 id="message"

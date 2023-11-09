@@ -72,7 +72,7 @@
     }
   }
 
-  .footer__flex--logo {
+  .footer__flex__logo {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,7 +87,7 @@
     }
   }
 
-  .footer__flex--developed-by {
+  .footer__flex__developed-by {
     font-size: 16px;
     font-size: 16px;
     display: flex;
@@ -105,7 +105,7 @@
     }
   }
 
-  .footer__flex--line {
+  .footer__flex__line {
     margin-top: 1rem;
     margin-bottom: -0.5rem;
     width: 10vw;
