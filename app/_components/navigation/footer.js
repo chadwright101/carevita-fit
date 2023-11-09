@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import ImageContainer from "@/app/_components/image-container";
 import { AuthContext } from "@/app/_context/auth-context";
-import { logoutUser } from "@/app/_firebase/firebase";
+import { logoutUser } from "@/app/_firebase/auth";
 
 import data from "@/app/_data/navigation-data.json";
 

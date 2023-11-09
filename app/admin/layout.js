@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { AuthContext } from "@/app/_context/auth-context";
-import { logoutUser } from "@/app/_firebase/firebase";
+import { logoutUser } from "@/app/_firebase/auth";
 import { AdminProvider } from "../_context/admin-contect";
 
 const AdminLayout = ({ children }) => {

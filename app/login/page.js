@@ -129,7 +129,7 @@ export default function Login() {
               Log in
             </button>
             {error && (
-              <p>"Login failed: Either the password or email is incorrect"</p>
+              <p>Login failed: Either the password or email is incorrect</p>
             )}
           </>
         )}
