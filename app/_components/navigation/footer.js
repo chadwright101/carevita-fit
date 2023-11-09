@@ -48,7 +48,7 @@ const Footer = () => {
                     </li>
                   ))}
               {!loggedInUser && (
-                <li>
+                <li className="footer-nav__list-item">
                   <Link href="/login">Admin Login</Link>
                 </li>
               )}

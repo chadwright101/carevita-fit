@@ -28,7 +28,6 @@ const TestimonialsSection = () => {
     handleTestimonialDelete,
     handleTestimonialCancel,
     handleTestimonialAdd,
-    testimonialsCollectionRef,
     moveTestimonialUp,
     moveTestimonialDown,
   } = useContext(AdminContext);
@@ -54,12 +53,12 @@ const TestimonialsSection = () => {
     );
 
     return () => unsubscribeTestimonials();
-  }, []);
+  }, [setTestimonialsArray, testimonialsCollectionRef]);
 
   return (
     <div className="admin-testimonials-section">
       <Heading subheading cssClasses="admin-testimonials-section__heading">
-        Testimonials
+        Testimonials <span>(maximum 10 entries)</span>
       </Heading>
       <ol className="testimonial-list">
         {testimonialsArray.map(({ name: person, paragraph, id }, index) => (
@@ -107,7 +106,7 @@ const TestimonialsSection = () => {
               <>
                 <p className="testimonial-list__item__index">{index + 1}</p>
                 <div className="testimonial-list__item__display">
-                  <p>"{paragraph}"</p>
+                  <p>&#8220;{paragraph}&#8221;</p>
                   <p>{person}</p>
                 </div>
                 {editIndex !== null ? null : (

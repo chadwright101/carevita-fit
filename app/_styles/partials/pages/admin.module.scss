@@ -9,6 +9,11 @@
 
   &__heading {
     margin-bottom: 2rem;
+
+    span {
+      font-style: italic;
+      font-weight: $thin;
+    }
   }
 
   .testimonial-list {

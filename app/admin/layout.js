@@ -30,7 +30,7 @@ const AdminLayout = ({ children }) => {
     return () => {
       window.removeEventListener("pagehide", handlePageHide);
     };
-  }, []);
+  }, [handleSignOut]);
 
   if (loggedInUser) {
     return (

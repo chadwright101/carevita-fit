@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/app/_firebase/firebase";
+import { getDocs } from "firebase/firestore";
+import { testimonialsCollectionRef } from "../admin/testimonials-section";
 
 import Heading from "@/app/_components/heading";
 
@@ -12,7 +12,6 @@ import "@splidejs/react-splide/css/core";
 
 const Testimonials = () => {
   const [testimonials, setTestimonials] = useState([]);
-  const testimonialsCollectionRef = collection(db, "testimonials");
 
   useEffect(() => {
     const getTestimonials = async () => {
@@ -23,7 +22,7 @@ const Testimonials = () => {
     };
 
     getTestimonials();
-  }, []);
+  }, [testimonialsCollectionRef]);
   return (
     <section className="testimonials-section">
       <Heading sectionHeading cssClasses="testimonials-section__heading">
