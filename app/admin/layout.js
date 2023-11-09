@@ -12,14 +12,14 @@ const AdminLayout = ({ children }) => {
   const router = useRouter();
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
 
-  const handleSignOut = async (e) => {
-    logoutUser();
-    router.push("/login");
-    setLoggedInUser(false);
-    localStorage.removeItem("loggedInUser");
-  };
-
   useEffect(() => {
+    const handleSignOut = async (e) => {
+      logoutUser();
+      router.push("/login");
+      setLoggedInUser(false);
+      localStorage.removeItem("loggedInUser");
+    };
+
     const handlePageHide = (e) => {
       e.preventDefault();
       handleSignOut();
@@ -30,7 +30,7 @@ const AdminLayout = ({ children }) => {
     return () => {
       window.removeEventListener("pagehide", handlePageHide);
     };
-  }, [handleSignOut]);
+  }, []);
 
   if (loggedInUser) {
     return (

@@ -53,7 +53,7 @@ const TestimonialsSection = () => {
     );
 
     return () => unsubscribeTestimonials();
-  }, [setTestimonialsArray, testimonialsCollectionRef]);
+  }, []);
 
   return (
     <div className="admin-testimonials-section">
@@ -67,7 +67,7 @@ const TestimonialsSection = () => {
               <>
                 <p className="testimonial-list__item__index">{index + 1}</p>
                 <form action="">
-                  <label htmlFor="name">Client's name:</label>
+                  <label htmlFor="name">Client&apos;s name:</label>
                   <input
                     className="testimonial-list__item__edit-name"
                     name="name"

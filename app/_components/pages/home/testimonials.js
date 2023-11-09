@@ -22,7 +22,7 @@ const Testimonials = () => {
     };
 
     getTestimonials();
-  }, [testimonialsCollectionRef]);
+  }, []);
   return (
     <section className="testimonials-section">
       <Heading sectionHeading cssClasses="testimonials-section__heading">
