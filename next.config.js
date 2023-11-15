@@ -18,5 +18,6 @@ module.exports = {
         pathname: "/carevita-fit/**",
       },
     ],
+    domains: ["firebasestorage.googleapis.com"],
   },
 };

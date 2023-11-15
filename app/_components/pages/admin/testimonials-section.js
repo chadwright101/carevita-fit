@@ -94,7 +94,7 @@ const TestimonialsSection = () => {
               {editIndex === index ? (
                 <>
                   <p className="testimonial-list__item__index">{index + 1}</p>
-                  <form action="">
+                  <form>
                     <label htmlFor="name">Client&apos;s name:</label>
                     <input
                       className="testimonial-list__item__edit-name"
@@ -163,7 +163,10 @@ const TestimonialsSection = () => {
                               updateTestimonialTimeStamp(id, index)
                             }
                           >
-                            &#8676;
+                            <img
+                              src="/icons/up-arrow.svg"
+                              alt="Move testimonial to start"
+                            />
                           </button>
                         ) : null}
                       </div>
@@ -203,6 +206,7 @@ const TestimonialsSection = () => {
                 }
                 maxLength={300}
                 rows={5}
+                required
               />
             </label>
             <label htmlFor="name">
@@ -214,6 +218,7 @@ const TestimonialsSection = () => {
                 placeholder="Add your client's full name here..."
                 value={newTestimonialName}
                 onChange={(event) => setNewTestimonialName(event.target.value)}
+                required
               />
             </label>
             <button className="admin-button" type="submit">

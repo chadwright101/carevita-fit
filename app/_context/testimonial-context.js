@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const TestimonialContext = createContext();
 
-const toastProps = {
+export const toastProps = {
   position: "bottom-left",
   autoClose: 3000,
   hideProgressBar: false,
@@ -179,18 +179,7 @@ export const TestimonialProvider = ({ children }) => {
       }}
     >
       {children}
-      <ToastContainer
-        position="bottom-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <ToastContainer />
     </TestimonialContext.Provider>
   );
 };
