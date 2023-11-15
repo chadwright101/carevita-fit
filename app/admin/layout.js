@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 import { AuthContext } from "@/app/_context/auth-context";
 import { logoutUser } from "@/app/_firebase/auth";
-import { AdminProvider } from "../_context/admin-contect";
+import { TestimonialProvider } from "@/app/_context/testimonial-context";
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
@@ -34,9 +34,9 @@ const AdminLayout = ({ children }) => {
 
   if (loggedInUser) {
     return (
-      <AdminProvider>
+      <TestimonialProvider>
         <section>{children}</section>
-      </AdminProvider>
+      </TestimonialProvider>
     );
   } else {
     return (

@@ -53,6 +53,12 @@
       }
     }
 
+    &__error {
+      color: red;
+      font-style: italic;
+      font-size: 16px;
+    }
+
     &__button {
       @include media("tablet") {
         width: 100px;

@@ -40,7 +40,7 @@ export default function Login() {
     try {
       const user = await loginWithEmailAndPassword(email, password);
       setLoggedInUser(true);
-      await router.push("/admin/dashboard");
+      router.push("/admin/dashboard");
     } catch (error) {
       setError(error.message);
     }
@@ -122,15 +122,18 @@ export default function Login() {
                 )}
               </div>
             </div>
+            {error && (
+              <p className="login-page__form__error">
+                Login failed: Either the password or email is incorrect. If the
+                problem persists, please contact the developer.
+              </p>
+            )}
             <button
               type="submit"
               className="admin-button login-page__form__button"
             >
               Log in
             </button>
-            {error && (
-              <p>Login failed: Either the password or email is incorrect</p>
-            )}
           </>
         )}
       </form>

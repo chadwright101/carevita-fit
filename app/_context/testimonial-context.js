@@ -11,7 +11,7 @@ import { testimonialsCollectionRef } from "../_components/pages/admin/testimonia
 
 import "react-toastify/dist/ReactToastify.css";
 
-export const AdminContext = createContext();
+export const TestimonialContext = createContext();
 
 const toastProps = {
   position: "bottom-left",
@@ -24,13 +24,14 @@ const toastProps = {
   theme: "light",
 };
 
-export const AdminProvider = ({ children }) => {
+export const TestimonialProvider = ({ children }) => {
   const [testimonialsArray, setTestimonialsArray] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editedName, setEditedName] = useState("");
   const [editedParagraph, setEditedParagraph] = useState("");
   const [newTestimonialName, setNewTestimonialName] = useState("");
   const [newTestimonialParagraph, setNewTestimonialParagraph] = useState("");
+  const [getTestimonialIsLoading, setGetTestimonialIsLoading] = useState(false);
   const router = useRouter();
 
   const handleTestimonialEdit = (testimonialIndex) => {
@@ -38,16 +39,19 @@ export const AdminProvider = ({ children }) => {
     const testimonial = testimonialsArray[testimonialIndex];
     setEditedName(testimonial.name);
     setEditedParagraph(testimonial.paragraph);
-    router.push(`/admin/dashboard#testimonial-${testimonialIndex}`);
+    document.getElementById(`/admin/dashboard#testimonial-${testimonialIndex}`);
   };
 
   const handleTestimonialSave = async (testimonialId) => {
     try {
+      const updatedTimestamp = new Date().getTime();
       await updateDoc(doc(db, "testimonials", testimonialId), {
         name: editedName,
         paragraph: editedParagraph,
+        timestamp: updatedTimestamp,
       });
       setEditIndex(null);
+      document.getElementById("/admin/dashboard#testimonial-0");
       toast.success("Success! Testimonial saved.", toastProps);
     } catch (error) {
       toast.error(
@@ -105,14 +109,19 @@ export const AdminProvider = ({ children }) => {
       const newTestimonial = {
         name: newTestimonialName,
         paragraph: newTestimonialParagraph,
+        timestamp: new Date().getTime(),
       };
+
       const docRef = await addDoc(testimonialsCollectionRef, newTestimonial);
-      setTestimonialsArray([
-        ...testimonialsArray,
-        { ...newTestimonial, id: docRef.id },
-      ]);
+
       setNewTestimonialName("");
       setNewTestimonialParagraph("");
+      setTimeout(() => {
+        const element = document.getElementById("testimonial-0");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
       toast.success("Success! Testimonial added.", toastProps);
     } catch (error) {
       toast.error(
@@ -122,44 +131,30 @@ export const AdminProvider = ({ children }) => {
     }
   };
 
-  const moveTestimonialUp = (testimonialIndex) => {
-    if (testimonialIndex > 0) {
-      try {
-        const updatedArray = [...testimonialsArray];
-        const [testimonialToMove] = updatedArray.splice(testimonialIndex, 1);
-        updatedArray.splice(testimonialIndex - 1, 0, testimonialToMove);
-        setTestimonialsArray(updatedArray);
-        toast.success("Success! Testimonial has been moved up.", toastProps);
-      } catch (error) {
-        toast.error(
-          "Error! Testimonial could not be moved. Please try again and contact the developer if the problem persists.",
-          toastProps
-        );
-        console.log(error);
-      }
-    }
-  };
-
-  const moveTestimonialDown = (testimonialIndex) => {
-    if (testimonialIndex < testimonialsArray.length - 1) {
-      try {
-        const updatedArray = [...testimonialsArray];
-        const [testimonialToMove] = updatedArray.splice(testimonialIndex, 1);
-        updatedArray.splice(testimonialIndex + 1, 0, testimonialToMove);
-        setTestimonialsArray(updatedArray);
-        toast.success("Testimonial has been moved down.", toastProps);
-      } catch (error) {
-        toast.error(
-          "Error! Testimonial could not be moved. Please try again and contact the developer if the problem persists.",
-          toastProps
-        );
-        console.log(error);
-      }
+  const updateTestimonialTimeStamp = async (testimonialId) => {
+    try {
+      const updatedTimestamp = new Date().getTime();
+      await updateDoc(doc(db, "testimonials", testimonialId), {
+        timestamp: updatedTimestamp,
+      });
+      setTimeout(() => {
+        document.getElementById("testimonial-0");
+      }, 100);
+      toast.success(
+        "Success! Testimonial moved to the top of the list.",
+        toastProps
+      );
+    } catch (error) {
+      toast.error(
+        "Error! Testimonial could not be saved. Please try again and contact the developer if the problem persists.",
+        toastProps
+      );
+      console.log(error);
     }
   };
 
   return (
-    <AdminContext.Provider
+    <TestimonialContext.Provider
       value={{
         testimonialsArray,
         setTestimonialsArray,
@@ -178,8 +173,9 @@ export const AdminProvider = ({ children }) => {
         handleTestimonialCancel,
         handleTestimonialAdd,
         testimonialsCollectionRef,
-        moveTestimonialUp,
-        moveTestimonialDown,
+        updateTestimonialTimeStamp,
+        getTestimonialIsLoading,
+        setGetTestimonialIsLoading,
       }}
     >
       {children}
@@ -195,6 +191,6 @@ export const AdminProvider = ({ children }) => {
         pauseOnHover
         theme="light"
       />
-    </AdminContext.Provider>
+    </TestimonialContext.Provider>
   );
 };

@@ -2,11 +2,17 @@
 
 import { useContext, useEffect } from "react";
 
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
 import { db } from "@/app/_firebase/firebase";
 
 import Heading from "@/app/_components/heading";
-import { AdminContext } from "@/app/_context/admin-contect";
+import { TestimonialContext } from "@/app/_context/testimonial-context";
 
 export const testimonialsCollectionRef = collection(db, "testimonials");
 
@@ -28,17 +34,33 @@ const TestimonialsSection = () => {
     handleTestimonialDelete,
     handleTestimonialCancel,
     handleTestimonialAdd,
-    moveTestimonialUp,
-    moveTestimonialDown,
-  } = useContext(AdminContext);
+    updateTestimonialTimeStamp,
+    getTestimonialIsLoading,
+    setGetTestimonialIsLoading,
+  } = useContext(TestimonialContext);
 
   useEffect(() => {
     const getTestimonials = async () => {
-      const testimonialsData = await getDocs(testimonialsCollectionRef);
-      setTestimonialsArray(
-        testimonialsData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
+      try {
+        setGetTestimonialIsLoading(true);
+        const q = query(
+          testimonialsCollectionRef,
+          orderBy("timestamp", "desc")
+        );
+        const testimonialsData = await getDocs(q);
+        const sortedTestimonials = testimonialsData.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setTestimonialsArray(sortedTestimonials);
+        setGetTestimonialIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+        setGetTestimonialIsLoading(false);
+      }
     };
+
     getTestimonials();
 
     const unsubscribeTestimonials = onSnapshot(
@@ -48,6 +70,8 @@ const TestimonialsSection = () => {
           ...doc.data(),
           id: doc.id,
         }));
+        updatedTestimonials.sort((a, b) => b.timestamp - a.timestamp);
+
         setTestimonialsArray(updatedTestimonials);
       }
     );
@@ -56,93 +80,105 @@ const TestimonialsSection = () => {
   }, []);
 
   return (
-    <div className="admin-testimonials-section">
+    <section className="admin-testimonials-section">
       <Heading subheading cssClasses="admin-testimonials-section__heading">
         Testimonials <span>(maximum 10 entries)</span>
       </Heading>
-      <ol className="testimonial-list">
-        {testimonialsArray.map(({ name: person, paragraph, id }, index) => (
-          <li className="testimonial-list__item" key={id}>
-            <div id={`testimonial-${index}`} className="nav-point"></div>
-            {editIndex === index ? (
-              <>
-                <p className="testimonial-list__item__index">{index + 1}</p>
-                <form action="">
-                  <label htmlFor="name">Client&apos;s name:</label>
-                  <input
-                    className="testimonial-list__item__edit-name"
-                    name="name"
-                    id="name"
-                    type="text"
-                    value={editedName}
-                    onChange={(event) => setEditedName(event.target.value)}
-                  />
-                  <label htmlFor="testimonial">Testimonial:</label>
-                  <textarea
-                    className="testimonial-list__item__edit-paragraph"
-                    name="testimonial"
-                    id="testimonial"
-                    value={editedParagraph}
-                    onChange={(event) => setEditedParagraph(event.target.value)}
-                    maxLength={300}
-                    rows={5}
-                  />
-                </form>
-                <div className="testimonial-list__item__edit-buttons">
-                  <button
-                    onClick={() => handleTestimonialSave(id)}
-                    className="admin-button"
-                  >
-                    Save
-                  </button>
-                  <button
-                    onClick={() => handleTestimonialCancel()}
-                    className="admin-button"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </>
-            ) : (
-              <>
-                <p className="testimonial-list__item__index">{index + 1}</p>
-                <div className="testimonial-list__item__display">
-                  <p>&#8220;{paragraph}&#8221;</p>
-                  <p>{person}</p>
-                </div>
-                {editIndex !== null ? null : (
+      {testimonialsArray.length === 0 && getTestimonialIsLoading ? (
+        <div className="spinner"></div>
+      ) : testimonialsArray.length !== 0 && !getTestimonialIsLoading ? (
+        <ol className="testimonial-list">
+          {testimonialsArray.map(({ name: person, paragraph, id }, index) => (
+            <li className="testimonial-list__item" key={id}>
+              <div id={`testimonial-${index}`} className="nav-point"></div>
+              {editIndex === index ? (
+                <>
+                  <p className="testimonial-list__item__index">{index + 1}</p>
+                  <form action="">
+                    <label htmlFor="name">Client&apos;s name:</label>
+                    <input
+                      className="testimonial-list__item__edit-name"
+                      name="name"
+                      id="name"
+                      type="text"
+                      value={editedName}
+                      onChange={(event) => setEditedName(event.target.value)}
+                      required
+                    />
+                    <label htmlFor="testimonial">Testimonial:</label>
+                    <textarea
+                      className="testimonial-list__item__edit-paragraph"
+                      name="testimonial"
+                      id="testimonial"
+                      value={editedParagraph}
+                      onChange={(event) =>
+                        setEditedParagraph(event.target.value)
+                      }
+                      maxLength={500}
+                      rows={5}
+                      required
+                    />
+                  </form>
                   <div className="testimonial-list__item__edit-buttons">
                     <button
-                      onClick={() => handleTestimonialEdit(index)}
+                      onClick={() => handleTestimonialSave(id)}
                       className="admin-button"
                     >
-                      Edit
+                      Save
                     </button>
                     <button
-                      onClick={() => handleTestimonialDelete(id)}
+                      onClick={() => handleTestimonialCancel()}
                       className="admin-button"
                     >
-                      Delete
+                      Cancel
                     </button>
-                    <div className="testimonial-list__item__arrows">
-                      {index > 0 ? (
-                        <button onClick={() => moveTestimonialUp(index)}>
-                          &uarr;
-                        </button>
-                      ) : null}
-                      {index < testimonialsArray.length - 1 ? (
-                        <button onClick={() => moveTestimonialDown(index)}>
-                          &darr;
-                        </button>
-                      ) : null}
-                    </div>
                   </div>
-                )}
-              </>
-            )}
-          </li>
-        ))}
-      </ol>
+                </>
+              ) : (
+                <>
+                  <p className="testimonial-list__item__index">{index + 1}</p>
+                  <div className="testimonial-list__item__display">
+                    <p>&#8220;{paragraph}&#8221;</p>
+                    <p>{person}</p>
+                  </div>
+                  {editIndex !== null ? null : (
+                    <div className="testimonial-list__item__edit-buttons">
+                      <button
+                        onClick={() => handleTestimonialEdit(index)}
+                        className="admin-button"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => handleTestimonialDelete(id)}
+                        className="admin-button"
+                      >
+                        Delete
+                      </button>
+                      <div className="testimonial-list__item__arrow">
+                        {index > 0 ? (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateTestimonialTimeStamp(id, index)
+                            }
+                          >
+                            &#8676;
+                          </button>
+                        ) : null}
+                      </div>
+                    </div>
+                  )}
+                </>
+              )}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p className="admin-testimonials-section__empty-list">
+          You currently have no testimonials. Add a new one below...
+        </p>
+      )}
       {testimonialsArray.length < 10 && editIndex === null ? (
         <div className="admin-testimonials-section__add-testimonial">
           <Heading
@@ -186,7 +222,7 @@ const TestimonialsSection = () => {
           </form>
         </div>
       ) : null}
-    </div>
+    </section>
   );
 };
 
