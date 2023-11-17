@@ -16,12 +16,12 @@ const SingleProperty = ({ data, eager }) => {
     <article className="property-component">
       <div className="property-component__heading-container">
         <Heading
-          cssClasses="property-component__heading-container--heading"
+          cssClasses="property-component__heading-container__heading"
           sectionHeading
         >
           {propertyName}
         </Heading>
-        <Link className="property-component__heading-container--link" href="#">
+        <Link className="property-component__heading-container__link" href="#">
           {suburb}, {city}
         </Link>
       </div>

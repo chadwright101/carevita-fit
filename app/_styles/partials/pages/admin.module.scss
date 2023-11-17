@@ -1,0 +1,319 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
+/* testimonials section */
+
+.admin-testimonials-section {
+  border-top: 1px solid $black;
+  border-bottom: 1px solid $black;
+  padding: 2.5rem 0;
+
+  &__heading {
+    margin-bottom: 2rem;
+
+    span {
+      font-style: italic;
+      font-weight: $thin;
+    }
+  }
+
+  &__empty-list {
+    font-style: italic;
+    color: red;
+  }
+
+  .testimonial-list {
+    display: grid;
+    row-gap: 1rem;
+
+    &__item {
+      padding: 1rem;
+      border: 1px $black solid;
+      position: relative;
+
+      form {
+        display: grid;
+        row-gap: 1rem;
+
+        label {
+          font-weight: 400;
+        }
+
+        label:last-of-type {
+          margin-top: 0.5rem;
+        }
+      }
+
+      &__index {
+        font-size: 2rem;
+        position: absolute;
+        font-weight: 400;
+        bottom: 1rem;
+        right: 1rem;
+      }
+
+      &__edit-name,
+      &__edit-paragraph {
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+
+      &__edit-paragraph {
+        position: relative;
+      }
+
+      &__edit-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-right: 3rem;
+        margin-top: 1.5rem;
+      }
+
+      &__display {
+        display: grid;
+        row-gap: 1rem;
+
+        p:last-of-type {
+          font-style: italic;
+          margin-bottom: 1rem;
+
+          @include media("tablet") {
+            margin: 0;
+          }
+        }
+      }
+
+      &__arrow {
+        button {
+          padding: 0.5rem 1rem;
+          background-color: $blue;
+          font-size: $subheading;
+          display: grid;
+          place-items: center;
+
+          @include media("tablet") {
+            &:hover {
+              transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+              transition-duration: 200ms;
+              background-color: rgb(19 66 102 / 75%);
+              cursor: pointer;
+            }
+          }
+
+          img {
+            transform: rotate(-90deg);
+            width: 1.75rem;
+            height: auto;
+          }
+        }
+      }
+    }
+  }
+
+  &__add-testimonial {
+    margin-top: 4rem;
+
+    &__heading {
+      margin-bottom: 2rem;
+    }
+
+    &__form {
+      display: grid;
+      row-gap: 1rem;
+
+      label {
+        display: grid;
+        row-gap: 0.5rem;
+        font-weight: 400;
+      }
+
+      input,
+      textarea {
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+
+      button {
+        margin-top: 1rem;
+
+        @include media("tablet") {
+          margin-right: auto;
+        }
+      }
+    }
+  }
+}
+
+/* main slideshow section */
+
+.admin-main-slideshow {
+  margin-bottom: 3rem;
+  border-bottom: 1px solid $black;
+  padding: 2.5rem 0;
+
+  &__heading {
+    margin-bottom: 2rem;
+
+    span {
+      font-style: italic;
+      font-weight: $thin;
+    }
+  }
+
+  &__empty-list {
+    font-style: italic;
+    color: red;
+  }
+
+  &__list {
+    display: grid;
+    gap: 2rem;
+
+    @include media("tablet") {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media("desktopSmall") {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__item {
+      position: relative;
+
+      &__delete,
+      &__arrow {
+        position: absolute;
+        z-index: 10;
+        padding: 0.5rem;
+        margin: -0.5rem;
+
+        @include media("tabletLarge") {
+          padding: 0;
+          margin: 0;
+        }
+
+        img {
+          background-color: $blue;
+          width: 2.5rem;
+          height: auto;
+          padding: 0.1rem;
+
+          @include media("tabletLarge") {
+            padding: 0;
+            width: 2rem;
+
+            &:hover {
+              background-color: $lightBlue;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      &__delete {
+        right: 1rem;
+        top: 1rem;
+      }
+
+      &__arrow {
+        right: 4.5rem;
+        top: 1rem;
+
+        @include media("tablet") {
+          right: 3.75rem;
+        }
+
+        img {
+          transform: rotate(-90deg);
+        }
+      }
+
+      &__image {
+        object-fit: cover;
+        width: 100%;
+        height: 225px;
+        box-shadow: 0 5px 5px rgb(0 0 0 / 15%);
+
+        @include media("phone") {
+          height: 325px;
+        }
+
+        @include media("tablet") {
+          height: 225px;
+        }
+
+        @include media("tabletLarge") {
+          height: 300px;
+        }
+
+        @include media("desktopSmall") {
+          height: 250px;
+        }
+
+        @include media("desktop") {
+          height: 275px;
+        }
+      }
+    }
+  }
+  &__form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include media("tabletLarge") {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+    }
+
+    label {
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      font-size: 1.5rem;
+
+      @include media("tabletLarge") {
+        grid-column: span 2;
+      }
+    }
+
+    input {
+      font-style: italic;
+
+      &::file-selector-button {
+        padding: 0.75rem 1rem;
+        border: none;
+        font-size: $paragraph;
+        background-color: $blue;
+        color: $white;
+        box-shadow: 0 2px 2px rgb(0 0 0 / 15%);
+        margin-right: 0.5rem;
+
+        @include media("tabletLarge") {
+          cursor: pointer;
+          &:hover {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+            background-color: $lightBlue;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    button {
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+
+        &:hover {
+          background-color: $green;
+        }
+      }
+      @include media("tabletLarge") {
+        margin-right: auto;
+      }
+    }
+  }
+}

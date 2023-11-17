@@ -2,16 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useRouter } from "next/navigation";
 
-import navigation from "@/app/_data/navigation-data.json";
 import ImageContainer from "@/app/_components/image-container";
+import { AuthContext } from "@/app/_context/auth-context";
+import { logoutUser } from "@/app/_firebase/auth";
+
+import data from "@/app/_data/navigation-data.json";
 
 import menuIcon from "public/icons/menu-icon.svg";
 import closeIcon from "public/icons/close-icon.svg";
 
+const { general, admin } = data;
+
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const router = useRouter();
+
+  const handleSignOut = async (e) => {
+    logoutUser();
+    router.push("/login");
+    setLoggedInUser(false);
+    localStorage.removeItem("loggedInUser");
+  };
 
   return (
     <header className="header-container">
@@ -41,20 +56,47 @@ const Header = () => {
       {toggleMenu && (
         <nav className="mobile-nav">
           <ul className="mobile-nav__list">
-            {navigation.map(({ title, url }, index) => (
-              <>
-                <li className="mobile-nav__list-item" key={index}>
-                  <Link
-                    className="mobile-nav__link"
-                    href={url}
-                    onClick={() => setToggleMenu(false)}
-                  >
-                    {title}
-                  </Link>
-                </li>
-                {index < navigation.length - 1 && <hr />}
-              </>
-            ))}
+            {loggedInUser
+              ? admin.map(({ title, url }, index) => (
+                  <>
+                    <li className="mobile-nav__list-item" key={index}>
+                      <Link
+                        className="mobile-nav__link"
+                        href={url}
+                        onClick={() => {
+                          setToggleMenu(false);
+                          if (title === "Sign Out") {
+                            handleSignOut();
+                          }
+                        }}
+                      >
+                        {title}
+                      </Link>
+                    </li>
+                    {index < general.length - 2 && <hr />}
+                  </>
+                ))
+              : general.map(({ title, url }, index) => (
+                  <>
+                    <li className="mobile-nav__list-item" key={index}>
+                      <Link
+                        className="mobile-nav__link"
+                        href={url}
+                        onClick={() => setToggleMenu(false)}
+                      >
+                        {title}
+                      </Link>
+                    </li>
+                    {index < general.length - 1 && <hr />}
+                  </>
+                ))}
+            {!loggedInUser && (
+              <li class="mobile-nav__admin-button">
+                <Link href="/login" onClick={() => setToggleMenu(false)}>
+                  Admin Login
+                </Link>
+              </li>
+            )}
           </ul>
           <button
             className="mobile-nav__close-button"
@@ -80,11 +122,22 @@ const Header = () => {
           </Link>
           <nav className="desktop-nav">
             <ul className="desktop-nav__list">
-              {navigation.map(({ title, url }, index) => (
-                <li className="desktop-nav__list-item" key={index}>
-                  <Link href={url}>{title}</Link>
-                </li>
-              ))}
+              {loggedInUser
+                ? admin.map(({ title, url }, index) => (
+                    <li className="desktop-nav__list-item" key={index}>
+                      <Link
+                        href={url}
+                        onClick={title === "Sign Out" ? handleSignOut : null}
+                      >
+                        {title}
+                      </Link>
+                    </li>
+                  ))
+                : general.map(({ title, url }, index) => (
+                    <li className="desktop-nav__list-item" key={index}>
+                      <Link href={url}>{title}</Link>
+                    </li>
+                  ))}
             </ul>
           </nav>
         </div>

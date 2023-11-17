@@ -1,26 +1,35 @@
-[
-  {
-    "title": "Home",
-    "url": "/"
-  },
-  {
-    "title": "About",
-    "url": "/#about"
-  },
-  {
-    "title": "Locations",
-    "url": "/locations"
-  },
-  {
-    "title": "Team",
-    "url": "/locations/#team"
-  },
-  {
-    "title": "Gallery",
-    "url": "/#gallery"
-  },
-  {
-    "title": "Contact",
-    "url": "/contact"
-  }
-]
+{
+  "general": [
+    {
+      "title": "Home",
+      "url": "/"
+    },
+    {
+      "title": "About",
+      "url": "/#about"
+    },
+    {
+      "title": "Locations",
+      "url": "/locations"
+    },
+    {
+      "title": "Team",
+      "url": "/locations/#team"
+    },
+    {
+      "title": "Gallery",
+      "url": "/#gallery"
+    },
+    {
+      "title": "Contact",
+      "url": "/contact"
+    }
+  ],
+  "admin": [
+    { "title": "Dashboard", "url": "/admin/dashboard" },
+    { "title": "Home Page", "url": "/" },
+    { "title": "Locations Page", "url": "/locations" },
+    { "title": "Contact Page", "url": "/contact" },
+    { "title": "Sign Out", "url": "#" }
+  ]
+}

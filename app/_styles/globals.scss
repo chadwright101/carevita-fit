@@ -16,10 +16,13 @@
 @import "./partials/pages/home.module.scss";
 @import "./partials/pages/locations.module.scss";
 @import "./partials/pages/contact.module.scss";
+@import "./partials/pages/admin.module.scss";
+@import "./partials/pages/login.module.scss";
+@import "./partials/pages/admin-layout.module.scss";
 
 * {
-  font-family: "Raleway";
-  color: #222222;
+  font-family: Raleway;
+  color: #222;
 }
 
 h1,
@@ -34,6 +37,7 @@ h5,
 h6 {
   font-weight: 400;
   font-size: 1.5rem;
+  line-height: 1.75rem;
 }
 
 p,

@@ -1,0 +1,17 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
+.admin-layout {
+  max-width: 500px;
+  margin: 0 auto;
+  display: grid;
+  &__heading {
+    font-size: $heading;
+    margin: 3rem 0;
+    text-align: center;
+  }
+
+  &__link {
+    margin: 0 auto;
+  }
+}
