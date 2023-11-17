@@ -44,14 +44,11 @@ export const TestimonialProvider = ({ children }) => {
 
   const handleTestimonialSave = async (testimonialId) => {
     try {
-      const updatedTimestamp = new Date().getTime();
       await updateDoc(doc(db, "testimonials", testimonialId), {
         name: editedName,
         paragraph: editedParagraph,
-        timestamp: updatedTimestamp,
       });
       setEditIndex(null);
-      document.getElementById("/admin/dashboard#testimonial-0");
       toast.success("Success! Testimonial saved.", toastProps);
     } catch (error) {
       toast.error(

@@ -7,6 +7,8 @@ import {
   listAll,
   getDownloadURL,
   deleteObject,
+  updateMetadata,
+  getMetadata,
 } from "firebase/storage";
 
 import { storage } from "@/app/_firebase/firebase";
@@ -19,31 +21,43 @@ import Heading from "@/app/_components/heading";
 const heroSlideshowStorageRef = ref(storage, "hero-slideshow");
 
 const HeroSection = () => {
-  const [heroImageUrls, setHeroImageUrls] = useState([]);
+  const [heroImageInfo, setHeroImageInfo] = useState([]);
   const [file, setFile] = useState(null);
   const [reloadImages, setReloadImages] = useState(false);
-  const [imageLoading, setImageLoading] = useState(false);
+  const [imagesLoading, setImageLoading] = useState(false);
   const fileInputRef = useRef(null);
 
-  const getHeroImages = async () => {
-    try {
-      setImageLoading(true);
-      const res = await listAll(heroSlideshowStorageRef);
-      const urls = await Promise.all(
-        res.items.map(async (itemRef) => {
-          return getDownloadURL(itemRef);
-        })
-      );
-      setHeroImageUrls(urls);
-      setImageLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getHeroImages = async () => {
+      try {
+        const res = await listAll(heroSlideshowStorageRef);
+
+        const imageInfoPromises = res.items.map(async (itemRef) => {
+          const metadata = await getMetadata(itemRef);
+          const url = await getDownloadURL(itemRef);
+          const filename = itemRef.name;
+          return {
+            url,
+            filename,
+            timestamp: metadata.customMetadata.timestamp || 0,
+          };
+        });
+
+        const imageInfo = await Promise.all(imageInfoPromises);
+
+        imageInfo.sort((a, b) => b.timestamp - a.timestamp);
+
+        setHeroImageInfo(imageInfo);
+      } catch (error) {
+        console.log(error);
+        toast.error(
+          "Error! Images could not load. Please try again and contact the developer if the problem persists.",
+          toastProps
+        );
+      }
+    };
     getHeroImages();
-  }, []);
+  }, [reloadImages]);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -70,48 +84,82 @@ const HeroSection = () => {
       if (file) {
         const fileName = `${Date.now()}_${file.name}`;
         const fileRef = ref(heroSlideshowStorageRef, fileName);
+        setReloadImages(true);
 
         toast.info("Adding new image...", toastProps);
 
         await uploadBytes(fileRef, file);
 
-        const imageUrl = await getDownloadURL(fileRef);
+        const metadata = {
+          customMetadata: {
+            timestamp: new Date().getTime(),
+          },
+        };
+        await updateMetadata(fileRef, metadata);
 
         setFile(null);
-        setHeroImageUrls((prevUrls) => [...prevUrls, imageUrl]);
-        toast.success("Success! New image added.", toastProps);
+        setTimeout(() => {
+          toast.success("Success! New image added.", toastProps);
+        }, 4000);
+        setReloadImages(false);
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
       }
     } catch (error) {
-      console.log(error);
-      toast.success(
+      console.error(error);
+      toast.error(
         "Error! New image could not be added. Please try again and contact the developer if the problem persists.",
         toastProps
       );
     }
   };
 
-  const removeHeroImage = async (url) => {
+  const updateImageTimestamp = async (filename) => {
+    try {
+      const imageRef = ref(heroSlideshowStorageRef, filename);
+      toast.info("Moving image...", toastProps);
+      setReloadImages(true);
+      const updatedMetadata = {
+        customMetadata: {
+          timestamp: new Date().getTime(),
+        },
+      };
+
+      await updateMetadata(imageRef, updatedMetadata);
+
+      setTimeout(() => {
+        toast.success(
+          "Success! Image moved to the top of the list.",
+          toastProps
+        );
+      }, 3000);
+      setReloadImages(false);
+    } catch (error) {
+      console.error(error);
+      toast.error(
+        "Error! Image could not be moved. Please try again and contact the developer if the problem persists.",
+        toastProps
+      );
+    }
+  };
+
+  const removeHeroImage = async (filename) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this image? This action cannot be undone."
     );
     if (confirmed) {
       try {
-        const decodedUrl = decodeURIComponent(url);
-        const fileNameWithParams = decodedUrl.split("/").pop();
-        const fileName = fileNameWithParams.split("?")[0];
         toast.info("Deleting image...", toastProps);
+        setReloadImages(true);
 
-        const fileRef = ref(heroSlideshowStorageRef, fileName);
+        const fileRef = ref(heroSlideshowStorageRef, filename);
         await deleteObject(fileRef);
 
-        setReloadImages(!reloadImages);
-        toast.success("Success! Image deleted.", toastProps);
-        setHeroImageUrls((prevUrls) =>
-          prevUrls.filter((prevUrl) => prevUrl !== url)
-        );
+        setTimeout(() => {
+          toast.success("Success! Image deleted.", toastProps);
+        }, 3000);
+        setReloadImages(false);
       } catch (error) {
         console.log(error);
         toast.error(
@@ -124,24 +172,32 @@ const HeroSection = () => {
   return (
     <section className="admin-main-slideshow">
       <Heading subheading cssClasses="admin-testimonials-section__heading">
-        Main gallery <span>(maximum 6 images)</span>
+        Hero gallery <span>(maximum 6 images)</span>
       </Heading>
-      {heroImageUrls.length === 0 && imageLoading ? (
-        <div className="spinner"></div>
-      ) : heroImageUrls.length !== 0 && !imageLoading ? (
+      {heroImageInfo.length !== 0 ? (
         <ul className="admin-main-slideshow__list">
-          {heroImageUrls.map((url, index) => (
+          {heroImageInfo.map(({ url, filename }, index) => (
             <li key={index} className="admin-main-slideshow__list__item">
               <button
-                className="admin-main-slideshow__list__item__icon"
+                className="admin-main-slideshow__list__item__delete"
                 type="button"
-                onClick={() => removeHeroImage(url)}
+                onClick={() => removeHeroImage(filename)}
               >
                 <img src="/icons/close-icon.svg" alt="Delete image" />
               </button>
+              <button
+                className="admin-main-slideshow__list__item__arrow"
+                type="button"
+                onClick={() => updateImageTimestamp(filename)}
+              >
+                <img
+                  src="/icons/up-arrow.svg"
+                  alt="Move testimonial to start"
+                />
+              </button>
               <ImageContainer
                 src={url}
-                alt=""
+                alt={`Image ${index}`}
                 width={650}
                 height={650}
                 cssClasses="admin-main-slideshow__list__item__image"
@@ -155,7 +211,7 @@ const HeroSection = () => {
         </p>
       )}
 
-      {heroImageUrls.length < 6 && (
+      {heroImageInfo.length < 6 && (
         <form className="admin-main-slideshow__form">
           <label htmlFor="upload">Upload new image:</label>
           <input

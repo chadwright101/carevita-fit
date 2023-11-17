@@ -95,16 +95,6 @@ const TestimonialsSection = () => {
                 <>
                   <p className="testimonial-list__item__index">{index + 1}</p>
                   <form>
-                    <label htmlFor="name">Client&apos;s name:</label>
-                    <input
-                      className="testimonial-list__item__edit-name"
-                      name="name"
-                      id="name"
-                      type="text"
-                      value={editedName}
-                      onChange={(event) => setEditedName(event.target.value)}
-                      required
-                    />
                     <label htmlFor="testimonial">Testimonial:</label>
                     <textarea
                       className="testimonial-list__item__edit-paragraph"
@@ -116,6 +106,16 @@ const TestimonialsSection = () => {
                       }
                       maxLength={500}
                       rows={5}
+                      required
+                    />
+                    <label htmlFor="name">Client&apos;s name:</label>
+                    <input
+                      className="testimonial-list__item__edit-name"
+                      name="name"
+                      id="name"
+                      type="text"
+                      value={editedName}
+                      onChange={(event) => setEditedName(event.target.value)}
                       required
                     />
                   </form>

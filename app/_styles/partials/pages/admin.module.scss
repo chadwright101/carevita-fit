@@ -181,11 +181,10 @@
     &__item {
       position: relative;
 
-      &__icon {
+      &__delete,
+      &__arrow {
         position: absolute;
         z-index: 10;
-        right: 1rem;
-        top: 1rem;
         padding: 0.5rem;
         margin: -0.5rem;
 
@@ -212,6 +211,24 @@
         }
       }
 
+      &__delete {
+        right: 1rem;
+        top: 1rem;
+      }
+
+      &__arrow {
+        right: 4.5rem;
+        top: 1rem;
+
+        @include media("tablet") {
+          right: 3.75rem;
+        }
+
+        img {
+          transform: rotate(-90deg);
+        }
+      }
+
       &__image {
         object-fit: cover;
         width: 100%;
@@ -223,7 +240,7 @@
         }
 
         @include media("tablet") {
-          height: 250px;
+          height: 225px;
         }
 
         @include media("tabletLarge") {
@@ -231,7 +248,11 @@
         }
 
         @include media("desktopSmall") {
-          height: 300px;
+          height: 250px;
+        }
+
+        @include media("desktop") {
+          height: 275px;
         }
       }
     }
