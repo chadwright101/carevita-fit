@@ -2,10 +2,8 @@
 
 import { createContext, useState } from "react";
 
-// Create the Context
 export const LocationsContext = createContext();
 
-// Create a Provider component
 export const LocationsProvider = ({ children }) => {
   const [showJohannesburg, setShowJohannesburg] = useState(true);
   const [showPretoria, setShowPretoria] = useState(true);

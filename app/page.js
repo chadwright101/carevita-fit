@@ -2,6 +2,7 @@ import About from "./_components/pages/home/about";
 import Testimonials from "./_components/pages/home/testimonials";
 import Gallery from "./_components/pages/home/gallery";
 import Hero from "./_components/pages/home/hero";
+import { HeroGalleryProvider } from "./_context/hero-gallery-context";
 
 export const metadata = {
   title: "Home - #fit",
@@ -33,7 +34,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <>
+    <HeroGalleryProvider>
       <main>
         <Hero />
         <div id="about" className="nav-point"></div>
@@ -42,6 +43,6 @@ export default function Home() {
         <div id="gallery" className="nav-point"></div>
         <Gallery />
       </main>
-    </>
+    </HeroGalleryProvider>
   );
 }

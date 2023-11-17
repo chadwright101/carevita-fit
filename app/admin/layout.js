@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { AuthContext } from "@/app/_context/auth-context";
 import { logoutUser } from "@/app/_firebase/auth";
 import { TestimonialProvider } from "@/app/_context/testimonial-context";
+import { HeroGalleryProvider } from "../_context/hero-gallery-context";
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
@@ -34,9 +35,11 @@ const AdminLayout = ({ children }) => {
 
   if (loggedInUser) {
     return (
-      <TestimonialProvider>
-        <section>{children}</section>
-      </TestimonialProvider>
+      <HeroGalleryProvider>
+        <TestimonialProvider>
+          <section>{children}</section>
+        </TestimonialProvider>
+      </HeroGalleryProvider>
     );
   } else {
     return (

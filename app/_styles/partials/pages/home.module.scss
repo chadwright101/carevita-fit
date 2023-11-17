@@ -3,6 +3,46 @@
 
 /* hero section */
 .hero-section {
+  &__slider-container {
+    height: 60vh;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    @include media("tablet") {
+      height: 450px;
+    }
+
+    @include media("tabletLarge") {
+      height: 525px;
+    }
+
+    @include media("desktopSmall") {
+      height: 600px;
+    }
+
+    @include media("desktop") {
+      height: 650px;
+    }
+
+    &__logo {
+      width: 200px;
+      height: auto;
+
+      @include media("phone") {
+        width: 250px;
+      }
+
+      @include media("tablet") {
+        width: 300px;
+      }
+
+      @include media("tabletLarge") {
+        width: 400px;
+      }
+    }
+  }
+
   .splide {
     margin: 0 -1.5rem;
 
