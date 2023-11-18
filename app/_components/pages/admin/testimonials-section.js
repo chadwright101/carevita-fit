@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 
 import {
@@ -77,7 +77,6 @@ const TestimonialsSection = () => {
         setTestimonialsArray(updatedTestimonials);
       }
     );
-
     return () => unsubscribeTestimonials();
   }, [setGetTestimonialIsLoading, setTestimonialsArray]);
 

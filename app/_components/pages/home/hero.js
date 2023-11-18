@@ -63,13 +63,14 @@ const Hero = () => {
     <section className="hero-section">
       <div className="hero-section__slider-container">
         {loadLogo ? (
-          <ImageContainer
-            src="/carevita-fit-logo.jpg"
-            alt="CareVita #fit logo"
-            width={400}
-            height={400}
-            cssClasses="hero-section__slider-container__logo"
-          />
+          <div className="hero-section__slider-container__logo">
+            <ImageContainer
+              src="/carevita-fit-logo.jpg"
+              alt="CareVita #fit logo"
+              width={400}
+              height={400}
+            />
+          </div>
         ) : (
           <HeroSlider imageList={heroImageInfo} />
         )}

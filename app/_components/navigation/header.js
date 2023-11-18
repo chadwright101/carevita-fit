@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import ImageContainer from "@/app/_components/image-container";
@@ -20,6 +20,18 @@ const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (toggleMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [toggleMenu]);
 
   const handleSignOut = async (e) => {
     logoutUser();

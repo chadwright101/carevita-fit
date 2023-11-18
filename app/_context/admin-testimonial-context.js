@@ -34,15 +34,19 @@ export const AdminTestimonialProvider = ({ children }) => {
 
   const handleTestimonialEdit = (testimonialIndex) => {
     setEditIndex(testimonialIndex);
+
+    const testimonial = testimonialsArray[testimonialIndex];
+    setEditedName(testimonial.name);
+    setEditedParagraph(testimonial.paragraph);
+
     setTimeout(() => {
       const element = document.getElementById(
         `testimonial-${testimonialIndex}`
       );
-      element.scrollIntoView({ behavior: "smooth" });
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }, 250);
-    const testimonial = testimonialsArray[testimonialIndex];
-    setEditedName(testimonial.name);
-    setEditedParagraph(testimonial.paragraph);
   };
 
   const handleTestimonialSave = async (testimonialId) => {
