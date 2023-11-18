@@ -1,17 +1,18 @@
 "use client";
 
 import { useEffect, useContext } from "react";
-import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
+import { listAll, getDownloadURL, getMetadata, ref } from "firebase/storage";
+import { storage } from "@/app/_firebase/firebase";
 
 import { toast } from "react-toastify";
-import { toastProps } from "@/app/_context/testimonial-context";
+import { toastProps } from "@/app/_context/admin-testimonial-context";
 
 import ImageContainer from "@/app/_components/image-container";
 import Heading from "@/app/_components/heading";
-import {
-  HeroGalleryContext,
-  heroSlideshowStorageRef,
-} from "@/app/_context/hero-gallery-context";
+import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
+import Image from "next/image";
+
+export const heroSlideshowStorageRef = ref(storage, "hero-slideshow");
 
 const HeroSection = () => {
   const {
@@ -24,7 +25,7 @@ const HeroSection = () => {
     uploadHeroImage,
     removeHeroImage,
     updateImageTimestamp,
-  } = useContext(HeroGalleryContext);
+  } = useContext(AdminGalleryContext);
 
   useEffect(() => {
     const getHeroImages = async () => {
@@ -33,15 +34,14 @@ const HeroSection = () => {
 
         const imageInfoPromises = res.items.map(async (itemRef) => {
           const metadata = await getMetadata(itemRef);
-          const url = await getDownloadURL(itemRef);
           const filename = itemRef.name;
+          const url = await getDownloadURL(itemRef);
           return {
             url,
             filename,
             timestamp: metadata.customMetadata.timestamp || 0,
           };
         });
-
         const imageInfo = await Promise.all(imageInfoPromises);
 
         imageInfo.sort((a, b) => b.timestamp - a.timestamp);
@@ -56,52 +56,69 @@ const HeroSection = () => {
       }
     };
     getHeroImages();
-  }, [reloadImages]);
+  }, [reloadImages, setHeroImageInfo]);
 
   return (
-    <section className="admin-main-slideshow">
+    <section className="admin-hero-gallery">
       <Heading subheading cssClasses="admin-testimonials-section__heading">
         Hero gallery <span>(maximum 6 images)</span>
       </Heading>
       {heroImageInfo.length !== 0 ? (
-        <ul className="admin-main-slideshow__list">
+        <ul className="admin-hero-gallery__list">
           {heroImageInfo.map(({ url, filename }, index) => (
-            <li key={index} className="admin-main-slideshow__list__item">
+            <li key={index} className="admin-hero-gallery__list__item">
+              <div
+                className="nav-point"
+                id={`hero-gallery-image-${index}`}
+              ></div>
               <button
-                className="admin-main-slideshow__list__item__delete"
+                className="admin-hero-gallery__list__item__delete"
                 type="button"
-                onClick={() => removeHeroImage(filename)}
+                onClick={() =>
+                  removeHeroImage(heroSlideshowStorageRef, filename, index)
+                }
               >
-                <img src="/icons/close-icon.svg" alt="Delete image" />
-              </button>
-              <button
-                className="admin-main-slideshow__list__item__arrow"
-                type="button"
-                onClick={() => updateImageTimestamp(filename)}
-              >
-                <img
-                  src="/icons/up-arrow.svg"
-                  alt="Move testimonial to start"
+                <Image
+                  src="/icons/close-icon.svg"
+                  alt="Delete image"
+                  width={40}
+                  height={40}
                 />
               </button>
+              {index !== 0 && (
+                <button
+                  className="admin-hero-gallery__list__item__arrow"
+                  type="button"
+                  onClick={() =>
+                    updateImageTimestamp(heroSlideshowStorageRef, filename)
+                  }
+                >
+                  <Image
+                    src="/icons/up-arrow.svg"
+                    alt="Move image to start"
+                    width={40}
+                    height={40}
+                  />
+                </button>
+              )}
               <ImageContainer
                 src={url}
                 alt={`Image ${index}`}
                 width={650}
                 height={650}
-                cssClasses="admin-main-slideshow__list__item__image"
+                cssClasses="admin-hero-gallery__list__item__image"
               />
             </li>
           ))}
         </ul>
       ) : (
-        <p className="admin-main-slideshow__empty-list">
+        <p className="admin-hero-gallery__empty-list">
           You currently have no images in this gallery. Add a new one below...
         </p>
       )}
 
       {heroImageInfo.length < 6 && (
-        <form className="admin-main-slideshow__form">
+        <form className="admin-hero-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input
             ref={fileInputRef}
@@ -114,7 +131,7 @@ const HeroSection = () => {
           <button
             type="button"
             className="admin-button"
-            onClick={uploadHeroImage}
+            onClick={() => uploadHeroImage(heroSlideshowStorageRef)}
             disabled={!file}
           >
             Upload

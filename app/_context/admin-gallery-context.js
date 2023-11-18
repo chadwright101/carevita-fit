@@ -9,15 +9,12 @@ import {
   updateMetadata,
 } from "firebase/storage";
 
-import { storage } from "@/app/_firebase/firebase";
 import { ToastContainer, toast } from "react-toastify";
-import { toastProps } from "@/app/_context/testimonial-context";
+import { toastProps } from "@/app/_context/admin-testimonial-context";
 
-export const HeroGalleryContext = createContext();
+export const AdminGalleryContext = createContext();
 
-export const heroSlideshowStorageRef = ref(storage, "hero-slideshow");
-
-export const HeroGalleryProvider = ({ children }) => {
+export const AdminGalleryProvider = ({ children }) => {
   const [heroImageInfo, setHeroImageInfo] = useState([]);
   const [file, setFile] = useState(null);
   const [reloadImages, setReloadImages] = useState(false);
@@ -43,11 +40,11 @@ export const HeroGalleryProvider = ({ children }) => {
     }
   };
 
-  const uploadHeroImage = async () => {
+  const uploadHeroImage = async (storageRef) => {
     try {
       if (file) {
         const fileName = `${Date.now()}_${file.name}`;
-        const fileRef = ref(heroSlideshowStorageRef, fileName);
+        const fileRef = ref(storageRef, fileName);
         setReloadImages(true);
 
         toast.info("Adding new image...", toastProps);
@@ -64,8 +61,7 @@ export const HeroGalleryProvider = ({ children }) => {
         setFile(null);
         setTimeout(() => {
           toast.success("Success! New image added.", toastProps);
-        }, 4000);
-        setReloadImages(false);
+        }, 3000);
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
@@ -76,12 +72,18 @@ export const HeroGalleryProvider = ({ children }) => {
         "Error! New image could not be added. Please try again and contact the developer if the problem persists.",
         toastProps
       );
+    } finally {
+      setTimeout(() => {
+        const element = document.getElementById("hero-gallery-image-0");
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 1500);
+      setReloadImages(false);
     }
   };
 
-  const updateImageTimestamp = async (filename) => {
+  const updateImageTimestamp = async (storageRef, filename) => {
     try {
-      const imageRef = ref(heroSlideshowStorageRef, filename);
+      const imageRef = ref(storageRef, filename);
       toast.info("Moving image...", toastProps);
       setReloadImages(true);
       const updatedMetadata = {
@@ -97,18 +99,23 @@ export const HeroGalleryProvider = ({ children }) => {
           "Success! Image moved to the first position.",
           toastProps
         );
-      }, 3000);
-      setReloadImages(false);
+      }, 2000);
     } catch (error) {
       console.error(error);
       toast.error(
         "Error! Image could not be moved. Please try again and contact the developer if the problem persists.",
         toastProps
       );
+    } finally {
+      setTimeout(() => {
+        const element = document.getElementById("hero-gallery-image-0");
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 1500);
+      setReloadImages(false);
     }
   };
 
-  const removeHeroImage = async (filename) => {
+  const removeHeroImage = async (storageRef, filename, index) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this image? This action cannot be undone."
     );
@@ -117,24 +124,31 @@ export const HeroGalleryProvider = ({ children }) => {
         toast.info("Deleting image...", toastProps);
         setReloadImages(true);
 
-        const fileRef = ref(heroSlideshowStorageRef, filename);
+        const fileRef = ref(storageRef, filename);
         await deleteObject(fileRef);
 
         setTimeout(() => {
           toast.success("Success! Image deleted.", toastProps);
-        }, 3000);
-        setReloadImages(false);
+        }, 2000);
       } catch (error) {
         console.log(error);
         toast.error(
           "Error! Image could not be deleted. Please try again and contact the developer if the problem persists."
         );
+      } finally {
+        setTimeout(() => {
+          const element = document.getElementById(
+            `hero-gallery-image-${index === 0 ? "0" : index - 1}`
+          );
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 1500);
+        setReloadImages(false);
       }
     }
   };
 
   return (
-    <HeroGalleryContext.Provider
+    <AdminGalleryContext.Provider
       value={{
         heroImageInfo,
         setHeroImageInfo,
@@ -151,6 +165,6 @@ export const HeroGalleryProvider = ({ children }) => {
     >
       {children}
       <ToastContainer />
-    </HeroGalleryContext.Provider>
+    </AdminGalleryContext.Provider>
   );
 };

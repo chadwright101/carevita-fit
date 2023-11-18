@@ -1,16 +1,16 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { listAll, getDownloadURL } from "firebase/storage";
+import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 
 import { toast } from "react-toastify";
-import { toastProps } from "@/app/_context/testimonial-context";
+import { toastProps } from "@/app/_context/admin-testimonial-context";
 
 import HeroSlider from "@/app/_components/sliders/hero-slider";
 
 import data from "@/app/_data/general-data.json";
-import { HeroGalleryContext } from "@/app/_context/hero-gallery-context";
-import { heroSlideshowStorageRef } from "@/app/_context/hero-gallery-context";
+import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
+import { heroSlideshowStorageRef } from "../admin/hero-section";
 import ImageContainer from "../../image-container";
 
 const {
@@ -20,7 +20,7 @@ const {
 } = data;
 
 const Hero = () => {
-  const { heroImageInfo, setHeroImageInfo } = useContext(HeroGalleryContext);
+  const { heroImageInfo, setHeroImageInfo } = useContext(AdminGalleryContext);
   const [loadLogo, setLoadLogo] = useState(false);
   useEffect(() => {
     const getHeroImages = async () => {
@@ -29,8 +29,12 @@ const Hero = () => {
         const res = await listAll(heroSlideshowStorageRef);
 
         const imageInfoPromises = res.items.map(async (itemRef) => {
+          const metadata = await getMetadata(itemRef);
           const url = await getDownloadURL(itemRef);
-          return url;
+          return {
+            url,
+            timestamp: metadata.customMetadata.timestamp || 0,
+          };
         });
 
         const newImageInfo = await Promise.all(imageInfoPromises);
@@ -39,6 +43,10 @@ const Hero = () => {
 
         setHeroImageInfo(newImageInfo);
         setLoadLogo(false);
+
+        const sortedImageUrls = newImageInfo.map((imageInfo) => imageInfo.url);
+
+        setHeroImageInfo(sortedImageUrls);
       } catch (error) {
         console.log(error);
         toast.error(
@@ -49,7 +57,7 @@ const Hero = () => {
     };
 
     getHeroImages();
-  }, []);
+  }, [setHeroImageInfo]);
 
   return (
     <section className="hero-section">

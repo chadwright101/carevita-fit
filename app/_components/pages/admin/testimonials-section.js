@@ -1,6 +1,7 @@
 "use client";
 
 import { useContext, useEffect } from "react";
+import Image from "next/image";
 
 import {
   collection,
@@ -10,9 +11,10 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "@/app/_firebase/firebase";
+import classNames from "classnames";
 
 import Heading from "@/app/_components/heading";
-import { TestimonialContext } from "@/app/_context/testimonial-context";
+import { AdminTestimonialContext } from "@/app/_context/admin-testimonial-context";
 
 export const testimonialsCollectionRef = collection(db, "testimonials");
 
@@ -37,7 +39,7 @@ const TestimonialsSection = () => {
     updateTestimonialTimeStamp,
     getTestimonialIsLoading,
     setGetTestimonialIsLoading,
-  } = useContext(TestimonialContext);
+  } = useContext(AdminTestimonialContext);
 
   useEffect(() => {
     const getTestimonials = async () => {
@@ -77,7 +79,7 @@ const TestimonialsSection = () => {
     );
 
     return () => unsubscribeTestimonials();
-  }, []);
+  }, [setGetTestimonialIsLoading, setTestimonialsArray]);
 
   return (
     <section className="admin-testimonials-section">
@@ -89,53 +91,63 @@ const TestimonialsSection = () => {
       ) : testimonialsArray.length !== 0 && !getTestimonialIsLoading ? (
         <ol className="testimonial-list">
           {testimonialsArray.map(({ name: person, paragraph, id }, index) => (
-            <li className="testimonial-list__item" key={id}>
-              <div id={`testimonial-${index}`} className="nav-point"></div>
+            <li
+              className={classNames("", {
+                "testimonial-list__item": editIndex !== index,
+                "testimonial-list__item--desktop-edit-open":
+                  editIndex === index,
+              })}
+              key={id}
+            >
+              <div className="nav-point" id={`testimonial-${index}`}></div>
               {editIndex === index ? (
-                <>
-                  <p className="testimonial-list__item__index">{index + 1}</p>
-                  <form>
-                    <label htmlFor="testimonial">Testimonial:</label>
-                    <textarea
-                      className="testimonial-list__item__edit-paragraph"
-                      name="testimonial"
-                      id="testimonial"
-                      value={editedParagraph}
-                      onChange={(event) =>
-                        setEditedParagraph(event.target.value)
-                      }
-                      maxLength={500}
-                      rows={5}
-                      required
-                    />
-                    <label htmlFor="name">Client&apos;s name:</label>
-                    <input
-                      className="testimonial-list__item__edit-name"
-                      name="name"
-                      id="name"
-                      type="text"
-                      value={editedName}
-                      onChange={(event) => setEditedName(event.target.value)}
-                      required
-                    />
-                  </form>
-                  <div className="testimonial-list__item__edit-buttons">
-                    <button
-                      onClick={() => handleTestimonialSave(id)}
-                      className="admin-button"
-                    >
-                      Save
-                    </button>
-                    <button
-                      onClick={() => handleTestimonialCancel()}
-                      className="admin-button"
-                    >
-                      Cancel
-                    </button>
+                <div className="testimonial-list__item__editing">
+                  <div className="testimonial-list__item__editing__container">
+                    <form>
+                      <label htmlFor="testimonial">
+                        Editing testimonial #{index + 1}:
+                      </label>
+                      <textarea
+                        className="testimonial-list__item__editing__edit-paragraph"
+                        name="testimonial"
+                        id="testimonial"
+                        value={editedParagraph}
+                        onChange={(event) =>
+                          setEditedParagraph(event.target.value)
+                        }
+                        maxLength={500}
+                        rows={5}
+                        required
+                      />
+                      <label htmlFor="name">Client&apos;s name:</label>
+                      <input
+                        className="testimonial-list__item__editing__edit-name"
+                        name="name"
+                        id="name"
+                        type="text"
+                        value={editedName}
+                        onChange={(event) => setEditedName(event.target.value)}
+                        required
+                      />
+                    </form>
+                    <div className="testimonial-list__item__editing__edit-buttons">
+                      <button
+                        onClick={() => handleTestimonialSave(id)}
+                        className="admin-button"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => handleTestimonialCancel()}
+                        className="admin-button"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
-                </>
+                </div>
               ) : (
-                <>
+                <div>
                   <p className="testimonial-list__item__index">{index + 1}</p>
                   <div className="testimonial-list__item__display">
                     <p>&#8220;{paragraph}&#8221;</p>
@@ -150,29 +162,31 @@ const TestimonialsSection = () => {
                         Edit
                       </button>
                       <button
-                        onClick={() => handleTestimonialDelete(id)}
+                        onClick={() => handleTestimonialDelete(id, index)}
                         className="admin-button"
                       >
                         Delete
                       </button>
                       <div className="testimonial-list__item__arrow">
-                        {index > 0 ? (
+                        {index !== 0 && (
                           <button
                             type="button"
                             onClick={() =>
                               updateTestimonialTimeStamp(id, index)
                             }
                           >
-                            <img
+                            <Image
                               src="/icons/up-arrow.svg"
                               alt="Move testimonial to start"
+                              width={40}
+                              height={40}
                             />
                           </button>
-                        ) : null}
+                        )}
                       </div>
                     </div>
                   )}
-                </>
+                </div>
               )}
             </li>
           ))}

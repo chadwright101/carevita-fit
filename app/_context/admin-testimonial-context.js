@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useState } from "react";
-import { useRouter } from "next/navigation";
 
 import { doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/app/_firebase/firebase";
@@ -11,7 +10,7 @@ import { testimonialsCollectionRef } from "../_components/pages/admin/testimonia
 
 import "react-toastify/dist/ReactToastify.css";
 
-export const TestimonialContext = createContext();
+export const AdminTestimonialContext = createContext();
 
 export const toastProps = {
   position: "bottom-left",
@@ -24,7 +23,7 @@ export const toastProps = {
   theme: "light",
 };
 
-export const TestimonialProvider = ({ children }) => {
+export const AdminTestimonialProvider = ({ children }) => {
   const [testimonialsArray, setTestimonialsArray] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editedName, setEditedName] = useState("");
@@ -32,14 +31,18 @@ export const TestimonialProvider = ({ children }) => {
   const [newTestimonialName, setNewTestimonialName] = useState("");
   const [newTestimonialParagraph, setNewTestimonialParagraph] = useState("");
   const [getTestimonialIsLoading, setGetTestimonialIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleTestimonialEdit = (testimonialIndex) => {
     setEditIndex(testimonialIndex);
+    setTimeout(() => {
+      const element = document.getElementById(
+        `testimonial-${testimonialIndex}`
+      );
+      element.scrollIntoView({ behavior: "smooth" });
+    }, 250);
     const testimonial = testimonialsArray[testimonialIndex];
     setEditedName(testimonial.name);
     setEditedParagraph(testimonial.paragraph);
-    document.getElementById(`/admin/dashboard#testimonial-${testimonialIndex}`);
   };
 
   const handleTestimonialSave = async (testimonialId) => {
@@ -77,7 +80,7 @@ export const TestimonialProvider = ({ children }) => {
     }
   };
 
-  const handleTestimonialDelete = async (testimonialId) => {
+  const handleTestimonialDelete = async (testimonialId, testimonialIndex) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this testimonial?"
     );
@@ -88,6 +91,7 @@ export const TestimonialProvider = ({ children }) => {
         setTestimonialsArray(
           testimonialsArray.filter((t) => t.id !== testimonialId)
         );
+
         toast.success("Success! Testimonial deleted.", toastProps);
       } catch (error) {
         toast.error(
@@ -95,6 +99,13 @@ export const TestimonialProvider = ({ children }) => {
           toastProps
         );
         console.log(error);
+      } finally {
+        setTimeout(() => {
+          const element = document.getElementById(
+            `testimonial-${testimonialIndex === 0 ? "0" : testimonialIndex - 1}`
+          );
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 250);
       }
     }
   };
@@ -113,18 +124,17 @@ export const TestimonialProvider = ({ children }) => {
 
       setNewTestimonialName("");
       setNewTestimonialParagraph("");
-      setTimeout(() => {
-        const element = document.getElementById("testimonial-0");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 100);
       toast.success("Success! Testimonial added.", toastProps);
     } catch (error) {
       toast.error(
         "Error! Testimonial could not be added. Please try again and contact the developer if the problem persists."
       );
       console.log(error);
+    } finally {
+      setTimeout(() => {
+        const element = document.getElementById("testimonial-0");
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 250);
     }
   };
 
@@ -134,9 +144,6 @@ export const TestimonialProvider = ({ children }) => {
       await updateDoc(doc(db, "testimonials", testimonialId), {
         timestamp: updatedTimestamp,
       });
-      setTimeout(() => {
-        document.getElementById("testimonial-0");
-      }, 100);
       toast.success(
         "Success! Testimonial moved to the top of the list.",
         toastProps
@@ -147,11 +154,16 @@ export const TestimonialProvider = ({ children }) => {
         toastProps
       );
       console.log(error);
+    } finally {
+      setTimeout(() => {
+        const element = document.getElementById("testimonial-0");
+        element.scrollIntoView({ behavior: "smooth" });
+      }, 250);
     }
   };
 
   return (
-    <TestimonialContext.Provider
+    <AdminTestimonialContext.Provider
       value={{
         testimonialsArray,
         setTestimonialsArray,
@@ -177,6 +189,6 @@ export const TestimonialProvider = ({ children }) => {
     >
       {children}
       <ToastContainer />
-    </TestimonialContext.Provider>
+    </AdminTestimonialContext.Provider>
   );
 };

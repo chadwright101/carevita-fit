@@ -28,20 +28,83 @@
 
     &__item {
       padding: 1rem;
-      border: 1px $black solid;
       position: relative;
+      border: 1px $black solid;
 
-      form {
-        display: grid;
-        row-gap: 1rem;
+      &--desktop-edit-open {
+        @include media("tablet") {
+          padding: 1rem;
+          position: relative;
+          border: 3px $blue solid;
+          background: #f5f5f5;
+        }
+      }
 
-        label {
-          font-weight: 400;
+      &__editing {
+        position: fixed;
+        background: #f5f5f5;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 100;
+
+        @include media("tablet") {
+          position: relative;
+          z-index: 0;
+          background-color: transparent;
         }
 
-        label:last-of-type {
-          margin-top: 0.5rem;
+        &__container {
+          padding: 4rem 1.5rem;
+
+          @include media("tablet") {
+            padding: 0;
+          }
         }
+
+        form {
+          display: grid;
+          row-gap: 2rem;
+
+          label {
+            font-weight: 400;
+            font-size: $subheading;
+
+            @include media("tablet") {
+              font-size: $paragraph;
+            }
+          }
+
+          label:last-of-type {
+            margin-top: 0.5rem;
+          }
+        }
+
+        &__edit-name,
+        &__edit-paragraph {
+          padding: 0.5rem;
+          font-size: 1rem;
+        }
+
+        &__edit-paragraph {
+          position: relative;
+        }
+
+        &__edit-buttons {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 1.5rem;
+          margin-right: 3rem;
+          margin-top: 1.5rem;
+        }
+      }
+      &__edit-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-right: 3rem;
+        margin-top: 1.5rem;
       }
 
       &__index {
@@ -50,24 +113,6 @@
         font-weight: 400;
         bottom: 1rem;
         right: 1rem;
-      }
-
-      &__edit-name,
-      &__edit-paragraph {
-        padding: 0.5rem;
-        font-size: 1rem;
-      }
-
-      &__edit-paragraph {
-        position: relative;
-      }
-
-      &__edit-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        margin-right: 3rem;
-        margin-top: 1.5rem;
       }
 
       &__display {
@@ -145,9 +190,9 @@
   }
 }
 
-/* main slideshow section */
+/* hero gallery */
 
-.admin-main-slideshow {
+.admin-hero-gallery {
   margin-bottom: 3rem;
   border-bottom: 1px solid $black;
   padding: 2.5rem 0;
@@ -220,7 +265,7 @@
         right: 4.5rem;
         top: 1rem;
 
-        @include media("tablet") {
+        @include media("tabletLarge") {
           right: 3.75rem;
         }
 
@@ -232,27 +277,27 @@
       &__image {
         object-fit: cover;
         width: 100%;
-        height: 225px;
+        height: 200px;
         box-shadow: 0 5px 5px rgb(0 0 0 / 15%);
 
         @include media("phone") {
-          height: 325px;
+          height: 270px;
         }
 
         @include media("tablet") {
-          height: 225px;
+          height: 200px;
         }
 
         @include media("tabletLarge") {
-          height: 300px;
-        }
-
-        @include media("desktopSmall") {
           height: 250px;
         }
 
+        @include media("desktopSmall") {
+          height: 215px;
+        }
+
         @include media("desktop") {
-          height: 275px;
+          height: 235px;
         }
       }
     }

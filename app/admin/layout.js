@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 
 import { AuthContext } from "@/app/_context/auth-context";
 import { logoutUser } from "@/app/_firebase/auth";
-import { TestimonialProvider } from "@/app/_context/testimonial-context";
-import { HeroGalleryProvider } from "../_context/hero-gallery-context";
+import { AdminTestimonialProvider } from "@/app/_context/admin-testimonial-context";
+import { AdminGalleryProvider } from "@/app/_context/admin-gallery-context";
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
@@ -31,15 +31,15 @@ const AdminLayout = ({ children }) => {
     return () => {
       window.removeEventListener("pagehide", handlePageHide);
     };
-  }, []);
+  }, [router, setLoggedInUser]);
 
   if (loggedInUser) {
     return (
-      <HeroGalleryProvider>
-        <TestimonialProvider>
+      <AdminGalleryProvider>
+        <AdminTestimonialProvider>
           <section>{children}</section>
-        </TestimonialProvider>
-      </HeroGalleryProvider>
+        </AdminTestimonialProvider>
+      </AdminGalleryProvider>
     );
   } else {
     return (
