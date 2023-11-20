@@ -20,7 +20,7 @@ const {
 } = data;
 
 const Hero = () => {
-  const { heroImageInfo, setHeroImageInfo } = useContext(AdminGalleryContext);
+  const { imageInfo, setImageInfo } = useContext(AdminGalleryContext);
   const [loadLogo, setLoadLogo] = useState(false);
   useEffect(() => {
     const getHeroImages = async () => {
@@ -41,12 +41,12 @@ const Hero = () => {
 
         newImageInfo.sort((a, b) => b.timestamp - a.timestamp);
 
-        setHeroImageInfo(newImageInfo);
+        setImageInfo(newImageInfo);
         setLoadLogo(false);
 
         const sortedImageUrls = newImageInfo.map((imageInfo) => imageInfo.url);
 
-        setHeroImageInfo(sortedImageUrls);
+        setImageInfo(sortedImageUrls);
       } catch (error) {
         console.log(error);
         toast.error(
@@ -57,7 +57,7 @@ const Hero = () => {
     };
 
     getHeroImages();
-  }, [setHeroImageInfo]);
+  }, [setImageInfo]);
 
   return (
     <section className="hero-section">
@@ -72,7 +72,7 @@ const Hero = () => {
             />
           </div>
         ) : (
-          <HeroSlider imageList={heroImageInfo} />
+          <HeroSlider imageList={imageInfo} />
         )}
       </div>
       <div className="hero-section__hero-text">

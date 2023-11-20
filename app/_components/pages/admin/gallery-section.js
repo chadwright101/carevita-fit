@@ -12,14 +12,15 @@ import ImageContainer from "@/app/_components/image-container";
 import Heading from "@/app/_components/heading";
 import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
 
-export const heroSlideshowStorageRef = ref(storage, "hero-slideshow");
+export const gallerySlideshowStorageRef = ref(storage, "gallery-slideshow");
 
-const HeroSection = () => {
+const GallerySection = () => {
   const {
     imageInfo,
     setImageInfo,
     file,
     reloadImages,
+    setReloadedImages,
     fileInputRef,
     handleFileChange,
     uploadImage,
@@ -28,9 +29,9 @@ const HeroSection = () => {
   } = useContext(AdminGalleryContext);
 
   useEffect(() => {
-    const getHeroImages = async () => {
+    const getGalleryImages = async () => {
       try {
-        const res = await listAll(heroSlideshowStorageRef);
+        const res = await listAll(gallerySlideshowStorageRef);
 
         const imageInfoPromises = res.items.map(async (itemRef) => {
           const metadata = await getMetadata(itemRef);
@@ -55,13 +56,13 @@ const HeroSection = () => {
         );
       }
     };
-    getHeroImages();
+    getGalleryImages();
   }, [reloadImages, setImageInfo]);
 
   return (
     <section className="admin-hero-gallery">
       <Heading subheading cssClasses="admin-testimonials-section__heading">
-        Main gallery <span>(maximum 6 images)</span>
+        Other gallery <span>(maximum 20 images)</span>
       </Heading>
       {imageInfo.length !== 0 ? (
         <ul className="admin-hero-gallery__list">
@@ -69,13 +70,18 @@ const HeroSection = () => {
             <li key={index} className="admin-hero-gallery__list__item">
               <div
                 className="nav-point"
-                id={`hero-gallery-image-${index}`}
+                id={`other-gallery-image-${index}`}
               ></div>
               <button
                 className="admin-hero-gallery__list__item__delete"
                 type="button"
                 onClick={() =>
-                  removeImage(heroSlideshowStorageRef, filename, index, "hero")
+                  removeImage(
+                    gallerySlideshowStorageRef,
+                    filename,
+                    index,
+                    "other"
+                  )
                 }
               >
                 <Image
@@ -91,9 +97,9 @@ const HeroSection = () => {
                   type="button"
                   onClick={() =>
                     updateImageTimestamp(
-                      heroSlideshowStorageRef,
+                      gallerySlideshowStorageRef,
                       filename,
-                      "hero"
+                      "other"
                     )
                   }
                 >
@@ -121,7 +127,7 @@ const HeroSection = () => {
         </p>
       )}
 
-      {imageInfo.length < 6 && (
+      {imageInfo.length < 20 && (
         <form className="admin-hero-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input
@@ -135,7 +141,7 @@ const HeroSection = () => {
           <button
             type="button"
             className="admin-button"
-            onClick={() => uploadImage(heroSlideshowStorageRef, "hero")}
+            onClick={() => uploadImage(gallerySlideshowStorageRef, "other")}
             disabled={!file}
           >
             Upload
@@ -146,4 +152,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default GallerySection;

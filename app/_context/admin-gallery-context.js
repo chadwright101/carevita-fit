@@ -15,7 +15,7 @@ import { toastProps } from "@/app/_context/admin-testimonial-context";
 export const AdminGalleryContext = createContext();
 
 export const AdminGalleryProvider = ({ children }) => {
-  const [heroImageInfo, setHeroImageInfo] = useState([]);
+  const [imageInfo, setImageInfo] = useState([]);
   const [file, setFile] = useState(null);
   const [reloadImages, setReloadImages] = useState(false);
   const fileInputRef = useRef(null);
@@ -40,7 +40,7 @@ export const AdminGalleryProvider = ({ children }) => {
     }
   };
 
-  const uploadHeroImage = async (storageRef) => {
+  const uploadImage = async (storageRef, galleryName) => {
     try {
       if (file) {
         const fileName = `${Date.now()}_${file.name}`;
@@ -74,14 +74,16 @@ export const AdminGalleryProvider = ({ children }) => {
       );
     } finally {
       setTimeout(() => {
-        const element = document.getElementById("hero-gallery-image-0");
+        const element = document.getElementById(
+          `${galleryName}-gallery-image-0`
+        );
         element.scrollIntoView({ behavior: "smooth" });
       }, 1500);
       setReloadImages(false);
     }
   };
 
-  const updateImageTimestamp = async (storageRef, filename) => {
+  const updateImageTimestamp = async (storageRef, filename, galleryName) => {
     try {
       const imageRef = ref(storageRef, filename);
       toast.info("Moving image...", toastProps);
@@ -108,14 +110,16 @@ export const AdminGalleryProvider = ({ children }) => {
       );
     } finally {
       setTimeout(() => {
-        const element = document.getElementById("hero-gallery-image-0");
+        const element = document.getElementById(
+          `${galleryName}-gallery-image-0`
+        );
         element.scrollIntoView({ behavior: "smooth" });
       }, 1500);
       setReloadImages(false);
     }
   };
 
-  const removeHeroImage = async (storageRef, filename, index) => {
+  const removeImage = async (storageRef, filename, index, galleryName) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this image? This action cannot be undone."
     );
@@ -136,12 +140,14 @@ export const AdminGalleryProvider = ({ children }) => {
           "Error! Image could not be deleted. Please try again and contact the developer if the problem persists."
         );
       } finally {
-        setTimeout(() => {
-          const element = document.getElementById(
-            `hero-gallery-image-${index === 0 ? "0" : index - 1}`
-          );
-          element.scrollIntoView({ behavior: "smooth" });
-        }, 1500);
+        if (index) {
+          setTimeout(() => {
+            const element = document.getElementById(
+              `${galleryName}-gallery-image-${index === 0 ? "0" : index - 1}`
+            );
+            element.scrollIntoView({ behavior: "smooth" });
+          }, 1500);
+        }
         setReloadImages(false);
       }
     }
@@ -150,16 +156,16 @@ export const AdminGalleryProvider = ({ children }) => {
   return (
     <AdminGalleryContext.Provider
       value={{
-        heroImageInfo,
-        setHeroImageInfo,
+        imageInfo,
+        setImageInfo,
         file,
         setFile,
         reloadImages,
         setReloadImages,
         fileInputRef,
         handleFileChange,
-        uploadHeroImage,
-        removeHeroImage,
+        uploadImage,
+        removeImage,
         updateImageTimestamp,
       }}
     >

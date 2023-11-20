@@ -1,6 +1,14 @@
 @import "../utils/variables.module.scss";
 @import "../utils/mixins/media.module.scss";
 
+/* admin page */
+
+.admin-page {
+  .admin-page__galleries-heading {
+    margin: 2rem 0;
+  }
+}
+
 /* testimonials section */
 
 .admin-testimonials-section {
@@ -194,7 +202,6 @@
 
 .admin-hero-gallery {
   margin-bottom: 3rem;
-  border-bottom: 1px solid $black;
   padding: 2.5rem 0;
 
   &__heading {
