@@ -15,10 +15,32 @@ const Properties = () => {
     useContext(LocationsContext);
   return (
     <section className="property-section">
-      {showJohannesburg && <SingleProperty data={properties[0]} eager />}
-      {showPretoria && <SingleProperty data={properties[1]} eager />}
-      {showMosselBay && <SingleProperty data={properties[2]} />}
-      {showGeorge && <SingleProperty data={properties[3]} />}
+      {showJohannesburg && (
+        <SingleProperty
+          data={properties[0]}
+          eager
+          enquireNowPropertyName={properties[0].propertyName}
+        />
+      )}
+      {showPretoria && (
+        <SingleProperty
+          data={properties[1]}
+          eager
+          enquireNowPropertyName={properties[1].propertyName}
+        />
+      )}
+      {showMosselBay && (
+        <SingleProperty
+          data={properties[2]}
+          enquireNowPropertyName={properties[2].propertyName}
+        />
+      )}
+      {showGeorge && (
+        <SingleProperty
+          data={properties[3]}
+          enquireNowPropertyName={properties[3].propertyName}
+        />
+      )}
     </section>
   );
 };

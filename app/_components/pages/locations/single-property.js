@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { useContext } from "react";
 
 import Heading from "@/app/_components/heading";
 import ImageContainer from "@/app/_components/image-container";
-import Button from "@/app/_components/button";
+import { LocationsContext } from "@/app/_context/locations-context";
 
-const SingleProperty = ({ data, eager }) => {
+const SingleProperty = ({ data, eager, enquireNowPropertyName }) => {
   const {
     propertyName,
     propertyLocation: { suburb, city },
@@ -12,6 +13,9 @@ const SingleProperty = ({ data, eager }) => {
     description,
     instructor: { name, image: instructorImage },
   } = data;
+
+  const { setEnquireNowLocation } = useContext(LocationsContext);
+
   return (
     <article className="property-component">
       <div className="property-component__heading-container">
@@ -50,7 +54,15 @@ const SingleProperty = ({ data, eager }) => {
           />
         </Link>
       </div>
-      <Button url="/contact">Enquire Now</Button>
+      <Link href="/contact">
+        <button
+          type="button"
+          onClick={() => setEnquireNowLocation(enquireNowPropertyName)}
+          className="button button--normal property-component__button"
+        >
+          Enquire Now
+        </button>
+      </Link>
     </article>
   );
 };

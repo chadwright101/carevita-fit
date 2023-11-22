@@ -1,3 +1,6 @@
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
+
 /* property page */
 
 .property-section {
@@ -137,6 +140,12 @@
     justify-content: space-between;
     margin-top: 1.5rem;
     column-gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__button {
+    width: 100%;
+    margin: auto 0;
   }
 }
 

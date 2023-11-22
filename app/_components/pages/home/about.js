@@ -2,6 +2,7 @@ import Heading from "@/app/_components/heading";
 import ImageContainer from "@/app/_components/image-container";
 
 import data from "@/app/_data/general-data.json";
+import Link from "next/link";
 
 const {
   homePage: {
@@ -25,10 +26,20 @@ const About = () => {
         <Heading cssClasses="about-section__heading" sectionHeading>
           About
         </Heading>
-        <div className="about-section__paragraph-container">
-          {paragraphs.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
+        <div className="about-section__container">
+          <div className="about-section__container__paragraphs">
+            {paragraphs.map((item, index) => (
+              <p key={index}>{item}</p>
+            ))}
+          </div>
+          <Link href="/locations">
+            <button
+              type="button"
+              className="button button--normal about-section__container__button"
+            >
+              View our locations
+            </button>
+          </Link>
         </div>
       </article>
       <ImageContainer

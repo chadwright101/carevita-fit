@@ -10,6 +10,7 @@ export const LocationsProvider = ({ children }) => {
   const [showMosselBay, setShowMosselBay] = useState(true);
   const [showGeorge, setShowGeorge] = useState(true);
   const [showClearFilter, setShowClearFilter] = useState(false);
+  const [enquireNowLocation, setEnquireNowLocation] = useState("");
 
   return (
     <LocationsContext.Provider
@@ -24,6 +25,8 @@ export const LocationsProvider = ({ children }) => {
         setShowMosselBay,
         showClearFilter,
         setShowClearFilter,
+        enquireNowLocation,
+        setEnquireNowLocation,
       }}
     >
       {children}

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import Button from "../../button";
 
 import data from "@/app/_data/general-data.json";
+import { LocationsContext } from "@/app/_context/locations-context";
 
 const {
   contactPage: {
@@ -14,12 +15,20 @@ const {
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
-
+  const { enquireNowLocation } = useContext(LocationsContext);
+  console.log(enquireNowLocation);
   return (
     <section className="contact-form-container">
       <p className="contact-form-container__paragraph">
-        Please fill out the form below, and we&apos;ll be in touch with you
-        ASAP...
+        Please fill out the form below, and{" "}
+        {enquireNowLocation ? (
+          <>
+            our team from <span>{enquireNowLocation}</span> will
+          </>
+        ) : (
+          "we'll"
+        )}{" "}
+        be in touch with you ASAP...
       </p>
       <form
         className="contact-form-container__form"
@@ -29,7 +38,7 @@ const Form = () => {
         <input
           type="text"
           name="subject"
-          defaultValue="Website Contact Form"
+          defaultValue={`${enquireNowLocation} - Website Contact Form`}
           className="hidden"
         />
         <input type="text" name="_honey" className="hidden" />
@@ -65,16 +74,19 @@ const Form = () => {
                 placeholder="Email address"
               />
             </div>
-            <div className="contact-form-container__form__group">
-              <label htmlFor="property">Property:</label>
-              <select id="property" name="property">
-                {propertyList.map((property, index) => (
-                  <option key={index} value={property}>
-                    {property}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {enquireNowLocation ? null : (
+              <div className="contact-form-container__form__group">
+                <label htmlFor="property">Property:</label>
+
+                <select id="property" name="property">
+                  {propertyList.map((property, index) => (
+                    <option key={index} value={property}>
+                      {property}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div className="contact-form-container__form__group">
               <label htmlFor="email">Message:</label>
               <textarea
