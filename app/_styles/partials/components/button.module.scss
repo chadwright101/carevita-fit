@@ -16,35 +16,35 @@
       transition-duration: 300ms;
     }
   }
-}
 
-.button--normal {
-  background: $blue;
-  color: $white;
-  margin: 2rem 0;
+  &--normal {
+    background: $blue;
+    color: $white;
+    margin: 2rem 0;
 
-  @include media("desktopSmall") {
-    &:hover {
-      background: rgb(19 66 102 / 75%);
+    @include media("desktopSmall") {
+      &:hover {
+        background: rgb(19 66 102 / 75%);
+      }
     }
   }
-}
 
-.button--arrow {
-  margin-top: 2rem;
-  background: $white;
-  color: $black;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  &--arrow {
+    margin-top: 2rem;
+    background: $white;
+    color: $black;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-  @include media("desktopSmall") {
-    &:hover {
-      background: $green;
-      color: $white;
-      border: solid $white 2px;
+    @include media("desktopSmall") {
+      &:hover {
+        background: $green;
+        color: $white;
+        border: solid $white 2px;
+      }
     }
   }
 }

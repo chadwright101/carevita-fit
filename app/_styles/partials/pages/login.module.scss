@@ -61,8 +61,10 @@
     }
 
     &__button {
+      margin-top: 1rem;
       @include media("tablet") {
         width: 100px;
+        margin-top: 0;
       }
     }
   }

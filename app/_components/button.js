@@ -32,7 +32,7 @@ const Button = ({ children, form, cssClasses, url, onClick, formNext }) => {
   } else {
     return (
       <Link href={url} className={`button button--normal ${cssClasses}`}>
-        {children || "View More"}
+        <button type="button">{children || "View More"}</button>
       </Link>
     );
   }

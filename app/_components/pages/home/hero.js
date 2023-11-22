@@ -1,17 +1,16 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 
 import { toast } from "react-toastify";
 import { toastProps } from "@/app/_context/admin-testimonial-context";
 
 import HeroSlider from "@/app/_components/sliders/hero-slider";
+import { mainGalleryStorageRef } from "../admin/main-gallery-section";
+import ImageContainer from "../../image-container";
 
 import data from "@/app/_data/general-data.json";
-import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
-import { heroSlideshowStorageRef } from "../admin/hero-section";
-import ImageContainer from "../../image-container";
 
 const {
   homePage: {
@@ -20,13 +19,13 @@ const {
 } = data;
 
 const Hero = () => {
-  const { imageInfo, setImageInfo } = useContext(AdminGalleryContext);
+  const [mainGalleryImageData, setMainGalleryImageData] = useState([]);
   const [loadLogo, setLoadLogo] = useState(false);
   useEffect(() => {
     const getHeroImages = async () => {
       try {
         setLoadLogo(true);
-        const res = await listAll(heroSlideshowStorageRef);
+        const res = await listAll(mainGalleryStorageRef);
 
         const imageInfoPromises = res.items.map(async (itemRef) => {
           const metadata = await getMetadata(itemRef);
@@ -41,12 +40,14 @@ const Hero = () => {
 
         newImageInfo.sort((a, b) => b.timestamp - a.timestamp);
 
-        setImageInfo(newImageInfo);
+        setMainGalleryImageData(newImageInfo);
         setLoadLogo(false);
 
-        const sortedImageUrls = newImageInfo.map((imageInfo) => imageInfo.url);
+        const sortedImageUrls = newImageInfo.map(
+          (mainGalleryImageData) => mainGalleryImageData.url
+        );
 
-        setImageInfo(sortedImageUrls);
+        setMainGalleryImageData(sortedImageUrls);
       } catch (error) {
         console.log(error);
         toast.error(
@@ -57,7 +58,7 @@ const Hero = () => {
     };
 
     getHeroImages();
-  }, [setImageInfo]);
+  }, [setMainGalleryImageData]);
 
   return (
     <section className="hero-section">
@@ -72,7 +73,7 @@ const Hero = () => {
             />
           </div>
         ) : (
-          <HeroSlider imageList={imageInfo} />
+          <HeroSlider imageList={mainGalleryImageData} />
         )}
       </div>
       <div className="hero-section__hero-text">

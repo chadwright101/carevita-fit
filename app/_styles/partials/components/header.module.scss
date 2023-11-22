@@ -24,6 +24,11 @@
     display: none;
   }
 
+  &__logo {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 400ms;
+  }
+
   &__menu-button {
     width: 44px;
     height: auto;
@@ -106,6 +111,11 @@
     align-items: flex-end;
     max-width: 1305px;
     margin: 0 auto;
+
+    &__logo {
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 400ms;
+    }
   }
 
   .desktop-nav {
