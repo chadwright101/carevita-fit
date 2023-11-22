@@ -78,45 +78,41 @@ const Header = () => {
         >
           {loggedInUser
             ? admin.map(({ title, url }, index) => (
-                <>
-                  <li className="mobile-nav__list-item" key={index}>
-                    <Link
-                      className="mobile-nav__link"
-                      href={url}
-                      onClick={() => {
-                        setToggleMenu(false);
-                        if (title === "Sign Out") {
-                          handleSignOut();
-                        }
-                        setEnquireNowLocation("");
-                      }}
-                    >
-                      {title}
-                    </Link>
-                  </li>
+                <li className="mobile-nav__list-item" key={index}>
+                  <Link
+                    className="mobile-nav__link"
+                    href={url}
+                    onClick={() => {
+                      setToggleMenu(false);
+                      if (title === "Sign Out") {
+                        handleSignOut();
+                      }
+                      setEnquireNowLocation("");
+                    }}
+                  >
+                    {title}
+                  </Link>
                   {index < general.length - 2 && <hr />}
-                </>
+                </li>
               ))
             : general.map(({ title, url }, index) => (
-                <>
-                  <li className="mobile-nav__list-item" key={index}>
-                    <Link
-                      className="mobile-nav__link"
-                      href={url}
-                      onClick={() => {
-                        setToggleMenu(false);
-                        setEnquireNowLocation("");
-                      }}
-                    >
-                      {title}
-                    </Link>
-                  </li>
+                <li className="mobile-nav__list-item" key={index}>
+                  <Link
+                    className="mobile-nav__link"
+                    href={url}
+                    onClick={() => {
+                      setToggleMenu(false);
+                      setEnquireNowLocation("");
+                    }}
+                  >
+                    {title}
+                  </Link>
                   {index < general.length - 1 && <hr />}
-                </>
+                </li>
               ))}
           {!loggedInUser && (
             <li
-              class={`mobile-nav__admin-button ${
+              className={`mobile-nav__admin-button ${
                 toggleMenu ? "mobile-nav__admin-button--open" : ""
               }`}
             >

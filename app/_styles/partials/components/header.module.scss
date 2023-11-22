@@ -68,10 +68,12 @@
   }
 
   &__list-item {
-    margin: 1.3rem 0;
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
 
-    @include media("phone") {
-      margin: 1.35rem 0;
+    hr {
+      width: 100%;
     }
   }
 
@@ -99,7 +101,7 @@
     transition-delay: 600ms;
 
     &--open {
-      bottom: 6.5rem;
+      bottom: 17.5%;
     }
 
     a {
