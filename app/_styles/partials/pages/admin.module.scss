@@ -4,8 +4,45 @@
 /* admin page */
 
 .admin-page {
-  .admin-page__galleries-heading {
+  &__galleries-heading {
     margin: 2rem 0;
+  }
+
+  &__galleries-container {
+    display: grid;
+    gap: 1.25rem;
+
+    @include media("tablet") {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+      align-items: center;
+    }
+
+    &__heading {
+      font-size: 1.25rem;
+
+      span {
+        font-style: italic;
+        font-weight: $thin;
+      }
+    }
+
+    button {
+      background: $blue;
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      height: 2.75rem;
+
+      @include media("tablet") {
+        font-size: 1rem;
+        &:hover {
+          background-color: $lightBlue;
+        }
+      }
+    }
   }
 }
 
@@ -200,18 +237,8 @@
 
 /* hero gallery */
 
-.admin-hero-gallery {
-  margin-bottom: 3rem;
-  padding: 2.5rem 0;
-
-  &__heading {
-    margin-bottom: 2rem;
-
-    span {
-      font-style: italic;
-      font-weight: $thin;
-    }
-  }
+.admin-gallery {
+  padding-top: 2.5rem;
 
   &__empty-list {
     font-style: italic;

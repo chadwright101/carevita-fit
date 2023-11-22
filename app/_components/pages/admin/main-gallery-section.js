@@ -9,18 +9,16 @@ import { toast } from "react-toastify";
 import { toastProps } from "@/app/_context/admin-testimonial-context";
 
 import ImageContainer from "@/app/_components/image-container";
-import Heading from "@/app/_components/heading";
 import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
 
-export const gallerySlideshowStorageRef = ref(storage, "gallery-slideshow");
+export const mainGalleryStorageRef = ref(storage, "hero-slideshow");
 
-const GallerySection = () => {
+const MainGallerySection = () => {
   const {
     imageInfo,
     setImageInfo,
     file,
     reloadImages,
-    setReloadedImages,
     fileInputRef,
     handleFileChange,
     uploadImage,
@@ -29,9 +27,9 @@ const GallerySection = () => {
   } = useContext(AdminGalleryContext);
 
   useEffect(() => {
-    const getGalleryImages = async () => {
+    const getMainGalleryImages = async () => {
       try {
-        const res = await listAll(gallerySlideshowStorageRef);
+        const res = await listAll(mainGalleryStorageRef);
 
         const imageInfoPromises = res.items.map(async (itemRef) => {
           const metadata = await getMetadata(itemRef);
@@ -56,32 +54,24 @@ const GallerySection = () => {
         );
       }
     };
-    getGalleryImages();
+    getMainGalleryImages();
   }, [reloadImages, setImageInfo]);
 
   return (
-    <section className="admin-hero-gallery">
-      <Heading subheading cssClasses="admin-testimonials-section__heading">
-        Other gallery <span>(maximum 20 images)</span>
-      </Heading>
+    <section className="admin-gallery">
       {imageInfo.length !== 0 ? (
-        <ul className="admin-hero-gallery__list">
+        <ul className="admin-gallery__list">
           {imageInfo.map(({ url, filename }, index) => (
-            <li key={index} className="admin-hero-gallery__list__item">
+            <li key={index} className="admin-gallery__list__item">
               <div
                 className="nav-point"
-                id={`other-gallery-image-${index}`}
+                id={`main-gallery-image-${index}`}
               ></div>
               <button
-                className="admin-hero-gallery__list__item__delete"
+                className="admin-gallery__list__item__delete"
                 type="button"
                 onClick={() =>
-                  removeImage(
-                    gallerySlideshowStorageRef,
-                    filename,
-                    index,
-                    "other"
-                  )
+                  removeImage(mainGalleryStorageRef, filename, index, "main")
                 }
               >
                 <Image
@@ -93,13 +83,13 @@ const GallerySection = () => {
               </button>
               {index !== 0 && (
                 <button
-                  className="admin-hero-gallery__list__item__arrow"
+                  className="admin-gallery__list__item__arrow"
                   type="button"
                   onClick={() =>
                     updateImageTimestamp(
-                      gallerySlideshowStorageRef,
+                      mainGalleryStorageRef,
                       filename,
-                      "other"
+                      "main"
                     )
                   }
                 >
@@ -116,19 +106,19 @@ const GallerySection = () => {
                 alt={`Image ${index}`}
                 width={650}
                 height={650}
-                cssClasses="admin-hero-gallery__list__item__image"
+                cssClasses="admin-gallery__list__item__image"
               />
             </li>
           ))}
         </ul>
       ) : (
-        <p className="admin-hero-gallery__empty-list">
+        <p className="admin-gallery__empty-list">
           You currently have no images in this gallery. Add a new one below...
         </p>
       )}
 
-      {imageInfo.length < 20 && (
-        <form className="admin-hero-gallery__form">
+      {imageInfo.length < 6 && (
+        <form className="admin-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input
             ref={fileInputRef}
@@ -141,7 +131,7 @@ const GallerySection = () => {
           <button
             type="button"
             className="admin-button"
-            onClick={() => uploadImage(gallerySlideshowStorageRef, "other")}
+            onClick={() => uploadImage(mainGalleryStorageRef, "main")}
             disabled={!file}
           >
             Upload
@@ -152,4 +142,4 @@ const GallerySection = () => {
   );
 };
 
-export default GallerySection;
+export default MainGallerySection;

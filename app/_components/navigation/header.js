@@ -7,7 +7,9 @@ import { useRouter } from "next/navigation";
 
 import ImageContainer from "@/app/_components/image-container";
 import { AuthContext } from "@/app/_context/auth-context";
+import { LocationsContext } from "@/app/_context/locations-context";
 import { logoutUser } from "@/app/_firebase/auth";
+import useScrollPosition from "@/app/_hooks/scroll-position";
 
 import data from "@/app/_data/navigation-data.json";
 
@@ -19,7 +21,9 @@ const { general, admin } = data;
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const { setEnquireNowLocation } = useContext(LocationsContext);
   const router = useRouter();
+  const scrollPosition = useScrollPosition();
 
   useEffect(() => {
     if (toggleMenu) {
@@ -48,13 +52,14 @@ const Header = () => {
           <ImageContainer
             src="/carevita-fit-logo.jpg"
             alt="CareVita fit logo"
-            width={80}
-            height={80}
+            width={scrollPosition > 50 ? 50 : 80}
+            height={scrollPosition > 50 ? 50 : 80}
             smallest={30}
             phone={20}
             desktopSmall={10}
             desktop={10}
             eager
+            cssClasses="mobile-header__logo"
           />
         </Link>
         <button onClick={() => setToggleMenu(true)}>
@@ -80,6 +85,7 @@ const Header = () => {
                           if (title === "Sign Out") {
                             handleSignOut();
                           }
+                          setEnquireNowLocation("");
                         }}
                       >
                         {title}
@@ -94,7 +100,10 @@ const Header = () => {
                       <Link
                         className="mobile-nav__link"
                         href={url}
-                        onClick={() => setToggleMenu(false)}
+                        onClick={() => {
+                          setToggleMenu(false);
+                          setEnquireNowLocation("");
+                        }}
                       >
                         {title}
                       </Link>
@@ -123,13 +132,17 @@ const Header = () => {
       <div className="desktop-header">
         <div className="desktop-header__container">
           <Link href="/">
-            <Image
+            <ImageContainer
               src="/carevita-fit-logo.jpg"
-              alt="CareVita logo"
-              width={80}
-              height={80}
-              priority
-              sizes="(max-width: 900px) 65px, (max-width: 1400px) 65px, 65px"
+              alt="CareVita fit logo"
+              width={scrollPosition > 150 ? 60 : 80}
+              height={scrollPosition > 150 ? 60 : 80}
+              smallest={30}
+              phone={20}
+              desktopSmall={10}
+              desktop={10}
+              eager
+              cssClasses="desktop-header__container__logo"
             />
           </Link>
           <nav className="desktop-nav">

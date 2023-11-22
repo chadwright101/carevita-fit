@@ -3,9 +3,10 @@
 import { useState } from "react";
 
 import Heading from "@/app/_components/heading";
-import GallerySection from "@/app/_components/pages/admin/gallery-section";
-import HeroSection from "@/app/_components/pages/admin/hero-section";
+import SecondaryGallerySection from "@/app/_components/pages/admin/secondary-gallery-section";
+import MainGallerySection from "@/app/_components/pages/admin/main-gallery-section";
 import TestimonialsSection from "@/app/_components/pages/admin/testimonials-section";
+import Image from "next/image";
 
 const Dashboard = () => {
   const [switchGallery, setSwitchGallery] = useState(false);
@@ -21,14 +22,33 @@ const Dashboard = () => {
       <Heading subheading cssClasses="admin-page__galleries-heading">
         Galleries
       </Heading>
-      <button
-        type="button"
-        className="admin-button admin-page__switch-button"
-        onClick={() => handleSwitch()}
-      >
-        Switch gallery
-      </button>
-      {switchGallery ? <HeroSection /> : <GallerySection />}
+      <div className="admin-page__galleries-container">
+        {switchGallery ? (
+          <h4 className="admin-page__galleries-container__heading">
+            Main gallery <span>(maximum 6 images)</span>
+          </h4>
+        ) : (
+          <h4 className="admin-page__galleries-container__heading">
+            Secondary gallery <span>(maximum 20 images)</span>
+          </h4>
+        )}
+        <button
+          type="button"
+          className="admin-button"
+          onClick={() => handleSwitch()}
+        >
+          {!switchGallery
+            ? "Switch to Main Gallery"
+            : "Switch to Secondary Gallery"}
+          <Image
+            src="/icons/swap.svg"
+            alt="Swap gallery icon"
+            width={35}
+            height={35}
+          />
+        </button>
+      </div>
+      {switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
     </main>
   );
 };

@@ -13,8 +13,11 @@ import visibleImage from "@/public/icons/visibility.svg";
 import visibleOffImage from "@/public/icons/visibility-off.svg";
 
 const isValidEmail = (email) => {
-  const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-  return regex.test(email);
+  if (email && email.trim().length > 0) {
+    const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    return regex.test(email);
+  }
+  return false;
 };
 
 export default function Login() {
@@ -22,7 +25,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
-  const [validEmail, setValidEmail] = useState(false);
   const [revealPassword, setRevealPassword] = useState(false);
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
   const router = useRouter();
@@ -48,7 +50,6 @@ export default function Login() {
 
   const handleNext = () => {
     if (isValidEmail(email)) {
-      setValidEmail(true);
       setShowPassword(true);
     } else {
       alert("Please enter a valid email address");

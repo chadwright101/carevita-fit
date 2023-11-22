@@ -9,13 +9,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="layout">
         <AuthProvider>
-          <Header />
           <LocationsProvider>
+            <Header />
             <div className="layout__outer">
               <div className="layout__inner">{children}</div>
             </div>
+            <Footer />
           </LocationsProvider>
-          <Footer />
         </AuthProvider>
       </body>
     </html>
