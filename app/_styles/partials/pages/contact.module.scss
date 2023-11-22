@@ -78,12 +78,14 @@
 
   &__paragraph {
     color: $white;
+    line-height: 1.6rem;
 
     span {
       color: $white;
       font-weight: 400;
       text-decoration: underline;
-      text-underline-offset: 6px;
+      text-underline-offset: 4px;
+      text-decoration-thickness: 1px;
     }
 
     @include media("desktopSmall") {

@@ -13,6 +13,7 @@ const {
 const Properties = () => {
   const { showJohannesburg, showPretoria, showGeorge, showMosselBay } =
     useContext(LocationsContext);
+
   return (
     <section className="property-section">
       {showJohannesburg && (

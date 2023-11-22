@@ -37,7 +37,6 @@ export default function Home() {
     <AdminGalleryProvider>
       <main>
         <Hero />
-        <div id="about" className="nav-point"></div>
         <About />
         <Testimonials />
         <div id="gallery" className="nav-point"></div>

@@ -21,7 +21,14 @@ const { general, admin } = data;
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
-  const { setEnquireNowLocation } = useContext(LocationsContext);
+  const {
+    setShowJohannesburg,
+    setShowPretoria,
+    setShowGeorge,
+    setShowMosselBay,
+    setShowClearFilter,
+    setEnquireNowLocation,
+  } = useContext(LocationsContext);
   const router = useRouter();
   const scrollPosition = useScrollPosition();
 
@@ -88,6 +95,11 @@ const Header = () => {
                         handleSignOut();
                       }
                       setEnquireNowLocation("");
+                      setShowGeorge(true);
+                      setShowJohannesburg(true);
+                      setShowMosselBay(true);
+                      setShowPretoria(true);
+                      setShowClearFilter(false);
                     }}
                   >
                     {title}
@@ -103,6 +115,11 @@ const Header = () => {
                     onClick={() => {
                       setToggleMenu(false);
                       setEnquireNowLocation("");
+                      setShowGeorge(true);
+                      setShowJohannesburg(true);
+                      setShowMosselBay(true);
+                      setShowPretoria(true);
+                      setShowClearFilter(false);
                     }}
                   >
                     {title}
@@ -154,11 +171,18 @@ const Header = () => {
                     <li className="desktop-nav__list-item" key={index}>
                       <Link
                         href={url}
-                        onClick={
-                          title === "Sign Out"
-                            ? handleSignOut
-                            : () => setEnquireNowLocation("")
-                        }
+                        onClick={() => {
+                          setToggleMenu(false);
+                          if (title === "Sign Out") {
+                            handleSignOut();
+                          }
+                          setEnquireNowLocation("");
+                          setShowGeorge(true);
+                          setShowJohannesburg(true);
+                          setShowMosselBay(true);
+                          setShowPretoria(true);
+                          setShowClearFilter(false);
+                        }}
                       >
                         {title}
                       </Link>
@@ -168,7 +192,14 @@ const Header = () => {
                     <li className="desktop-nav__list-item" key={index}>
                       <Link
                         href={url}
-                        onClick={() => setEnquireNowLocation("")}
+                        onClick={() => {
+                          setEnquireNowLocation("");
+                          setShowGeorge(true);
+                          setShowJohannesburg(true);
+                          setShowMosselBay(true);
+                          setShowPretoria(true);
+                          setShowClearFilter(false);
+                        }}
                       >
                         {title}
                       </Link>

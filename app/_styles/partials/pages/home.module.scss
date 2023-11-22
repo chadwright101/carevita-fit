@@ -259,9 +259,6 @@
   }
 
   &__slider-container {
-    height: 60vh;
-    width: 100%;
-
     @include media("phone") {
       height: 350px;
     }

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import ImageContainer from "@/app/_components/image-container";
 import { AuthContext } from "@/app/_context/auth-context";
+import { LocationsContext } from "@/app/_context/locations-context";
 import { logoutUser } from "@/app/_firebase/auth";
 
 import data from "@/app/_data/navigation-data.json";
@@ -16,6 +17,14 @@ const { general, admin } = data;
 
 const Footer = () => {
   const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const {
+    setShowJohannesburg,
+    setShowPretoria,
+    setShowGeorge,
+    setShowMosselBay,
+    setShowClearFilter,
+    setEnquireNowLocation,
+  } = useContext(LocationsContext);
   const router = useRouter();
 
   const handleSignOut = async (e) => {
@@ -36,7 +45,17 @@ const Footer = () => {
                     <li className="footer-nav__list-item" key={index}>
                       <Link
                         href={url}
-                        onClick={title === "Sign Out" ? handleSignOut : null}
+                        onClick={() => {
+                          if (title === "Sign Out") {
+                            handleSignOut();
+                          }
+                          setEnquireNowLocation("");
+                          setShowGeorge(true);
+                          setShowJohannesburg(true);
+                          setShowMosselBay(true);
+                          setShowPretoria(true);
+                          setShowClearFilter(false);
+                        }}
                       >
                         {title}
                       </Link>
@@ -44,7 +63,19 @@ const Footer = () => {
                   ))
                 : general.map(({ title, url }, index) => (
                     <li className="footer-nav__list-item" key={index}>
-                      <Link href={url}>{title}</Link>
+                      <Link
+                        href={url}
+                        onClick={() => {
+                          setEnquireNowLocation("");
+                          setShowGeorge(true);
+                          setShowJohannesburg(true);
+                          setShowMosselBay(true);
+                          setShowPretoria(true);
+                          setShowClearFilter(false);
+                        }}
+                      >
+                        {title}
+                      </Link>
                     </li>
                   ))}
               {!loggedInUser && (

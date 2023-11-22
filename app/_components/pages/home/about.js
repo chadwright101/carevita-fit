@@ -23,6 +23,7 @@ const About = () => {
         cssClasses="about-section__image"
       />
       <article>
+        <div id="about" className="nav-point"></div>
         <Heading cssClasses="about-section__heading" sectionHeading>
           About
         </Heading>
