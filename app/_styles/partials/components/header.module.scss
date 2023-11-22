@@ -39,17 +39,32 @@
 .mobile-nav {
   position: fixed;
   top: 0;
+  right: -100%;
   height: 100vh;
   width: 100%;
   background-color: $blue;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
 
   @include media("tabletLarge") {
     display: none;
   }
 
+  &--open {
+    right: 0;
+  }
+
   &__list {
     margin-top: 1.25rem;
     padding: 2rem 1.5rem 0 1.25rem;
+    transform: translateX(100%);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
+    height: 100vh;
+
+    &--open {
+      transform: translateX(0);
+    }
   }
 
   &__list-item {
@@ -77,8 +92,15 @@
 
   &__admin-button {
     position: absolute;
-    bottom: 2.5rem;
+    bottom: -5rem;
     right: 1.5rem;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 700ms;
+    transition-delay: 600ms;
+
+    &--open {
+      bottom: 6.5rem;
+    }
 
     a {
       background-color: $green;

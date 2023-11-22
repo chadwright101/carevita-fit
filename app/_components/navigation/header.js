@@ -70,63 +70,69 @@ const Header = () => {
           />
         </button>
       </div>
-      {toggleMenu && (
-        <nav className="mobile-nav">
-          <ul className="mobile-nav__list">
-            {loggedInUser
-              ? admin.map(({ title, url }, index) => (
-                  <>
-                    <li className="mobile-nav__list-item" key={index}>
-                      <Link
-                        className="mobile-nav__link"
-                        href={url}
-                        onClick={() => {
-                          setToggleMenu(false);
-                          if (title === "Sign Out") {
-                            handleSignOut();
-                          }
-                          setEnquireNowLocation("");
-                        }}
-                      >
-                        {title}
-                      </Link>
-                    </li>
-                    {index < general.length - 2 && <hr />}
-                  </>
-                ))
-              : general.map(({ title, url }, index) => (
-                  <>
-                    <li className="mobile-nav__list-item" key={index}>
-                      <Link
-                        className="mobile-nav__link"
-                        href={url}
-                        onClick={() => {
-                          setToggleMenu(false);
-                          setEnquireNowLocation("");
-                        }}
-                      >
-                        {title}
-                      </Link>
-                    </li>
-                    {index < general.length - 1 && <hr />}
-                  </>
-                ))}
-            {!loggedInUser && (
-              <li class="mobile-nav__admin-button">
-                <Link href="/login" onClick={() => setToggleMenu(false)}>
-                  Admin Login
-                </Link>
-              </li>
-            )}
-          </ul>
-          <button
-            className="mobile-nav__close-button"
-            onClick={() => setToggleMenu(false)}
-          >
-            <Image src={closeIcon} alt="Close menu icon" />
-          </button>
-        </nav>
-      )}
+      <nav className={`mobile-nav ${toggleMenu ? "mobile-nav--open" : ""}`}>
+        <ul
+          className={`mobile-nav__list ${
+            toggleMenu ? "mobile-nav__list--open" : ""
+          }`}
+        >
+          {loggedInUser
+            ? admin.map(({ title, url }, index) => (
+                <>
+                  <li className="mobile-nav__list-item" key={index}>
+                    <Link
+                      className="mobile-nav__link"
+                      href={url}
+                      onClick={() => {
+                        setToggleMenu(false);
+                        if (title === "Sign Out") {
+                          handleSignOut();
+                        }
+                        setEnquireNowLocation("");
+                      }}
+                    >
+                      {title}
+                    </Link>
+                  </li>
+                  {index < general.length - 2 && <hr />}
+                </>
+              ))
+            : general.map(({ title, url }, index) => (
+                <>
+                  <li className="mobile-nav__list-item" key={index}>
+                    <Link
+                      className="mobile-nav__link"
+                      href={url}
+                      onClick={() => {
+                        setToggleMenu(false);
+                        setEnquireNowLocation("");
+                      }}
+                    >
+                      {title}
+                    </Link>
+                  </li>
+                  {index < general.length - 1 && <hr />}
+                </>
+              ))}
+          {!loggedInUser && (
+            <li
+              class={`mobile-nav__admin-button ${
+                toggleMenu ? "mobile-nav__admin-button--open" : ""
+              }`}
+            >
+              <Link href="/login" onClick={() => setToggleMenu(false)}>
+                Admin Login
+              </Link>
+            </li>
+          )}
+        </ul>
+        <button
+          className="mobile-nav__close-button"
+          onClick={() => setToggleMenu(false)}
+        >
+          <Image src={closeIcon} alt="Close menu icon" />
+        </button>
+      </nav>
 
       {/* desktop navigation */}
       <div className="desktop-header">
@@ -152,7 +158,11 @@ const Header = () => {
                     <li className="desktop-nav__list-item" key={index}>
                       <Link
                         href={url}
-                        onClick={title === "Sign Out" ? handleSignOut : null}
+                        onClick={
+                          title === "Sign Out"
+                            ? handleSignOut
+                            : () => setEnquireNowLocation("")
+                        }
                       >
                         {title}
                       </Link>
@@ -160,7 +170,12 @@ const Header = () => {
                   ))
                 : general.map(({ title, url }, index) => (
                     <li className="desktop-nav__list-item" key={index}>
-                      <Link href={url}>{title}</Link>
+                      <Link
+                        href={url}
+                        onClick={() => setEnquireNowLocation("")}
+                      >
+                        {title}
+                      </Link>
                     </li>
                   ))}
             </ul>
