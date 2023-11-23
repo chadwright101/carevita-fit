@@ -19,20 +19,37 @@
   border-bottom: 2px solid $black;
   box-shadow: 0 2px 2px rgb(0 0 0 / 6%);
   background-color: $white;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
 
   @include media("tabletLarge") {
     display: none;
   }
 
+  &--scroll {
+    transform: translateY(-30px);
+  }
+
   &__logo {
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 400ms;
+
+    &--scroll {
+      scale: 0.75;
+      transform: translateY(20px);
+    }
   }
 
   &__menu-button {
     width: 44px;
     height: auto;
-    transform: translate(0, 0.25rem);
+    transform: translateY(0.25rem);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 400ms;
+
+    &--scroll {
+      transform: translateY(20px);
+    }
   }
 }
 
@@ -123,9 +140,15 @@
   max-width: 100%;
   box-shadow: 0 2px 2px rgb(0 0 0 / 6%);
   background-color: $white;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
 
   @include media("tabletLarge") {
     display: block;
+  }
+
+  &--scroll {
+    transform: translateY(-30px);
   }
 
   &__container {
@@ -139,6 +162,11 @@
     &__logo {
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 400ms;
+
+      &--scroll {
+        scale: 0.7;
+        transform: translateY(25px);
+      }
     }
   }
 
@@ -147,6 +175,12 @@
       display: flex;
       gap: 1.5rem;
       transform: translate(0, -5px);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 400ms;
+
+      &--scroll {
+        transform: translateY(0px);
+      }
     }
 
     &__list-item:hover {

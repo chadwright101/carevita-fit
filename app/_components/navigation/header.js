@@ -54,26 +54,34 @@ const Header = () => {
   return (
     <header className="header-container">
       {/* mobile nav */}
-      <div className="mobile-header">
+      <div
+        className={`mobile-header ${
+          scrollPosition >= 50 ? "mobile-header--scroll" : ""
+        }`}
+      >
         <Link href="/">
           <ImageContainer
             src="/carevita-fit-logo.jpg"
             alt="CareVita fit logo"
-            width={scrollPosition > 50 ? 50 : 80}
-            height={scrollPosition > 50 ? 50 : 80}
+            width={80}
+            height={80}
             smallest={30}
             phone={20}
             desktopSmall={10}
             desktop={10}
             eager
-            cssClasses="mobile-header__logo"
+            cssClasses={`mobile-header__logo ${
+              scrollPosition >= 50 ? "mobile-header__logo--scroll" : ""
+            }`}
           />
         </Link>
         <button onClick={() => setToggleMenu(true)}>
           <Image
             src={menuIcon}
             alt="Menu icon"
-            className="mobile-header__menu-button"
+            className={`mobile-header__menu-button ${
+              scrollPosition >= 50 ? "mobile-header__menu-button--scroll" : ""
+            }`}
           />
         </button>
       </div>
@@ -148,24 +156,36 @@ const Header = () => {
       </nav>
 
       {/* desktop navigation */}
-      <div className="desktop-header">
+      <div
+        className={`desktop-header ${
+          scrollPosition >= 150 ? "desktop-header--scroll" : ""
+        }`}
+      >
         <div className="desktop-header__container">
           <Link href="/">
             <ImageContainer
               src="/carevita-fit-logo.jpg"
               alt="CareVita fit logo"
-              width={scrollPosition > 150 ? 60 : 80}
-              height={scrollPosition > 150 ? 60 : 80}
+              width={80}
+              height={80}
               smallest={30}
               phone={20}
               desktopSmall={10}
               desktop={10}
               eager
-              cssClasses="desktop-header__container__logo"
+              cssClasses={`desktop-header__container__logo ${
+                scrollPosition >= 150
+                  ? "desktop-header__container__logo--scroll"
+                  : ""
+              }`}
             />
           </Link>
           <nav className="desktop-nav">
-            <ul className="desktop-nav__list">
+            <ul
+              className={`desktop-nav__list ${
+                scrollPosition >= 150 ? "desktop-nav__list--scroll" : ""
+              }`}
+            >
               {loggedInUser
                 ? admin.map(({ title, url }, index) => (
                     <li className="desktop-nav__list-item" key={index}>
