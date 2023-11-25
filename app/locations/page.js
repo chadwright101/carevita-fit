@@ -6,29 +6,8 @@ import Properties from "../_components/pages/locations/properties";
 
 export const metadata = {
   title: "Locations - #fit",
-  description: "",
-  keywords:
-    "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
   openGraph: {
     title: "Locations - #fit",
-    description: "",
-    type: "website",
-    locale: "en_ZA",
-    siteName: "#fit - CareVita",
-    url: "",
-    keywords:
-      "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
-    images: [
-      {
-        url: "",
-      },
-      {
-        url: "",
-      },
-      {
-        url: "",
-      },
-    ],
   },
 };
 

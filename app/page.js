@@ -6,29 +6,8 @@ import { AdminGalleryProvider } from "./_context/admin-gallery-context";
 
 export const metadata = {
   title: "Home - #fit",
-  description: "",
-  keywords:
-    "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
   openGraph: {
     title: "Home - #fit",
-    description: "",
-    type: "website",
-    locale: "en_ZA",
-    siteName: "#fit - CareVita",
-    url: "",
-    keywords:
-      "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
-    images: [
-      {
-        url: "",
-      },
-      {
-        url: "",
-      },
-      {
-        url: "",
-      },
-    ],
   },
 };
 
