@@ -3,10 +3,10 @@
 import { createContext, useState } from "react";
 
 import { doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
-import { db } from "@/app/_firebase/firebase";
+import { db } from "@/app/api/firebase/route";
 import { ToastContainer, toast } from "react-toastify";
 
-import { testimonialsCollectionRef } from "../_components/pages/admin/testimonials-section";
+import { testimonialsCollectionRef } from "@/app/api/firebase/route";
 
 import "react-toastify/dist/ReactToastify.css";
 

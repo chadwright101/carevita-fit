@@ -3,15 +3,13 @@
 import { useEffect, useContext } from "react";
 import Image from "next/image";
 
-import { listAll, getDownloadURL, getMetadata, ref } from "firebase/storage";
-import { storage } from "@/app/_firebase/firebase";
+import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { toast } from "react-toastify";
 import { toastProps } from "@/app/_context/admin-testimonial-context";
 
+import { secondaryGalleryStorageRef } from "@/app/api/firebase/route";
 import ImageContainer from "@/app/_components/image-container";
 import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
-
-export const secondaryGalleryStorageRef = ref(storage, "gallery-slideshow");
 
 const SecondaryGallerySection = () => {
   const {

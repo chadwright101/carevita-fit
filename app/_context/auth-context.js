@@ -4,20 +4,30 @@ import { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
 
+const checkLoginStatus = () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const expirationTime = localStorage.getItem("expirationTime");
+  if (isLoggedIn && expirationTime && Date.now() < parseInt(expirationTime)) {
+    return true;
+  } else {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("expirationTime");
+    return false;
+  }
+};
+
 export const AuthProvider = ({ children }) => {
-  const [loggedInUser, setLoggedInUser] = useState(() => {
-    let storedLoggedInUser;
-    if (typeof window !== "undefined") {
-      storedLoggedInUser = localStorage.getItem("loggedInUser");
-    }
-    return storedLoggedInUser ? JSON.parse(storedLoggedInUser) : false;
-  });
+  const [loggedInUser, setLoggedInUser] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+    const isLocalStorageAvailable =
+      typeof window !== "undefined" && window.localStorage;
+
+    if (isLocalStorageAvailable) {
+      const isLoggedIn = checkLoginStatus();
+      setLoggedInUser(isLoggedIn);
     }
-  }, [loggedInUser]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ loggedInUser, setLoggedInUser }}>

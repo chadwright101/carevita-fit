@@ -7,16 +7,8 @@ import { toast } from "react-toastify";
 import { toastProps } from "@/app/_context/admin-testimonial-context";
 
 import HeroSlider from "@/app/_components/sliders/hero-slider";
-import { mainGalleryStorageRef } from "../admin/main-gallery-section";
+import { mainGalleryStorageRef } from "@/app/api/firebase/route";
 import ImageContainer from "../../image-container";
-
-import data from "@/app/_data/general-data.json";
-
-const {
-  homePage: {
-    hero: { paragraph },
-  },
-} = data;
 
 const Hero = () => {
   const [mainGalleryImageData, setMainGalleryImageData] = useState([]);
@@ -75,10 +67,6 @@ const Hero = () => {
         ) : (
           <HeroSlider imageList={mainGalleryImageData} />
         )}
-      </div>
-      <div className="hero-section__hero-text">
-        <h2 className="white-text">{paragraph[0]}</h2>
-        <h2 className="white-text">{paragraph[1]}</h2>
       </div>
     </section>
   );

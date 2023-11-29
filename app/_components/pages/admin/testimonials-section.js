@@ -1,22 +1,14 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import Image from "next/image";
 
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
-import { db } from "@/app/_firebase/firebase";
+import { getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import classNames from "classnames";
 
 import Heading from "@/app/_components/heading";
 import { AdminTestimonialContext } from "@/app/_context/admin-testimonial-context";
-
-export const testimonialsCollectionRef = collection(db, "testimonials");
+import { testimonialsCollectionRef } from "@/app/api/firebase/route";
 
 const TestimonialsSection = () => {
   const {

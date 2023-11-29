@@ -9,7 +9,7 @@ import { toastProps } from "@/app/_context/admin-testimonial-context";
 import Heading from "@/app/_components/heading";
 import BasicSlider from "@/app/_components/sliders/basic-slider";
 
-import { secondaryGalleryStorageRef } from "../admin/secondary-gallery-section";
+import { secondaryGalleryStorageRef } from "@/app/api/firebase/route";
 import ImageContainer from "../../image-container";
 
 const Gallery = () => {

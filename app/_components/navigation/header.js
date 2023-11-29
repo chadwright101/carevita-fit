@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 import ImageContainer from "@/app/_components/image-container";
 import { AuthContext } from "@/app/_context/auth-context";
@@ -29,7 +28,6 @@ const Header = () => {
     setShowClearFilter,
     setEnquireNowLocation,
   } = useContext(LocationsContext);
-  const router = useRouter();
   const scrollPosition = useScrollPosition();
 
   useEffect(() => {
@@ -46,9 +44,8 @@ const Header = () => {
 
   const handleSignOut = async (e) => {
     logoutUser();
-    router.push("/login");
     setLoggedInUser(false);
-    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("isLoggedIn");
   };
 
   return (

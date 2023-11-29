@@ -5,9 +5,9 @@ import MeetTheTeam from "../_components/pages/locations/meet-the-team";
 import Properties from "../_components/pages/locations/properties";
 
 export const metadata = {
-  title: "Locations - #fit",
+  title: "Locations - CareVita #fit",
   openGraph: {
-    title: "Locations - #fit",
+    title: "Locations - CareVita #fit",
   },
 };
 

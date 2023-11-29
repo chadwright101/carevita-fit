@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && npx stylelint \"**/*.scss\""
+    "lint": "next lint"
   },
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "classnames": "^2.3.2",
     "firebase": "^10.5.2",
+    "firebaseui": "^6.1.0",
     "next": "14.0.0",
     "react": "^18",
     "react-dom": "^18",
@@ -20,8 +21,6 @@
   },
   "devDependencies": {
     "eslint": "^8",
-    "eslint-config-next": "14.0.0",
-    "stylelint": "^15.11.0",
-    "stylelint-config-standard-scss": "^11.1.0"
+    "eslint-config-next": "14.0.0"
   }
 }

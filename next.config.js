@@ -17,7 +17,11 @@ module.exports = {
         port: "",
         pathname: "/carevita-fit/**",
       },
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+        pathname: "**",
+      },
     ],
-    domains: ["firebasestorage.googleapis.com"],
   },
 };

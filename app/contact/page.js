@@ -10,9 +10,9 @@ const {
 } = data;
 
 export const metadata = {
-  title: "Contact - #fit",
+  title: "Contact - CareVita #fit",
   openGraph: {
-    title: "Contact - #fit",
+    title: "Contact - CareVita #fit",
   },
 };
 

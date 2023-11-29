@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -26,14 +26,8 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [revealPassword, setRevealPassword] = useState(false);
-  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const { setLoggedInUser } = useContext(AuthContext);
   const router = useRouter();
-
-  useEffect(() => {
-    if (loggedInUser) {
-      router.push("/admin/dashboard");
-    }
-  }, [loggedInUser, router]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -41,6 +35,9 @@ export default function Login() {
 
     try {
       const user = await loginWithEmailAndPassword(email, password);
+      const expirationTime = Date.now() + 2 * 60 * 60 * 1000;
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("expirationTime", expirationTime);
       setLoggedInUser(true);
       router.push("/admin/dashboard");
     } catch (error) {

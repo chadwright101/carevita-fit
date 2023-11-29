@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { getDocs } from "firebase/firestore";
-import { testimonialsCollectionRef } from "../admin/testimonials-section";
+import { testimonialsCollectionRef } from "@/app/api/firebase/route";
 
 import Heading from "@/app/_components/heading";
 

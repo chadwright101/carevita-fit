@@ -34,7 +34,6 @@ const BasicSlider = ({ imageList }) => {
             alt={`CareVita #fit - Image ${index + 1}`}
             width={900}
             height={500}
-            eager={index < 2 ? true : false}
             smallest={100}
             desktop={95}
           />
