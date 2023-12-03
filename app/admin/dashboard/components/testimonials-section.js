@@ -1,11 +1,12 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import Image from "next/image";
+
 import { doc, updateDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { db } from "@/app/_firebase/firebase";
 import { ToastContainer, toast } from "react-toastify";
-
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { toastProps } from "@/app/_lib/ToastProps";
 
 import { getDocs, onSnapshot, orderBy, query } from "firebase/firestore";
 import classNames from "classnames";
@@ -14,17 +15,6 @@ import Heading from "@/app/_components/heading";
 import { testimonialsCollectionRef } from "@/app/_firebase/firebase";
 
 import "react-toastify/dist/ReactToastify.css";
-
-export const toastProps = {
-  position: "bottom-left",
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true,
-  progress: undefined,
-  theme: "light",
-};
 
 const TestimonialsSection = () => {
   const [testimonialsArray, setTestimonialsArray] = useState([]);

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { AuthContext } from "@/app/_context/auth-context";
-import { AdminTestimonialProvider } from "@/app/_context/admin-testimonial-context";
 import { AdminGalleryProvider } from "@/app/_context/admin-gallery-context";
 
 const AdminLayout = ({ children }) => {
@@ -12,9 +11,7 @@ const AdminLayout = ({ children }) => {
   if (loggedInUser) {
     return (
       <AdminGalleryProvider>
-        <AdminTestimonialProvider>
-          <section>{children}</section>
-        </AdminTestimonialProvider>
+        <section>{children}</section>
       </AdminGalleryProvider>
     );
   } else {

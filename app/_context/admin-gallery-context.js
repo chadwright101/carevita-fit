@@ -10,7 +10,7 @@ import {
 } from "firebase/storage";
 
 import { ToastContainer, toast } from "react-toastify";
-import { toastProps } from "@/app/_context/admin-testimonial-context";
+import { toastProps } from "@/app/_lib/ToastProps";
 
 export const AdminGalleryContext = createContext();
 

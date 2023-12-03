@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { toast } from "react-toastify";
-import { toastProps } from "@/app/_context/admin-testimonial-context";
+import { toastProps } from "@/app/_lib/ToastProps";
 
 import { secondaryGalleryStorageRef } from "@/app/_firebase/firebase";
 import ImageContainer from "@/app/_components/image-container";
