@@ -7,7 +7,7 @@ import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { toast } from "react-toastify";
 import { toastProps } from "@/app/_context/admin-testimonial-context";
 
-import { mainGalleryStorageRef } from "@/app/api/firebase/route";
+import { mainGalleryStorageRef } from "@/app/_firebase/firebase";
 import ImageContainer from "@/app/_components/image-container";
 import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
 

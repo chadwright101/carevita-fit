@@ -1,9 +1,8 @@
-import About from "./_components/pages/home/about";
-import Testimonials from "./_components/pages/home/testimonials";
-import Gallery from "./_components/pages/home/gallery";
-import Hero from "./_components/pages/home/hero";
-import { AdminGalleryProvider } from "./_context/admin-gallery-context";
-import HeroParagraph from "./_components/pages/home/hero-paragraph";
+import About from "./_components/home/about";
+import Testimonials from "./_components/home/testimonials";
+import Gallery from "./_components/home/gallery";
+import Hero from "./_components/home/hero";
+import HeroParagraph from "./_components/home/hero-paragraph";
 
 export const metadata = {
   title: "Home - CareVita #fit",
@@ -14,15 +13,13 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <AdminGalleryProvider>
-      <main>
-        <Hero />
-        <HeroParagraph />
-        <About />
-        <Testimonials />
-        <div id="gallery" className="nav-point"></div>
-        <Gallery />
-      </main>
-    </AdminGalleryProvider>
+    <main>
+      <Hero />
+      <HeroParagraph />
+      <About />
+      <Testimonials />
+      <div id="gallery" className="nav-point"></div>
+      <Gallery />
+    </main>
   );
 }

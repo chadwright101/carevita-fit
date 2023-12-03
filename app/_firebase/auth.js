@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 
-import { auth } from "../api/firebase/route";
+import { auth } from "./firebase";
 
 export async function loginWithEmailAndPassword(email, password) {
   try {

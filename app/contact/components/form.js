@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react";
 
-import Button from "../../button";
+import Button from "../../_components/button";
 
 import data from "@/app/_data/general-data.json";
 import { LocationsContext } from "@/app/_context/locations-context";
@@ -16,7 +16,6 @@ const {
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
-  console.log(enquireNowLocation);
   return (
     <section className="contact-form-container">
       <p className="contact-form-container__paragraph">

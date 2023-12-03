@@ -1,6 +1,6 @@
 import Heading from "../_components/heading";
-import ContactInfo from "../_components/pages/contact/contact-info";
-import Form from "../_components/pages/contact/form";
+import ContactInfo from "./components/contact-info";
+import Form from "./components/form";
 import ImageContainer from "../_components/image-container";
 
 import data from "@/app/_data/general-data.json";

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useContext } from "react";
-
 import { AuthContext } from "@/app/_context/auth-context";
 import { AdminTestimonialProvider } from "@/app/_context/admin-testimonial-context";
 import { AdminGalleryProvider } from "@/app/_context/admin-gallery-context";

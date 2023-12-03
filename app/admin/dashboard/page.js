@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 import Heading from "@/app/_components/heading";
-import SecondaryGallerySection from "@/app/_components/pages/admin/secondary-gallery-section";
-import MainGallerySection from "@/app/_components/pages/admin/main-gallery-section";
-import TestimonialsSection from "@/app/_components/pages/admin/testimonials-section";
+import SecondaryGallerySection from "@/app/admin/dashboard/components/secondary-gallery-section";
+import MainGallerySection from "@/app/admin/dashboard/components/main-gallery-section";
+import TestimonialsSection from "@/app/admin/dashboard/components/testimonials-section";
 import Image from "next/image";
 
 const Dashboard = () => {

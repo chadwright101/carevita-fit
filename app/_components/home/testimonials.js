@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { getDocs } from "firebase/firestore";
-import { testimonialsCollectionRef } from "@/app/api/firebase/route";
 
+import { testimonialsCollectionRef } from "@/app/_firebase/firebase";
 import Heading from "@/app/_components/heading";
 
 import "@splidejs/react-splide/css/core";
@@ -17,8 +17,12 @@ const Testimonials = () => {
   useEffect(() => {
     const getTestimonials = async () => {
       const testimonialsData = await getDocs(testimonialsCollectionRef);
+
       setTestimonials(
-        testimonialsData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        testimonialsData.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
       );
       setLoading(false);
     };
