@@ -14,7 +14,7 @@ const HeroSlider = ({ imageList }) => {
         interval: 5000,
         rewind: true,
         drag: false,
-        dragMinThreshold: { mouse: 50, touch: 150 },
+        dragMinThreshold: { touch: 150 },
         breakpoints: {
           900: {
             arrows: false,

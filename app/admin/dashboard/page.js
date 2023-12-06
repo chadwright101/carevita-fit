@@ -10,9 +10,12 @@ import Image from "next/image";
 
 const Dashboard = () => {
   const [switchGallery, setSwitchGallery] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSwitch = () => {
     setSwitchGallery(!switchGallery);
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 4000);
   };
 
   return (
@@ -32,21 +35,25 @@ const Dashboard = () => {
             Secondary gallery <span>(maximum 20 images)</span>
           </h4>
         )}
-        <button
-          type="button"
-          className="admin-button"
-          onClick={() => handleSwitch()}
-        >
-          {!switchGallery
-            ? "Switch to Main Gallery"
-            : "Switch to Secondary Gallery"}
-          <Image
-            src="/icons/swap.svg"
-            alt="Swap gallery icon"
-            width={35}
-            height={35}
-          />
-        </button>
+        {isLoading ? (
+          <div className="spinner"></div>
+        ) : (
+          <button
+            type="button"
+            className="admin-button"
+            onClick={() => handleSwitch()}
+          >
+            {!switchGallery
+              ? "Switch to Main Gallery"
+              : "Switch to Secondary Gallery"}
+            <Image
+              src="/icons/swap.svg"
+              alt="Swap gallery icon"
+              width={35}
+              height={35}
+            />
+          </button>
+        )}
       </div>
       {switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
     </main>

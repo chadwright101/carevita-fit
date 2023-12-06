@@ -11,12 +11,11 @@ const BasicSlider = ({ imageList }) => {
       options={{
         type: "fade",
         rewind: true,
-        pagination: false,
-        perPage: 1,
         speed: 2000,
         interval: 5000,
         autoplay: true,
         drag: false,
+        dragMinThreshold: { touch: 150 },
         arrows: true,
         breakpoints: {
           900: {

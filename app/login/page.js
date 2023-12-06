@@ -8,17 +8,10 @@ import Image from "next/image";
 import { AuthContext } from "@/app/_context/auth-context";
 import { loginWithEmailAndPassword } from "@/app/_firebase/auth";
 import Heading from "../_components/heading";
+import { isValidEmail } from "../_lib/IsValidEmail";
 
 import visibleImage from "@/public/icons/visibility.svg";
 import visibleOffImage from "@/public/icons/visibility-off.svg";
-
-const isValidEmail = (email) => {
-  if (email && email.trim().length > 0) {
-    const regex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-    return regex.test(email);
-  }
-  return false;
-};
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -26,6 +19,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const [revealPassword, setRevealPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { setLoggedInUser } = useContext(AuthContext);
   const router = useRouter();
 
@@ -34,14 +28,16 @@ export default function Login() {
     setError(null);
 
     try {
+      setIsLoading(true);
       const user = await loginWithEmailAndPassword(email, password);
+      setLoggedInUser(true);
       const expirationTime = Date.now() + 2 * 60 * 60 * 1000;
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("expirationTime", expirationTime);
-      setLoggedInUser(true);
       router.push("/admin/dashboard");
     } catch (error) {
       setError(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -126,12 +122,16 @@ export default function Login() {
                 problem persists, please contact the developer.
               </p>
             )}
-            <button
-              type="submit"
-              className="admin-button login-page__form__button"
-            >
-              Log in
-            </button>
+            {isLoading ? (
+              <div className="spinner"></div>
+            ) : (
+              <button
+                type="submit"
+                className="admin-button login-page__form__button"
+              >
+                Log in
+              </button>
+            )}
           </>
         )}
       </form>

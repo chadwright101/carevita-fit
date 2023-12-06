@@ -2,9 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { listAll, getMetadata, getDownloadURL } from "firebase/storage";
-
-import { secondaryGalleryStorageRef } from "@/app/_firebase/firebase";
 import Heading from "@/app/_components/heading";
 import BasicSlider from "@/app/_components/sliders/basic-slider";
 import LoadingLogo from "@/app/_lib/LoadingLogo";
@@ -19,30 +16,14 @@ const Gallery = () => {
 
   useEffect(() => {
     const getSecondaryGalleryImages = async () => {
-      try {
-        const res = await listAll(secondaryGalleryStorageRef);
-
-        const imageInfoPromises = res.items.map(async (itemRef) => {
-          const metadata = await getMetadata(itemRef);
-          const url = await getDownloadURL(itemRef);
-          return {
-            url,
-            timestamp: metadata.customMetadata.timestamp || 0,
-          };
-        });
-
-        const newImageInfo = await Promise.all(imageInfoPromises);
-
-        newImageInfo.sort((a, b) => b.timestamp - a.timestamp);
-
-        setSecondaryGalleryImageObjects(newImageInfo);
-        setSecondaryGalleryImageUrls(
-          newImageInfo.map((imageInfo) => imageInfo.url)
-        );
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
+      const newImageInfo = await fetch("/api/home/gallery").then((res) =>
+        res.json()
+      );
+      setSecondaryGalleryImageObjects(newImageInfo);
+      setSecondaryGalleryImageUrls(
+        newImageInfo.map((imageInfo) => imageInfo.url)
+      );
+      setLoading(false);
     };
 
     getSecondaryGalleryImages();

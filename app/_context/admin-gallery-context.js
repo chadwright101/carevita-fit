@@ -126,8 +126,8 @@ export const AdminGalleryProvider = ({ children }) => {
     if (confirmed) {
       try {
         toast.info("Deleting image...", toastProps);
-        setReloadImages(true);
 
+        setReloadImages(true);
         const fileRef = ref(storageRef, filename);
         await deleteObject(fileRef);
 
@@ -136,9 +136,6 @@ export const AdminGalleryProvider = ({ children }) => {
         }, 2000);
       } catch (error) {
         console.log(error);
-        toast.error(
-          "Error! Image could not be deleted. Please try again and contact the developer if the problem persists."
-        );
       } finally {
         if (index) {
           setTimeout(() => {

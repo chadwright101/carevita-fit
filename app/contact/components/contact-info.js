@@ -2,47 +2,56 @@
 
 import { useState } from "react";
 
-import data from "@/app/_data/general-data.json";
-
-const {
-  contactPage: { phone, email },
-} = data;
-
 const ContactInfo = () => {
-  const [showPhone, setShowPhone] = useState(false);
-  const [showEmail, setShowEmail] = useState(false);
+  const [showPhone, setShowPhone] = useState("Show phone number");
+  const [showEmail, setShowEmail] = useState("Show email address");
+
+  const handlePhoneNumber = async () => {
+    try {
+      const response = await fetch("/api/contact/show-phone-number");
+      const phoneNumber = await response.json();
+      setShowPhone(phoneNumber);
+    } catch {
+      console.log(error);
+    }
+  };
+
+  const handleEmail = async () => {
+    try {
+      const response = await fetch("/api/contact/show-email");
+      const email = await response.json();
+      setShowEmail(email);
+    } catch {
+      console.log(error);
+    }
+  };
+
   return (
     <ul className="contact-info">
       <li className="contact-info__item">
         Tel:{" "}
-        {!showPhone ? (
-          <span
-            className="contact-info__show"
-            onClick={() => setShowPhone(true)}
-          >
-            Show phone number
+        {showPhone === "Show phone number" ? (
+          <span className="contact-info__show" onClick={handlePhoneNumber}>
+            {showPhone}
           </span>
         ) : (
           <a
-            href={`tel:${phone.replace(/\s/g, "")}`}
+            href={`tel:${showPhone.replace(/\s/g, "")}`}
             className="contact-info__link"
           >
-            {phone}
+            {showPhone}
           </a>
         )}
       </li>
       <li className="contact-info__item">
         Email:{" "}
-        {!showEmail ? (
-          <span
-            className="contact-info__show"
-            onClick={() => setShowEmail(true)}
-          >
-            Show email address
+        {showEmail === "Show email address" ? (
+          <span className="contact-info__show" onClick={handleEmail}>
+            {showEmail}
           </span>
         ) : (
-          <a href={`mailto:${email}`} className="contact-info__link">
-            {email}
+          <a href={`mailto:${showEmail}`} className="contact-info__link">
+            {showEmail}
           </a>
         )}
       </li>
