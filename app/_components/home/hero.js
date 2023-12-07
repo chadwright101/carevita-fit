@@ -1,36 +1,38 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 import HeroSlider from "@/app/_components/sliders/hero-slider";
-import LoadingLogo from "@/app/_lib/LoadingLogo";
 
-const Hero = () => {
-  const [mainGalleryImageObjects, setMainGalleryImageObjects] = useState([]);
-  const [mainGalleryImageUrls, setMainGalleryImageUrls] = useState([]);
-  const [loading, setLoading] = useState(true);
+import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 
-  useEffect(() => {
-    const getHeroImages = async () => {
-      const newImageInfo = await fetch("/api/home/hero").then((res) =>
-        res.json()
-      );
-      setMainGalleryImageObjects(newImageInfo);
-      setMainGalleryImageUrls(newImageInfo.map((imageInfo) => imageInfo.url));
-      setLoading(false);
-    };
+import { mainGalleryStorageRef } from "@/app/_firebase/firebase";
 
-    getHeroImages();
-  }, [setMainGalleryImageObjects, setMainGalleryImageUrls]);
+const Hero = async () => {
+  const fetchData = async () => {
+    try {
+      const res = await listAll(mainGalleryStorageRef);
+
+      const imageInfoPromises = res.items.map(async (itemRef) => {
+        const metadata = await getMetadata(itemRef);
+        const filename = itemRef.name;
+        const url = await getDownloadURL(itemRef);
+        return {
+          url,
+          filename,
+          timestamp: metadata.customMetadata.timestamp || 0,
+        };
+      });
+      const imageInfo = await Promise.all(imageInfoPromises);
+      return imageInfo.sort((a, b) => b.timestamp - a.timestamp);
+    } catch (error) {
+      console.error("Error fetching hero images:", error);
+    }
+  };
+
+  const imageData = await fetchData();
+  const sortedImageData = imageData.map((imageInfo) => imageInfo.url);
 
   return (
     <section className="hero-section">
       <div className="hero-section__slider-container">
-        {loading ? (
-          <LoadingLogo section={"gallery-section"} />
-        ) : (
-          <HeroSlider imageList={mainGalleryImageUrls} />
-        )}
+        <HeroSlider imageList={sortedImageData} />
       </div>
     </section>
   );

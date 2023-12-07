@@ -15,6 +15,7 @@ import Heading from "@/app/_components/heading";
 import { testimonialsCollectionRef } from "@/app/_firebase/firebase";
 
 import "react-toastify/dist/ReactToastify.css";
+import { RefreshExpirationTime } from "@/app/_lib/RefreshExpirationTime";
 
 const TestimonialsSection = () => {
   const [testimonialsArray, setTestimonialsArray] = useState([]);
@@ -56,6 +57,8 @@ const TestimonialsSection = () => {
         toastProps
       );
       console.log(error);
+    } finally {
+      RefreshExpirationTime();
     }
   };
 
@@ -71,6 +74,7 @@ const TestimonialsSection = () => {
         setEditedName(testimonialsArray[editIndex].name);
         setEditedParagraph(testimonialsArray[editIndex].paragraph);
         setEditIndex(null);
+        RefreshExpirationTime();
       }
     } else {
       setEditIndex(null);
@@ -97,6 +101,7 @@ const TestimonialsSection = () => {
         );
         console.log(error);
       } finally {
+        RefreshExpirationTime();
         setTimeout(() => {
           const element = document.getElementById(
             `testimonial-${testimonialIndex === 0 ? "0" : testimonialIndex - 1}`
@@ -128,6 +133,7 @@ const TestimonialsSection = () => {
       );
       console.log(error);
     } finally {
+      RefreshExpirationTime();
       setTimeout(() => {
         const element = document.getElementById("testimonial-0");
         element.scrollIntoView({ behavior: "smooth" });
@@ -152,6 +158,7 @@ const TestimonialsSection = () => {
       );
       console.log(error);
     } finally {
+      RefreshExpirationTime();
       setTimeout(() => {
         const element = document.getElementById("testimonial-0");
         element.scrollIntoView({ behavior: "smooth" });

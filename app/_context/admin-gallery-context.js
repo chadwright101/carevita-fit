@@ -11,6 +11,7 @@ import {
 
 import { ToastContainer, toast } from "react-toastify";
 import { toastProps } from "@/app/_lib/ToastProps";
+import { RefreshExpirationTime } from "../_lib/RefreshExpirationTime";
 
 export const AdminGalleryContext = createContext();
 
@@ -73,6 +74,7 @@ export const AdminGalleryProvider = ({ children }) => {
         toastProps
       );
     } finally {
+      RefreshExpirationTime();
       setTimeout(() => {
         const element = document.getElementById(
           `${galleryName}-gallery-image-0`
@@ -109,6 +111,7 @@ export const AdminGalleryProvider = ({ children }) => {
         toastProps
       );
     } finally {
+      RefreshExpirationTime();
       setTimeout(() => {
         const element = document.getElementById(
           `${galleryName}-gallery-image-0`
@@ -146,6 +149,7 @@ export const AdminGalleryProvider = ({ children }) => {
           }, 1500);
         }
         setReloadImages(false);
+        RefreshExpirationTime();
       }
     }
   };

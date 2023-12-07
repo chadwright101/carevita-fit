@@ -9,6 +9,7 @@ import { toastProps } from "@/app/_lib/ToastProps";
 import { mainGalleryStorageRef } from "@/app/_firebase/firebase";
 import ImageContainer from "@/app/_components/image-container";
 import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
+import { RefreshExpirationTime } from "@/app/_lib/RefreshExpirationTime";
 
 const MainGallerySection = () => {
   const {
@@ -36,6 +37,8 @@ const MainGallerySection = () => {
           "Error! Images could not load. Please try again and contact the developer if the problem persists.",
           toastProps
         );
+      } finally {
+        RefreshExpirationTime();
       }
     };
     getMainGalleryImages();
