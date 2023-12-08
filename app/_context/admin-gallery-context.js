@@ -80,7 +80,7 @@ export const AdminGalleryProvider = ({ children }) => {
           `${galleryName}-gallery-image-0`
         );
         element.scrollIntoView({ behavior: "smooth" });
-      }, 1500);
+      }, 4500);
       setReloadImages(false);
     }
   };
