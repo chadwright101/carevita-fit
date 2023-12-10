@@ -7,7 +7,11 @@ export const AuthContext = createContext();
 const checkLoginStatus = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const expirationTime = localStorage.getItem("expirationTime");
-  if (isLoggedIn && expirationTime && Date.now() < parseInt(expirationTime)) {
+  if (
+    isLoggedIn &&
+    expirationTime &&
+    Date.now() < parseInt(expirationTime, 10)
+  ) {
     return true;
   } else {
     localStorage.removeItem("isLoggedIn");

@@ -127,8 +127,7 @@
     "phone": "+27 83 567 8901",
     "email": "julie@carevita.co.za",
     "form": {
-      "propertyList": ["Property 1", "Property 2", "Property 3", "Property 4"],
-      "formAction": ""
+      "propertyList": ["Property 1", "Property 2", "Property 3", "Property 4"]
     },
     "image": "/images/9U7A5106.jpg"
   }

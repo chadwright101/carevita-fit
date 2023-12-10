@@ -1,21 +1,30 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import Button from "../../_components/button";
 
 import data from "@/app/_data/general-data.json";
 import { LocationsContext } from "@/app/_context/locations-context";
+import { sendEmail } from "@/app/actions";
+import Recaptcha from "./recaptcha";
 
 const {
   contactPage: {
-    form: { propertyList, formAction },
+    form: { propertyList },
   },
 } = data;
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
+  const ref = useRef(null);
+
+  const handleRecaptchaChange = (value) => {
+    setShowRecaptcha(!!value);
+  };
+
   return (
     <section className="contact-form-container">
       <p className="contact-form-container__paragraph">
@@ -30,16 +39,13 @@ const Form = () => {
         be in touch with you ASAP...
       </p>
       <form
+        ref={ref}
         className="contact-form-container__form"
-        action={`https://formsubmit.co/${formAction}`}
-        method="POST"
+        action={async (formData) => {
+          await sendEmail(formData);
+          ref.current.reset();
+        }}
       >
-        <input
-          type="text"
-          name="subject"
-          defaultValue={`${enquireNowLocation} - Website Contact Form`}
-          className="hidden"
-        />
         <input type="text" name="_honey" className="hidden" />
         <div className="contact-form-container__form__group">
           <label htmlFor="name">Name:</label>
@@ -108,12 +114,15 @@ const Form = () => {
           </Button>
         )}
       </form>
-      {!showMessage && (
-        <Button
-          formNext
-          onClick={() => setShowMessage(true)}
-          cssClasses="mr-auto"
-        />
+      {!showMessage && !showRecaptcha && (
+        <>
+          <Button
+            formNext
+            onClick={() => setShowMessage(true)}
+            cssClasses="mr-auto"
+          />
+          <Recaptcha onChange={handleRecaptchaChange} />
+        </>
       )}
     </section>
   );
