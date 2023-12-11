@@ -1,6 +1,7 @@
 "use server";
 
 import nodemailer from "nodemailer";
+import data from "@/app/_data/general-data.json";
 
 export async function sendEmail(formData) {
   const honey = formData.get("honey");
@@ -41,3 +42,15 @@ export async function sendEmail(formData) {
     console.error(error);
   }
 }
+
+const {
+  contactPage: { email, phone },
+} = data;
+
+export const showPhoneNumber = async () => {
+  return phone;
+};
+
+export const showEmailAddress = async () => {
+  return email;
+};

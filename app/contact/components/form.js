@@ -36,7 +36,7 @@ const Form = () => {
 
   const handleRecaptchaChange = (value) => {
     const elapsedTime = new Date().getTime() - submissionStartTime;
-    if (elapsedTime < 5000) {
+    if (elapsedTime < 4000) {
       console.error("Form submitted too quickly. Possible bot activity.");
       return;
     } else {

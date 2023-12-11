@@ -1,70 +1,51 @@
 "use client";
 
 import { useState } from "react";
+import { showPhoneNumber, showEmailAddress } from "@/app/actions";
 
 const ContactInfo = () => {
-  const [showPhone, setShowPhone] = useState("Show phone number");
-  const [showEmail, setShowEmail] = useState("Show email address");
-  const [loading, setLoading] = useState(true);
+  const [displayPhoneNumber, setDisplayPhoneNumber] =
+    useState("Show phone number");
+  const [displayEmail, setDisplayEmail] = useState("Show email address");
 
-  const handlePhoneNumber = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/contact/show-phone-number");
-      const phone = await response.json();
-      setShowPhone(phone);
-    } catch {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+  const handleShowPhoneNumber = async () => {
+    const phoneNumber = await showPhoneNumber();
+    setDisplayPhoneNumber(phoneNumber);
   };
 
-  const handleEmail = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch("/api/contact/show-email");
-      const email = await response.json();
-      setShowEmail(email);
-    } catch {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+  const handleShowEmailAddress = async () => {
+    const emailAddress = await showEmailAddress();
+    setDisplayEmail(emailAddress);
   };
 
   return (
     <ul className="contact-info">
       <li className="contact-info__item">
         Tel:{" "}
-        {showPhone === "Show phone number" ? (
-          <span className="contact-info__show" onClick={handlePhoneNumber}>
-            {showPhone}
+        {displayPhoneNumber === "Show phone number" ? (
+          <span className="contact-info__show" onClick={handleShowPhoneNumber}>
+            {displayPhoneNumber}
           </span>
-        ) : showPhone !== "Show phone number" ? (
+        ) : (
           <a
-            href={`tel:${showPhone.replace(/\s/g, "")}`}
+            href={`tel:${displayPhoneNumber.replace(/\s/g, "")}`}
             className="contact-info__link"
           >
-            {showPhone}
+            {displayPhoneNumber}
           </a>
-        ) : loading ? (
-          <p>Loading..</p>
-        ) : null}
+        )}
       </li>
       <li className="contact-info__item">
         Email:{" "}
-        {showEmail === "Show email address" ? (
-          <span className="contact-info__show" onClick={handleEmail}>
-            {showEmail}
+        {displayEmail === "Show email address" ? (
+          <span className="contact-info__show" onClick={handleShowEmailAddress}>
+            {displayEmail}
           </span>
-        ) : showEmail !== "Show email address" ? (
-          <a href={`mailto:${showEmail}`} className="contact-info__link">
-            {showEmail}
+        ) : (
+          <a href={`mailto:${displayEmail}`} className="contact-info__link">
+            {displayEmail}
           </a>
-        ) : loading ? (
-          <p>Loading..</p>
-        ) : null}
+        )}
       </li>
     </ul>
   );
