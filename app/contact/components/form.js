@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import Button from "../../_components/button";
 
@@ -18,11 +18,25 @@ const {
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
+  const [submissionStartTime, setSubmissionStartTime] = useState();
   const [validateRecaptcha, setValidateRecaptcha] = useState(false);
   const ref = useRef(null);
 
+  useEffect(() => {
+    const startSubmissionTimer = () => {
+      setSubmissionStartTime(new Date().getTime());
+    };
+    startSubmissionTimer();
+  }, []);
+
   const handleRecaptchaChange = (value) => {
-    setValidateRecaptcha(!!value);
+    const elapsedTime = new Date().getTime() - submissionStartTime;
+    if (elapsedTime < 2000) {
+      console.error("Form submitted too quickly. Possible bot activity.");
+      return;
+    } else {
+      setValidateRecaptcha(!!value);
+    }
   };
 
   return (
@@ -110,7 +124,7 @@ const Form = () => {
           </Button>
         )}
       </form>
-      {!showMessage && !validateRecaptcha && (
+      {!showMessage && (
         <>
           <Button
             formNext

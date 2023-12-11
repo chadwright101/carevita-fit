@@ -3,9 +3,10 @@
 import nodemailer from "nodemailer";
 
 export async function sendEmail(formData) {
+  const honey = formData.get("honey");
+
   try {
-    const honey = formData.get("honey");
-    if (honey === "") {
+    if (honey === null) {
       const name = formData.get("name");
       const phone = formData.get("phone");
       const email = formData.get("email");
@@ -34,7 +35,7 @@ export async function sendEmail(formData) {
 
       await transporter.sendMail(mailOptions);
     } else {
-      logger.error("Invalid form submission due to non-empty honeypot field");
+      console.error("Invalid form submission due to non-empty honeypot field");
     }
   } catch (error) {
     console.error(error);
