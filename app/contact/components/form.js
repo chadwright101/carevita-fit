@@ -18,11 +18,11 @@ const {
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
-  const [showRecaptcha, setShowRecaptcha] = useState(false);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
   const ref = useRef(null);
 
   const handleRecaptchaChange = (value) => {
-    setShowRecaptcha(!!value);
+    setValidateRecaptcha(!!value);
   };
 
   return (
@@ -57,7 +57,7 @@ const Form = () => {
             placeholder="Full name"
           />
         </div>
-        {showMessage && (
+        {showMessage && validateRecaptcha && (
           <>
             <div className="contact-form-container__form__group">
               <label htmlFor="phone">Phone:</label>
@@ -104,22 +104,19 @@ const Form = () => {
             </div>
           </>
         )}
-        {showMessage && (
-          <Button
-            form
-            onClick={() => setShowMessage(false)}
-            cssClasses="mr-auto"
-          >
+        {showMessage && validateRecaptcha && (
+          <Button form onClick={() => setShowMessage(false)}>
             Submit
           </Button>
         )}
       </form>
-      {!showMessage && !showRecaptcha && (
+      {!showMessage && !validateRecaptcha && (
         <>
           <Button
             formNext
             onClick={() => setShowMessage(true)}
-            cssClasses="mr-auto"
+            disabled={!validateRecaptcha}
+            cssClasses="contact-form-container__next-button"
           />
           <Recaptcha onChange={handleRecaptchaChange} />
         </>

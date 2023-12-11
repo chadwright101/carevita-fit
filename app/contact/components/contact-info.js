@@ -9,8 +9,8 @@ const ContactInfo = () => {
   const handlePhoneNumber = async () => {
     try {
       const response = await fetch("/api/contact/show-phone-number");
-      const phoneNumber = await response.json();
-      setShowPhone(phoneNumber);
+      const phone = await response.json();
+      setShowPhone(phone);
     } catch {
       console.log(error);
     }

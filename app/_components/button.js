@@ -1,10 +1,22 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const Button = ({ children, form, cssClasses, url, onClick, formNext }) => {
+const Button = ({
+  children,
+  form,
+  cssClasses,
+  url,
+  onClick,
+  formNext,
+  disabled,
+}) => {
   if (form) {
     return (
-      <button className={`button button--arrow ${cssClasses}`} type="submit">
+      <button
+        className={`button button--arrow ${cssClasses}`}
+        type="submit"
+        disabled={disabled}
+      >
         {children}
         <Image
           src="/icons/arrow_forward.svg"
@@ -17,6 +29,7 @@ const Button = ({ children, form, cssClasses, url, onClick, formNext }) => {
   } else if (formNext) {
     return (
       <button
+        disabled={disabled}
         className={`button button--arrow ${cssClasses}`}
         onClick={onClick}
       >

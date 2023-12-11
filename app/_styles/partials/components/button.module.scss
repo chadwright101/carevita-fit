@@ -39,6 +39,11 @@
     justify-content: center;
     width: 100%;
 
+    &:disabled {
+      background: rgba(255, 255, 255, 0.75);
+      cursor: not-allowed;
+    }
+
     @include media("desktopSmall") {
       &:hover {
         background: $green;
