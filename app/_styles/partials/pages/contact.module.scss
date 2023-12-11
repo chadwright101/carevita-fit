@@ -91,6 +91,16 @@
     @include media("desktopSmall") {
       margin-bottom: 2rem;
     }
+
+    &--submitted {
+      color: $white;
+      font-size: $subheading;
+    }
+
+    &__button {
+      background-color: $white;
+      margin-top: 2rem;
+    }
   }
 
   &__form {

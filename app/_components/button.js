@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useFormStatus } from "react-dom";
 
 const Button = ({
   children,
@@ -10,20 +11,28 @@ const Button = ({
   formNext,
   disabled,
 }) => {
+  const { pending } = useFormStatus();
+
   if (form) {
     return (
       <button
         className={`button button--arrow ${cssClasses}`}
         type="submit"
-        disabled={disabled}
+        disabled={pending}
       >
-        {children}
-        <Image
-          src="/icons/arrow_forward.svg"
-          alt="Arrow icon"
-          width={20}
-          height={20}
-        ></Image>
+        {pending ? (
+          <div className="spinner"></div>
+        ) : (
+          <>
+            {children}
+            <Image
+              src="/icons/arrow_forward.svg"
+              alt="Arrow icon"
+              width={20}
+              height={20}
+            ></Image>
+          </>
+        )}
       </button>
     );
   } else if (formNext) {
