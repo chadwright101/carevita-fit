@@ -19,7 +19,7 @@ const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
   const [submissionStartTime, setSubmissionStartTime] = useState();
-  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(true);
   const [showEmailSubmitted, setShowEmailSubmitted] = useState(false);
   const ref = useRef(null);
 
@@ -82,6 +82,7 @@ const Form = () => {
               await sendEmail(formData);
               ref.current.reset();
               setShowEmailSubmitted(true);
+              setShowMessage(false);
             }}
           >
             <input type="text" name="_honey" className="hidden" />
