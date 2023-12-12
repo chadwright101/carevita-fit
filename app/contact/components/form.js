@@ -101,11 +101,12 @@ const Form = () => {
                 <div className="contact-form-container__form__group">
                   <label htmlFor="phone">Phone:</label>
                   <input
-                    type="text"
+                    type="tel"
                     id="phone"
                     name="phone"
                     required
                     placeholder="Phone number"
+                    pattern="[+]?[0-9]+"
                   />
                 </div>
                 <div className="contact-form-container__form__group">
