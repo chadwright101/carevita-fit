@@ -12,8 +12,8 @@ import useScrollPosition from "@/app/_hooks/scroll-position";
 
 import data from "@/app/_data/navigation-data.json";
 
-import menuIcon from "public/icons/menu-icon.svg";
-import closeIcon from "public/icons/close-icon.svg";
+import menuIcon2 from "public/icons/menu-icon2.svg";
+import closeIcon2 from "public/icons/close-icon2.svg";
 
 const { general, admin } = data;
 
@@ -74,7 +74,7 @@ const Header = () => {
         </Link>
         <button onClick={() => setToggleMenu(true)}>
           <Image
-            src={menuIcon}
+            src={menuIcon2}
             alt="Menu icon"
             className={`mobile-header__menu-button ${
               scrollPosition >= 50 ? "mobile-header__menu-button--scroll" : ""
@@ -148,7 +148,7 @@ const Header = () => {
           className="mobile-nav__close-button"
           onClick={() => setToggleMenu(false)}
         >
-          <Image src={closeIcon} alt="Close menu icon" />
+          <Image src={closeIcon2} alt="Close menu icon" />
         </button>
       </nav>
 
