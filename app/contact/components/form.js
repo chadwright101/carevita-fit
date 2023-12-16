@@ -94,6 +94,7 @@ const Form = () => {
                 name="name"
                 required
                 placeholder="Full name"
+                minlength="2"
               />
             </div>
             {showMessage && validateRecaptcha && (
@@ -138,8 +139,9 @@ const Form = () => {
                     id="message"
                     name="message"
                     required
-                    placeholder="Type your message here"
+                    placeholder="Type your message here (minimum 30 characters)"
                     rows={3}
+                    minlength="30"
                   />
                 </div>
               </>
