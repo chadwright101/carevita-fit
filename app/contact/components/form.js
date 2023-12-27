@@ -49,7 +49,7 @@ const Form = () => {
       {showEmailSubmitted ? (
         <>
           <div id="email-submitted" className="nav-point"></div>
-          <p className="contact-form-container__paragraph--submitted">
+          <p className="contact-form-container__paragraph--submitted ">
             Your email has been sent, we will be in touch soon.
           </p>
           <button
