@@ -72,7 +72,7 @@ const MainGallerySection = () => {
                 }
               >
                 <Image
-                  src="/icons/close-icon.svg"
+                  src="/icons/close-icon2.svg"
                   alt="Delete image"
                   width={40}
                   height={40}

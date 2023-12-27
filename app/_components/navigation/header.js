@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 
@@ -70,18 +69,13 @@ const Header = () => {
           />
         </Link>
         <button onClick={() => setToggleMenu(true)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="48"
-            viewBox="0 96 960 960"
-            width="48"
-            fill="#222222"
+          <img
+            src="/icons/menu-icon2.svg"
+            alt="Menu icon"
             className={`mobile-header__menu-button ${
               scrollPosition >= 50 ? "mobile-header__menu-button--scroll" : ""
             }`}
-          >
-            <path d="M120 816v-60h720v60H120Zm0-210v-60h720v60H120Zm0-210v-60h720v60H120Z" />
-          </svg>
+          />
         </button>
       </div>
       <nav className={`mobile-nav ${toggleMenu ? "mobile-nav--open" : ""}`}>
@@ -150,14 +144,7 @@ const Header = () => {
           className="mobile-nav__close-button"
           onClick={() => setToggleMenu(false)}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="48"
-            width="48"
-            fill="#ffffff"
-          >
-            <path d="m12.45 37.65-2.1-2.1L21.9 24 10.35 12.45l2.1-2.1L24 21.9l11.55-11.55 2.1 2.1L26.1 24l11.55 11.55-2.1 2.1L24 26.1Z" />
-          </svg>
+          <img src="/icons/close-icon2.svg" alt="Close menu icon" />
         </button>
       </nav>
 

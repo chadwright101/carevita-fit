@@ -62,6 +62,12 @@
 
     &__button {
       margin-top: 1rem;
+
+      &:disabled {
+        background: #94c36a;
+        cursor: not-allowed;
+      }
+
       @include media("tablet") {
         width: 100px;
         margin-top: 0;

@@ -1,12 +1,13 @@
 "use client";
 
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 import { AuthContext } from "@/app/_context/auth-context";
 import { loginWithEmailAndPassword } from "@/app/_firebase/auth";
+import Recaptcha from "@/app/_lib/Recaptcha";
+
 import Heading from "../_components/heading";
 import { isValidEmail } from "../_lib/IsValidEmail";
 
@@ -20,6 +21,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [revealPassword, setRevealPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
   const { setLoggedInUser } = useContext(AuthContext);
   const router = useRouter();
 
@@ -67,13 +69,19 @@ export default function Login() {
           />
         </div>
         {!showPassword ? (
-          <button
-            type="button"
-            className="admin-button login-page__form__button"
-            onClick={handleNext}
-          >
-            Next
-          </button>
+          <>
+            <button
+              type="button"
+              className="admin-button login-page__form__button"
+              onClick={handleNext}
+              disabled={!validateRecaptcha}
+            >
+              Next
+            </button>
+            {!validateRecaptcha ? (
+              <Recaptcha onChange={() => setValidateRecaptcha(true)} />
+            ) : null}
+          </>
         ) : (
           <>
             <div className="login-page__form__group">
@@ -128,6 +136,7 @@ export default function Login() {
               <button
                 type="submit"
                 className="admin-button login-page__form__button"
+                disabled={!validateRecaptcha}
               >
                 Log in
               </button>

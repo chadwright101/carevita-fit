@@ -7,7 +7,7 @@ import Button from "../../_components/button";
 import data from "@/app/_data/general-data.json";
 import { LocationsContext } from "@/app/_context/locations-context";
 import { sendEmail } from "@/app/actions";
-import Recaptcha from "./recaptcha";
+import Recaptcha from "@/app/_lib/Recaptcha";
 
 const {
   contactPage: {
@@ -94,7 +94,7 @@ const Form = () => {
                 name="name"
                 required
                 placeholder="Full name"
-                minlength="2"
+                minLength="2"
               />
             </div>
             {showMessage && validateRecaptcha && (
@@ -141,7 +141,7 @@ const Form = () => {
                     required
                     placeholder="Type your message here (minimum 30 characters)"
                     rows={3}
-                    minlength="30"
+                    minLength="30"
                   />
                 </div>
               </>
