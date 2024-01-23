@@ -6,9 +6,9 @@ import { AuthContext } from "@/app/_context/auth-context";
 import { AdminGalleryProvider } from "@/app/_context/admin-gallery-context";
 
 const AdminLayout = ({ children }) => {
-  const { loggedInUser } = useContext(AuthContext);
+  const { userUid } = useContext(AuthContext);
 
-  if (loggedInUser) {
+  if (userUid) {
     return (
       <AdminGalleryProvider>
         <section>{children}</section>

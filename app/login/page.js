@@ -21,8 +21,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [revealPassword, setRevealPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
-  const { setLoggedInUser } = useContext(AuthContext);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(true);
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -32,10 +31,6 @@ export default function Login() {
     try {
       setIsLoading(true);
       const user = await loginWithEmailAndPassword(email, password);
-      setLoggedInUser(true);
-      const expirationTime = Date.now() + 2 * 60 * 60 * 1000;
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("expirationTime", expirationTime);
       router.push("/admin/dashboard");
     } catch (error) {
       setError(error.message);

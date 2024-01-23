@@ -12,4 +12,24 @@
     max-width: 1400px;
     margin: 0 auto;
   }
+
+  &__placeholder {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    padding: 2rem 2rem;
+
+    div {
+      display: grid;
+      justify-content: center;
+      h1 {
+        margin-bottom: 4rem;
+        text-align: center;
+      }
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+  }
 }

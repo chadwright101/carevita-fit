@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
 const { general, admin } = data;
 
 const Footer = () => {
-  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const { userUid } = useContext(AuthContext);
   const {
     setShowJohannesburg,
     setShowPretoria,
@@ -30,8 +30,6 @@ const Footer = () => {
   const handleSignOut = async (e) => {
     logoutUser();
     router.push("/login");
-    setLoggedInUser(false);
-    localStorage.removeItem("loggedInUser");
   };
 
   return (
@@ -40,7 +38,7 @@ const Footer = () => {
         <div className="footer__flex">
           <nav className="footer-nav">
             <ul className="footer-nav__list">
-              {loggedInUser
+              {userUid
                 ? admin.map(({ title, url }, index) => (
                     <li className="footer-nav__list-item" key={index}>
                       <Link
@@ -78,7 +76,7 @@ const Footer = () => {
                       </Link>
                     </li>
                   ))}
-              {!loggedInUser && (
+              {!userUid && (
                 <li className="footer-nav__list-item">
                   <Link href="/login">Admin Login</Link>
                 </li>

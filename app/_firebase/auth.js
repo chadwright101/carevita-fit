@@ -9,7 +9,7 @@ export async function loginWithEmailAndPassword(email, password) {
       email,
       password
     );
-    return userCredential.user;
+    return userCredential.user.uid;
   } catch (error) {
     throw error;
   }

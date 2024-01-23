@@ -3,6 +3,7 @@ import { LocationsProvider } from "@/app/_context/locations-context";
 import Footer from "./_components/navigation/footer";
 import Header from "./_components/navigation/header";
 import "@/app/_styles/globals.scss";
+import ImageContainer from "./_components/image-container";
 
 export const metadata = {
   metadataBase: new URL("https://carevitafit.co.za"),
@@ -45,6 +46,17 @@ export default function RootLayout({ children }) {
             <Footer />
           </LocationsProvider>
         </AuthProvider>
+        {/* <div className="layout__placeholder">
+          <div>
+            <h1>Soon to be the new home of...</h1>
+            <ImageContainer
+              src="/carevita-fit-logo.jpg"
+              alt="CareVita #fit logo"
+              width={400}
+              height={400}
+            />
+          </div>
+        </div> */}
       </body>
     </html>
   );

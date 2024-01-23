@@ -15,7 +15,7 @@ const { general, admin } = data;
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const { loggedInUser, setLoggedInUser } = useContext(AuthContext);
+  const { userUid } = useContext(AuthContext);
   const {
     setShowJohannesburg,
     setShowPretoria,
@@ -40,8 +40,6 @@ const Header = () => {
 
   const handleSignOut = async (e) => {
     logoutUser();
-    setLoggedInUser(false);
-    localStorage.removeItem("isLoggedIn");
   };
 
   return (
@@ -84,7 +82,7 @@ const Header = () => {
             toggleMenu ? "mobile-nav__list--open" : ""
           }`}
         >
-          {loggedInUser
+          {userUid
             ? admin.map(({ title, url }, index) => (
                 <li className="mobile-nav__list-item" key={index}>
                   <Link
@@ -128,7 +126,7 @@ const Header = () => {
                   {index < general.length - 1 && <hr />}
                 </li>
               ))}
-          {!loggedInUser && (
+          {!userUid && (
             <li
               className={`mobile-nav__admin-button ${
                 toggleMenu ? "mobile-nav__admin-button--open" : ""
@@ -179,7 +177,7 @@ const Header = () => {
                 scrollPosition >= 150 ? "desktop-nav__list--scroll" : ""
               }`}
             >
-              {loggedInUser
+              {userUid
                 ? admin.map(({ title, url }, index) => (
                     <li className="desktop-nav__list-item" key={index}>
                       <Link
