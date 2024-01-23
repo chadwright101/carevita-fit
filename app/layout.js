@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="layout">
-        <AuthProvider>
+        {/* <AuthProvider>
           <LocationsProvider>
             <Header />
             <div className="layout__outer">
@@ -45,8 +45,8 @@ export default function RootLayout({ children }) {
             </div>
             <Footer />
           </LocationsProvider>
-        </AuthProvider>
-        {/* <div className="layout__placeholder">
+        </AuthProvider> */}
+        <div className="layout__placeholder">
           <div>
             <h1>Soon to be the new home of...</h1>
             <ImageContainer
@@ -56,7 +56,7 @@ export default function RootLayout({ children }) {
               height={400}
             />
           </div>
-        </div> */}
+        </div>
       </body>
     </html>
   );
