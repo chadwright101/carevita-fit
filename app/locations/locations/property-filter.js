@@ -8,12 +8,10 @@ import classNames from "classnames";
 
 const PropertyFilter = () => {
   const {
-    showJohannesburg,
     showPretoria,
     showGeorge,
     showMosselBay,
     showClearFilter,
-    setShowJohannesburg,
     setShowPretoria,
     setShowGeorge,
     setShowMosselBay,
@@ -25,25 +23,9 @@ const PropertyFilter = () => {
       <ul className="property-filter__list">
         <li
           onClick={() => {
-            setShowJohannesburg(true);
-            setShowGeorge(false);
-            setShowMosselBay(false);
-            setShowPretoria(false);
-            setShowClearFilter(true);
-          }}
-          className={classNames("property-filter__list-item", {
-            underline: showJohannesburg && showClearFilter,
-          })}
-        >
-          Johannesburg
-        </li>
-        <span>|</span>
-        <li
-          onClick={() => {
             setShowPretoria(true);
             setShowGeorge(false);
             setShowMosselBay(false);
-            setShowJohannesburg(false);
             setShowClearFilter(true);
           }}
           className={classNames("property-filter__list-item", {
@@ -57,7 +39,6 @@ const PropertyFilter = () => {
           onClick={() => {
             setShowMosselBay(true);
             setShowGeorge(false);
-            setShowJohannesburg(false);
             setShowPretoria(false);
             setShowClearFilter(true);
           }}
@@ -71,7 +52,6 @@ const PropertyFilter = () => {
         <li
           onClick={() => {
             setShowGeorge(true);
-            setShowJohannesburg(false);
             setShowMosselBay(false);
             setShowPretoria(false);
             setShowClearFilter(true);
@@ -88,7 +68,6 @@ const PropertyFilter = () => {
           onClick={() => {
             setShowClearFilter(false);
             setShowGeorge(true);
-            setShowJohannesburg(true);
             setShowMosselBay(true);
             setShowPretoria(true);
           }}

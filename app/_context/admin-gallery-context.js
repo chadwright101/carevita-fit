@@ -7,6 +7,7 @@ import {
   uploadBytes,
   deleteObject,
   updateMetadata,
+  getDownloadURL,
 } from "firebase/storage";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -77,7 +78,9 @@ export const AdminGalleryProvider = ({ children }) => {
         const element = document.getElementById(
           `${galleryName}-gallery-image-0`
         );
-        element.scrollIntoView({ behavior: "smooth" });
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
       }, 4500);
       setReloadImages(false);
     }
@@ -113,7 +116,9 @@ export const AdminGalleryProvider = ({ children }) => {
         const element = document.getElementById(
           `${galleryName}-gallery-image-0`
         );
-        element.scrollIntoView({ behavior: "smooth" });
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
       }, 1500);
       setReloadImages(false);
     }
@@ -127,13 +132,22 @@ export const AdminGalleryProvider = ({ children }) => {
       try {
         toast.info("Deleting image...", toastProps);
 
-        setReloadImages(true);
         const fileRef = ref(storageRef, filename);
-        await deleteObject(fileRef);
 
-        setTimeout(() => {
-          toast.success("Success! Image deleted.", toastProps);
-        }, 2000);
+        const fileExists = await getDownloadURL(fileRef)
+          .then(() => true)
+          .catch(() => false);
+
+        setReloadImages(true);
+        if (fileExists) {
+          await deleteObject(fileRef);
+
+          setTimeout(() => {
+            toast.success("Success! Image deleted.", toastProps);
+          }, 2000);
+        } else {
+          console.log(`File ${filename} does not exist.`);
+        }
       } catch (error) {
         console.log(error);
       } finally {
@@ -142,7 +156,9 @@ export const AdminGalleryProvider = ({ children }) => {
             const element = document.getElementById(
               `${galleryName}-gallery-image-${index === 0 ? "0" : index - 1}`
             );
-            element.scrollIntoView({ behavior: "smooth" });
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth" });
+            }
           }, 1500);
         }
         setReloadImages(false);

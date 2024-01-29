@@ -23,12 +23,11 @@ const Dashboard = () => {
     return (
       <main className="admin-page">
         <Heading pageHeading>Dashboard</Heading>
-        <TestimonialsSection />
         <Heading subheading cssClasses="admin-page__galleries-heading">
           Galleries
         </Heading>
         <div className="admin-page__galleries-container">
-          {switchGallery ? (
+          {!switchGallery ? (
             <h4 className="admin-page__galleries-container__heading">
               Main gallery <span>(maximum 6 images)</span>
             </h4>
@@ -45,7 +44,7 @@ const Dashboard = () => {
               className="admin-button"
               onClick={() => handleSwitch()}
             >
-              {!switchGallery
+              {switchGallery
                 ? "Switch to Main Gallery"
                 : "Switch to Secondary Gallery"}
               <Image
@@ -57,7 +56,8 @@ const Dashboard = () => {
             </button>
           )}
         </div>
-        {switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
+        {!switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
+        <TestimonialsSection />
       </main>
     );
   }

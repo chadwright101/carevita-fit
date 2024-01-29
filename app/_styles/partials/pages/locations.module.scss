@@ -6,6 +6,7 @@
 .property-section {
   display: grid;
   row-gap: 3rem;
+  align-items: start;
 
   @include media("desktopSmall") {
     grid-template-columns: repeat(2, 1fr);
@@ -76,6 +77,10 @@
 
   &__heading-container {
     margin-bottom: 2rem;
+
+    @include media("desktopSmall") {
+      min-height: 6.5rem;
+    }
 
     .property-component__heading-container__heading {
       margin-bottom: 0.75rem;

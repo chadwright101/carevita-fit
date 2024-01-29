@@ -7,55 +7,22 @@
       "images": [""]
     },
     "hero": {
-      "images": [
-        "/images/9U7A5096.jpg",
-        "/images/9U7A5120.jpg",
-        "/images/20230420_143400.jpg",
-        "/images/20230420_144516.jpg"
-      ],
       "paragraph": [
         "Are you looking for a way to improve the wellbeing of your elderly residents in care centres and retirement estates?",
         "Look no further than our fitness programme!"
       ]
     },
     "about": {
-      "images": ["/images/20230420_144516.jpg", "/images/20230420_142646.jpg"],
+      "images": [
+        "/images/general/20230420_144516.jpg",
+        "/images/general/20230420_142646.jpg"
+      ],
       "paragraphs": [
         "Our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure their safety for our senior members. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
         "Regular exercise has been shown to have numerous benefits for seniors, including improved cardiovascular health, increased strength and flexibility, and a reduced risk of falls and injuries. It also improves mood and sleep, and reduces stress and anxiety.",
         "The exercise programmes are led by certified fitness professionals that understand the unique challenges that come with ageing."
       ]
-    },
-    "testimonials": [
-      {
-        "name": "John Doe",
-        "paragraph": [
-          "The fitness company offers a wide range of classes and programs suitable for all fitness levels. The trainers are knowledgeable and motivating, creating a supportive and inclusive environment for members to achieve their health goals."
-        ]
-      },
-      {
-        "name": "Jane Doe",
-        "paragraph": [
-          "I highly recommend the fitness company for its top-notch facilities and equipment. The gym is clean and well-maintained, providing a comfortable space for workouts. The staff is friendly and helpful, ensuring a positive experience for every visitor."
-        ]
-      },
-      {
-        "name": "Jimmy Doe",
-        "paragraph": [
-          "The fitness company's online platform is fantastic, offering virtual workout options that can be accessed anytime, anywhere. The variety of classes available ensures there's something for everyone, making it convenient for busy individuals to stay active and healthy."
-        ]
-      }
-    ],
-    "gallery": [
-      "/images/9U7A5096.jpg",
-      "/images/9U7A5101.jpg",
-      "/images/9U7A5104.jpg",
-      "/images/9U7A5106.jpg",
-      "/images/9U7A5109.jpg",
-      "/images/9U7A5120.jpg",
-      "/images/9U7A5126.jpg",
-      "/images/9U7A5127.jpg"
-    ]
+    }
   },
   "locationsPage": {
     "meta": {
@@ -63,13 +30,13 @@
     },
     "properties": [
       {
-        "propertyName": "Property 1",
+        "propertyName": "Mosselbaai Aftree- en Leefstyloord",
         "propertyLocation": {
-          "suburb": "Fourways",
-          "city": "Johannesburg"
+          "suburb": "Dana Bay",
+          "city": "Mossel Bay"
         },
-        "image": "/images/9U7A5096.jpg",
-        "description": "Location description goes here...",
+        "image": "/images/mossel bay/1.jpg",
+        "description": "Mosselbaai Aftree- en Leefstyloord has 6 exercise classes a week. These take place on Mondays and Thursdays at 9am, 10am and 5:15pm. The classes are held in the Hall next to the restaurant, so after class the members can enjoy a tea/coffee or even a breakfast. The residents here are such a close community and it is wonderful to see how many friendships have formed in these classes. The classes are instructed by Amanda Baird who has a great sense of humour paired with such compassion that the members just love coming back to her classes every week. Her exercises are also extremely effective ,so the results are felt surprisingly fast.",
         "instructor": {
           "name": "Kathy",
           "image": "/images/_7affa782-7351-4faa-a3d9-4a1989929797.jpeg",
@@ -77,13 +44,13 @@
         }
       },
       {
-        "propertyName": "Property 2",
+        "propertyName": "Serene Park Retirement Centre",
         "propertyLocation": {
-          "suburb": "Menlyn",
+          "suburb": "Garsfontein",
           "city": "Pretoria"
         },
-        "image": "/images/Resized/20230420_143721.jpg",
-        "description": "Location description goes here...",
+        "image": "/images/serene/5.jpg",
+        "description": "Serene Park Retirement Centre has 1 exercise class a week. This class takes place on a Thursdays at 8am. The classes are in the coffee shop, so you can grab a lovely tea or coffee right after class with your exercise friends. The classes are instructed by Venessa Salt, who likes to add in some cardio to her class and enjoys having fun conversations with her members to create a light and fun environment.",
         "instructor": {
           "name": "Joanne",
           "image": "/images/_994693aa-175c-4e13-9e0e-38ff65a00fb5.jpeg",
@@ -91,13 +58,13 @@
         }
       },
       {
-        "propertyName": "Property 3",
+        "propertyName": "Rosemoor Home for the Aged",
         "propertyLocation": {
-          "suburb": "Menlyn",
-          "city": "Pretoria"
+          "suburb": "Rosemoor",
+          "city": "George"
         },
-        "image": "/images/20230420_143903.jpg",
-        "description": "Location description goes here...",
+        "image": "/images/rosemoor/ef79fe29-ed8a-4254-8f46-c61ec5e4395c.jpg",
+        "description": "Rosemoor Home for the Aged has 2 exercise classes a week. These take place on Tuesdays and Thursdays at 9:30am. The classes are held in the hall and these classes are quite easy as the residents are quite a frail group. They love getting together to move a little bit and the class is filled with laughter. The classes are instructed by Rhode Mostert, who is a kind and gentle instructor. She spends time making sure everyone is able to get some movement in and the residents are always happy when they see her.",
         "instructor": {
           "name": "Sipho",
           "image": "/images/_2f39fc4e-25ec-454e-9de3-c590591a4c04.jpeg",
@@ -105,16 +72,30 @@
         }
       },
       {
-        "propertyName": "Property 4",
+        "propertyName": "Bronberg Retirement Estate",
         "propertyLocation": {
-          "suburb": "Heralds View",
-          "city": "Mossel Bay"
+          "suburb": "Olympus Drive",
+          "city": "Pretoria"
         },
-        "image": "/images/9U7A5126.jpg",
-        "description": "Location description goes here...",
+        "image": "/images/bronberg/60019af6-3add-e1e2-0a3d-5023e6947d45.jpg",
+        "description": "Bronberg Retirement Estate has 2 exercise classes a week. These take place on Tuesdays and Fridays at 8am. The classes are held in the Mandolin Hall which is right next door to the restaurant, so the option is always there to have a breakfast or tea/coffee after class. The classes are instructed by Venessa salt who likes to add in some cardio to her class and enjoys having fun conversations with her members to create a light and fun environment and Julie Bailey who loves showing the members that they are able to do more with their bodies than they think, which helps strengthen them and build their confidence.",
         "instructor": {
           "name": "Charlotte",
           "image": "/images/_62e25621-017a-46fa-965d-c83d1fa07857.jpeg",
+          "bio": "Olivia Smith is a highly skilled and dedicated fitness instructor with over 10 years of experience in the industry. She is passionate about helping individuals achieve their fitness goals and live a healthy lifestyle. With her dynamic and motivational approach, Olivia creates engaging workout routines that combine cardio, strength training, and flexibility exercises."
+        }
+      },
+      {
+        "propertyName": "Bardolino Retirement and Lifestyle Village",
+        "propertyLocation": {
+          "suburb": "Die Voor Bay",
+          "city": "Mossel Bay"
+        },
+        "image": "/images/bardolino/2.jpg",
+        "description": "Bardolino Retirement and Lifestyle Village has 2 exercise classes a week. These take place on Tuesdays and Fridays at 9am. These classes are held in the dining hall and some Fridays they take the class outside on the grass. This is lovely, as the fresh air makes everyone feel so refreshed and energised. What a great way to start the day. Having the dining hall right there also allows for some social time after class over a cup of tea/coffee and a healthy snack from the kiosk. There is also a class for the frail care residents every 2nd week. This class takes place every 2nd Tuesday at 10am. These classes are also held in the dining hall and the frail care residents are brought in by the nurses. This class is more focused on basic movements and mobility to assist the frail with safe exercises and general daily activities. The classes are instructed by Amanda Baird who has a great sense of humour paired with such compassion that the members just love coming back to her classes every week. Her exercises are also extremely effective ,so the results are felt surprisingly fast. Amanda changes her approach with the frail class to provide a much safer and gentler workout, however, her passion is still felt by all in the class as they like to sing a song to her after some of the classes.",
+        "instructor": {
+          "name": "Henry",
+          "image": "/images/_2f39fc4e-25ec-454e-9de3-c590591a4c04.jpeg",
           "bio": "Olivia Smith is a highly skilled and dedicated fitness instructor with over 10 years of experience in the industry. She is passionate about helping individuals achieve their fitness goals and live a healthy lifestyle. With her dynamic and motivational approach, Olivia creates engaging workout routines that combine cardio, strength training, and flexibility exercises."
         }
       }
@@ -125,10 +106,16 @@
       "title": "Locations"
     },
     "phone": "+27 83 567 8901",
-    "email": "julie@carevita.co.za",
+    "email": "fit@carevita.co.za",
     "form": {
-      "propertyList": ["Property 1", "Property 2", "Property 3", "Property 4"]
+      "propertyList": [
+        "Mosselbaai Aftree- en Leefstyloord",
+        "Serene Park Retirement Centre",
+        "Rosemoor Home for the Aged",
+        "Bronberg Retirement Estate",
+        "Bardolino Retirement and Lifestyle Village"
+      ]
     },
-    "image": "/images/9U7A5106.jpg"
+    "image": "/general/images/9U7A5106.jpg"
   }
 }

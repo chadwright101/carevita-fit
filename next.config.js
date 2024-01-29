@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         protocol: "https",
-        hostname: "firebasestorage.googleapis.com",
+        hostname: "*.googleapis.com",
         pathname: "**",
       },
     ],

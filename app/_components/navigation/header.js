@@ -10,6 +10,7 @@ import { logoutUser } from "@/app/_firebase/auth";
 import useScrollPosition from "@/app/_hooks/scroll-position";
 
 import data from "@/app/_data/navigation-data.json";
+import Image from "next/image";
 
 const { general, admin } = data;
 
@@ -67,9 +68,11 @@ const Header = () => {
           />
         </Link>
         <button onClick={() => setToggleMenu(true)}>
-          <img
+          <Image
             src="/icons/menu-icon2.svg"
             alt="Menu icon"
+            width={44}
+            height={44}
             className={`mobile-header__menu-button ${
               scrollPosition >= 50 ? "mobile-header__menu-button--scroll" : ""
             }`}
@@ -142,7 +145,12 @@ const Header = () => {
           className="mobile-nav__close-button"
           onClick={() => setToggleMenu(false)}
         >
-          <img src="/icons/close-icon2.svg" alt="Close menu icon" />
+          <Image
+            src="/icons/close-icon2.svg"
+            alt="Close menu icon"
+            width={48}
+            height={48}
+          />
         </button>
       </nav>
 

@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="layout">
-        {/* <AuthProvider>
+        <AuthProvider>
           <LocationsProvider>
             <Header />
             <div className="layout__outer">
@@ -45,18 +45,7 @@ export default function RootLayout({ children }) {
             </div>
             <Footer />
           </LocationsProvider>
-        </AuthProvider> */}
-        <div className="layout__placeholder">
-          <div>
-            <h1>Soon to be the new home of...</h1>
-            <ImageContainer
-              src="/carevita-fit-logo.jpg"
-              alt="CareVita #fit logo"
-              width={400}
-              height={400}
-            />
-          </div>
-        </div>
+        </AuthProvider>
       </body>
     </html>
   );

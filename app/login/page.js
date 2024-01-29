@@ -1,10 +1,9 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-import { AuthContext } from "@/app/_context/auth-context";
 import { loginWithEmailAndPassword } from "@/app/_firebase/auth";
 import Recaptcha from "@/app/_lib/Recaptcha";
 
@@ -21,7 +20,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [revealPassword, setRevealPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [validateRecaptcha, setValidateRecaptcha] = useState(true);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e) => {
