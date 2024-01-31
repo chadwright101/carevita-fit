@@ -141,11 +141,25 @@
   }
 
   &__description {
-    display: flex;
-    justify-content: space-between;
     margin-top: 1.5rem;
-    column-gap: 2rem;
     margin-bottom: 2rem;
+
+    div {
+      float: right;
+      margin-left: 1rem;
+
+      img {
+        width: 75px;
+        height: auto;
+        aspect-ratio: 45/54;
+        object-fit: cover;
+      }
+
+      img:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
   }
 
   &__button {
@@ -195,5 +209,7 @@
   &__image {
     width: 100%;
     height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
   }
 }

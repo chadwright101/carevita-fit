@@ -7,7 +7,7 @@ import SingleProperty from "@/app/locations/locations/single-property";
 import data from "@/app/_data/general-data.json";
 
 const {
-  locationsPage: { properties },
+  locationsPage: { properties, instructors },
 } = data;
 
 const Properties = () => {
@@ -19,12 +19,14 @@ const Properties = () => {
       {showMosselBay && (
         <>
           <SingleProperty
-            data={properties[0]}
+            propertyData={properties[0]}
+            instructorData={instructors[0]}
             eager
             enquireNowPropertyName={properties[0].propertyName}
           />
           <SingleProperty
-            data={properties[4]}
+            propertyData={properties[4]}
+            instructorData={instructors[0]}
             eager
             enquireNowPropertyName={properties[4].propertyName}
           />
@@ -33,18 +35,21 @@ const Properties = () => {
       {showPretoria && (
         <>
           <SingleProperty
-            data={properties[1]}
+            propertyData={properties[1]}
+            instructorData={instructors[0]}
             enquireNowPropertyName={properties[1].propertyName}
           />
           <SingleProperty
-            data={properties[3]}
+            propertyData={properties[3]}
+            instructorData={instructors[0]}
             enquireNowPropertyName={properties[3].propertyName}
           />
         </>
       )}
       {showGeorge && (
         <SingleProperty
-          data={properties[2]}
+          propertyData={properties[2]}
+          instructorData={instructors[1]}
           enquireNowPropertyName={properties[2].propertyName}
         />
       )}

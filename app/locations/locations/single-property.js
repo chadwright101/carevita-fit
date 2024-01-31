@@ -5,14 +5,19 @@ import Heading from "@/app/_components/heading";
 import ImageContainer from "@/app/_components/image-container";
 import { LocationsContext } from "@/app/_context/locations-context";
 
-const SingleProperty = ({ data, eager, enquireNowPropertyName }) => {
+const SingleProperty = ({
+  propertyData,
+  instructorData,
+  eager,
+  enquireNowPropertyName,
+}) => {
   const {
     propertyName,
-    propertyLocation: { suburb, city },
+    propertyLocation: { suburb, city, link },
     image,
     description,
-    instructor: { name, image: instructorImage },
-  } = data;
+  } = propertyData;
+  const { name, image: instructorImage } = instructorData;
 
   const { setEnquireNowLocation } = useContext(LocationsContext);
 
@@ -25,7 +30,11 @@ const SingleProperty = ({ data, eager, enquireNowPropertyName }) => {
         >
           {propertyName}
         </Heading>
-        <Link className="property-component__heading-container__link" href="#">
+        <Link
+          className="property-component__heading-container__link"
+          href={link}
+          target="_blank"
+        >
           {suburb}, {city}
         </Link>
       </div>
@@ -41,18 +50,22 @@ const SingleProperty = ({ data, eager, enquireNowPropertyName }) => {
         />
       </div>
       <div className="property-component__description">
-        <p>{description}</p>
-        <Link href={`/locations#${name.toLowerCase()}`}>
-          <ImageContainer
-            src={instructorImage}
-            alt={`${name} - CareVita #fit instructor`}
-            width={50}
-            height={50}
-            eager={eager}
-            smallest={10}
-            tabletLarge={5}
-          />
-        </Link>
+        <p>
+          <div>
+            <Link href={`/locations#${name.toLowerCase()}`}>
+              <ImageContainer
+                src={instructorImage}
+                alt={`${name} - CareVita #fit instructor`}
+                width={100}
+                height={100}
+                eager={eager}
+                smallest={10}
+                tabletLarge={5}
+              />
+            </Link>
+          </div>
+          {description}
+        </p>
       </div>
       <Link href="/contact">
         <button
