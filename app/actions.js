@@ -5,7 +5,7 @@ import data from "@/app/_data/general-data.json";
 import { emailTemplateHtml } from "./_lib/EmailTemplateHtml";
 import express from "express";
 import rateLimit from "express-rate-limit";
-import { db, bucket } from "./_firebase/firebase-admin";
+import { db } from "./_firebase/firebase-admin";
 
 import { sanitize } from "isomorphic-dompurify";
 
