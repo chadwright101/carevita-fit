@@ -6,20 +6,19 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import { toastProps } from "@/app/_lib/ToastProps";
 
-import { onSnapshot } from "firebase/firestore";
+import {
+  onSnapshot,
+  doc,
+  updateDoc,
+  addDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import classNames from "classnames";
 
 import Heading from "@/app/_components/heading";
-import { testimonialsCollectionRef } from "@/app/_firebase/firebase";
+import { db, testimonialsCollectionRef } from "@/app/_firebase/firebase";
 
 import "react-toastify/dist/ReactToastify.css";
-import {
-  addTestimonial,
-  deleteTestimonial,
-  getTestimonialsServer,
-  saveTestimonial,
-  updateTestimonialTimestamp,
-} from "@/app/actions";
 
 const TestimonialsSection = () => {
   const [testimonialsArray, setTestimonialsArray] = useState([]);
@@ -52,12 +51,11 @@ const TestimonialsSection = () => {
 
   const handleTestimonialSave = async (testimonialId) => {
     try {
-      saveTestimonial(
-        testimonialId,
-        editedName,
-        editedParagraph,
-        editedProperty
-      );
+      await updateDoc(doc(db, "testimonials", testimonialId), {
+        name: editedName,
+        paragraph: editedParagraph,
+        property: editedProperty,
+      });
       setEditIndex(null);
       toast.success("Success! Testimonial saved.", toastProps);
     } catch (error) {
@@ -102,7 +100,7 @@ const TestimonialsSection = () => {
 
     if (confirmed) {
       try {
-        deleteTestimonial(testimonialId);
+        await deleteDoc(doc(db, "testimonials", testimonialId));
         setTestimonialsArray(
           testimonialsArray.filter((t) => t.id !== testimonialId)
         );
@@ -137,7 +135,7 @@ const TestimonialsSection = () => {
         timestamp: new Date().getTime(),
       };
 
-      addTestimonial(newTestimonial);
+      const docRef = await addDoc(testimonialsCollectionRef, newTestimonial);
 
       setNewTestimonialName("");
       setNewTestimonialParagraph("");
@@ -154,7 +152,9 @@ const TestimonialsSection = () => {
   const updateTestimonialTimeStamp = async (testimonialId) => {
     try {
       const updatedTimestamp = new Date().getTime();
-      updateTestimonialTimestamp(updatedTimestamp, testimonialId);
+      await updateDoc(doc(db, "testimonials", testimonialId), {
+        timestamp: updatedTimestamp,
+      });
       toast.success(
         "Success! Testimonial moved to the top of the list.",
         toastProps
@@ -177,7 +177,19 @@ const TestimonialsSection = () => {
     const getTestimonials = async () => {
       try {
         setGetTestimonialIsLoading(true);
-        const sortedTestimonials = await getTestimonialsServer();
+        const q = query(
+          testimonialsCollectionRef,
+          orderBy("timestamp", "desc")
+        );
+        const testimonialsData = await getDocs(q);
+        const testimonials = testimonialsData.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        const sortedTestimonials = testimonials.sort(
+          (a, b) => b.timestamp - a.timestamp
+        );
 
         setTestimonialsArray(sortedTestimonials);
         setGetTestimonialIsLoading(false);

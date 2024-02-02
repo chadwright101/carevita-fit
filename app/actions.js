@@ -5,7 +5,6 @@ import data from "@/app/_data/general-data.json";
 import { emailTemplateHtml } from "./_lib/EmailTemplateHtml";
 import express from "express";
 import rateLimit from "express-rate-limit";
-import { db } from "./_firebase/firebase-admin";
 
 import { sanitize } from "isomorphic-dompurify";
 
@@ -75,46 +74,4 @@ export const showPhoneNumber = async () => {
 
 export const showEmailAddress = async () => {
   return email;
-};
-
-export const saveTestimonial = async (
-  testimonialId,
-  editedName,
-  editedParagraph,
-  editedProperty
-) => {
-  await db.doc(`testimonials/${testimonialId}`).update({
-    name: editedName,
-    paragraph: editedParagraph,
-    property: editedProperty,
-  });
-};
-
-export const deleteTestimonial = async (testimonialId) => {
-  await db.doc(`testimonials/${testimonialId}`).delete();
-};
-
-export const addTestimonial = async (data) => {
-  await db.collection("testimonials").add(data);
-};
-
-export const updateTestimonialTimestamp = async (
-  updatedTimestamp,
-  testimonialId
-) => {
-  await db
-    .doc(`testimonials/${testimonialId}`)
-    .update({ timestamp: updatedTimestamp });
-};
-
-export const getTestimonialsServer = async () => {
-  const testimonialsSnapshot = await db
-    .collection("testimonials")
-    .orderBy("timestamp", "desc")
-    .get();
-  const testimonials = testimonialsSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  return testimonials;
 };
