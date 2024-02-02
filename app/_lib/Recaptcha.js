@@ -5,6 +5,7 @@ const Recaptcha = ({ onChange }) => {
     <ReCAPTCHA
       sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       onChange={onChange}
+      className="recaptcha"
     />
   );
 };

@@ -174,9 +174,11 @@
   &__heading {
     margin-bottom: 3rem;
     text-align: center;
+    font-size: $subheading;
 
     @include media("tablet") {
       text-align: left;
+      font-size: $heading;
     }
 
     @include media("desktopSmall") {

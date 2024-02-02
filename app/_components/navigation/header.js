@@ -70,7 +70,7 @@ const Header = () => {
             }`}
           />
         </Link>
-        <button onClick={() => setToggleMenu(true)}>
+        <button onClick={toggleMenu}>
           <Image
             src="/icons/menu-icon2.svg"
             alt="Menu icon"
@@ -118,7 +118,7 @@ const Header = () => {
                     className="mobile-nav__link"
                     href={url}
                     onClick={() => {
-                      setToggleMenu(false);
+                      toggleMenu();
                       setEnquireNowLocation("");
                       setShowGeorge(true);
                       setShowJohannesburg(true);
@@ -138,7 +138,7 @@ const Header = () => {
                 toggleMenu ? "mobile-nav__admin-button--open" : ""
               }`}
             >
-              <Link href="/login" onClick={() => setToggleMenu(false)}>
+              <Link href="/login" onClick={toggleMenu}>
                 Admin Login
               </Link>
             </li>
