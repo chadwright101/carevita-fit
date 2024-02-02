@@ -148,13 +148,6 @@ const TestimonialsSection = () => {
         "Error! Testimonial could not be added. Please try again and contact the developer if the problem persists."
       );
       console.log(error);
-    } finally {
-      setTimeout(() => {
-        const element = document.getElementById("testimonial-0");
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
-      }, 250);
     }
   };
 

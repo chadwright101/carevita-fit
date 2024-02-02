@@ -57,6 +57,7 @@ export default function Login() {
             type="email"
             id="email"
             name="email"
+            disabled={!validateRecaptcha}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="username"

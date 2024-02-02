@@ -46,10 +46,6 @@ const SecondaryGallerySection = () => {
         setImageInfo(imageInfo);
       } catch (error) {
         console.log(error);
-        toast.error(
-          "Error! Images could not load. Please try again and contact the developer if the problem persists.",
-          toastProps
-        );
       }
     };
     getSecondaryGalleryImages();
