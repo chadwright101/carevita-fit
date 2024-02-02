@@ -46,7 +46,7 @@ const Properties = () => {
           />
           <SingleProperty
             propertyData={properties[5]}
-            instructorData={instructors[0]}
+            instructorData={instructors[4]}
             enquireNowPropertyName={properties[5].propertyName}
           />
         </>

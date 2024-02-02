@@ -50,22 +50,20 @@ const SingleProperty = ({
         />
       </div>
       <div className="property-component__description">
-        <p>
-          <div>
-            <Link href={`/locations#${name.toLowerCase()}`}>
-              <ImageContainer
-                src={instructorImage}
-                alt={`${name} - CareVita #fit instructor`}
-                width={100}
-                height={100}
-                eager={eager}
-                smallest={10}
-                tabletLarge={5}
-              />
-            </Link>
-          </div>
-          {description}
-        </p>
+        <div>
+          <Link href={`/locations#${name.toLowerCase()}`}>
+            <ImageContainer
+              src={instructorImage}
+              alt={`${name} - CareVita #fit instructor`}
+              width={100}
+              height={100}
+              eager={eager}
+              smallest={10}
+              tabletLarge={5}
+            />
+          </Link>
+        </div>
+        <p>{description}</p>
       </div>
       <Link href="/contact">
         <button
