@@ -71,9 +71,20 @@ const TestimonialsSection = () => {
   };
 
   const handleTestimonialAddCancel = () => {
-    setNewTestimonialName("");
-    setNewTestimonialParagraph("");
-    setNewTestimonialProperty("");
+    if (
+      editedName !== null ||
+      editedParagraph !== null ||
+      editedProperty !== null
+    ) {
+      const confirmed = window.confirm(
+        "All progress will be lost. Are you sure you want to cancel?"
+      );
+      if (confirmed) {
+        setNewTestimonialName("");
+        setNewTestimonialParagraph("");
+        setNewTestimonialProperty("");
+      }
+    }
   };
 
   const handleTestimonialEditCancel = () => {

@@ -15,7 +15,7 @@ import Image from "next/image";
 const { general, admin } = data;
 
 const Header = () => {
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const [menu, setMenu] = useState({ toggle: false });
   const { userUid } = useContext(AuthContext);
   const {
     setShowJohannesburg,
@@ -27,8 +27,12 @@ const Header = () => {
   } = useContext(LocationsContext);
   const scrollPosition = useScrollPosition();
 
+  const toggleMenu = () => {
+    setMenu((prevState) => ({ ...prevState, toggle: !prevState.toggle }));
+  };
+
   useEffect(() => {
-    if (toggleMenu) {
+    if (menu.toggle) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
@@ -37,8 +41,7 @@ const Header = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [toggleMenu]);
-
+  }, [menu.toggle]);
   const handleSignOut = async (e) => {
     logoutUser();
   };
@@ -79,10 +82,10 @@ const Header = () => {
           />
         </button>
       </div>
-      <nav className={`mobile-nav ${toggleMenu ? "mobile-nav--open" : ""}`}>
+      <nav className={`mobile-nav ${menu.toggle ? "mobile-nav--open" : ""}`}>
         <ul
           className={`mobile-nav__list ${
-            toggleMenu ? "mobile-nav__list--open" : ""
+            menu.toggle ? "mobile-nav__list--open" : ""
           }`}
         >
           {userUid
@@ -92,7 +95,7 @@ const Header = () => {
                     className="mobile-nav__link"
                     href={url}
                     onClick={() => {
-                      setToggleMenu(false);
+                      toggleMenu();
                       if (title === "Sign Out") {
                         handleSignOut();
                       }
@@ -141,10 +144,7 @@ const Header = () => {
             </li>
           )}
         </ul>
-        <button
-          className="mobile-nav__close-button"
-          onClick={() => setToggleMenu(false)}
-        >
+        <button className="mobile-nav__close-button" onClick={toggleMenu}>
           <Image
             src="/icons/close-icon2.svg"
             alt="Close menu icon"
@@ -191,7 +191,7 @@ const Header = () => {
                       <Link
                         href={url}
                         onClick={() => {
-                          setToggleMenu(false);
+                          toggleMenu();
                           if (title === "Sign Out") {
                             handleSignOut();
                           }
