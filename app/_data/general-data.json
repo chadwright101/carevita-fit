@@ -1,10 +1,10 @@
 {
   "homePage": {
     "meta": {
-      "title": "Home",
-      "description": "",
-      "keywords": "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
-      "images": [""]
+      "title": "Home - CareVita #fit",
+      "description": "At CareVita #fit, our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure the safety of the elderly. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
+      "keywords": "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, senior citizens, care centre, retirement estate, fitness programme",
+      "images": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/general/meta-image.webp"
     },
     "hero": {
       "paragraph": [
@@ -14,11 +14,11 @@
     },
     "about": {
       "images": [
-        "/images/general/20230420_144516.jpg",
-        "/images/general/20230420_142646.jpg"
+        "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fithttps://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/general/20230420_144516.jpg",
+        "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/general/20230420_142646.jpg"
       ],
       "paragraphs": [
-        "Our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure their safety for our senior members. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
+        "Our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure safety of our senior members. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
         "Regular exercise has been shown to have numerous benefits for seniors, including improved cardiovascular health, increased strength and flexibility, and a reduced risk of falls and injuries. It also improves mood and sleep, and reduces stress and anxiety.",
         "The exercise programmes are led by certified fitness professionals that understand the unique challenges that come with ageing."
       ]
@@ -36,7 +36,7 @@
           "city": "Mossel Bay",
           "link": "https://www.google.com/maps/place/Mosselbaai+Aftree-+en+Leefstyloord/@-34.1921045,22.0615624,15z/data=!4m6!3m5!1s0x1dd66812ee6df3ff:0x3e13369107dbfbfa!8m2!3d-34.1921045!4d22.0615624!16s%2Fg%2F11c2jqwf1n?entry=ttu"
         },
-        "image": "/images/mossel bay/1.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/mossel bay/1.jpg",
         "description": "Mosselbaai Aftree- en Leefstyloord has 6 exercise classes a week. These take place on Mondays and Thursdays at 9am, 10am and 5:15pm. The classes are held in the Hall next to the restaurant, so after class the members can enjoy a tea/coffee or even a breakfast. The residents here are such a close community and it is wonderful to see how many friendships have formed in these classes. The classes are instructed by Amanda Baird who has a great sense of humour paired with such compassion that the members just love coming back to her classes every week. Her exercises are also extremely effective ,so the results are felt surprisingly fast."
       },
       {
@@ -46,7 +46,7 @@
           "city": "Pretoria",
           "link": "https://www.google.com/maps/place/Serene+Park+Retirement+Centre/@-25.7878319,28.2828673,17z/data=!3m1!4b1!4m6!3m5!1s0x1e9560baeafe586f:0xaa7f50090e3b06fd!8m2!3d-25.7878319!4d28.2854422!16s%2Fg%2F1xc60jpg?entry=ttu"
         },
-        "image": "/images/serene/5.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/serene/5.jpg",
         "description": "Serene Park Retirement Centre has 1 exercise class a week. This class takes place on a Thursdays at 8am. The classes are in the coffee shop, so you can grab a lovely tea or coffee right after class with your exercise friends. The classes are instructed by Venessa Salt, who likes to add in some cardio to her class and enjoys having fun conversations with her members to create a light and fun environment."
       },
       {
@@ -56,7 +56,7 @@
           "city": "George",
           "link": "https://www.google.com/maps/place/Rosemoor+Home+for+the+Aged/@-33.9695687,22.4749271,17z/data=!3m1!4b1!4m6!3m5!1s0x1dd61b2828536bc7:0x7407548bc9cf9c84!8m2!3d-33.9695687!4d22.477502!16s%2Fg%2F1pzxpnclg?entry=ttu"
         },
-        "image": "/images/rosemoor/ef79fe29-ed8a-4254-8f46-c61ec5e4395c.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/rosemoor/ef79fe29-ed8a-4254-8f46-c61ec5e4395c.jpg",
         "description": "Rosemoor Home for the Aged has 2 exercise classes a week. These take place on Tuesdays and Thursdays at 9:30am. The classes are held in the hall and these classes are quite easy as the residents are quite a frail group. They love getting together to move a little bit and the class is filled with laughter. The classes are instructed by Rhode Mostert, who is a kind and gentle instructor. She spends time making sure everyone is able to get some movement in and the residents are always happy when they see her."
       },
       {
@@ -66,7 +66,7 @@
           "city": "Pretoria",
           "link": "https://www.google.com/maps/place/Bronberg+Retirement+Estate/@-25.806671,28.3253918,15z/data=!4m10!1m2!2m1!1sBronberg+Retirement+Estate!3m6!1s0x1e955dca3d776811:0x211a7bd9c9407220!8m2!3d-25.8098154!4d28.3411081!15sChpCcm9uYmVyZyBSZXRpcmVtZW50IEVzdGF0ZZIBFHJldGlyZW1lbnRfY29tbXVuaXR54AEA!16s%2Fg%2F11c5d9knsm?entry=ttu"
         },
-        "image": "/images/bronberg/60019af6-3add-e1e2-0a3d-5023e6947d45.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/bronberg/60019af6-3add-e1e2-0a3d-5023e6947d45.jpg",
         "description": "Bronberg Retirement Estate has 2 exercise classes a week. These take place on Tuesdays and Fridays at 8am. The classes are held in the Mandolin Hall which is right next door to the restaurant, so the option is always there to have a breakfast or tea/coffee after class. The classes are instructed by Venessa salt who likes to add in some cardio to her class and enjoys having fun conversations with her members to create a light and fun environment and Julie Bailey who loves showing the members that they are able to do more with their bodies than they think, which helps strengthen them and build their confidence."
       },
       {
@@ -76,24 +76,29 @@
           "city": "Mossel Bay",
           "link": "https://www.google.com/maps/place/Bardolino+Retirement+and+Lifestyle+Village/@-34.1547785,22.1043159,17z/data=!3m1!4b1!4m6!3m5!1s0x1dd669bb300de891:0xc1cd4688eb76ae53!8m2!3d-34.1547785!4d22.1068908!16s%2Fg%2F11h5x1kypv?entry=ttu"
         },
-        "image": "/images/bardolino/2.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/bardolino/2.jpg",
         "description": "Bardolino Retirement and Lifestyle Village has 2 exercise classes a week. These take place on Tuesdays and Fridays at 9am. These classes are held in the dining hall and some Fridays they take the class outside on the grass. This is lovely, as the fresh air makes everyone feel so refreshed and energised. What a great way to start the day. Having the dining hall right there also allows for some social time after class over a cup of tea/coffee and a healthy snack from the kiosk. There is also a class for the frail care residents every 2nd week. This class takes place every 2nd Tuesday at 10am. These classes are also held in the dining hall and the frail care residents are brought in by the nurses. This class is more focused on basic movements and mobility to assist the frail with safe exercises and general daily activities. The classes are instructed by Amanda Baird who has a great sense of humour paired with such compassion that the members just love coming back to her classes every week. Her exercises are also extremely effective ,so the results are felt surprisingly fast. Amanda changes her approach with the frail class to provide a much safer and gentler workout, however, her passion is still felt by all in the class as they like to sing a song to her after some of the classes."
       }
     ],
     "instructors": [
       {
         "name": "Julie",
-        "image": "/images/instructors/Julie.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/instructors/Julie.jpg",
         "bio": "Julie is a dedicated and highly skilled personal trainer who is committed to helping individuals achieve their fitness goals and improve their overall well-being. Julie understands the importance of motivation in achieving fitness goals. She excels at providing continuous support and encouragement. Julie designs customized fitness programs that cater to the needs of seniors. She tailors exercises and activities specifically to promote strength, flexibility, balance, and cardiovascular health among older adults. Julie's programs are designed to improve overall physical fitness, prevent age-related conditions, and enhance overall quality of life. Julie prioritizes safety in her training sessions. Julie remains committed to expanding her knowledge and staying up-to-date with the latest advancements in the fitness industry."
       },
       {
+        "name": "Amanda",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/instructors/Amanda.jpg",
+        "bio": "Amanda is a fantastic Instructor. She is a qualified Biokineticist and everyone that spends time with her can immediately pick up her care for everyone around her. She is a gentle, but very effective Instructor and the results from her exercise classes are felt very quickly. Amanda has an abundance of knowledge on the human body and its anatomy and how the effects of strength training can benefit the older population. She has a fantastic sense of humour, so getting through a class with her is a fun and very enjoyable experience. Amanda is also available to those members that require a more one-on-one approach to get them to the point that they are ready and comfortable to join a group class."
+      },
+      {
         "name": "Venessa",
-        "image": "/images/_2f39fc4e-25ec-454e-9de3-c590591a4c04.jpeg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/instructors/Venessa.jpg",
         "bio": "Venessa went into the health and fitness industry in 1988. This consists of teaching, coaching and mentoring clients and members in different forms of Yoga and Pilates. Having over 30 years’ experience she has a firm grasp of the functioning and capabilities of the human body. She continues to provide private sessions to students of various ages and enjoys helping students, clients and members meet their goals."
       },
       {
         "name": "Rhode",
-        "image": "/images/instructors/Rhode.jpg",
+        "image": "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/instructors/Rhode.jpg",
         "bio": "Rhode has been in the fitness Industry for 4 years now. She has specialised in Corrective Exercise and Injury prevention. This makes her an ideal candidate to work safely with the older population. She is a kind person that makes all her members feel safe and comfortable during her classes."
       }
     ]
@@ -113,6 +118,6 @@
         "Bardolino Retirement and Lifestyle Village"
       ]
     },
-    "image": "/general/images/9U7A5106.jpg"
+    "image": "/generalhttps://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/9U7A5106.jpg"
   }
 }

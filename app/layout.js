@@ -3,31 +3,24 @@ import { LocationsProvider } from "@/app/_context/locations-context";
 import Footer from "./_components/navigation/footer";
 import Header from "./_components/navigation/header";
 import "@/app/_styles/globals.scss";
-import ImageContainer from "./_components/image-container";
 
 export const metadata = {
   metadataBase: new URL("https://carevitafit.co.za"),
   description:
-    "Our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure their safety for our senior members. These exercise programmes are led by certified fitness professionals that understand the unique challenges that come with ageing.",
+    "At CareVita #fit, our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure the safety of the elderly. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
   keywords:
-    "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
+    "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, senior citizens, care centre, retirement estate, fitness programme",
   openGraph: {
     description:
-      "Our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure their safety for our senior members. These exercise programmes are led by certified fitness professionals that understand the unique challenges that come with ageing.",
+      "At CareVita #fit, our fitness programme is designed specifically by qualified trainers, physiotherapists and medical practitioners to ensure the safety of the elderly. They include a variety of exercises that are safe, effective and fun. Our main focus is on strength, flexibility and balance.",
     type: "website",
     locale: "en_ZA",
     siteName: "#fit - CareVita",
     keywords:
-      "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, care centre, retirement estate, fitness programme",
+      "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, senior citizens, care centre, retirement estate, fitness programme",
     images: [
       {
-        url: "",
-      },
-      {
-        url: "",
-      },
-      {
-        url: "",
+        url: "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/general/meta-image.webp",
       },
     ],
   },
