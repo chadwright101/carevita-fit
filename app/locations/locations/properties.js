@@ -20,13 +20,13 @@ const Properties = () => {
         <>
           <SingleProperty
             propertyData={properties[0]}
-            instructorData={instructors[0]}
+            instructorData={instructors[1]}
             eager
             enquireNowPropertyName={properties[0].propertyName}
           />
           <SingleProperty
             propertyData={properties[4]}
-            instructorData={instructors[0]}
+            instructorData={instructors[1]}
             eager
             enquireNowPropertyName={properties[4].propertyName}
           />
@@ -36,20 +36,25 @@ const Properties = () => {
         <>
           <SingleProperty
             propertyData={properties[1]}
-            instructorData={instructors[0]}
+            instructorData={instructors[2]}
             enquireNowPropertyName={properties[1].propertyName}
           />
           <SingleProperty
             propertyData={properties[3]}
-            instructorData={instructors[0]}
+            instructorData={instructors[2]}
             enquireNowPropertyName={properties[3].propertyName}
+          />
+          <SingleProperty
+            propertyData={properties[5]}
+            instructorData={instructors[0]}
+            enquireNowPropertyName={properties[5].propertyName}
           />
         </>
       )}
       {showGeorge && (
         <SingleProperty
           propertyData={properties[2]}
-          instructorData={instructors[1]}
+          instructorData={instructors[3]}
           enquireNowPropertyName={properties[2].propertyName}
         />
       )}

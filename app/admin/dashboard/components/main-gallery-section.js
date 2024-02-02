@@ -16,6 +16,7 @@ const MainGallerySection = () => {
     imageInfo,
     setImageInfo,
     file,
+    reloadImages,
     fileInputRef,
     handleFileChange,
     uploadImage,
@@ -51,7 +52,7 @@ const MainGallerySection = () => {
       }
     };
     getMainGalleryImages();
-  }, [setImageInfo]);
+  }, [reloadImages, setImageInfo]);
 
   return (
     <section className="admin-gallery">
