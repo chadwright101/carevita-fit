@@ -92,6 +92,7 @@ const Form = () => {
                 type="text"
                 id="name"
                 name="name"
+                disabled={!validateRecaptcha}
                 required
                 placeholder="Full name"
                 minLength="2"

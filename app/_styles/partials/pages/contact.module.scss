@@ -76,6 +76,11 @@
     padding: 2.75rem 1.5rem;
   }
 
+  input:disabled {
+    background: rgba(255, 255, 255, 0.85);
+    cursor: not-allowed;
+  }
+
   &__paragraph {
     color: $white;
     line-height: 1.6rem;
