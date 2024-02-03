@@ -10,16 +10,14 @@ import { sendEmail } from "@/app/actions";
 import Recaptcha from "@/app/_lib/Recaptcha";
 
 const {
-  contactPage: {
-    form: { propertyList },
-  },
+  locationsPage: { properties },
 } = data;
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
   const [submissionStartTime, setSubmissionStartTime] = useState();
-  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(true);
   const [showEmailSubmitted, setShowEmailSubmitted] = useState(false);
   const ref = useRef(null);
 
@@ -126,11 +124,15 @@ const Form = () => {
                     <label htmlFor="property">Property:</label>
 
                     <select id="property" name="property">
-                      {propertyList.map((property, index) => (
-                        <option key={index} value={property}>
-                          {property}
-                        </option>
-                      ))}
+                      {properties
+                        .sort((a, b) =>
+                          a.propertyName.localeCompare(b.propertyName)
+                        )
+                        .map(({ propertyName }, index) => (
+                          <option key={index} value={propertyName}>
+                            {propertyName}
+                          </option>
+                        ))}
                     </select>
                   </div>
                 )}
