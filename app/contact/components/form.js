@@ -17,7 +17,7 @@ const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const { enquireNowLocation } = useContext(LocationsContext);
   const [submissionStartTime, setSubmissionStartTime] = useState();
-  const [validateRecaptcha, setValidateRecaptcha] = useState(true);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
   const [showEmailSubmitted, setShowEmailSubmitted] = useState(false);
   const ref = useRef(null);
 
