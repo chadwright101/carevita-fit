@@ -58,8 +58,8 @@ const SingleProperty = ({
               width={100}
               height={100}
               eager={eager}
-              smallest={10}
-              tabletLarge={5}
+              smallest={30}
+              tabletLarge={30}
             />
           </Link>
         </div>
