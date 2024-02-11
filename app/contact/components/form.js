@@ -112,7 +112,7 @@ const Form = () => {
                 <div className="contact-form-container__form__group">
                   <label htmlFor="email">Email:</label>
                   <input
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     required
