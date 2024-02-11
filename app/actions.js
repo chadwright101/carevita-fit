@@ -26,8 +26,8 @@ export async function sendEmail(formData) {
     if (honey === null) {
       const name = sanitize(formData.get("name"));
       const phone = sanitize(formData.get("phone"));
+      const property = formData.get("property");
       const email = sanitize(formData.get("email"));
-      const property = sanitize(formData.get("property"));
       const message = sanitize(formData.get("message"));
 
       const emailHtmlContent = emailTemplateHtml({
@@ -40,12 +40,13 @@ export async function sendEmail(formData) {
 
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
-        secure: process.env.SMTP_SECURE,
+        port: 587,
+        secure: false,
         auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS,
         },
+        requireTLS: true,
       });
       const mailOptions = {
         from: process.env.SMTP_SEND_FROM,
