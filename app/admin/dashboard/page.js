@@ -33,7 +33,7 @@ const Dashboard = () => {
             </h4>
           ) : (
             <h4 className="admin-page__galleries-container__heading">
-              Secondary gallery <span>(maximum 20 images)</span>
+              Secondary gallery <span>(maximum 25 images)</span>
             </h4>
           )}
           {isLoading ? (

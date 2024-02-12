@@ -234,9 +234,9 @@ const TestimonialsSection = () => {
     <>
       <section className="admin-testimonials-section">
         <Heading subheading cssClasses="admin-testimonials-section__heading">
-          Testimonials <span>(maximum 20 entries)</span>
+          Testimonials <span>(maximum 40 entries)</span>
         </Heading>
-        {testimonialsArray.length < 20 && editIndex === null ? (
+        {testimonialsArray.length < 40 && editIndex === null ? (
           <div className="admin-testimonials-section__add-testimonial">
             <Heading
               subheading

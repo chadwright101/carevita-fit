@@ -116,7 +116,7 @@ const SecondaryGallerySection = () => {
         </p>
       )}
 
-      {imageInfo.length < 20 && (
+      {imageInfo.length < 25 && (
         <form className="admin-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input
