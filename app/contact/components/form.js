@@ -123,17 +123,12 @@ const Form = () => {
                   <div className="contact-form-container__form__group">
                     <label htmlFor="property">Property:</label>
 
-                    <select id="property" name="property">
-                      {properties
-                        .sort((a, b) =>
-                          a.propertyName.localeCompare(b.propertyName)
-                        )
-                        .map(({ propertyName }, index) => (
-                          <option key={index} value={propertyName}>
-                            {propertyName}
-                          </option>
-                        ))}
-                    </select>
+                    <input
+                      type="text"
+                      id="property"
+                      name="property"
+                      placeholder="Eg: Bronberg Retirement Estate"
+                    />
                   </div>
                 )}
                 <div className="contact-form-container__form__group">

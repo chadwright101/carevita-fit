@@ -34,7 +34,9 @@ export const emailTemplateHtml = ({
             Email address: <span style="font-weight: 200; font-style: italic;">${email}</span>
           </p>
           <p style="font-size: 1rem; margin: 1rem 0; font-weight: 500;">
-            Property in question: <span style="font-weight: 200; font-style: italic;">${property}</span>
+            Property in question: <span style="font-weight: 200; font-style: italic;">${
+              property || "Not added"
+            }</span>
           </p>
           <p style="font-size: 1rem; font-weight: 500;">
             Message:
