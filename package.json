@@ -22,7 +22,7 @@
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
     "react-toastify": "^10.0.4",
-    "sass": "^1.71.1"
+    "sass": "^1.72.0"
   },
   "devDependencies": {
     "eslint": "^8",
