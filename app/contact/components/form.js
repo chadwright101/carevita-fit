@@ -4,14 +4,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import Button from "../../_components/button";
 
-import data from "@/app/_data/general-data.json";
 import { LocationsContext } from "@/app/_context/locations-context";
 import { sendEmail } from "@/app/actions";
 import Recaptcha from "@/app/_lib/Recaptcha";
-
-const {
-  locationsPage: { properties },
-} = data;
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -34,7 +29,7 @@ const Form = () => {
 
   const handleRecaptchaChange = (value) => {
     const elapsedTime = new Date().getTime() - submissionStartTime;
-    if (elapsedTime < 4000) {
+    if (elapsedTime < 3000) {
       console.error("Form submitted too quickly. Possible bot activity.");
       return;
     } else {
