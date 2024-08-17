@@ -85,7 +85,7 @@ const Footer = () => {
           </nav>
           <div className="footer__flex__logo">
             <ImageContainer
-              src="/carevita-fit-logo.webp"
+              src="/images/carevita-fit-logo.webp"
               alt="CareVita logo"
               width={120}
               height={100}

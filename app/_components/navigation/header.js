@@ -56,7 +56,7 @@ const Header = () => {
       >
         <Link href="/">
           <ImageContainer
-            src="/carevita-fit-logo.webp"
+            src="/images/carevita-fit-logo.webp"
             alt="CareVita fit logo"
             width={80}
             height={80}
@@ -163,7 +163,7 @@ const Header = () => {
         <div className="desktop-header__container">
           <Link href="/">
             <ImageContainer
-              src="/carevita-fit-logo.webp"
+              src="/images/carevita-fit-logo.webp"
               alt="CareVita fit logo"
               width={80}
               height={80}
