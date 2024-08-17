@@ -12,12 +12,6 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname:
-          "the-wright-designs-website-images.s3.af-south-1.amazonaws.com",
-        pathname: "**",
-      },
-      {
-        protocol: "https",
         hostname: "*.googleapis.com",
         pathname: "**",
       },

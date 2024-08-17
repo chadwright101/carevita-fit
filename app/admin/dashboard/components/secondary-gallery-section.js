@@ -124,7 +124,7 @@ const SecondaryGallerySection = () => {
             name="upload"
             id="upload"
             type="file"
-            accept=".jpg, .jpeg, .png"
+            accept=".webp, .jpeg, .png"
             onChange={handleFileChange}
           />
           <button

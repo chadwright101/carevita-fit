@@ -20,7 +20,7 @@ export const metadata = {
       "#fit, CareVita, elderly fitness, wellbeing, elderly, retired, old people, senior citizens, care centre, retirement estate, fitness programme",
     images: [
       {
-        url: "https://the-wright-designs-website-images.s3.af-south-1.amazonaws.com/carevita-fit/images/general/meta-image.webp",
+        url: "/images/general/meta-image.webp",
       },
     ],
   },
