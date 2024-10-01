@@ -11,21 +11,21 @@
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
     "classnames": "^2.5.1",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "express-rate-limit": "^7.4.0",
-    "firebase": "^10.12.5",
-    "firebase-admin": "^12.1.1",
-    "isomorphic-dompurify": "^2.11.0",
-    "next": "14.2.3",
-    "nodemailer": "^6.9.13",
+    "firebase": "^10.14.0",
+    "firebase-admin": "^12.6.0",
+    "isomorphic-dompurify": "^2.16.0",
+    "next": "14.2.13",
+    "nodemailer": "^6.9.15",
     "react": "^18",
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
     "react-toastify": "^10.0.5",
-    "sass": "^1.77.4"
+    "sass": "^1.79.4"
   },
   "devDependencies": {
     "eslint": "^8",
-    "eslint-config-next": "14.1.4"
+    "eslint-config-next": "14.2.13"
   }
 }
