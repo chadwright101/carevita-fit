@@ -1,5 +1,8 @@
+@use "mixins/media.module";
+@use "variables.module";
+
 .white-text {
-  color: $white;
+  color: variables.$white;
 }
 
 .hidden {
@@ -19,18 +22,18 @@
 }
 
 .page-heading {
-  font-size: $heading;
+  font-size: variables.$heading;
   margin: 3rem 0;
   text-align: center;
 
-  @include media("tablet") {
+  @include media.media("tablet") {
     text-align: left;
   }
 }
 
 .underline {
   text-decoration: underline;
-  text-decoration-color: $green;
+  text-decoration-color: variables.$green;
   text-decoration-thickness: 2px;
   text-underline-offset: 6px;
 }
@@ -50,16 +53,16 @@
 
 .admin-button {
   padding: 0.75rem 1rem;
-  font-size: $paragraph;
-  background-color: $green;
-  color: $white;
+  font-size: variables.$paragraph;
+  background-color: variables.$green;
+  color: variables.$white;
   box-shadow: 0 2px 2px rgb(0 0 0 / 15%);
 
-  @include media("tabletLarge") {
+  @include media.media("tabletLarge") {
     &:hover {
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 300ms;
-      background-color: $lightGreen;
+      background-color: variables.$lightGreen;
       cursor: pointer;
     }
   }

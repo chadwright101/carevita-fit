@@ -1,5 +1,5 @@
-@import "../utils/variables.module.scss";
-@import "../utils/mixins/media.module.scss";
+@use "../utils/variables.module.scss";
+@use "../utils/mixins/media.module.scss";
 
 /* hero section */
 .hero-section {
@@ -7,19 +7,19 @@
     height: 60vh;
     width: 100%;
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       height: 450px;
     }
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       height: 525px;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       height: 600px;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       height: 650px;
     }
   }
@@ -27,11 +27,11 @@
   .splide {
     margin: 0 -1.5rem;
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       margin: 0 -3rem;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       margin: 0;
     }
   }
@@ -40,19 +40,19 @@
     height: 60vh;
     width: 100%;
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       height: 450px;
     }
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       height: 525px;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       height: 600px;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       height: 650px;
     }
 
@@ -69,21 +69,21 @@
     gap: 2.5rem;
     text-align: center;
     padding: 7rem 1.5rem;
-    background: $blue;
+    background: variables.$blue;
     margin: -0.75rem -1.5rem 0;
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       padding: 6rem 3rem;
       margin: -0.75rem -3rem 0;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       padding: 7rem 3rem;
       margin: -0.75rem 0 0;
     }
 
     h2:first-of-type {
-      font-weight: $thin;
+      font-weight: variables.$thin;
     }
   }
 }
@@ -95,11 +95,11 @@
   gap: 4rem 0;
   margin: 4rem 0;
 
-  @include media("tablet") {
+  @include media.media("tablet") {
     gap: 3rem;
   }
 
-  @include media("desktopSmall") {
+  @include media.media("desktopSmall") {
     margin: 4rem 0;
     gap: 2rem;
     grid-template-columns: repeat(2, 1fr);
@@ -114,11 +114,11 @@
     width: 100%;
     object-fit: cover;
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       height: 450px;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       height: 100%;
       &:last-child {
         display: none;
@@ -154,40 +154,40 @@
 
 .testimonials-section {
   padding: 4rem 3rem;
-  background-color: $blue;
+  background-color: variables.$blue;
   margin-bottom: 3rem;
 
-  @include media("desktopSmall") {
+  @include media.media("desktopSmall") {
     padding: 6rem 0;
   }
 
   &__heading,
   &__quote,
   &__name {
-    color: $white;
+    color: variables.$white;
   }
 
   &__name {
-    font-weight: $light;
+    font-weight: variables.$light;
   }
 
   &__heading {
     margin-bottom: 3rem;
     text-align: center;
-    font-size: $subheading;
+    font-size: variables.$subheading;
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       text-align: left;
-      font-size: $heading;
+      font-size: variables.$heading;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       padding: 0 3rem;
     }
   }
 
   &__container {
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       padding: 0 8rem;
     }
   }
@@ -198,8 +198,8 @@
   }
 
   &__quotation-marks {
-    font-size: $heading;
-    color: $white;
+    font-size: variables.$heading;
+    color: variables.$white;
     font-family: "Times New Roman", Times, serif;
   }
 
@@ -215,33 +215,33 @@
     text-align: center;
     margin-bottom: 3rem;
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       text-align: left;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       margin-bottom: 4rem;
     }
   }
 
   &__slider-container {
-    @include media("phone") {
+    @include media.media("phone") {
       height: 350px;
     }
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       height: 450px;
     }
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       height: 525px;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       height: 600px;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       height: 650px;
     }
   }
@@ -249,11 +249,11 @@
   .splide {
     margin: 0 -1.5rem;
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       margin: 0 -3rem;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       margin: 0;
     }
   }
@@ -261,23 +261,23 @@
   .splide__slide {
     height: 275px;
 
-    @include media("phone") {
+    @include media.media("phone") {
       height: 350px;
     }
 
-    @include media("tablet") {
+    @include media.media("tablet") {
       height: 450px;
     }
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       height: 525px;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       height: 600px;
     }
 
-    @include media("desktop") {
+    @include media.media("desktop") {
       height: 650px;
     }
 

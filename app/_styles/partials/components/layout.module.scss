@@ -1,9 +1,9 @@
-@import "../utils/mixins/media.module.scss";
+@use "../utils/mixins/media.module.scss";
 
 .layout {
   &__inner {
     padding: 0 1.5rem;
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       padding: 0 3rem;
     }
   }

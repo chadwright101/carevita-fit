@@ -1,5 +1,5 @@
-@import "../utils/variables.module.scss";
-@import "../utils/mixins/media.module.scss";
+@use "../utils/variables.module.scss";
+@use "../utils/mixins/media.module.scss";
 
 .footer-container {
   display: flex;
@@ -9,13 +9,13 @@
   padding: 3rem 3rem 1rem;
   max-width: 1300px;
   margin: 4rem auto 0;
-  border-top: solid 1px $black;
+  border-top: solid 1px variables.$black;
 
-  @include media("desktopSmall") {
+  @include media.media("desktopSmall") {
     margin-top: 3rem;
   }
 
-  @include media("desktop") {
+  @include media.media("desktop") {
     padding: 3rem 0 1rem;
   }
 
@@ -27,16 +27,16 @@
     width: 100%;
 
     a {
-      color: $link;
+      color: variables.$link;
     }
 
-    @include media("desktopSmall") {
+    @include media.media("desktopSmall") {
       font-size: 15px;
       flex-direction: row;
       justify-content: center;
       gap: 0.5rem;
       margin-top: 1rem;
-      border-top: solid $black 1px;
+      border-top: solid variables.$black 1px;
       width: 400px;
       padding-top: 1rem;
     }
@@ -44,7 +44,7 @@
 }
 
 .footer__flex {
-  @include media("tabletLarge") {
+  @include media.media("tabletLarge") {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -53,7 +53,7 @@
   .footer-nav {
     display: none;
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       display: block;
     }
 
@@ -67,7 +67,7 @@
       a:hover {
         text-decoration: underline;
         text-underline-offset: 4px;
-        text-decoration-color: $green;
+        text-decoration-color: variables.$green;
         text-decoration-thickness: 2px;
       }
     }
@@ -79,7 +79,7 @@
     align-items: center;
     gap: 1.5rem;
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       align-items: end;
     }
 
@@ -95,10 +95,10 @@
     align-items: center;
 
     a {
-      color: $link;
+      color: variables.$link;
     }
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       align-items: end;
       text-align: right;
       margin-top: 0.5rem;
@@ -111,7 +111,7 @@
     margin-bottom: -0.5rem;
     width: 10vw;
 
-    @include media("tabletLarge") {
+    @include media.media("tabletLarge") {
       display: none;
     }
   }

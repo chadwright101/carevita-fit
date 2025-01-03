@@ -1,5 +1,5 @@
-@import "../utils/variables.module.scss";
-@import "../utils/mixins/media.module.scss";
+@use "../utils/variables.module.scss";
+@use "../utils/mixins/media.module.scss";
 
 .header-container {
   width: 100%;
@@ -16,13 +16,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 1.5rem;
-  border-bottom: 2px solid $black;
+  border-bottom: 2px solid variables.$black;
   box-shadow: 0 2px 2px rgb(0 0 0 / 6%);
-  background-color: $white;
+  background-color: variables.$white;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 400ms;
 
-  @include media("tabletLarge") {
+  @include media.media("tabletLarge") {
     display: none;
   }
 
@@ -59,11 +59,11 @@
   right: -100%;
   height: 100vh;
   width: 100%;
-  background-color: $blue;
+  background-color: variables.$blue;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
 
-  @include media("tabletLarge") {
+  @include media.media("tabletLarge") {
     display: none;
   }
 
@@ -95,8 +95,8 @@
   }
 
   &__link {
-    color: $white;
-    font-size: $subheading;
+    color: variables.$white;
+    font-size: variables.$subheading;
     padding: 1rem;
     margin: -1rem;
   }
@@ -122,11 +122,11 @@
     }
 
     a {
-      background-color: $green;
-      font-weight: $light;
-      font-size: $subheading;
+      background-color: variables.$green;
+      font-weight: variables.$light;
+      font-size: variables.$subheading;
       padding: 0.75rem 1rem;
-      color: $white;
+      color: variables.$white;
     }
   }
 }
@@ -136,14 +136,14 @@
 .desktop-header {
   display: none;
   padding: 1rem 3rem;
-  border-bottom: 2px solid $black;
+  border-bottom: 2px solid variables.$black;
   max-width: 100%;
   box-shadow: 0 2px 2px rgb(0 0 0 / 6%);
-  background-color: $white;
+  background-color: variables.$white;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 400ms;
 
-  @include media("tabletLarge") {
+  @include media.media("tabletLarge") {
     display: block;
   }
 
@@ -186,7 +186,7 @@
     &__list-item:hover {
       text-decoration: underline;
       text-underline-offset: 6px;
-      text-decoration-color: $green;
+      text-decoration-color: variables.$green;
       text-decoration-thickness: 2px;
     }
   }
