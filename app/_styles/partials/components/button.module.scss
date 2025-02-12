@@ -1,15 +1,15 @@
-@use "../utils/variables.module.scss";
-@use "../utils/mixins/media.module.scss";
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
 
 .button {
   padding: 0.5rem 3rem;
-  font-size: variables.$subheading;
-  border: solid variables.$green 2px;
+  font-size: $subheading;
+  border: solid $green 2px;
   border-radius: 16px;
   box-shadow: 0 2px 2px rgb(0 0 0 / 16%);
   text-align: center;
 
-  @include media.media("desktopSmall") {
+  @include media("desktopSmall") {
     &:hover {
       cursor: pointer;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -18,11 +18,11 @@
   }
 
   &--normal {
-    background: variables.$blue;
-    color: variables.$white;
+    background: $blue;
+    color: $white;
     margin: 2rem 0;
 
-    @include media.media("desktopSmall") {
+    @include media("desktopSmall") {
       &:hover {
         background: rgb(19 66 102 / 75%);
       }
@@ -31,8 +31,8 @@
 
   &--arrow {
     margin-top: 2rem;
-    background: variables.$white;
-    color: variables.$black;
+    background: $white;
+    color: $black;
     display: flex;
     gap: 1rem;
     align-items: center;
@@ -47,15 +47,15 @@
     &:disabled:hover {
       background: rgba(255, 255, 255, 0.85);
       cursor: not-allowed;
-      border: solid variables.$green 2px;
-      color: variables.$black;
+      border: solid $green 2px;
+      color: $black;
     }
 
-    @include media.media("desktopSmall") {
+    @include media("desktopSmall") {
       &:hover {
-        background: variables.$green;
-        color: variables.$white;
-        border: solid variables.$white 2px;
+        background: $green;
+        color: $white;
+        border: solid $white 2px;
       }
     }
   }

@@ -1,5 +1,5 @@
-@use "../utils/variables.module.scss";
-@use "../utils/mixins/media.module.scss";
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
 
 .admin-layout {
   max-width: 500px;
@@ -7,7 +7,7 @@
   display: grid;
 
   &__heading {
-    font-size: variables.$heading;
+    font-size: $heading;
     margin: 3rem 0;
     text-align: center;
   }

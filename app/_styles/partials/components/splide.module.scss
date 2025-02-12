@@ -1,5 +1,5 @@
-@use "../utils/variables.module.scss";
-@use "../utils/mixins/media.module.scss";
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
 
 .splide__arrows {
   z-index: 10;
@@ -9,14 +9,14 @@
 }
 
 .splide__arrow {
-  fill: variables.$white;
+  fill: $white;
   padding: 1rem;
   margin: -1rem;
   opacity: 0.9;
   position: absolute;
 }
 
-@include media.media("desktopSmall") {
+@include media("desktopSmall") {
   .splide__arrow {
     padding: 0;
     margin: 0;
@@ -24,12 +24,12 @@
 }
 
 .splide__arrow:hover {
-  fill: variables.$green;
+  fill: $green;
   cursor: pointer;
 }
 
 .splide__arrow:disabled {
-  fill: variables.$white;
+  fill: $white;
 }
 
 .splide__arrow--prev {

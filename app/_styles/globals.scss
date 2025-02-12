@@ -1,24 +1,24 @@
 /* utils */
-@use "partials/utils/resets.module.scss";
-@use "partials/utils/variables.module.scss";
-@use "partials/utils/fonts.module.scss";
-@use "partials/components/splide.module.scss";
-@use "partials/utils/mixins/media.module.scss";
-@use "partials/utils/utils.module.scss";
+@import "./partials/utils/resets.module.scss";
+@import "./partials/utils/variables.module.scss";
+@import "./partials/utils/fonts.module.scss";
+@import "./partials/components/splide.module.scss";
+@import "./partials/utils/mixins/media.module.scss";
+@import "./partials/utils/utils.module.scss";
 
 /* components */
-@use "partials/components/header.module.scss";
-@use "partials/components/footer.module.scss";
-@use "partials/components/layout.module.scss";
-@use "partials//components/button.module.scss";
+@import "./partials/components/header.module.scss";
+@import "./partials/components/footer.module.scss";
+@import "./partials/components/layout.module.scss";
+@import "./partials//components/button.module.scss";
 
 /* pages */
-@use "partials/pages/home.module.scss";
-@use "partials/pages/locations.module.scss";
-@use "partials/pages/contact.module.scss";
-@use "partials/pages/admin.module.scss";
-@use "partials/pages/login.module.scss";
-@use "partials/pages/admin-layout.module.scss";
+@import "./partials/pages/home.module.scss";
+@import "./partials/pages/locations.module.scss";
+@import "./partials/pages/contact.module.scss";
+@import "./partials/pages/admin.module.scss";
+@import "./partials/pages/login.module.scss";
+@import "./partials/pages/admin-layout.module.scss";
 
 * {
   font-family: Raleway;
@@ -55,7 +55,7 @@ p {
   text-align: justify;
 }
 
-@include media.media("tabletLarge") {
+@include media("tabletLarge") {
   a {
     cursor: pointer;
   }

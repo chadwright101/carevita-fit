@@ -1,5 +1,5 @@
-@use "../utils/variables.module.scss";
-@use "../utils/mixins/media.module.scss";
+@import "../utils/variables.module.scss";
+@import "../utils/mixins/media.module.scss";
 
 .login-page {
   &__heading {
@@ -11,7 +11,7 @@
     flex-direction: column;
     row-gap: 1rem;
 
-    @include media.media("tablet") {
+    @include media("tablet") {
       width: 300px;
     }
 
@@ -29,7 +29,7 @@
       row-gap: 0.5rem;
       align-items: center;
 
-      @include media.media("tablet") {
+      @include media("tablet") {
         grid-template-columns: 100px 1fr;
       }
 
@@ -44,7 +44,7 @@
           padding: 0.5rem;
           margin: -0.5rem;
 
-          @include media.media("desktopSmall") {
+          @include media("desktopSmall") {
             padding: 0;
             margin: 0;
 
@@ -74,7 +74,7 @@
         cursor: not-allowed;
       }
 
-      @include media.media("tablet") {
+      @include media("tablet") {
         width: 100px;
         margin-top: 0;
       }
