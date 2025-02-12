@@ -3,9 +3,7 @@
 import { useEffect, useContext } from "react";
 import Image from "next/image";
 
-import { toast } from "react-toastify";
-import { toastProps } from "@/app/_lib/ToastProps";
-import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
+import { list, getDownloadURL, getMetadata } from "firebase/storage";
 
 import { mainGalleryStorageRef } from "@/app/_firebase/firebase";
 import ImageContainer from "@/app/_components/image-container";
@@ -27,7 +25,7 @@ const MainGallerySection = () => {
   useEffect(() => {
     const getMainGalleryImages = async () => {
       try {
-        const res = await listAll(mainGalleryStorageRef);
+        const res = await list(mainGalleryStorageRef, { maxResults: 6 });
 
         const imageInfoPromises = res.items.map(async (itemRef) => {
           const metadata = await getMetadata(itemRef);
@@ -41,7 +39,6 @@ const MainGallerySection = () => {
         });
         const imageInfo = await Promise.all(imageInfoPromises);
 
-        imageInfo.sort((a, b) => b.timestamp - a.timestamp);
         setImageInfo(imageInfo);
       } catch (error) {
         console.log(error);
