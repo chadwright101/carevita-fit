@@ -1,10 +1,7 @@
 "use client";
 
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useCallback } from "react";
 import Image from "next/image";
-
-import { list, getDownloadURL, getMetadata } from "firebase/storage";
-
 import { mainGalleryStorageRef } from "@/app/_firebase/firebase";
 import ImageContainer from "@/app/_components/image-container";
 import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
@@ -20,38 +17,23 @@ const MainGallerySection = () => {
     uploadImage,
     removeImage,
     updateImageTimestamp,
+    getGalleryImages,
   } = useContext(AdminGalleryContext);
 
+  const getMainGalleryImages = useCallback(async () => {
+    const newImageInfo = await getGalleryImages(mainGalleryStorageRef);
+    setImageInfo(newImageInfo);
+  }, [getGalleryImages, setImageInfo]);
+
   useEffect(() => {
-    const getMainGalleryImages = async () => {
-      try {
-        const res = await list(mainGalleryStorageRef, { maxResults: 6 });
-
-        const imageInfoPromises = res.items.map(async (itemRef) => {
-          const metadata = await getMetadata(itemRef);
-          const filename = itemRef.name;
-          const url = await getDownloadURL(itemRef);
-          return {
-            url,
-            filename,
-            timestamp: metadata.customMetadata.timestamp || 0,
-          };
-        });
-        const imageInfo = await Promise.all(imageInfoPromises);
-
-        setImageInfo(imageInfo);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getMainGalleryImages();
-  }, [reloadImages, setImageInfo]);
+  }, [reloadImages, getMainGalleryImages]);
 
   return (
     <section className="admin-gallery">
       {imageInfo.length !== 0 ? (
         <ul className="admin-gallery__list">
-          {imageInfo.map(({ url, filename }, index) => (
+          {imageInfo.map(({ url, filename, timestamp }, index) => (
             <li key={index} className="admin-gallery__list__item">
               <div
                 className="nav-point"
@@ -63,6 +45,7 @@ const MainGallerySection = () => {
                 onClick={() =>
                   removeImage(mainGalleryStorageRef, filename, index, "main")
                 }
+                aria-label="Delete Image"
               >
                 <Image
                   src="/icons/close-icon2.svg"
@@ -82,6 +65,7 @@ const MainGallerySection = () => {
                       "main"
                     )
                   }
+                  aria-label="Move Image Up"
                 >
                   <Image
                     src="/icons/up-arrow.svg"
@@ -115,7 +99,7 @@ const MainGallerySection = () => {
             name="upload"
             id="upload"
             type="file"
-            accept=".webp, .jpeg, .png"
+            accept=".webp, .jpeg, .png, .jpg"
             onChange={handleFileChange}
           />
           <button
@@ -123,6 +107,7 @@ const MainGallerySection = () => {
             className="admin-button"
             onClick={() => uploadImage(mainGalleryStorageRef, "main")}
             disabled={!file}
+            aria-label="Upload Image"
           >
             Upload
           </button>
