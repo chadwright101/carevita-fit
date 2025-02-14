@@ -24,7 +24,7 @@ const SecondaryGallerySection = () => {
   const getSecondaryGalleryImages = useCallback(async () => {
     const newImageInfo = await getGalleryImages(secondaryGalleryStorageRef);
     setImageInfo(newImageInfo);
-  }, [getGalleryImages, setImageInfo, secondaryGalleryStorageRef]);
+  }, [getGalleryImages, setImageInfo]);
 
   useEffect(() => {
     getSecondaryGalleryImages();

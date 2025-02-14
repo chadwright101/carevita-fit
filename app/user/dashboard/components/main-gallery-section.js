@@ -23,7 +23,7 @@ const MainGallerySection = () => {
   const getMainGalleryImages = useCallback(async () => {
     const newImageInfo = await getGalleryImages(mainGalleryStorageRef);
     setImageInfo(newImageInfo);
-  }, [getGalleryImages, setImageInfo, mainGalleryStorageRef]);
+  }, [getGalleryImages, setImageInfo]);
 
   useEffect(() => {
     getMainGalleryImages();
