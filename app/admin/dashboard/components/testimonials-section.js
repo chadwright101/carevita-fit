@@ -215,7 +215,7 @@ const TestimonialsSection = () => {
 
     getTestimonials();
 
-    const unsubscribeTestimonials = onSnapshot(
+    /* const unsubscribeTestimonials = onSnapshot(
       testimonialsCollectionRef,
       (snapshot) => {
         const updatedTestimonials = snapshot.docs.map((doc) => ({
@@ -227,7 +227,7 @@ const TestimonialsSection = () => {
         setTestimonialsArray(updatedTestimonials);
       }
     );
-    return () => unsubscribeTestimonials();
+    return () => unsubscribeTestimonials(); */
   }, [setGetTestimonialIsLoading, setTestimonialsArray]);
 
   return (
