@@ -30,7 +30,7 @@ export default function Login() {
     try {
       setIsLoading(true);
       const user = await loginWithEmailAndPassword(email, password);
-      router.push("/admin/dashboard");
+      router.push("/user/dashboard");
     } catch (error) {
       setError(error.message);
       setIsLoading(false);
