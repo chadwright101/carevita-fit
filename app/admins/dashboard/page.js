@@ -3,9 +3,9 @@
 import { useContext, useState } from "react";
 
 import Heading from "@/app/_components/heading";
-import SecondaryGallerySection from "@/app/admin/dashboard/components/secondary-gallery-section";
-import MainGallerySection from "@/app/admin/dashboard/components/main-gallery-section";
-import TestimonialsSection from "@/app/admin/dashboard/components/testimonials-section";
+import SecondaryGallerySection from "@/app/admins/dashboard/components/secondary-gallery-section";
+import MainGallerySection from "@/app/admins/dashboard/components/main-gallery-section";
+import TestimonialsSection from "@/app/admins/dashboard/components/testimonials-section";
 import Image from "next/image";
 import { AuthContext } from "@/app/_context/auth-context";
 
