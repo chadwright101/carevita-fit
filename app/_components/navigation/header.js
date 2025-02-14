@@ -133,11 +133,7 @@ const Header = () => {
                 </li>
               ))}
           {!userUid && (
-            <li
-              className={`mobile-nav__admin-button ${
-                toggleMenu ? "mobile-nav__admin-button--open" : ""
-              }`}
-            >
+            <li className={`mobile-nav__admin-button`}>
               <Link href="/login" onClick={toggleMenu}>
                 Admin Login
               </Link>
