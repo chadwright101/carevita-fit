@@ -26,7 +26,7 @@ const Dashboard = () => {
         <Heading subheading cssClasses="admin-page__galleries-heading">
           Galleries
         </Heading>
-        {/* <div className="admin-page__galleries-container">
+        <div className="admin-page__galleries-container">
           {!switchGallery ? (
             <h4 className="admin-page__galleries-container__heading">
               Main gallery <span>(maximum 6 images)</span>
@@ -57,7 +57,7 @@ const Dashboard = () => {
           )}
         </div>
         {!switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
-        <TestimonialsSection /> */}
+        <TestimonialsSection />
       </main>
     );
   }
