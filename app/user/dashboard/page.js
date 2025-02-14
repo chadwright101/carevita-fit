@@ -1,27 +1,11 @@
 "use client";
 
 import { useContext, useState } from "react";
-import dynamic from "next/dynamic";
 
 import Heading from "@/app/_components/heading";
-const SecondaryGallerySection = dynamic(
-  () => import("@/app/admin/dashboard/components/secondary-gallery-section"),
-  {
-    ssr: false,
-  }
-);
-const MainGallerySection = dynamic(
-  () => import("@/app/admin/dashboard/components/main-gallery-section"),
-  {
-    ssr: false,
-  }
-);
-const TestimonialsSection = dynamic(
-  () => import("@/app/admin/dashboard/components/testimonials-section"),
-  {
-    ssr: false,
-  }
-);
+import SecondaryGallerySection from "@/app/user/dashboard/components/secondary-gallery-section";
+import MainGallerySection from "@/app/user/dashboard/components/main-gallery-section";
+import TestimonialsSection from "@/app/user/dashboard/components/testimonials-section";
 import Image from "next/image";
 import { AuthContext } from "@/app/_context/auth-context";
 
