@@ -44,11 +44,6 @@ const Properties = () => {
             instructorData={instructors[2]}
             enquireNowPropertyName={properties[3].propertyName}
           />
-          <SingleProperty
-            propertyData={properties[5]}
-            instructorData={instructors[4]}
-            enquireNowPropertyName={properties[5].propertyName}
-          />
         </>
       )}
       {showGeorge && (
