@@ -14,24 +14,29 @@ const MeetTheTeam = () => {
         Meet the Team
       </Heading>
       <ul className="team-section__list">
-        {instructors.map(({ name: instructorName, image, bio }, index) => (
-          <li className="team-section__list-item" key={index}>
-            <div className="nav-point" id={instructorName.toLowerCase()}></div>
-            <ImageContainer
-              src={image}
-              alt={`CareVita #fit - ${instructorName}`}
-              width={400}
-              height={400}
-              smallest={95}
-              tablet={50}
-              desktopSmall={40}
-              desktop={30}
-              cssClasses="team-section__image"
-            />
-            <h4>{instructorName}</h4>
-            <p>{bio}</p>
-          </li>
-        ))}
+        {instructors
+          .filter(({ bio }) => bio && bio.trim() !== "")
+          .map(({ name: instructorName, image, bio }, index) => (
+            <li className="team-section__list-item" key={index}>
+              <div
+                className="nav-point"
+                id={instructorName.toLowerCase()}
+              ></div>
+              <ImageContainer
+                src={image}
+                alt={`CareVita #fit - ${instructorName}`}
+                width={400}
+                height={400}
+                smallest={95}
+                tablet={50}
+                desktopSmall={40}
+                desktop={30}
+                cssClasses="team-section__image"
+              />
+              <h4>{instructorName}</h4>
+              <p>{bio}</p>
+            </li>
+          ))}
       </ul>
     </section>
   );

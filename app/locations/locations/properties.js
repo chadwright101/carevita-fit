@@ -30,6 +30,12 @@ const Properties = () => {
             eager
             enquireNowPropertyName={properties[4].propertyName}
           />
+          <SingleProperty
+            propertyData={properties[6]}
+            instructorData={instructors[5]}
+            eager
+            enquireNowPropertyName={properties[6].propertyName}
+          />
         </>
       )}
       {showPretoria && (

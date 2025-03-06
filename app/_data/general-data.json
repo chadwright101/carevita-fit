@@ -87,7 +87,17 @@
           "link": "https://maps.app.goo.gl/PhKDxfvPRAgikwzWA"
         },
         "image": "/images/bergvallei/Screenshot-2024-05-09-213620.webp",
-        "description": "Bergvallei Retirement Estate has 2 exercise classes a week. These take place on Tuesdays and Thursdays at 9am. The classes are held in the Hall next to the restaurant, which also has a beautiful outdoor seating area, so after class the members can enjoy a tea/coffee or even a breakfast. The residents here are part of a wonderful community and it is great to see how many friendships have formed in these classes. Bergvallei is still under construction in some areas, so this is also a great opportunity for the new residents to get to know their neighbours in a fun atmosphere. The classes are instructed by Julia Bailey who has a great sense of humour and she loves showing the members that they are able to do more with their bodies than they think, which helps strengthen them and build their confidence. "
+        "description": "Bergvallei Retirement Estate has 2 exercise classes a week. These take place on Tuesdays and Thursdays at 9am. The classes are held in the Hall next to the restaurant, which also has a beautiful outdoor seating area, so after class the members can enjoy a tea/coffee or even a breakfast. The residents here are part of a wonderful community and it is great to see how many friendships have formed in these classes. Bergvallei is still under construction in some areas, so this is also a great opportunity for the new residents to get to know their neighbours in a fun atmosphere. The classes are instructed by Julia Bailey who has a great sense of humour and she loves showing the members that they are able to do more with their bodies than they think, which helps strengthen them and build their confidence."
+      },
+      {
+        "propertyName": "Hartenrus Aftree-Oord",
+        "propertyLocation": {
+          "suburb": "Hartenbos",
+          "city": "Mossel Bay",
+          "link": "https://maps.app.goo.gl/kFadTyLMUxvEwcAr9"
+        },
+        "image": "/images/hartenrus/Hartenrus-01.webp",
+        "description": "Hartenrus Aftree-Oord has 2 exercise classes a week. These take place on Mondays and Thursdays at 8am. These classes are held in the hall or outside in the garden when the weather allows. The classes are instructed by Chane, who is a strong but gentle instructor. Her background is in Crossfit, however, she also instructs Senior Crossfit classes and so has the ability to see each person’s capabilities. This way each member will do only what they are able to do in a safe environment."
       }
     ],
     "instructors": [
@@ -115,6 +125,11 @@
         "name": "Danel",
         "image": "/images/instructors/Danel.webp",
         "bio": "Danel is a young and very smart instructor. She is a qualified Biokineticist and so she has a vast understanding of the human body and its functions and abilities. Danel is also a very friendly person who is hands on in helping our members learn each movement correctly from the start. Her classes are tough, yet manageable and effective but she will always make sure that everyone only does what they are physically able to do. Her friendly and caring personality draws people to her as they instantly feel comfortable and safe within her presence."
+      },
+      {
+        "name": "Chane",
+        "image": "/images/instructors/Chane.webp",
+        "bio": ""
       }
     ]
   },
