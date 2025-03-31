@@ -26,7 +26,7 @@ const Properties = () => {
           />
           <SingleProperty
             propertyData={properties[4]}
-            instructorData={instructors[1]}
+            instructorData={instructors[2]}
             eager
             enquireNowPropertyName={properties[4].propertyName}
           />
