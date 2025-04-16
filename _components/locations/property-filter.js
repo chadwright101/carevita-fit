@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 
-import { LocationsContext } from "@/app/_context/locations-context";
+import { LocationsContext } from "@/_context/locations-context";
 
 import classNames from "classnames";
 

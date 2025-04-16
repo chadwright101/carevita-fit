@@ -1,9 +1,9 @@
-import Heading from "../_components/heading";
-import ContactInfo from "./components/contact-info";
-import Form from "./components/form";
-import ImageContainer from "../_components/image-container";
+import Heading from "../../_components/heading";
+import ContactInfo from "../../_components/contact/contact-info";
+import Form from "../../_components/contact/form";
+import ImageContainer from "../../_components/image-container";
 
-import data from "@/app/_data/general-data.json";
+import data from "@/_data/general-data.json";
 
 const {
   contactPage: { image },

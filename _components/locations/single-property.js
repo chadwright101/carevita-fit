@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useContext } from "react";
 
-import Heading from "@/app/_components/heading";
-import ImageContainer from "@/app/_components/image-container";
-import { LocationsContext } from "@/app/_context/locations-context";
+import Heading from "@/_components/heading";
+import ImageContainer from "@/_components/image-container";
+import { LocationsContext } from "@/_context/locations-context";
 
 const SingleProperty = ({
   propertyData,

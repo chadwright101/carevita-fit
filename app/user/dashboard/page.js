@@ -2,12 +2,12 @@
 
 import { useContext, useState } from "react";
 
-import Heading from "@/app/_components/heading";
-import SecondaryGallerySection from "@/app/user/dashboard/components/secondary-gallery-section";
-import MainGallerySection from "@/app/user/dashboard/components/main-gallery-section";
-import TestimonialsSection from "@/app/user/dashboard/components/testimonials-section";
+import Heading from "@/_components/heading";
+import SecondaryGallerySection from "@/_components/user/dashboard/secondary-gallery-section";
+import MainGallerySection from "@/_components/user/dashboard/main-gallery-section";
+import TestimonialsSection from "@/_components/user/dashboard/testimonials-section";
 import Image from "next/image";
-import { AuthContext } from "@/app/_context/auth-context";
+import { AuthContext } from "@/_context/auth-context";
 
 const Dashboard = () => {
   const [switchGallery, setSwitchGallery] = useState(false);

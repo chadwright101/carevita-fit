@@ -2,11 +2,12 @@
 
 import { useEffect, useContext, useCallback } from "react";
 import Image from "next/image";
-import { mainGalleryStorageRef } from "@/app/_firebase/firebase";
-import ImageContainer from "@/app/_components/image-container";
-import { AdminGalleryContext } from "@/app/_context/admin-gallery-context";
 
-const MainGallerySection = () => {
+import { secondaryGalleryStorageRef } from "@/_firebase/firebase";
+import ImageContainer from "@/_components/image-container";
+import { AdminGalleryContext } from "@/_context/admin-gallery-context";
+
+const SecondaryGallerySection = () => {
   const {
     imageInfo,
     setImageInfo,
@@ -20,14 +21,14 @@ const MainGallerySection = () => {
     getGalleryImages,
   } = useContext(AdminGalleryContext);
 
-  const getMainGalleryImages = useCallback(async () => {
-    const newImageInfo = await getGalleryImages(mainGalleryStorageRef);
+  const getSecondaryGalleryImages = useCallback(async () => {
+    const newImageInfo = await getGalleryImages(secondaryGalleryStorageRef);
     setImageInfo(newImageInfo);
   }, [getGalleryImages, setImageInfo]);
 
   useEffect(() => {
-    getMainGalleryImages();
-  }, [reloadImages, getMainGalleryImages]);
+    getSecondaryGalleryImages();
+  }, [reloadImages, getSecondaryGalleryImages]);
 
   return (
     <section className="admin-gallery">
@@ -37,13 +38,18 @@ const MainGallerySection = () => {
             <li key={index} className="admin-gallery__list__item">
               <div
                 className="nav-point"
-                id={`main-gallery-image-${index}`}
+                id={`secondary-gallery-image-${index}`}
               ></div>
               <button
                 className="admin-gallery__list__item__delete"
                 type="button"
                 onClick={() =>
-                  removeImage(mainGalleryStorageRef, filename, index, "main")
+                  removeImage(
+                    secondaryGalleryStorageRef,
+                    filename,
+                    index,
+                    "secondary"
+                  )
                 }
                 aria-label="Delete Image"
               >
@@ -60,9 +66,9 @@ const MainGallerySection = () => {
                   type="button"
                   onClick={() =>
                     updateImageTimestamp(
-                      mainGalleryStorageRef,
+                      secondaryGalleryStorageRef,
                       filename,
-                      "main"
+                      "secondary"
                     )
                   }
                   aria-label="Move Image Up"
@@ -91,7 +97,7 @@ const MainGallerySection = () => {
         </p>
       )}
 
-      {imageInfo.length < 6 && (
+      {imageInfo.length < 25 && (
         <form className="admin-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input
@@ -105,7 +111,7 @@ const MainGallerySection = () => {
           <button
             type="button"
             className="admin-button"
-            onClick={() => uploadImage(mainGalleryStorageRef, "main")}
+            onClick={() => uploadImage(secondaryGalleryStorageRef, "secondary")}
             disabled={!file}
             aria-label="Upload Image"
           >
@@ -117,4 +123,4 @@ const MainGallerySection = () => {
   );
 };
 
-export default MainGallerySection;
+export default SecondaryGallerySection;

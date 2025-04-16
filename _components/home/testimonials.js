@@ -1,7 +1,7 @@
 import { getDocs, orderBy, query } from "firebase/firestore";
 
-import { testimonialsCollectionRef } from "@/app/_firebase/firebase";
-import Heading from "@/app/_components/heading";
+import { testimonialsCollectionRef } from "@/_firebase/firebase";
+import Heading from "@/_components/heading";
 import TestimonialSlider from "../sliders/testimonial-slider";
 
 const Testimonials = async () => {

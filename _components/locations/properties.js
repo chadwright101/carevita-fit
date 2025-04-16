@@ -2,9 +2,9 @@
 
 import { useContext } from "react";
 
-import { LocationsContext } from "@/app/_context/locations-context";
-import SingleProperty from "@/app/locations/locations/single-property";
-import data from "@/app/_data/general-data.json";
+import { LocationsContext } from "@/_context/locations-context";
+import SingleProperty from "./single-property";
+import data from "@/_data/general-data.json";
 
 const {
   locationsPage: { properties, instructors },

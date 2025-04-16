@@ -1,8 +1,8 @@
-import Heading from "@/app/_components/heading";
+import Heading from "@/_components/heading";
 
-import PropertyFilter from "@/app/locations/locations/property-filter";
-import MeetTheTeam from "./locations/meet-the-team";
-import Properties from "./locations/properties";
+import PropertyFilter from "@/_components/locations/property-filter";
+import MeetTheTeam from "@/_components/locations/meet-the-team";
+import Properties from "@/_components/locations/properties";
 
 export const metadata = {
   title: "Locations - CareVita #fit",

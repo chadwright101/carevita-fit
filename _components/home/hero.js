@@ -1,14 +1,13 @@
+import HeroSlider from "@/_components/sliders/hero-slider";
+
 import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 
-import { secondaryGalleryStorageRef } from "@/app/_firebase/firebase";
+import { mainGalleryStorageRef } from "@/_firebase/firebase";
 
-import Heading from "@/app/_components/heading";
-import BasicSlider from "@/app/_components/sliders/basic-slider";
-
-const Gallery = async () => {
+const Hero = async () => {
   const fetchData = async () => {
     try {
-      const res = await listAll(secondaryGalleryStorageRef);
+      const res = await listAll(mainGalleryStorageRef);
 
       const imageInfoPromises = res.items.map(async (itemRef) => {
         const metadata = await getMetadata(itemRef);
@@ -21,7 +20,6 @@ const Gallery = async () => {
         };
       });
       const imageInfo = await Promise.all(imageInfoPromises);
-
       return imageInfo.sort((a, b) => b.timestamp - a.timestamp);
     } catch (error) {
       console.error("Error fetching hero images:", error);
@@ -32,14 +30,12 @@ const Gallery = async () => {
   const sortedImageData = imageData.map((imageInfo) => imageInfo.url);
 
   return (
-    <section className="gallery-section">
-      <Heading sectionHeading cssClasses="gallery-section__heading">
-        Gallery
-      </Heading>
-      <div className="gallery-section__slider-container">
-        <BasicSlider imageList={sortedImageData} />
+    <section className="hero-section">
+      <div className="hero-section__slider-container">
+        <HeroSlider imageList={sortedImageData} />
       </div>
     </section>
   );
 };
-export default Gallery;
+
+export default Hero;

@@ -3,13 +3,13 @@
 import Link from "next/link";
 import { useState, useContext, useEffect } from "react";
 
-import ImageContainer from "@/app/_components/image-container";
-import { AuthContext } from "@/app/_context/auth-context";
-import { LocationsContext } from "@/app/_context/locations-context";
-import { logoutUser } from "@/app/_firebase/auth";
-import useScrollPosition from "@/app/_hooks/scroll-position";
+import ImageContainer from "@/_components/image-container";
+import { AuthContext } from "@/_context/auth-context";
+import { LocationsContext } from "@/_context/locations-context";
+import { logoutUser } from "@/_firebase/auth";
+import useScrollPosition from "@/_hooks/scroll-position";
 
-import data from "@/app/_data/navigation-data.json";
+import data from "@/_data/navigation-data.json";
 import Image from "next/image";
 
 const { general, admin } = data;

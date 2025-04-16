@@ -1,8 +1,8 @@
 "use server";
 
 import nodemailer from "nodemailer";
-import data from "@/app/_data/general-data.json";
-import { emailTemplateHtml } from "./_lib/EmailTemplateHtml";
+import data from "@/_data/general-data.json";
+import { emailTemplateHtml } from "../_lib/EmailTemplateHtml";
 import express from "express";
 import rateLimit from "express-rate-limit";
 

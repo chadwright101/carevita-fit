@@ -1,4 +1,4 @@
-import data from "@/app/_data/general-data.json";
+import data from "@/_data/general-data.json";
 
 const {
   homePage: {

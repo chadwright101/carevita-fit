@@ -2,11 +2,11 @@
 
 import { useContext, useEffect, useRef, useState } from "react";
 
-import Button from "../../_components/button";
+import Button from "../button";
 
-import { LocationsContext } from "@/app/_context/locations-context";
-import { sendEmail } from "@/app/actions";
-import Recaptcha from "@/app/_lib/Recaptcha";
+import { LocationsContext } from "@/_context/locations-context";
+import { sendEmail } from "@/_actions/send-email";
+import Recaptcha from "@/_lib/Recaptcha";
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useContext } from "react";
-import { AuthContext } from "@/app/_context/auth-context";
-import { AdminGalleryProvider } from "@/app/_context/admin-gallery-context";
+import { AuthContext } from "@/_context/auth-context";
+import { AdminGalleryProvider } from "@/_context/admin-gallery-context";
 
 const AdminLayout = ({ children }) => {
   const { userUid } = useContext(AuthContext);

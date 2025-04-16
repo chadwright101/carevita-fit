@@ -1,7 +1,7 @@
-import Heading from "@/app/_components/heading";
-import ImageContainer from "@/app/_components/image-container";
+import Heading from "@/_components/heading";
+import ImageContainer from "@/_components/image-container";
 
-import data from "@/app/_data/general-data.json";
+import data from "@/_data/general-data.json";
 import Link from "next/link";
 
 const {

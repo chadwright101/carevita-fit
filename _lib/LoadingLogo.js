@@ -1,4 +1,4 @@
-import ImageContainer from "@/app/_components/image-container";
+import ImageContainer from "@/_components/image-container";
 
 export const LoadingLogo = ({ section }) => (
   <div className={`${section}__slider-container__logo`}>

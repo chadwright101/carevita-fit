@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { showPhoneNumber, showEmailAddress } from "@/app/actions";
+import { showPhoneNumber, showEmailAddress } from "@/_actions/send-email";
 
 const ContactInfo = () => {
   const [displayPhoneNumber, setDisplayPhoneNumber] =

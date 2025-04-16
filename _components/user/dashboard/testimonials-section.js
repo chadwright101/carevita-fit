@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { ToastContainer, toast } from "react-toastify";
-import { toastProps } from "@/app/_lib/ToastProps";
+import { toastProps } from "@/_lib/ToastProps";
 
 import {
   onSnapshot,
@@ -18,8 +18,8 @@ import {
 } from "firebase/firestore";
 import classNames from "classnames";
 
-import Heading from "@/app/_components/heading";
-import { db, testimonialsCollectionRef } from "@/app/_firebase/firebase";
+import Heading from "@/_components/heading";
+import { db, testimonialsCollectionRef } from "@/_firebase/firebase";
 
 import "react-toastify/dist/ReactToastify.css";
 

@@ -3,7 +3,7 @@
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 
 import "@splidejs/react-splide/css/core";
-import ImageContainer from "@/app/_components/image-container";
+import ImageContainer from "@/_components/image-container";
 
 const HeroSlider = ({ imageList }) => {
   return (

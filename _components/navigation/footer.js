@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
 
-import ImageContainer from "@/app/_components/image-container";
-import { AuthContext } from "@/app/_context/auth-context";
-import { LocationsContext } from "@/app/_context/locations-context";
-import { logoutUser } from "@/app/_firebase/auth";
+import ImageContainer from "@/_components/image-container";
+import { AuthContext } from "@/_context/auth-context";
+import { LocationsContext } from "@/_context/locations-context";
+import { logoutUser } from "@/_firebase/auth";
 
-import data from "@/app/_data/navigation-data.json";
+import data from "@/_data/navigation-data.json";
 
 const currentYear = new Date().getFullYear();
 

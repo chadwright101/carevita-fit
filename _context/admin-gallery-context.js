@@ -13,7 +13,7 @@ import {
 } from "firebase/storage";
 
 import { ToastContainer, toast } from "react-toastify";
-import { toastProps } from "@/app/_lib/ToastProps";
+import { toastProps } from "@/_lib/ToastProps";
 
 export const AdminGalleryContext = createContext();
 
