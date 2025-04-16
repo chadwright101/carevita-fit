@@ -8,6 +8,7 @@ import MainGallerySection from "@/_components/user/dashboard/main-gallery-sectio
 import TestimonialsSection from "@/_components/user/dashboard/testimonials-section";
 import Image from "next/image";
 import { AuthContext } from "@/_context/auth-context";
+import LocationsSection from "@/_components/user/dashboard/locations/locations-section";
 
 const Dashboard = () => {
   const [switchGallery, setSwitchGallery] = useState(false);
@@ -57,6 +58,7 @@ const Dashboard = () => {
           )}
         </div>
         {!switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
+        <LocationsSection />
         <TestimonialsSection />
       </main>
     );
