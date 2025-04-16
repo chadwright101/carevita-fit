@@ -2,13 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import {
-  doc,
-  deleteDoc,
-  onSnapshot,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, deleteDoc, onSnapshot, updateDoc } from "firebase/firestore";
 import {
   db,
   locationsCollectionRef,
@@ -30,7 +24,7 @@ const LocationList = () => {
   const [editingLocationId, setEditingLocationId] = useState(null);
   const [editedDescription, setEditedDescription] = useState("");
   const [editedHeading, setEditedHeading] = useState("");
-  const [editedLocation, setEditedLocation] = useState("");
+  const [editedCity, setEditedCity] = useState("");
   const [editedSuburb, setEditedSuburb] = useState("");
   const [editedImage, setEditedImage] = useState(null);
   const [editedImageUrl, setEditedImageUrl] = useState("");
@@ -43,7 +37,6 @@ const LocationList = () => {
         id: doc.id,
         ...doc.data(),
       }));
-      // Sort locations by timestamp (newest first)
       locationsData.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
       setLocations(locationsData);
       setLoading(false);
@@ -60,33 +53,35 @@ const LocationList = () => {
     if (!confirmDelete) return;
 
     try {
-      // Delete the location document first
       await deleteDoc(doc(db, "locations", locationId));
 
-      // Then try to delete the images if they exist
       if (image) {
         try {
-          const imagePath = decodeURIComponent(
-            image.split("?")[0].split("/").pop()
-          );
-          const imageRef = ref(locationsStorageRef, imagePath);
-          await deleteObject(imageRef);
+          const fullPath = image.split(
+            "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
+          )[1];
+          if (fullPath) {
+            const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
+            const imageRef = ref(locationsStorageRef, decodedPath);
+            await deleteObject(imageRef);
+          }
         } catch (error) {
           console.error("Error deleting image:", error);
-          // Continue even if image deletion fails
         }
       }
 
       if (staffImage) {
         try {
-          const staffImagePath = decodeURIComponent(
-            staffImage.split("?")[0].split("/").pop()
-          );
-          const staffImageRef = ref(locationsStorageRef, staffImagePath);
-          await deleteObject(staffImageRef);
+          const fullPath = staffImage.split(
+            "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
+          )[1];
+          if (fullPath) {
+            const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
+            const staffImageRef = ref(locationsStorageRef, decodedPath);
+            await deleteObject(staffImageRef);
+          }
         } catch (error) {
           console.error("Error deleting staff image:", error);
-          // Continue even if staff image deletion fails
         }
       }
 
@@ -104,7 +99,7 @@ const LocationList = () => {
     if (locationToEdit) {
       setEditedDescription(locationToEdit.description);
       setEditedHeading(locationToEdit.heading);
-      setEditedLocation(locationToEdit.location);
+      setEditedCity(locationToEdit.city);
       setEditedSuburb(locationToEdit.suburb);
       setEditedImageUrl(locationToEdit.image || "");
       setEditedStaffImageUrl(locationToEdit.staff_image || "");
@@ -149,24 +144,25 @@ const LocationList = () => {
       await updateDoc(doc(db, "locations", locationId), {
         description: editedDescription,
         heading: editedHeading,
-        location: editedLocation,
+        location: editedCity,
         suburb: editedSuburb,
       });
 
-      // Image Upload
       if (editedImage) {
-        // Delete old image if it exists
         const location = locations.find((loc) => loc.id === locationId);
         if (location?.image) {
           try {
-            const oldImagePath = decodeURIComponent(
-              location.image.split("?")[0].split("/").pop()
-            );
-            const oldImageRef = ref(locationsStorageRef, oldImagePath);
-            await deleteObject(oldImageRef);
+            // Extract the full path from the URL
+            const fullPath = location.image.split(
+              "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
+            )[1];
+            if (fullPath) {
+              const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
+              const oldImageRef = ref(locationsStorageRef, decodedPath);
+              await deleteObject(oldImageRef);
+            }
           } catch (error) {
             console.error("Error deleting old image:", error);
-            // Continue with upload even if delete fails
           }
         }
         const imageRef = ref(locationsStorageRef, `images/${editedImage.name}`);
@@ -176,18 +172,20 @@ const LocationList = () => {
           image: imageUrl,
         });
       } else if (editedImageUrl === "") {
-        // Delete existing image if no new image is selected
         const location = locations.find((loc) => loc.id === locationId);
         if (location?.image) {
           try {
-            const oldImagePath = decodeURIComponent(
-              location.image.split("?")[0].split("/").pop()
-            );
-            const oldImageRef = ref(locationsStorageRef, oldImagePath);
-            await deleteObject(oldImageRef);
+            // Extract the full path from the URL
+            const fullPath = location.image.split(
+              "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
+            )[1];
+            if (fullPath) {
+              const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
+              const oldImageRef = ref(locationsStorageRef, decodedPath);
+              await deleteObject(oldImageRef);
+            }
           } catch (error) {
             console.error("Error deleting image:", error);
-            // Continue with update even if delete fails
           }
           await updateDoc(doc(db, "locations", locationId), {
             image: "",
@@ -195,23 +193,21 @@ const LocationList = () => {
         }
       }
 
-      // Staff Image Upload
       if (editedStaffImage) {
-        // Delete old staff image if it exists
         const location = locations.find((loc) => loc.id === locationId);
         if (location?.staff_image) {
           try {
-            const oldStaffImagePath = decodeURIComponent(
-              location.staff_image.split("?")[0].split("/").pop()
-            );
-            const oldStaffImageRef = ref(
-              locationsStorageRef,
-              oldStaffImagePath
-            );
-            await deleteObject(oldStaffImageRef);
+            // Extract the full path from the URL
+            const fullPath = location.staff_image.split(
+              "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
+            )[1];
+            if (fullPath) {
+              const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
+              const oldStaffImageRef = ref(locationsStorageRef, decodedPath);
+              await deleteObject(oldStaffImageRef);
+            }
           } catch (error) {
             console.error("Error deleting old staff image:", error);
-            // Continue with upload even if delete fails
           }
         }
         const staffImageRef = ref(
@@ -224,21 +220,20 @@ const LocationList = () => {
           staff_image: staffImageUrl,
         });
       } else if (editedStaffImageUrl === "") {
-        // Delete existing staff image if no new image is selected
         const location = locations.find((loc) => loc.id === locationId);
         if (location?.staff_image) {
           try {
-            const oldStaffImagePath = decodeURIComponent(
-              location.staff_image.split("?")[0].split("/").pop()
-            );
-            const oldStaffImageRef = ref(
-              locationsStorageRef,
-              oldStaffImagePath
-            );
-            await deleteObject(oldStaffImageRef);
+            // Extract the full path from the URL
+            const fullPath = location.staff_image.split(
+              "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
+            )[1];
+            if (fullPath) {
+              const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
+              const oldStaffImageRef = ref(locationsStorageRef, decodedPath);
+              await deleteObject(oldStaffImageRef);
+            }
           } catch (error) {
             console.error("Error deleting staff image:", error);
-            // Continue with update even if delete fails
           }
           await updateDoc(doc(db, "locations", locationId), {
             staff_image: "",
@@ -250,7 +245,7 @@ const LocationList = () => {
       setEditingLocationId(null);
       setEditedDescription("");
       setEditedHeading("");
-      setEditedLocation("");
+      setEditedCity("");
       setEditedSuburb("");
       setEditedImage(null);
       setEditedImageUrl("");
@@ -266,7 +261,7 @@ const LocationList = () => {
     setEditingLocationId(null);
     setEditedDescription("");
     setEditedHeading("");
-    setEditedLocation("");
+    setEditedCity("");
     setEditedSuburb("");
     setEditedImage(null);
     setEditedImageUrl("");
@@ -288,7 +283,7 @@ const LocationList = () => {
 
   return (
     <section>
-      <h2>Locations</h2>
+      <h2>Cities</h2>
       {loading ? (
         <p>Loading locations...</p>
       ) : locations.length === 0 ? (
@@ -308,11 +303,16 @@ const LocationList = () => {
                     value={editedDescription}
                     onChange={(e) => setEditedDescription(e.target.value)}
                   />
-                  <input
-                    type="text"
-                    value={editedLocation}
-                    onChange={(e) => setEditedLocation(e.target.value)}
-                  />
+                  <select
+                    value={editedCity}
+                    onChange={(e) => setEditedCity(e.target.value)}
+                    required
+                  >
+                    <option value="">Select a city</option>
+                    <option value="Pretoria">Pretoria</option>
+                    <option value="George">George</option>
+                    <option value="Mossel Bay">Mossel Bay</option>
+                  </select>
                   <input
                     type="text"
                     value={editedSuburb}
@@ -347,7 +347,7 @@ const LocationList = () => {
                 <>
                   <h3>{location.heading}</h3>
                   <p>Description: {location.description}</p>
-                  <p>Location: {location.location}</p>
+                  <p>City: {location.city}</p>
                   <p>Suburb: {location.suburb}</p>
                   {location.image && (
                     <Image

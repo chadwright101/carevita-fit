@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import AddLocationForm from "./add-location-form";
-import LocationList from "../location-list";
+import LocationList from "./location-list";
 
 const LocationsSection = () => {
   const [showAddForm, setShowAddForm] = useState(false);

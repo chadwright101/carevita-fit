@@ -16,7 +16,7 @@ import { toastProps } from "@/_lib/ToastProps";
 const AddLocationForm = () => {
   const [description, setDescription] = useState("");
   const [heading, setHeading] = useState("");
-  const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
   const [suburb, setSuburb] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
@@ -59,7 +59,7 @@ const AddLocationForm = () => {
   const resetForm = () => {
     setDescription("");
     setHeading("");
-    setLocation("");
+    setCity("");
     setSuburb("");
     setImage(null);
     setImagePreview("");
@@ -70,7 +70,7 @@ const AddLocationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!heading || !description || !location || !suburb) {
+    if (!heading || !description || !city || !suburb) {
       toast.error("Please fill in all required fields", toastProps);
       return;
     }
@@ -82,11 +82,10 @@ const AddLocationForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Create new location document
       const newLocation = {
         description,
         heading,
-        location,
+        city,
         suburb,
         image: "",
         staff_image: "",
@@ -95,19 +94,16 @@ const AddLocationForm = () => {
 
       const docRef = await addDoc(locationsCollectionRef, newLocation);
 
-      // Upload property image if provided
       if (image) {
         const imageRef = ref(locationsStorageRef, `images/${image.name}`);
         await uploadBytes(imageRef, image);
         const imageUrl = await getDownloadURL(imageRef);
 
-        // Update the document with the image URL
         await updateDoc(doc(db, "locations", docRef.id), {
           image: imageUrl,
         });
       }
 
-      // Upload staff image if provided
       if (staffImage) {
         const staffImageRef = ref(
           locationsStorageRef,
@@ -116,7 +112,6 @@ const AddLocationForm = () => {
         await uploadBytes(staffImageRef, staffImage);
         const staffImageUrl = await getDownloadURL(staffImageRef);
 
-        // Update the document with the staff image URL
         await updateDoc(doc(db, "locations", docRef.id), {
           staff_image: staffImageUrl,
         });
@@ -159,17 +154,6 @@ const AddLocationForm = () => {
         </div>
 
         <div>
-          <label htmlFor="location">Location:</label>
-          <input
-            id="location"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            required
-          />
-        </div>
-
-        <div>
           <label htmlFor="suburb">Suburb:</label>
           <input
             id="suburb"
@@ -178,6 +162,20 @@ const AddLocationForm = () => {
             onChange={(e) => setSuburb(e.target.value)}
             required
           />
+        </div>
+        <div>
+          <label htmlFor="city">City:</label>
+          <select
+            id="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          >
+            <option value="">Select a location</option>
+            <option value="Pretoria">Pretoria</option>
+            <option value="George">George</option>
+            <option value="Mossel Bay">Mossel Bay</option>
+          </select>
         </div>
 
         <div>

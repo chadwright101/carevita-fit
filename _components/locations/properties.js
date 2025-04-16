@@ -1,10 +1,12 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { getDocs } from "firebase/firestore";
 
 import { LocationsContext } from "@/_context/locations-context";
 import SingleProperty from "./single-property";
 import data from "@/_data/general-data.json";
+import { locationsCollectionRef } from "@/_firebase/firebase";
 
 const {
   locationsPage: { properties, instructors },
@@ -13,6 +15,24 @@ const {
 const Properties = () => {
   const { showPretoria, showGeorge, showMosselBay } =
     useContext(LocationsContext);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        console.log("Attempting to fetch locations from Firestore...");
+        const querySnapshot = await getDocs(locationsCollectionRef);
+        const locationsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        console.log("Successfully fetched locations:", locationsData);
+      } catch (error) {
+        console.error("Error fetching locations:", error);
+      }
+    };
+
+    fetchLocations();
+  }, []);
 
   return (
     <section className="property-section">
