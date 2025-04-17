@@ -1,31 +1,32 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getDocs } from "firebase/firestore";
 
 import { LocationsContext } from "@/_context/locations-context";
 import SingleProperty from "./single-property";
-import data from "@/_data/general-data.json";
 import { locationsCollectionRef } from "@/_firebase/firebase";
 
-const {
-  locationsPage: { properties, instructors },
-} = data;
-
 const Properties = () => {
-  const { showPretoria, showGeorge, showMosselBay } =
-    useContext(LocationsContext);
+  const { selectedCities, isLoading } = useContext(LocationsContext);
+  const [locations, setLocations] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState([]);
 
   useEffect(() => {
     const fetchLocations = async () => {
       try {
         console.log("Attempting to fetch locations from Firestore...");
         const querySnapshot = await getDocs(locationsCollectionRef);
-        const locationsData = querySnapshot.docs.map((doc) => ({
+        const locationsPayload = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        console.log("Successfully fetched locations:", locationsData);
+
+        const sortedLocations = locationsPayload.sort((a, b) => {
+          return (b.timestamp || 0) - (a.timestamp || 0);
+        });
+
+        setLocations(sortedLocations);
       } catch (error) {
         console.error("Error fetching locations:", error);
       }
@@ -34,55 +35,30 @@ const Properties = () => {
     fetchLocations();
   }, []);
 
+  // Filter locations based on selected cities
+  useEffect(() => {
+    if (locations.length > 0 && Object.keys(selectedCities).length > 0) {
+      const filtered = locations.filter((location) => {
+        return selectedCities[location.city] === true;
+      });
+      setFilteredLocations(filtered);
+    } else {
+      setFilteredLocations(locations);
+    }
+  }, [locations, selectedCities]);
+
+  if (isLoading) {
+    return <div className="property-section">Loading properties...</div>;
+  }
+
   return (
     <section className="property-section">
-      {showMosselBay && (
-        <>
-          <SingleProperty
-            propertyData={properties[0]}
-            instructorData={instructors[1]}
-            eager
-            enquireNowPropertyName={properties[0].propertyName}
-          />
-          <SingleProperty
-            propertyData={properties[4]}
-            instructorData={instructors[2]}
-            eager
-            enquireNowPropertyName={properties[4].propertyName}
-          />
-          <SingleProperty
-            propertyData={properties[6]}
-            instructorData={instructors[5]}
-            eager
-            enquireNowPropertyName={properties[6].propertyName}
-          />
-        </>
-      )}
-      {showPretoria && (
-        <>
-          <SingleProperty
-            propertyData={properties[1]}
-            instructorData={instructors[0]}
-            enquireNowPropertyName={properties[1].propertyName}
-          />
-          <SingleProperty
-            propertyData={properties[3]}
-            instructorData={instructors[2]}
-            enquireNowPropertyName={properties[3].propertyName}
-          />
-          <SingleProperty
-            propertyData={properties[5]}
-            instructorData={instructors[0]}
-            enquireNowPropertyName={properties[5].propertyName}
-          />
-        </>
-      )}
-      {showGeorge && (
-        <SingleProperty
-          propertyData={properties[2]}
-          instructorData={instructors[3]}
-          enquireNowPropertyName={properties[2].propertyName}
-        />
+      {filteredLocations.length === 0 ? (
+        <p>No properties found for the selected filters.</p>
+      ) : (
+        filteredLocations.map((location) => (
+          <SingleProperty key={location.id} propertyData={location} eager />
+        ))
       )}
     </section>
   );

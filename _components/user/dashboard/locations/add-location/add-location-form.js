@@ -32,7 +32,11 @@ const AddLocationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [staffMembers, setStaffMembers] = useState([]);
   const [selectedStaff, setSelectedStaff] = useState("");
+  const [availableCities, setAvailableCities] = useState([]);
+  const [newCity, setNewCity] = useState("");
+  const [addingNewCity, setAddingNewCity] = useState(false);
 
+  // Fetch staff members
   useEffect(() => {
     const fetchStaffMembers = async () => {
       try {
@@ -54,6 +58,53 @@ const AddLocationForm = () => {
 
     fetchStaffMembers();
   }, []);
+
+  // Fetch unique city values
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const querySnapshot = await getDocs(locationsCollectionRef);
+        const cities = new Set();
+
+        querySnapshot.docs.forEach((doc) => {
+          const cityValue = doc.data().city;
+          if (cityValue) {
+            cities.add(cityValue);
+          }
+        });
+
+        const uniqueCities = Array.from(cities).sort();
+        setAvailableCities(uniqueCities);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+        toast.error("Failed to load cities", toastProps);
+      }
+    };
+
+    fetchCities();
+  }, []);
+
+  const handleAddNewCity = () => {
+    if (!newCity.trim()) {
+      toast.error("Please enter a city name", toastProps);
+      return;
+    }
+
+    // Check if city already exists
+    if (availableCities.includes(newCity.trim())) {
+      toast.error("This city already exists", toastProps);
+      return;
+    }
+
+    setAvailableCities((prev) => [...prev, newCity.trim()].sort());
+    setCity(newCity.trim());
+    setNewCity("");
+    setAddingNewCity(false);
+    toast.success(
+      `Added "${newCity.trim()}" to the list of cities`,
+      toastProps
+    );
+  };
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -174,17 +225,53 @@ const AddLocationForm = () => {
         </div>
         <div>
           <label htmlFor="city">City:</label>
-          <select
-            id="city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            required
-          >
-            <option value="">Select a location</option>
-            <option value="Pretoria">Pretoria</option>
-            <option value="George">George</option>
-            <option value="Mossel Bay">Mossel Bay</option>
-          </select>
+          {!addingNewCity ? (
+            <div className="city-select-container">
+              <select
+                id="city"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required
+              >
+                <option value="">Select a location</option>
+                {availableCities.map((cityOption) => (
+                  <option key={cityOption} value={cityOption}>
+                    {cityOption}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={() => setAddingNewCity(true)}
+                className="add-new-city-btn"
+              >
+                Add New City
+              </button>
+            </div>
+          ) : (
+            <div className="new-city-input-container">
+              <input
+                type="text"
+                value={newCity}
+                onChange={(e) => setNewCity(e.target.value)}
+                placeholder="Enter new city name"
+              />
+              <div className="new-city-actions">
+                <button type="button" onClick={handleAddNewCity}>
+                  Add
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setNewCity("");
+                    setAddingNewCity(false);
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
         <div>

@@ -5,19 +5,9 @@ import Heading from "@/_components/heading";
 import ImageContainer from "@/_components/image-container";
 import { LocationsContext } from "@/_context/locations-context";
 
-const SingleProperty = ({
-  propertyData,
-  instructorData,
-  eager,
-  enquireNowPropertyName,
-}) => {
-  const {
-    propertyName,
-    propertyLocation: { suburb, city, link },
-    image,
-    description,
-  } = propertyData;
-  const { name, image: instructorImage } = instructorData;
+const SingleProperty = ({ propertyData, eager }) => {
+  const { heading, suburb, city, googleMapsLink, image, description } =
+    propertyData;
 
   const { setEnquireNowLocation } = useContext(LocationsContext);
 
@@ -28,11 +18,11 @@ const SingleProperty = ({
           cssClasses="property-component__heading-container__heading"
           sectionHeading
         >
-          {propertyName}
+          {heading}
         </Heading>
         <Link
           className="property-component__heading-container__link"
-          href={link}
+          href={googleMapsLink}
           target="_blank"
         >
           {suburb}, {city}
@@ -41,7 +31,7 @@ const SingleProperty = ({
       <div className="property-component__image">
         <ImageContainer
           src={image}
-          alt={`CareVita #fit - ${propertyName}`}
+          alt={`CareVita #fit - ${heading}`}
           width={1100}
           height={500}
           eager={eager}
@@ -50,7 +40,7 @@ const SingleProperty = ({
         />
       </div>
       <div className="property-component__description">
-        <div>
+        {/* <div>
           <Link href={`/locations#${name.toLowerCase()}`}>
             <ImageContainer
               src={instructorImage}
@@ -62,13 +52,13 @@ const SingleProperty = ({
               tabletLarge={30}
             />
           </Link>
-        </div>
+        </div> */}
         <p>{description}</p>
       </div>
       <Link href="/contact">
         <button
           type="button"
-          onClick={() => setEnquireNowLocation(enquireNowPropertyName)}
+          onClick={() => setEnquireNowLocation(heading)}
           className="button button--normal property-component__button"
         >
           Enquire Now

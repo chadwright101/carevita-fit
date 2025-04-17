@@ -4,7 +4,10 @@ import { useState, useEffect } from "react";
 import ImageUploader from "./image-uploader";
 import { updateLocation } from "./location-service";
 import { getDocs, query, orderBy, doc, getDoc } from "firebase/firestore";
-import { staffCollectionRef } from "@/_firebase/firebase";
+import {
+  staffCollectionRef,
+  locationsCollectionRef,
+} from "@/_firebase/firebase";
 import { toast } from "react-toastify";
 import { toastProps } from "@/_lib/ToastProps";
 
@@ -18,6 +21,7 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
   const [googleMapsLink, setGoogleMapsLink] = useState("");
   const [staffMembers, setStaffMembers] = useState([]);
   const [selectedStaff, setSelectedStaff] = useState("");
+  const [availableCities, setAvailableCities] = useState([]);
 
   useEffect(() => {
     const fetchStaffMembers = async () => {
@@ -41,8 +45,36 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
     fetchStaffMembers();
   }, [location]);
 
+  // Fetch unique city values
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const querySnapshot = await getDocs(locationsCollectionRef);
+        const cities = new Set();
+
+        querySnapshot.docs.forEach((doc) => {
+          const cityValue = doc.data().city;
+          if (cityValue) {
+            cities.add(cityValue);
+          }
+        });
+
+        const uniqueCities = Array.from(cities).sort();
+        setAvailableCities(uniqueCities);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+        toast.error("Failed to load cities", toastProps);
+      }
+    };
+
+    fetchCities();
+  }, [location]); // Re-fetch cities when location changes
+
+  // Initialize form values when location changes
   useEffect(() => {
     if (location) {
+      // Only set these values when the location object changes (not on every render)
+      // This prevents overriding user changes when the component re-renders
       setDescription(location.description || "");
       setHeading(location.heading || "");
       setCity(location.city || location.location || "");
@@ -65,6 +97,12 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
   };
 
   const handleSubmit = async () => {
+    // Validate required fields
+    if (!heading || !description || !city || !suburb) {
+      toast.error("Please fill in all required fields", toastProps);
+      return;
+    }
+
     const locationData = {
       description,
       heading,
@@ -76,13 +114,30 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
       staffMember: selectedStaff || null,
     };
 
-    const success = await updateLocation(
-      location.id,
-      locationData,
-      location.image
-    );
-    if (success) {
-      onSave();
+    try {
+      const success = await updateLocation(
+        location.id,
+        locationData,
+        location.image
+      );
+
+      if (success) {
+        // Update the location object with the new values to prevent reset on re-render
+        if (location) {
+          location.city = city;
+          location.description = description;
+          location.heading = heading;
+          location.suburb = suburb;
+          location.googleMapsLink = googleMapsLink;
+          location.staffMember = selectedStaff || null;
+        }
+
+        toast.success("Location updated successfully!", toastProps);
+        onSave();
+      }
+    } catch (error) {
+      console.error("Error updating location:", error);
+      toast.error("Failed to update location. Please try again.", toastProps);
     }
   };
 
@@ -116,9 +171,11 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
           required
         >
           <option value="">Select a city</option>
-          <option value="Pretoria">Pretoria</option>
-          <option value="George">George</option>
-          <option value="Mossel Bay">Mossel Bay</option>
+          {availableCities.map((cityOption) => (
+            <option key={cityOption} value={cityOption}>
+              {cityOption}
+            </option>
+          ))}
         </select>
       </div>
 
