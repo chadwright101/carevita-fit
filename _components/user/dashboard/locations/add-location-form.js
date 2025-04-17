@@ -20,8 +20,7 @@ const AddLocationForm = () => {
   const [suburb, setSuburb] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState("");
-  const [staffImage, setStaffImage] = useState(null);
-  const [staffImagePreview, setStaffImagePreview] = useState("");
+  const [googleMapsLink, setGoogleMapsLink] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleImageChange = (e) => {
@@ -35,27 +34,6 @@ const AddLocationForm = () => {
     }
   };
 
-  const handleStaffImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setStaffImage(e.target.files[0]);
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setStaffImagePreview(event.target.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
-
-  const handleImageDelete = () => {
-    setImage(null);
-    setImagePreview("");
-  };
-
-  const handleStaffImageDelete = () => {
-    setStaffImage(null);
-    setStaffImagePreview("");
-  };
-
   const resetForm = () => {
     setDescription("");
     setHeading("");
@@ -63,8 +41,7 @@ const AddLocationForm = () => {
     setSuburb("");
     setImage(null);
     setImagePreview("");
-    setStaffImage(null);
-    setStaffImagePreview("");
+    setGoogleMapsLink("");
   };
 
   const handleSubmit = async (e) => {
@@ -87,8 +64,8 @@ const AddLocationForm = () => {
         heading,
         city,
         suburb,
+        googleMapsLink,
         image: "",
-        staff_image: "",
         timestamp: new Date().getTime(),
       };
 
@@ -101,19 +78,6 @@ const AddLocationForm = () => {
 
         await updateDoc(doc(db, "locations", docRef.id), {
           image: imageUrl,
-        });
-      }
-
-      if (staffImage) {
-        const staffImageRef = ref(
-          locationsStorageRef,
-          `staff_images/${staffImage.name}`
-        );
-        await uploadBytes(staffImageRef, staffImage);
-        const staffImageUrl = await getDownloadURL(staffImageRef);
-
-        await updateDoc(doc(db, "locations", docRef.id), {
-          staff_image: staffImageUrl,
         });
       }
 
@@ -179,6 +143,17 @@ const AddLocationForm = () => {
         </div>
 
         <div>
+          <label htmlFor="googleMapsLink">Google Maps Link (optional):</label>
+          <input
+            id="googleMapsLink"
+            type="url"
+            value={googleMapsLink}
+            onChange={(e) => setGoogleMapsLink(e.target.value)}
+            placeholder="https://maps.google.com/..."
+          />
+        </div>
+
+        <div>
           <label htmlFor="image">Property Image:</label>
           <input
             id="image"
@@ -196,29 +171,6 @@ const AddLocationForm = () => {
               />
               <button type="button" onClick={handleImageDelete}>
                 Remove Image
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="staffImage">Staff Image:</label>
-          <input
-            id="staffImage"
-            type="file"
-            onChange={handleStaffImageChange}
-            accept=".jpg,.jpeg,.png,.webp"
-          />
-          {staffImagePreview && (
-            <div>
-              <Image
-                src={staffImagePreview}
-                alt="Staff Image Preview"
-                width={100}
-                height={100}
-              />
-              <button type="button" onClick={handleStaffImageDelete}>
-                Remove Staff Image
               </button>
             </div>
           )}

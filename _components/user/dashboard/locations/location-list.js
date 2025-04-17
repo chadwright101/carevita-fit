@@ -28,8 +28,7 @@ const LocationList = () => {
   const [editedSuburb, setEditedSuburb] = useState("");
   const [editedImage, setEditedImage] = useState(null);
   const [editedImageUrl, setEditedImageUrl] = useState("");
-  const [editedStaffImage, setEditedStaffImage] = useState(null);
-  const [editedStaffImageUrl, setEditedStaffImageUrl] = useState("");
+  const [editedGoogleMapsLink, setEditedGoogleMapsLink] = useState("");
 
   useEffect(() => {
     const unsubscribe = onSnapshot(locationsCollectionRef, (snapshot) => {
@@ -45,7 +44,7 @@ const LocationList = () => {
     return () => unsubscribe();
   }, []);
 
-  const handleDelete = async (locationId, image, staffImage) => {
+  const handleDelete = async (locationId, image) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this location?"
     );
@@ -70,21 +69,6 @@ const LocationList = () => {
         }
       }
 
-      if (staffImage) {
-        try {
-          const fullPath = staffImage.split(
-            "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
-          )[1];
-          if (fullPath) {
-            const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-            const staffImageRef = ref(locationsStorageRef, decodedPath);
-            await deleteObject(staffImageRef);
-          }
-        } catch (error) {
-          console.error("Error deleting staff image:", error);
-        }
-      }
-
       toast.success("Location deleted successfully!", toastProps);
     } catch (error) {
       console.error("Error deleting location:", error);
@@ -102,7 +86,9 @@ const LocationList = () => {
       setEditedCity(locationToEdit.city);
       setEditedSuburb(locationToEdit.suburb);
       setEditedImageUrl(locationToEdit.image || "");
-      setEditedStaffImageUrl(locationToEdit.staff_image || "");
+      setEditedGoogleMapsLink(
+        locationToEdit.googleMapsLink || locationToEdit.google_maps_link || ""
+      );
     }
     setEditingLocationId(locationId);
   };
@@ -118,25 +104,9 @@ const LocationList = () => {
     }
   };
 
-  const handleStaffImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setEditedStaffImage(e.target.files[0]);
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setEditedStaffImageUrl(event.target.result);
-      };
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
-
   const handleImageDelete = () => {
     setEditedImage(null);
     setEditedImageUrl("");
-  };
-
-  const handleStaffImageDelete = () => {
-    setEditedStaffImage(null);
-    setEditedStaffImageUrl("");
   };
 
   const handleSave = async (locationId) => {
@@ -146,13 +116,13 @@ const LocationList = () => {
         heading: editedHeading,
         location: editedCity,
         suburb: editedSuburb,
+        googleMapsLink: editedGoogleMapsLink,
       });
 
       if (editedImage) {
         const location = locations.find((loc) => loc.id === locationId);
         if (location?.image) {
           try {
-            // Extract the full path from the URL
             const fullPath = location.image.split(
               "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
             )[1];
@@ -175,7 +145,6 @@ const LocationList = () => {
         const location = locations.find((loc) => loc.id === locationId);
         if (location?.image) {
           try {
-            // Extract the full path from the URL
             const fullPath = location.image.split(
               "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
             )[1];
@@ -193,54 +162,6 @@ const LocationList = () => {
         }
       }
 
-      if (editedStaffImage) {
-        const location = locations.find((loc) => loc.id === locationId);
-        if (location?.staff_image) {
-          try {
-            // Extract the full path from the URL
-            const fullPath = location.staff_image.split(
-              "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
-            )[1];
-            if (fullPath) {
-              const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-              const oldStaffImageRef = ref(locationsStorageRef, decodedPath);
-              await deleteObject(oldStaffImageRef);
-            }
-          } catch (error) {
-            console.error("Error deleting old staff image:", error);
-          }
-        }
-        const staffImageRef = ref(
-          locationsStorageRef,
-          `staff_images/${editedStaffImage.name}`
-        );
-        await uploadBytes(staffImageRef, editedStaffImage);
-        const staffImageUrl = await getDownloadURL(staffImageRef);
-        await updateDoc(doc(db, "locations", locationId), {
-          staff_image: staffImageUrl,
-        });
-      } else if (editedStaffImageUrl === "") {
-        const location = locations.find((loc) => loc.id === locationId);
-        if (location?.staff_image) {
-          try {
-            // Extract the full path from the URL
-            const fullPath = location.staff_image.split(
-              "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
-            )[1];
-            if (fullPath) {
-              const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-              const oldStaffImageRef = ref(locationsStorageRef, decodedPath);
-              await deleteObject(oldStaffImageRef);
-            }
-          } catch (error) {
-            console.error("Error deleting staff image:", error);
-          }
-          await updateDoc(doc(db, "locations", locationId), {
-            staff_image: "",
-          });
-        }
-      }
-
       toast.success("Location updated successfully!", toastProps);
       setEditingLocationId(null);
       setEditedDescription("");
@@ -249,8 +170,6 @@ const LocationList = () => {
       setEditedSuburb("");
       setEditedImage(null);
       setEditedImageUrl("");
-      setEditedStaffImage(null);
-      setEditedStaffImageUrl("");
     } catch (error) {
       console.error("Error updating location:", error);
       toast.error("Failed to update location. Please try again.", toastProps);
@@ -265,8 +184,6 @@ const LocationList = () => {
     setEditedSuburb("");
     setEditedImage(null);
     setEditedImageUrl("");
-    setEditedStaffImage(null);
-    setEditedStaffImageUrl("");
   };
 
   const moveLocationToTop = async (locationId) => {
@@ -328,18 +245,15 @@ const LocationList = () => {
                   )}
                   <input type="file" onChange={handleImageChange} />
                   <button onClick={handleImageDelete}>Delete Image</button>
-                  {editedStaffImageUrl && (
-                    <Image
-                      src={editedStaffImageUrl}
-                      alt="Staff Image Preview"
-                      width={100}
-                      height={100}
+                  <div>
+                    <label>Google Maps Link:</label>
+                    <input
+                      type="url"
+                      value={editedGoogleMapsLink}
+                      onChange={(e) => setEditedGoogleMapsLink(e.target.value)}
+                      placeholder="https://maps.google.com/..."
                     />
-                  )}
-                  <input type="file" onChange={handleStaffImageChange} />
-                  <button onClick={handleStaffImageDelete}>
-                    Delete Staff Image
-                  </button>
+                  </div>
                   <button onClick={() => handleSave(location.id)}>Save</button>
                   <button onClick={handleCancel}>Cancel</button>
                 </>
@@ -357,25 +271,22 @@ const LocationList = () => {
                       height={100}
                     />
                   )}
-                  {location.staff_image && (
-                    <Image
-                      src={location.staff_image}
-                      alt={`${location.heading} - Staff`}
-                      width={100}
-                      height={100}
-                    />
+                  {location.googleMapsLink && (
+                    <p>
+                      <a
+                        href={location.googleMapsLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View on Google Maps
+                      </a>
+                    </p>
                   )}
                   <br />
                   <button onClick={() => handleEdit(location.id)}>Edit</button>
                   <br />
                   <button
-                    onClick={() =>
-                      handleDelete(
-                        location.id,
-                        location.image,
-                        location.staff_image
-                      )
-                    }
+                    onClick={() => handleDelete(location.id, location.image)}
                   >
                     Delete
                   </button>
