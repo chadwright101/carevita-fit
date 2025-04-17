@@ -3,7 +3,12 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
-const ImageUploader = ({ initialImageUrl, onImageChange, onImageDelete }) => {
+const ImageUploader = ({
+  initialImageUrl,
+  onImageChange,
+  onImageDelete,
+  required,
+}) => {
   const [imageUrl, setImageUrl] = useState(initialImageUrl || "");
   const [image, setImage] = useState(null);
   const fileInputRef = useRef(null);
@@ -69,6 +74,7 @@ const ImageUploader = ({ initialImageUrl, onImageChange, onImageDelete }) => {
           onChange={handleImageChange}
           accept="image/*"
           ref={fileInputRef}
+          required={required}
         />
         <button
           onClick={handleImageDelete}

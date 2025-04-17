@@ -6,7 +6,7 @@ import { staffCollectionRef } from "@/_firebase/firebase";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StaffItem from "./staff-item";
-import StaffEditForm from "../edit-staff/staff-edit-form";
+import StaffEditForm from "../edit-staff/edit-staff-form";
 import AddStaffForm from "../add-staff/add-staff-form";
 
 const StaffList = () => {

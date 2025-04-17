@@ -3,6 +3,9 @@
 import { useState, useRef } from "react";
 import ImageUploader from "../utils/image-uploader";
 import { addStaffMember } from "../utils/staff-service";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastProps } from "@/_lib/ToastProps";
 
 const AddStaffForm = ({ onStaffAdded }) => {
   const [name, setName] = useState("");
@@ -26,7 +29,12 @@ const AddStaffForm = ({ onStaffAdded }) => {
     e.preventDefault();
 
     if (!name.trim()) {
-      alert("Please enter a name");
+      toast.error("Please enter a name", toastProps);
+      return;
+    }
+
+    if (!image) {
+      toast.error("Please upload a profile image", toastProps);
       return;
     }
 
@@ -94,11 +102,14 @@ const AddStaffForm = ({ onStaffAdded }) => {
         </div>
 
         <div className="form-group">
-          <label>Profile Image</label>
+          <label>
+            Profile Image <span className="required">*</span>
+          </label>
           <ImageUploader
             initialImageUrl={imageUrl}
             onImageChange={handleImageChange}
             onImageDelete={handleImageDelete}
+            required
           />
         </div>
 
@@ -112,6 +123,7 @@ const AddStaffForm = ({ onStaffAdded }) => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

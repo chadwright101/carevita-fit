@@ -3,6 +3,9 @@
 import { useState, useEffect } from "react";
 import ImageUploader from "../utils/image-uploader";
 import { updateStaffMember } from "../utils/staff-service";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toastProps } from "@/_lib/ToastProps";
 
 const StaffEditForm = ({ staff, onSave, onCancel }) => {
   const [name, setName] = useState("");
@@ -32,7 +35,12 @@ const StaffEditForm = ({ staff, onSave, onCancel }) => {
 
     // Validate form
     if (!name.trim()) {
-      alert("Please enter a name");
+      toast.error("Please enter a name", toastProps);
+      return;
+    }
+
+    if (!image && !imageUrl) {
+      toast.error("Please upload a profile image", toastProps);
       return;
     }
 
@@ -73,11 +81,14 @@ const StaffEditForm = ({ staff, onSave, onCancel }) => {
       </div>
 
       <div className="form-group">
-        <label>Profile Image</label>
+        <label>
+          Profile Image <span className="required">*</span>
+        </label>
         <ImageUploader
           initialImageUrl={imageUrl}
           onImageChange={handleImageChange}
           onImageDelete={handleImageDelete}
+          required
         />
       </div>
 
@@ -87,6 +98,7 @@ const StaffEditForm = ({ staff, onSave, onCancel }) => {
           Cancel
         </button>
       </div>
+      <ToastContainer />
     </form>
   );
 };
