@@ -20,5 +20,7 @@ export const storage = getStorage(app);
 export const mainGalleryStorageRef = ref(storage, "hero-slideshow");
 export const secondaryGalleryStorageRef = ref(storage, "gallery-slideshow");
 export const locationsStorageRef = ref(storage, "locations");
+export const staffStorageRef = ref(storage, "staff");
 export const testimonialsCollectionRef = collection(db, "testimonials");
 export const locationsCollectionRef = collection(db, "locations");
+export const staffCollectionRef = collection(db, "staff");
