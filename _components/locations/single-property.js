@@ -1,15 +1,44 @@
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/_firebase/firebase";
 
 import Heading from "@/_components/heading";
 import ImageContainer from "@/_components/image-container";
 import { LocationsContext } from "@/_context/locations-context";
 
 const SingleProperty = ({ propertyData, eager }) => {
-  const { heading, suburb, city, googleMapsLink, image, description } =
-    propertyData;
+  const {
+    heading,
+    suburb,
+    city,
+    googleMapsLink,
+    image,
+    description,
+    staffMember,
+  } = propertyData;
 
+  const [instructorData, setInstructorData] = useState(null);
   const { setEnquireNowLocation } = useContext(LocationsContext);
+
+  useEffect(() => {
+    const fetchInstructorData = async () => {
+      if (!staffMember) return;
+
+      try {
+        const staffDocRef = doc(db, "staff", staffMember);
+        const staffDocSnap = await getDoc(staffDocRef);
+
+        if (staffDocSnap.exists()) {
+          setInstructorData(staffDocSnap.data());
+        }
+      } catch (error) {
+        console.error("Error fetching instructor data:", error);
+      }
+    };
+
+    fetchInstructorData();
+  }, [staffMember]);
 
   return (
     <article className="property-component">
@@ -40,19 +69,21 @@ const SingleProperty = ({ propertyData, eager }) => {
         />
       </div>
       <div className="property-component__description">
-        {/* <div>
-          <Link href={`/locations#${name.toLowerCase()}`}>
-            <ImageContainer
-              src={instructorImage}
-              alt={`${name} - CareVita #fit instructor`}
-              width={100}
-              height={100}
-              eager={eager}
-              smallest={30}
-              tabletLarge={30}
-            />
-          </Link>
-        </div> */}
+        {instructorData && instructorData.image && (
+          <div>
+            <Link href={`/locations#${instructorData.name.toLowerCase()}`}>
+              <ImageContainer
+                src={instructorData.image}
+                alt={`${instructorData.name} - CareVita #fit instructor`}
+                width={100}
+                height={100}
+                eager={eager}
+                smallest={30}
+                tabletLarge={30}
+              />
+            </Link>
+          </div>
+        )}
         <p>{description}</p>
       </div>
       <Link href="/contact">
