@@ -14,7 +14,6 @@ const AddStaffForm = ({ onStaffAdded }) => {
 
   const handleImageChange = (newImage) => {
     setImage(newImage);
-    // Store the function reference so we can access the resetFileInput method later
     handleImageChangeRef.current = handleImageChange;
   };
 
@@ -26,7 +25,6 @@ const AddStaffForm = ({ onStaffAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form
     if (!name.trim()) {
       alert("Please enter a name");
       return;

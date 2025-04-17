@@ -58,6 +58,7 @@ export const updateLocation = async (locationId, locationData, oldImage) => {
       location: locationData.city,
       suburb: locationData.suburb,
       googleMapsLink: locationData.googleMapsLink,
+      staffMember: locationData.staffMember,
     });
 
     // Handle image updates

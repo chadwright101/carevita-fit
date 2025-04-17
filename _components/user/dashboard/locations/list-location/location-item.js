@@ -1,9 +1,32 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { deleteLocation, moveLocationToTop } from "./location-service";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/_firebase/firebase";
 
 const LocationItem = ({ location, index, totalLocations, onEdit }) => {
+  const [staffName, setStaffName] = useState("");
+
+  useEffect(() => {
+    const fetchStaffMember = async () => {
+      if (location.staffMember) {
+        try {
+          const staffDocRef = doc(db, "staff", location.staffMember);
+          const staffDoc = await getDoc(staffDocRef);
+
+          if (staffDoc.exists()) {
+            setStaffName(staffDoc.data().name);
+          }
+        } catch (error) {
+          console.error("Error fetching staff member:", error);
+        }
+      }
+    };
+
+    fetchStaffMember();
+  }, [location.staffMember]);
   const handleDelete = async () => {
     await deleteLocation(location.id, location.image);
   };
@@ -20,6 +43,7 @@ const LocationItem = ({ location, index, totalLocations, onEdit }) => {
         <p>Description: {location.description}</p>
         <p>City: {location.city || location.location}</p>
         <p>Suburb: {location.suburb}</p>
+        {staffName && <p>Staff Member: {staffName}</p>}
 
         {location.image && (
           <div className="location-image">
