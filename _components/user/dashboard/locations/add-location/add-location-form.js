@@ -188,10 +188,15 @@ const AddLocationForm = () => {
   };
 
   return (
-    <section>
-      <h2>Add New Location</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <section className="admin-locations__add-location">
+      <h2 className="admin-locations__add-location__heading">
+        Add New Location
+      </h2>
+      <form
+        className="admin-locations__add-location__form"
+        onSubmit={handleSubmit}
+      >
+        <div className="admin-locations__add-location__form__field-group">
           <label htmlFor="heading">Property Name:</label>
           <input
             id="heading"
@@ -199,10 +204,10 @@ const AddLocationForm = () => {
             value={heading}
             onChange={(e) => setHeading(e.target.value)}
             required
+            placeholder="Enter property name"
           />
         </div>
-
-        <div>
+        <div className="admin-locations__add-location__form__field-group">
           <label htmlFor="description">Description:</label>
           <textarea
             id="description"
@@ -210,10 +215,10 @@ const AddLocationForm = () => {
             onChange={(e) => setDescription(e.target.value)}
             required
             rows={4}
+            placeholder="Enter property description"
           />
         </div>
-
-        <div>
+        <div className="admin-locations__add-location__form__field-group">
           <label htmlFor="suburb">Suburb:</label>
           <input
             id="suburb"
@@ -221,12 +226,13 @@ const AddLocationForm = () => {
             value={suburb}
             onChange={(e) => setSuburb(e.target.value)}
             required
+            placeholder="Enter suburb"
           />
         </div>
-        <div>
+        <div className="admin-locations__add-location__form__city">
           <label htmlFor="city">City:</label>
           {!addingNewCity ? (
-            <div className="city-select-container">
+            <div className="admin-locations__add-location__form__city__select-group">
               <select
                 id="city"
                 value={city}
@@ -240,23 +246,19 @@ const AddLocationForm = () => {
                   </option>
                 ))}
               </select>
-              <button
-                type="button"
-                onClick={() => setAddingNewCity(true)}
-                className="add-new-city-btn"
-              >
+              <button type="button" onClick={() => setAddingNewCity(true)}>
                 Add New City
               </button>
             </div>
           ) : (
-            <div className="new-city-input-container">
+            <div className="admin-locations__add-location__form__city__input-group">
               <input
                 type="text"
                 value={newCity}
                 onChange={(e) => setNewCity(e.target.value)}
                 placeholder="Enter new city name"
               />
-              <div className="new-city-actions">
+              <div className="admin-locations__add-location__form__city__input-group__buttons">
                 <button type="button" onClick={handleAddNewCity}>
                   Add
                 </button>
@@ -273,8 +275,7 @@ const AddLocationForm = () => {
             </div>
           )}
         </div>
-
-        <div>
+        <div className="admin-locations__add-location__form__field-group">
           <label htmlFor="googleMapsLink">Google Maps Link (optional):</label>
           <input
             id="googleMapsLink"
@@ -284,8 +285,7 @@ const AddLocationForm = () => {
             placeholder="https://maps.google.com/..."
           />
         </div>
-
-        <div>
+        <div className="admin-locations__add-location__form__field-group">
           <label htmlFor="staffMember">Staff Member (optional):</label>
           <select
             id="staffMember"
@@ -300,8 +300,7 @@ const AddLocationForm = () => {
             ))}
           </select>
         </div>
-
-        <div>
+        <div className="admin-locations__add-location__form__field-group">
           <label htmlFor="image">Property Image:</label>
           <input
             id="image"
@@ -324,9 +323,12 @@ const AddLocationForm = () => {
             </div>
           )}
         </div>
-
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Adding..." : "Add Location"}
+        <button
+          className="admin-locations__add-location__form__submit-button"
+          type="submit"
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Adding..." : "Submit"}
         </button>
       </form>
       <ToastContainer />

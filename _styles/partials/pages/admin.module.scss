@@ -422,7 +422,129 @@
 .admin-locations {
   padding: 2.5rem 0;
   display: grid;
-  gap: 2.5rem;
+  gap: 2rem;
+  border-top: 1px solid variables.$black;
+  margin-top: 2.5rem;
+
+  &__heading {
+    font-size: variables.$subheading;
+    margin-bottom: 2rem;
+  }
+
+  &__add-location {
+    display: grid;
+    row-gap: 1rem;
+
+    &__heading {
+      font-size: variables.$subheading;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    &__form {
+      display: grid;
+      row-gap: 1rem;
+
+      &__field-group {
+        display: grid;
+        row-gap: 0.5rem;
+
+        label {
+          font-weight: 400;
+        }
+      }
+
+      &__city {
+        display: grid;
+        row-gap: 0.5rem;
+
+        label {
+          font-weight: 400;
+        }
+
+        &__select-group {
+          display: grid;
+          row-gap: 0.5rem;
+
+          button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: variables.$blue;
+            color: variables.$white;
+            font-size: variables.$paragraph;
+
+            @include media.media("tablet") {
+              margin-right: auto;
+            }
+          }
+        }
+
+        &__input-group {
+          display: grid;
+          row-gap: 0.5rem;
+
+          &__buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+
+            @include media.media("tablet") {
+              display: flex;
+            }
+
+            button {
+              margin-top: 1rem;
+              padding: 0.5rem 1rem;
+              background-color: variables.$blue;
+              color: variables.$white;
+              font-size: variables.$paragraph;
+            }
+          }
+        }
+      }
+
+      input,
+      textarea,
+      select {
+        padding: 0.5rem;
+        font-size: 1rem;
+      }
+
+      &__submit-button {
+        padding: 0.5rem 1rem;
+        background-color: variables.$green;
+        color: variables.$white;
+        font-size: variables.$paragraph;
+
+        @include media.media("tablet") {
+          margin-right: auto;
+        }
+      }
+    }
+  }
+
+  &__add-location-button {
+    background: variables.$blue;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    height: 2.75rem;
+    color: variables.$white;
+    font-size: variables.$paragraph;
+
+    @include media.media("tablet") {
+      font-size: 1rem;
+      margin-right: auto;
+      padding: 0 1rem;
+      &:hover {
+        cursor: pointer;
+        background-color: variables.$lightBlue;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+      }
+    }
+  }
 
   &__cities {
     &__list {
