@@ -33,7 +33,7 @@ const MainGallerySection = () => {
     <section className="admin-gallery">
       {imageInfo.length !== 0 ? (
         <ul className="admin-gallery__list">
-          {imageInfo.map(({ url, filename, timestamp }, index) => (
+          {imageInfo.map(({ url, filename }, index) => (
             <li key={index} className="admin-gallery__list__item">
               <div
                 className="nav-point"

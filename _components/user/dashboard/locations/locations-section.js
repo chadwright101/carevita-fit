@@ -8,10 +8,13 @@ const LocationsSection = () => {
   const [showAddForm, setShowAddForm] = useState(false);
 
   return (
-    <div>
-      <h1>Manage Locations</h1>
+    <div className="admin-locations">
+      <h3 className="admin-locations__heading">Locations</h3>
 
-      <button onClick={() => setShowAddForm(!showAddForm)}>
+      <button
+        className="admin-locations__add-location-button"
+        onClick={() => setShowAddForm(!showAddForm)}
+      >
         {showAddForm ? "Hide Add Form" : "Add New Location"}
       </button>
 

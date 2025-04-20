@@ -1,11 +1,7 @@
 "use client";
 
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import {
-  db,
-  locationsCollectionRef,
-  locationsStorageRef,
-} from "@/_firebase/firebase";
+import { db, locationsStorageRef } from "@/_firebase/firebase";
 import {
   ref,
   deleteObject,

@@ -44,17 +44,18 @@ const LocationList = () => {
   };
 
   return (
-    <section className="locations-list-section">
-      <h2>Cities</h2>
-
+    <section className="admin-locations__cities">
       {loading ? (
         <p>Loading locations...</p>
       ) : locations.length === 0 ? (
         <p>No locations added yet.</p>
       ) : (
-        <ul className="locations-list">
+        <ul className="admin-locations__cities__list">
           {locations.map((location, index) => (
-            <li key={location.id} className="location-list-item">
+            <li
+              key={location.id}
+              className="admin-locations__cities__list__item"
+            >
               {editingLocationId === location.id ? (
                 <LocationEditForm
                   location={getLocationToEdit()}
