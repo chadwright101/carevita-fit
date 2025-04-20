@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@splidejs/react-splide": "^0.7.12",
-    "@tailwindcss/postcss": "^4.1.4",
     "classnames": "^2.5.1",
     "express": "^5.1.0",
     "express-rate-limit": "^7.5.0",
@@ -23,8 +22,7 @@
     "react-dom": "^19",
     "react-google-recaptcha": "^3.1.0",
     "react-toastify": "^11.0.5",
-    "sass": "^1.86.3",
-    "tailwindcss": "^4.1.4"
+    "sass": "^1.86.3"
   },
   "devDependencies": {
     "eslint": "^9",

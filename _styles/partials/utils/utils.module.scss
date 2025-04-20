@@ -5,18 +5,6 @@
   color: variables.$white;
 }
 
-.hidden {
-  display: none;
-}
-
-.block {
-  display: block;
-}
-
-.grid {
-  display: grid;
-}
-
 .nav-point {
   transform: translateY(-175px);
 }
@@ -29,13 +17,6 @@
   @include media.media("tablet") {
     text-align: left;
   }
-}
-
-.underline {
-  text-decoration: underline;
-  text-decoration-color: variables.$green;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
 }
 
 .image-transition {
@@ -66,6 +47,26 @@
       cursor: pointer;
     }
   }
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.link {
+  color: #0000ee;
+}
+
+.link:hover {
+  opacity: 80%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .spinner {

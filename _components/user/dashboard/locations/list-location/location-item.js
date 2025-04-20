@@ -99,7 +99,7 @@ const LocationItem = ({ location, index, totalLocations, onEdit }) => {
           {location.description.length > 180 && (
             <button
               onClick={() => setDescriptionExpanded(!descriptionExpanded)}
-              className="link italic"
+              className="link italic cursor-pointer"
             >
               {descriptionExpanded ? "...See less" : "...See more"}
             </button>
@@ -122,7 +122,7 @@ const LocationItem = ({ location, index, totalLocations, onEdit }) => {
               href={location.googleMapsLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="link italic font-medium"
+              className="link italic"
             >
               Google Maps link
             </a>

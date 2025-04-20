@@ -19,3 +19,44 @@
 @use "partials/pages/admin.module.scss";
 @use "partials/pages/login.module.scss";
 @use "partials/pages/admin-layout.module.scss";
+
+* {
+  font-family: Raleway;
+  color: #222222;
+}
+
+h1,
+h2 {
+  font-weight: 500;
+  font-size: 2.25rem;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+}
+
+p,
+ul,
+label,
+input,
+textarea,
+select {
+  font-size: 1.125rem;
+  font-weight: 200;
+  line-height: 1.5rem;
+}
+
+p {
+  text-align: justify;
+}
+
+@include media.media("tabletLarge") {
+  a {
+    cursor: pointer;
+  }
+}

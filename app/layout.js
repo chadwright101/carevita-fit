@@ -3,7 +3,6 @@ import { LocationsProvider } from "@/_context/locations-context";
 import Footer from "../_components/navigation/footer";
 import Header from "../_components/navigation/header";
 import "@/_styles/globals.scss";
-import "@/_styles/tailwind.css";
 
 export const metadata = {
   metadataBase: new URL("https://carevitafit.co.za"),
