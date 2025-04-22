@@ -13,8 +13,8 @@ const StaffList = () => {
   const [staff, setStaff] = useState([]);
   const [loading, setLoading] = useState(true);
   const [editingStaffId, setEditingStaffId] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
 
-  // Set up real-time listener for staff collection
   useEffect(() => {
     const unsubscribe = onSnapshot(staffCollectionRef, (snapshot) => {
       const staffData = snapshot.docs.map((doc) => ({
@@ -22,14 +22,12 @@ const StaffList = () => {
         ...doc.data(),
       }));
 
-      // Sort by timestamp (newest first)
       staffData.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
       setStaff(staffData);
       setLoading(false);
     });
 
-    // Clean up listener on unmount
     return () => unsubscribe();
   }, []);
 
@@ -50,24 +48,25 @@ const StaffList = () => {
   };
 
   return (
-    <section className="staff-management-section">
-      <h2>Staff Management</h2>
+    <section className="admin-staff">
+      <h3>Staff</h3>
+      <button
+        className="admin-staff__add-staff-button"
+        onClick={() => setShowAddForm(!showAddForm)}
+      >
+        {showAddForm ? "Hide add form" : "Add new staff member"}
+      </button>
 
-      {/* Add new staff form */}
-      <AddStaffForm onStaffAdded={() => {}} />
-
-      {/* Staff list */}
-      <div className="staff-list-container">
-        <h3>Current Staff</h3>
-
+      {showAddForm && <AddStaffForm />}
+      <div>
         {loading ? (
           <p>Loading staff...</p>
         ) : staff.length === 0 ? (
           <p>No staff members added yet.</p>
         ) : (
-          <ul className="staff-list">
+          <ul className="admin-staff__list">
             {staff.map((member, index) => (
-              <li key={member.id} className="staff-list-item">
+              <li key={member.id} className="admin-staff__list__item">
                 {editingStaffId === member.id ? (
                   <StaffEditForm
                     staff={getStaffToEdit()}

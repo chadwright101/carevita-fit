@@ -17,7 +17,6 @@ const ImageUploader = ({
     setImageUrl(initialImageUrl || "");
   }, [initialImageUrl]);
 
-  // Method to reset the file input
   const resetFileInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -26,10 +25,8 @@ const ImageUploader = ({
     setImageUrl("");
   };
 
-  // Expose the reset method to parent via props if provided
   useEffect(() => {
     if (onImageChange && typeof onImageChange === "function") {
-      // Attach the reset method to the onImageChange function
       onImageChange.resetFileInput = resetFileInput;
     }
   }, [onImageChange]);
@@ -49,12 +46,6 @@ const ImageUploader = ({
     }
   };
 
-  const handleImageDelete = () => {
-    setImage(null);
-    setImageUrl("");
-    onImageDelete();
-  };
-
   return (
     <div className="image-uploader">
       {imageUrl && (
@@ -64,7 +55,6 @@ const ImageUploader = ({
             alt="Staff Image Preview"
             width={150}
             height={150}
-            style={{ objectFit: "cover", borderRadius: "50%" }}
           />
         </div>
       )}
@@ -76,13 +66,6 @@ const ImageUploader = ({
           ref={fileInputRef}
           required={required}
         />
-        <button
-          onClick={handleImageDelete}
-          type="button"
-          className="delete-image-btn"
-        >
-          Delete Image
-        </button>
       </div>
     </div>
   );

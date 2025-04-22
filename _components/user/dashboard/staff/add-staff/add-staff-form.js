@@ -50,13 +50,11 @@ const AddStaffForm = ({ onStaffAdded }) => {
       const success = await addStaffMember(staffData);
 
       if (success) {
-        // Reset form
         setName("");
         setBio("");
         setImage(null);
         setImageUrl("");
 
-        // Reset file input using the exposed method
         if (
           handleImageChangeRef.current &&
           handleImageChangeRef.current.resetFileInput
@@ -64,7 +62,6 @@ const AddStaffForm = ({ onStaffAdded }) => {
           handleImageChangeRef.current.resetFileInput();
         }
 
-        // Notify parent component
         if (onStaffAdded) {
           onStaffAdded();
         }
@@ -75,11 +72,11 @@ const AddStaffForm = ({ onStaffAdded }) => {
   };
 
   return (
-    <div className="add-staff-form-container">
+    <div className="admin-staff__add-staff">
       <h3>Add New Staff Member</h3>
-      <form className="add-staff-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="add-name">Name</label>
+      <form className="admin-staff__add-staff__form" onSubmit={handleSubmit}>
+        <div className="admin-staff__add-staff__form__field-group">
+          <label htmlFor="add-name">Name:</label>
           <input
             id="add-name"
             type="text"
@@ -90,8 +87,11 @@ const AddStaffForm = ({ onStaffAdded }) => {
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="add-bio">Bio</label>
+        <div className="admin-staff__add-staff__form__field-group">
+          <div className="admin-staff__add-staff__form__field-group__bio">
+            <label htmlFor="add-bio">Bio:</label>
+            <p>Staff member must have a bio to be displayed on the website.</p>
+          </div>
           <textarea
             id="add-bio"
             value={bio}
@@ -101,10 +101,8 @@ const AddStaffForm = ({ onStaffAdded }) => {
           />
         </div>
 
-        <div className="form-group">
-          <label>
-            Profile Image <span className="required">*</span>
-          </label>
+        <div className="admin-staff__add-staff__form__field-group">
+          <label>Profile Image:</label>
           <ImageUploader
             initialImageUrl={imageUrl}
             onImageChange={handleImageChange}
@@ -113,13 +111,9 @@ const AddStaffForm = ({ onStaffAdded }) => {
           />
         </div>
 
-        <div className="form-actions">
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="add-staff-btn"
-          >
-            {isSubmitting ? "Adding..." : "Add Staff Member"}
+        <div className="admin-staff__add-staff__form__buttons">
+          <button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Adding..." : "Submit"}
           </button>
         </div>
       </form>
