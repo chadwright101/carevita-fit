@@ -230,7 +230,9 @@ const AddLocationForm = () => {
           />
         </div>
         <div className="admin-locations__add-location__form__city">
-          <label htmlFor="city">City:</label>
+          <label htmlFor="city">
+            {addingNewCity ? "Add new city:" : "City:"}
+          </label>
           {!addingNewCity ? (
             <div className="admin-locations__add-location__form__city__select-group">
               <select

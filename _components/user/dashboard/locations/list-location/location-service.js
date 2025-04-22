@@ -47,7 +47,6 @@ export const deleteLocation = async (locationId, image) => {
 
 export const updateLocation = async (locationId, locationData, oldImage) => {
   try {
-    // Update basic location data
     await updateDoc(doc(db, "locations", locationId), {
       description: locationData.description,
       heading: locationData.heading,
@@ -57,14 +56,11 @@ export const updateLocation = async (locationId, locationData, oldImage) => {
       staffMember: locationData.staffMember,
     });
 
-    // Handle image updates
     if (locationData.newImage) {
-      // Delete old image if it exists
       if (oldImage) {
         await deleteImageFromStorage(oldImage);
       }
 
-      // Upload new image
       const imageRef = ref(
         locationsStorageRef,
         `images/${locationData.newImage.name}`
@@ -75,7 +71,6 @@ export const updateLocation = async (locationId, locationData, oldImage) => {
         image: imageUrl,
       });
     } else if (locationData.imageUrl === "") {
-      // Delete image without replacement
       if (oldImage) {
         await deleteImageFromStorage(oldImage);
         await updateDoc(doc(db, "locations", locationId), {
@@ -107,7 +102,6 @@ export const moveLocationToTop = async (locationId) => {
   }
 };
 
-// Helper function to delete image from storage
 const deleteImageFromStorage = async (imageUrl) => {
   try {
     const fullPath = imageUrl.split(

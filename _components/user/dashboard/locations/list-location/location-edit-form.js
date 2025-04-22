@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import ImageUploader from "./image-uploader";
 import { updateLocation } from "./location-service";
-import { getDocs, query, orderBy, doc, getDoc } from "firebase/firestore";
+import { getDocs, query, orderBy } from "firebase/firestore";
 import {
   staffCollectionRef,
   locationsCollectionRef,
@@ -45,7 +45,6 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
     fetchStaffMembers();
   }, [location]);
 
-  // Fetch unique city values
   useEffect(() => {
     const fetchCities = async () => {
       try {
@@ -68,13 +67,10 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
     };
 
     fetchCities();
-  }, [location]); // Re-fetch cities when location changes
+  }, [location]);
 
-  // Initialize form values when location changes
   useEffect(() => {
     if (location) {
-      // Only set these values when the location object changes (not on every render)
-      // This prevents overriding user changes when the component re-renders
       setDescription(location.description || "");
       setHeading(location.heading || "");
       setCity(location.city || location.location || "");
@@ -97,7 +93,6 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
   };
 
   const handleSubmit = async () => {
-    // Validate required fields
     if (!heading || !description || !city || !suburb) {
       toast.error("Please fill in all required fields", toastProps);
       return;
@@ -122,7 +117,6 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
       );
 
       if (success) {
-        // Update the location object with the new values to prevent reset on re-render
         if (location) {
           location.city = city;
           location.description = description;
@@ -142,9 +136,10 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
   };
 
   return (
-    <div className="location-edit-form">
-      <div className="form-group">
-        <label htmlFor="heading">Heading</label>
+    <div className="admin-locations__cities__list__item_edit-form">
+      <h3>{location.heading}</h3>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label htmlFor="heading">Property name:</label>
         <input
           id="heading"
           type="text"
@@ -153,17 +148,18 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label htmlFor="description">Description:</label>
         <textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          rows="8"
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="city">City</label>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label htmlFor="city">City:</label>
         <select
           id="city"
           value={city}
@@ -179,8 +175,8 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
         </select>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="suburb">Suburb</label>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label htmlFor="suburb">Suburb:</label>
         <input
           id="suburb"
           type="text"
@@ -189,8 +185,8 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="googleMapsLink">Google Maps Link</label>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label htmlFor="googleMapsLink">Google Maps Link:</label>
         <input
           id="googleMapsLink"
           type="url"
@@ -200,8 +196,8 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
         />
       </div>
 
-      <div className="form-group">
-        <label htmlFor="staffMember">Staff Member (optional)</label>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label htmlFor="staffMember">Staff Member (optional):</label>
         <select
           id="staffMember"
           value={selectedStaff}
@@ -216,8 +212,8 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
         </select>
       </div>
 
-      <div className="form-group">
-        <label>Location Image</label>
+      <div className="admin-locations__cities__list__item_edit-form__field-group">
+        <label>Location Image:</label>
         <ImageUploader
           initialImageUrl={imageUrl}
           onImageChange={handleImageChange}
@@ -225,7 +221,7 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
         />
       </div>
 
-      <div className="form-actions">
+      <div className="admin-locations__cities__list__item_edit-form__buttons">
         <button onClick={handleSubmit}>Save</button>
         <button onClick={onCancel}>Cancel</button>
       </div>

@@ -26,28 +26,19 @@ const ImageUploader = ({ initialImageUrl, onImageChange, onImageDelete }) => {
     }
   };
 
-  const handleImageDelete = () => {
-    setImage(null);
-    setImageUrl("");
-    onImageDelete();
-  };
-
   return (
     <div className="image-uploader">
       {imageUrl && (
-        <div className="image-preview">
+        <div className="image-uploader__image-preview">
           <Image
             src={imageUrl}
             alt="Location Image Preview"
-            width={100}
-            height={100}
+            width={200}
+            height={200}
           />
         </div>
       )}
-      <div className="image-controls">
-        <input type="file" onChange={handleImageChange} />
-        <button onClick={handleImageDelete}>Delete Image</button>
-      </div>
+      <input type="file" onChange={handleImageChange} />
     </div>
   );
 };

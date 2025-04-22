@@ -5,7 +5,6 @@ import Image from "next/image";
 import { deleteLocation, moveLocationToTop } from "./location-service";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/_firebase/firebase";
-import ImageContainer from "@/_components/image-container";
 
 const LocationItem = ({ location, index, totalLocations, onEdit }) => {
   const [staffName, setStaffName] = useState("");
