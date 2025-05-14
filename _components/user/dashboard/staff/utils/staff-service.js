@@ -23,14 +23,28 @@ export const addStaffMember = async (staffData) => {
 
     // Handle image upload if provided
     if (staffData.image) {
-      const imageRef = ref(staffStorageRef, `images/${staffData.image.name}`);
-      await uploadBytes(imageRef, staffData.image);
-      const imageUrl = await getDownloadURL(imageRef);
+      try {
+        // Generate a unique filename to avoid conflicts
+        const timestamp = new Date().getTime();
+        const filename = `${timestamp}_${staffData.image.name}`;
 
-      // Update the document with the image URL
-      await updateDoc(doc(db, "staff", docRef.id), {
-        image: imageUrl,
-      });
+        const imageRef = ref(staffStorageRef, `images/${filename}`);
+        await uploadBytes(imageRef, staffData.image);
+        const imageUrl = await getDownloadURL(imageRef);
+
+        // Update the document with the image URL
+        await updateDoc(doc(db, "staff", docRef.id), {
+          image: imageUrl,
+        });
+      } catch (uploadError) {
+        console.error("Error uploading image:", uploadError);
+        // Continue with staff creation even if image upload fails
+        toast.warning(
+          "Staff member added but image upload failed. You can edit later to add an image.",
+          toastProps
+        );
+        return true;
+      }
     }
 
     toast.success("Staff member added successfully!", toastProps);
@@ -50,13 +64,17 @@ export const deleteStaffMember = async (staffId, imageUrl) => {
   if (!confirmDelete) return false;
 
   try {
+    // First delete the document
     await deleteDoc(doc(db, "staff", staffId));
 
+    // Then try to delete the image if it exists
     if (imageUrl) {
       try {
         await deleteImageFromStorage(imageUrl);
       } catch (error) {
+        // Log but don't fail the operation if image deletion fails
         console.error("Error deleting image:", error);
+        // The document is already deleted, so we consider this a success
       }
     }
 
@@ -79,25 +97,43 @@ export const updateStaffMember = async (staffId, staffData, oldImageUrl) => {
 
     // Handle image updates
     if (staffData.newImage) {
-      // Delete old image if it exists
-      if (oldImageUrl) {
-        await deleteImageFromStorage(oldImageUrl);
+      try {
+        // Delete old image if it exists
+        if (oldImageUrl) {
+          await deleteImageFromStorage(oldImageUrl);
+        }
+      } catch (deleteError) {
+        // Log error but continue with upload
+        console.error("Error deleting old image:", deleteError);
+        // Don't throw the error to allow the update to continue
       }
 
-      // Upload new image
-      const imageRef = ref(
-        staffStorageRef,
-        `images/${staffData.newImage.name}`
-      );
-      await uploadBytes(imageRef, staffData.newImage);
-      const imageUrl = await getDownloadURL(imageRef);
-      await updateDoc(doc(db, "staff", staffId), {
-        image: imageUrl,
-      });
+      try {
+        // Generate a unique filename to avoid conflicts
+        const timestamp = new Date().getTime();
+        const filename = `${timestamp}_${staffData.newImage.name}`;
+
+        // Upload new image
+        const imageRef = ref(staffStorageRef, `images/${filename}`);
+        await uploadBytes(imageRef, staffData.newImage);
+        const imageUrl = await getDownloadURL(imageRef);
+        await updateDoc(doc(db, "staff", staffId), {
+          image: imageUrl,
+        });
+      } catch (uploadError) {
+        console.error("Error uploading new image:", uploadError);
+        throw uploadError; // Rethrow to trigger the catch block
+      }
     } else if (staffData.imageUrl === "") {
       // Delete image without replacement
       if (oldImageUrl) {
-        await deleteImageFromStorage(oldImageUrl);
+        try {
+          await deleteImageFromStorage(oldImageUrl);
+        } catch (deleteError) {
+          console.error("Error deleting image:", deleteError);
+          // Continue with the update even if image deletion fails
+        }
+
         await updateDoc(doc(db, "staff", staffId), {
           image: "",
         });
@@ -130,12 +166,26 @@ export const moveStaffToTop = async (staffId) => {
 // Helper function to delete image from storage
 const deleteImageFromStorage = async (imageUrl) => {
   try {
+    // Check if URL is valid
+    if (!imageUrl || !imageUrl.includes("firebasestorage.googleapis.com")) {
+      console.warn("Invalid image URL format:", imageUrl);
+      return;
+    }
+
+    // Extract the path from the URL
     const fullPath = imageUrl.split(
       "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
     )[1];
+
     if (fullPath) {
+      // Decode the URL-encoded path and remove query parameters
       const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-      const imageRef = ref(staffStorageRef, decodedPath);
+
+      // Create a direct reference to the file in storage
+      // We use a direct reference to storage root to avoid path duplication
+      const imageRef = ref(storage, decodedPath);
+
+      // Delete the file
       await deleteObject(imageRef);
     }
   } catch (error) {

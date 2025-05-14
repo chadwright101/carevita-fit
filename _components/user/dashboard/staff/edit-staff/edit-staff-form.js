@@ -92,7 +92,6 @@ const StaffEditForm = ({ staff, onSave, onCancel }) => {
           initialImageUrl={imageUrl}
           onImageChange={handleImageChange}
           onImageDelete={handleImageDelete}
-          required
         />
       </div>
 
