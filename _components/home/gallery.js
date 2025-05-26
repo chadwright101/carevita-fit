@@ -1,9 +1,7 @@
-import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
-
-import { secondaryGalleryStorageRef } from "@/_firebase/firebase";
-
 import Heading from "@/_components/heading";
 import BasicSlider from "@/_components/sliders/basic-slider";
+import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
+import { secondaryGalleryStorageRef } from "@/_firebase/firebase";
 
 const Gallery = async () => {
   const fetchData = async () => {
@@ -17,14 +15,15 @@ const Gallery = async () => {
         return {
           url,
           filename,
-          timestamp: metadata.customMetadata.timestamp || 0,
+          timestamp: metadata.customMetadata?.timestamp || 0,
         };
       });
       const imageInfo = await Promise.all(imageInfoPromises);
 
       return imageInfo.sort((a, b) => b.timestamp - a.timestamp);
     } catch (error) {
-      console.error("Error fetching hero images:", error);
+      console.error("Error fetching gallery images:", error);
+      return [];
     }
   };
 

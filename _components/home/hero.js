@@ -1,7 +1,5 @@
 import HeroSlider from "@/_components/sliders/hero-slider";
-
 import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
-
 import { mainGalleryStorageRef } from "@/_firebase/firebase";
 
 const Hero = async () => {
@@ -16,13 +14,14 @@ const Hero = async () => {
         return {
           url,
           filename,
-          timestamp: metadata.customMetadata.timestamp || 0,
+          timestamp: metadata.customMetadata?.timestamp || 0,
         };
       });
       const imageInfo = await Promise.all(imageInfoPromises);
       return imageInfo.sort((a, b) => b.timestamp - a.timestamp);
     } catch (error) {
       console.error("Error fetching hero images:", error);
+      return [];
     }
   };
 
