@@ -34,10 +34,12 @@
       grid-template-columns: 75px 1fr;
       font-weight: variables.$light;
       margin-right: auto;
+    }
 
-      @include media.media("tabletLarge") {
-        cursor: pointer;
-      }
+    &__show {
+      font-size: 1.125rem;
+      font-weight: 200;
+      line-height: 1.5rem;
     }
 
     &__show,
@@ -45,6 +47,9 @@
       padding: 0.5rem;
       margin: -0.5rem;
       font-weight: variables.$thin;
+      @include media.media("tabletLarge") {
+        cursor: pointer;
+      }
 
       @include media.media("tabletLarge") {
         padding: 0;

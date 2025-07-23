@@ -86,7 +86,7 @@
   top: 0;
   left: 0;
   border: 3px solid transparent;
-  border-top-color: #333; /* Change the color here */
+  border-top-color: #333;
   animation: spin 1s linear infinite;
 }
 
@@ -119,4 +119,8 @@
 .recaptcha {
   transform: scale(0.9);
   transform-origin: 0 0;
+}
+
+.hidden {
+  display: none;
 }

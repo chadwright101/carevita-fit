@@ -23,9 +23,12 @@ const ContactInfo = () => {
       <li className="contact-info__item">
         Tel:{" "}
         {displayPhoneNumber === "Show phone number" ? (
-          <span className="contact-info__show" onClick={handleShowPhoneNumber}>
+          <button
+            className="contact-info__show"
+            onClick={handleShowPhoneNumber}
+          >
             {displayPhoneNumber}
-          </span>
+          </button>
         ) : (
           <a
             href={`tel:${displayPhoneNumber.replace(/\s/g, "")}`}
@@ -38,9 +41,12 @@ const ContactInfo = () => {
       <li className="contact-info__item">
         Email:{" "}
         {displayEmail === "Show email address" ? (
-          <span className="contact-info__show" onClick={handleShowEmailAddress}>
+          <button
+            className="contact-info__show"
+            onClick={handleShowEmailAddress}
+          >
             {displayEmail}
-          </span>
+          </button>
         ) : (
           <a href={`mailto:${displayEmail}`} className="contact-info__link">
             {displayEmail}
