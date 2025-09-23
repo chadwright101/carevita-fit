@@ -18,12 +18,11 @@ const Header = () => {
   const [menu, setMenu] = useState({ toggle: false });
   const { userUid } = useContext(AuthContext);
   const {
-    setShowJohannesburg,
-    setShowPretoria,
-    setShowGeorge,
-    setShowMosselBay,
+    showClearFilter,
     setShowClearFilter,
+    enquireNowLocation,
     setEnquireNowLocation,
+    showAllCities,
   } = useContext(LocationsContext);
   const scrollPosition = useScrollPosition();
 
@@ -192,11 +191,7 @@ const Header = () => {
                             handleSignOut();
                           }
                           setEnquireNowLocation("");
-                          setShowGeorge(true);
-                          setShowJohannesburg(true);
-                          setShowMosselBay(true);
-                          setShowPretoria(true);
-                          setShowClearFilter(false);
+                          showAllCities();
                         }}
                       >
                         {title}
@@ -209,11 +204,7 @@ const Header = () => {
                         href={url}
                         onClick={() => {
                           setEnquireNowLocation("");
-                          setShowGeorge(true);
-                          setShowJohannesburg(true);
-                          setShowMosselBay(true);
-                          setShowPretoria(true);
-                          setShowClearFilter(false);
+                          showAllCities();
                         }}
                       >
                         {title}

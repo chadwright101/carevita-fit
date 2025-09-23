@@ -126,7 +126,6 @@ const LocationEditForm = ({ location, onSave, onCancel }) => {
           location.staffMember = selectedStaff || null;
         }
 
-        toast.success("Location updated successfully!", toastProps);
         onSave();
       }
     } catch (error) {

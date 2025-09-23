@@ -13,7 +13,7 @@ import {
 import {
   db,
   locationsCollectionRef,
-  locationsStorageRef,
+  storage,
   staffCollectionRef,
 } from "@/_firebase/firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
@@ -168,7 +168,7 @@ const AddLocationForm = () => {
       const docRef = await addDoc(locationsCollectionRef, newLocation);
 
       if (image) {
-        const imageRef = ref(locationsStorageRef, `images/${image.name}`);
+        const imageRef = ref(storage, `locations/images/${image.name}`);
         await uploadBytes(imageRef, image);
         const imageUrl = await getDownloadURL(imageRef);
 

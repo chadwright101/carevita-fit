@@ -26,18 +26,17 @@ const PropertyFilter = () => {
     <div className="property-filter">
       <ul className="property-filter__list">
         {availableCities.map((city, index) => (
-          <>
-            {index > 0 && <span key={`separator-${index}`}>|</span>}
+          <div key={city}>
             <li
-              key={city}
               onClick={() => toggleCity(city)}
               className={classNames("property-filter__list-item", {
                 underline: isCitySelected(city) && showClearFilter,
               })}
             >
+              {index > 0 && <span>|</span>}
               {city}
             </li>
-          </>
+          </div>
         ))}
       </ul>
       {showClearFilter && (

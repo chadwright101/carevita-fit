@@ -1,7 +1,7 @@
 "use client";
 
 import { doc, deleteDoc, updateDoc } from "firebase/firestore";
-import { db, locationsStorageRef } from "@/_firebase/firebase";
+import { db, storage } from "@/_firebase/firebase";
 import {
   ref,
   deleteObject,
@@ -28,7 +28,7 @@ export const deleteLocation = async (locationId, image) => {
         )[1];
         if (fullPath) {
           const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-          const imageRef = ref(locationsStorageRef, decodedPath);
+          const imageRef = ref(storage, decodedPath);
           await deleteObject(imageRef);
         }
       } catch (error) {
@@ -62,8 +62,8 @@ export const updateLocation = async (locationId, locationData, oldImage) => {
       }
 
       const imageRef = ref(
-        locationsStorageRef,
-        `images/${locationData.newImage.name}`
+        storage,
+        `locations/images/${locationData.newImage.name}`
       );
       await uploadBytes(imageRef, locationData.newImage);
       const imageUrl = await getDownloadURL(imageRef);
@@ -109,7 +109,7 @@ const deleteImageFromStorage = async (imageUrl) => {
     )[1];
     if (fullPath) {
       const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-      const imageRef = ref(locationsStorageRef, decodedPath);
+      const imageRef = ref(storage, decodedPath);
       await deleteObject(imageRef);
     }
   } catch (error) {
