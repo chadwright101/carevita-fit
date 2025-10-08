@@ -3,7 +3,7 @@
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 
 import "@splidejs/react-splide/css/core";
-import ImageContainer from "@/_components/image-container";
+import Image from "next/image";
 
 const HeroSlider = ({ imageList }) => {
   return (
@@ -61,14 +61,13 @@ const HeroSlider = ({ imageList }) => {
       <SplideTrack>
         {imageList.map((url, index) => (
           <SplideSlide key={index}>
-            <ImageContainer
+            <Image
               src={url}
               alt={`CareVita #fit - Image ${index + 1}`}
               width={1400}
               height={1000}
-              smallest={100}
-              desktop={95}
               eager={index < 2 ? true : false}
+              sizes="(max-width: 1400px) 100vw, 1400px"
             />
           </SplideSlide>
         ))}

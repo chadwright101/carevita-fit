@@ -18,7 +18,7 @@ const About = () => {
         alt="CareVita #fit - Group"
         width="1100"
         height="660"
-        smallest="90"
+        tablet="90"
         tabletLarge="50"
         cssClasses="about-section__image"
       />
