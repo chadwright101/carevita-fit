@@ -1,7 +1,4 @@
-import { AuthProvider } from "../_context/auth-context";
-import { LocationsProvider } from "@/_context/locations-context";
-import Footer from "../_components/navigation/footer";
-import Header from "../_components/navigation/header";
+import LayoutContent from "./client-layout";
 import "@/_styles/globals.scss";
 
 export const metadata = {
@@ -26,19 +23,12 @@ export const metadata = {
   },
 };
 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="layout">
-        <AuthProvider>
-          <LocationsProvider>
-            <Header />
-            <div className="layout__outer">
-              <div className="layout__inner">{children}</div>
-            </div>
-            <Footer />
-          </LocationsProvider>
-        </AuthProvider>
+        <LayoutContent>{children}</LayoutContent>
       </body>
     </html>
   );

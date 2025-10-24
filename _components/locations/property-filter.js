@@ -3,6 +3,7 @@
 import { useContext } from "react";
 import { LocationsContext } from "@/_context/locations-context";
 import classNames from "classnames";
+import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const PropertyFilter = () => {
   const {
@@ -15,7 +16,11 @@ const PropertyFilter = () => {
   } = useContext(LocationsContext);
 
   if (isLoading) {
-    return <div className="property-filter">Loading filters...</div>;
+    return (
+      <div className="property-filter--loading">
+        <div className={utils.spinner}></div>
+      </div>
+    );
   }
 
   if (availableCities.length === 0) {

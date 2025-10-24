@@ -2,6 +2,7 @@ import Heading from "@/_components/heading";
 import BasicSlider from "@/_components/sliders/basic-slider";
 import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { secondaryGalleryStorageRef } from "@/_firebase/firebase";
+import { addCacheBustingTimestamp } from "@/_lib/cache-busting-url";
 
 const Gallery = async () => {
   const fetchData = async () => {
@@ -28,7 +29,7 @@ const Gallery = async () => {
   };
 
   const imageData = await fetchData();
-  const sortedImageData = imageData.map((imageInfo) => imageInfo.url);
+  const sortedImageData = imageData.map((imageInfo) => addCacheBustingTimestamp(imageInfo.url, imageInfo.timestamp));
 
   return (
     <section className="gallery-section">

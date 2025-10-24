@@ -5,6 +5,7 @@ import Heading from "@/_components/heading";
 import ImageContainer from "@/_components/image-container";
 import { staffCollectionRef } from "@/_firebase/firebase";
 import { getDocs, query, orderBy } from "firebase/firestore";
+import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const MeetTheTeam = () => {
   const [instructors, setInstructors] = useState([]);
@@ -44,7 +45,9 @@ const MeetTheTeam = () => {
         Meet the Team
       </Heading>
       {loading ? (
-        <div className="team-section__loading">Loading team members...</div>
+        <div className="team-section--loading">
+          <div className={utils.spinner}></div>
+        </div>
       ) : (
         <ul className="team-section__list">
           {instructors

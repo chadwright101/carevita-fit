@@ -66,7 +66,8 @@ const HeroSlider = ({ imageList }) => {
               alt={`CareVita #fit - Image ${index + 1}`}
               width={1400}
               height={1000}
-              eager={index < 2 ? true : false}
+              priority={index < 2}
+              loading={index < 2 ? "eager" : "lazy"}
               sizes="(max-width: 1400px) 100vw, 1400px"
             />
           </SplideSlide>

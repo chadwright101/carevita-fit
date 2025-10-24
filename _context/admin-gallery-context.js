@@ -21,6 +21,7 @@ export const AdminGalleryProvider = ({ children }) => {
   const [imageInfo, setImageInfo] = useState([]);
   const [file, setFile] = useState(null);
   const [reloadImages, setReloadImages] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
 
   const handleFileChange = useCallback(
@@ -207,6 +208,7 @@ export const AdminGalleryProvider = ({ children }) => {
 
   const getGalleryImages = useCallback(async (storageRef) => {
     try {
+      setIsLoading(true);
       const res = await listAll(storageRef);
       const imageInfoPromises = res.items.map(async (itemRef) => {
         const metadata = await getMetadata(itemRef);
@@ -224,8 +226,10 @@ export const AdminGalleryProvider = ({ children }) => {
     } catch (error) {
       console.error("Error fetching gallery images:", error);
       return [];
+    } finally {
+      setIsLoading(false);
     }
-  }, []);
+  }, [setIsLoading]);
 
   return (
     <AdminGalleryContext.Provider
@@ -236,6 +240,7 @@ export const AdminGalleryProvider = ({ children }) => {
         setFile,
         reloadImages,
         setReloadImages,
+        isLoading,
         fileInputRef,
         handleFileChange,
         uploadImage,

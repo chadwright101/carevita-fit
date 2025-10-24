@@ -6,6 +6,7 @@ import { getDocs } from "firebase/firestore";
 import { LocationsContext } from "@/_context/locations-context";
 import SingleProperty from "./single-property";
 import { locationsCollectionRef } from "@/_firebase/firebase";
+import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const Properties = () => {
   const { selectedCities, isLoading } = useContext(LocationsContext);
@@ -48,7 +49,11 @@ const Properties = () => {
   }, [locations, selectedCities]);
 
   if (isLoading) {
-    return <div className="property-section">Loading properties...</div>;
+    return (
+      <div className="property-section--loading">
+        <div className={utils.spinner}></div>
+      </div>
+    );
   }
 
   return (

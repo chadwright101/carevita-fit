@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { deleteStaffMember, moveStaffToTop } from "../utils/staff-service";
 import classNames from "classnames";
+import { addCacheBustingTimestamp } from "@/_lib/cache-busting-url";
 
 const StaffItem = ({ staff, index, totalStaff, onEdit }) => {
   const handleDelete = async () => {
@@ -18,7 +19,7 @@ const StaffItem = ({ staff, index, totalStaff, onEdit }) => {
       <h3>{staff.name}</h3>
       {staff.image && (
         <div className="admin-staff__list__item__image">
-          <Image src={staff.image} alt={staff.name} width={300} height={300} />
+          <Image src={addCacheBustingTimestamp(staff.image, staff.timestamp || Date.now())} alt={staff.name} width={300} height={300} />
         </div>
       )}
 

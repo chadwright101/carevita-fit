@@ -13,13 +13,10 @@ import StaffSection from "@/_components/user/dashboard/staff/staff-section";
 
 const Dashboard = () => {
   const [switchGallery, setSwitchGallery] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const { userUid } = useContext(AuthContext);
 
   const handleSwitch = () => {
     setSwitchGallery(!switchGallery);
-    setIsLoading(true);
-    setTimeout(() => setIsLoading(false), 4000);
   };
   if (userUid) {
     return (
@@ -38,10 +35,7 @@ const Dashboard = () => {
               Secondary gallery <span>(maximum 25 images)</span>
             </h4>
           )}
-          {isLoading ? (
-            <div className="spinner"></div>
-          ) : (
-            <button
+          <button
               type="button"
               className="admin-button"
               onClick={() => handleSwitch()}
@@ -56,7 +50,6 @@ const Dashboard = () => {
                 height={35}
               />
             </button>
-          )}
         </div>
         {!switchGallery ? <MainGallerySection /> : <SecondaryGallerySection />}
         <LocationsSection />

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { deleteLocation, moveLocationToTop } from "./location-service";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/_firebase/firebase";
+import { addCacheBustingTimestamp } from "@/_lib/cache-busting-url";
 
 const LocationItem = ({ location, index, totalLocations, onEdit }) => {
   const [staffName, setStaffName] = useState("");
@@ -43,7 +44,7 @@ const LocationItem = ({ location, index, totalLocations, onEdit }) => {
       </h3>
       <div className="admin-locations__cities__list__item__image-container">
         <Image
-          src={location.image}
+          src={addCacheBustingTimestamp(location.image, location.timestamp || Date.now())}
           alt={location.heading}
           width={650}
           height={650}

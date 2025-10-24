@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 
 import ImageContainer from "@/_components/image-container";
 import { AuthContext } from "@/_context/auth-context";
 import { LocationsContext } from "@/_context/locations-context";
 import { logoutUser } from "@/_firebase/auth";
 import useScrollPosition from "@/_hooks/scroll-position";
+import useBodyScrollLock from "@/_hooks/use-body-scroll-lock";
 
 import data from "@/_data/navigation-data.json";
 import Image from "next/image";
@@ -26,21 +27,12 @@ const Header = () => {
   } = useContext(LocationsContext);
   const scrollPosition = useScrollPosition();
 
+  // Use the custom hook to manage body scroll locking
+  useBodyScrollLock(menu.toggle);
+
   const toggleMenu = () => {
     setMenu((prevState) => ({ ...prevState, toggle: !prevState.toggle }));
   };
-
-  useEffect(() => {
-    if (menu.toggle) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [menu.toggle]);
   const handleSignOut = async (e) => {
     logoutUser();
   };
@@ -99,11 +91,7 @@ const Header = () => {
                         handleSignOut();
                       }
                       setEnquireNowLocation("");
-                      setShowGeorge(true);
-                      setShowJohannesburg(true);
-                      setShowMosselBay(true);
-                      setShowPretoria(true);
-                      setShowClearFilter(false);
+                      showAllCities();
                     }}
                   >
                     {title}
@@ -119,11 +107,7 @@ const Header = () => {
                     onClick={() => {
                       toggleMenu();
                       setEnquireNowLocation("");
-                      setShowGeorge(true);
-                      setShowJohannesburg(true);
-                      setShowMosselBay(true);
-                      setShowPretoria(true);
-                      setShowClearFilter(false);
+                      showAllCities();
                     }}
                   >
                     {title}

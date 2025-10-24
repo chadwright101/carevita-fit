@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import classNames from "classnames";
+import { addCacheBustingTimestamp } from "@/_lib/cache-busting-url";
 
 const ImageContainer = ({
   src,
@@ -17,11 +18,12 @@ const ImageContainer = ({
   quality,
   eager,
   onClick,
+  timestamp,
 }) => {
   return (
     <Image
       alt={alt || "Carevita #fit"}
-      src={src}
+      src={timestamp ? addCacheBustingTimestamp(src, timestamp) : src}
       width={width}
       height={height}
       quality={quality || 50}

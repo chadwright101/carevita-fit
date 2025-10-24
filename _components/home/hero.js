@@ -1,6 +1,7 @@
 import HeroSlider from "@/_components/sliders/hero-slider";
 import { listAll, getDownloadURL, getMetadata } from "firebase/storage";
 import { mainGalleryStorageRef } from "@/_firebase/firebase";
+import { addCacheBustingTimestamp } from "@/_lib/cache-busting-url";
 
 const Hero = async () => {
   const fetchData = async () => {
@@ -26,7 +27,7 @@ const Hero = async () => {
   };
 
   const imageData = await fetchData();
-  const sortedImageData = imageData.map((imageInfo) => imageInfo.url);
+  const sortedImageData = imageData.map((imageInfo) => addCacheBustingTimestamp(imageInfo.url, imageInfo.timestamp));
 
   return (
     <section className="hero-section">

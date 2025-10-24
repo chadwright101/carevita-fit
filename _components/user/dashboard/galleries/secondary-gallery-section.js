@@ -6,6 +6,7 @@ import Image from "next/image";
 import { secondaryGalleryStorageRef } from "@/_firebase/firebase";
 import ImageContainer from "@/_components/image-container";
 import { AdminGalleryContext } from "@/_context/admin-gallery-context";
+import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const SecondaryGallerySection = () => {
   const {
@@ -19,6 +20,7 @@ const SecondaryGallerySection = () => {
     removeImage,
     updateImageTimestamp,
     getGalleryImages,
+    isLoading,
   } = useContext(AdminGalleryContext);
 
   const getSecondaryGalleryImages = useCallback(async () => {
@@ -32,7 +34,9 @@ const SecondaryGallerySection = () => {
 
   return (
     <section className="admin-gallery">
-      {imageInfo.length !== 0 ? (
+      {isLoading ? (
+        <div className={utils.spinner}></div>
+      ) : imageInfo.length !== 0 ? (
         <ul className="admin-gallery__list">
           {imageInfo.map(({ url, filename, timestamp }, index) => (
             <li key={index} className="admin-gallery__list__item">
@@ -87,6 +91,7 @@ const SecondaryGallerySection = () => {
                 width={650}
                 height={650}
                 cssClasses="admin-gallery__list__item__image"
+                timestamp={timestamp}
               />
             </li>
           ))}
