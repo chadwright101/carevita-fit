@@ -1,30 +1,26 @@
-import { getDocs, orderBy, query } from "firebase/firestore";
+"use client";
 
-import { testimonialsCollectionRef } from "@/_firebase/firebase";
+import { useContext } from "react";
+import { TestimonialsContext } from "@/_context/testimonials-context";
 import Heading from "@/_components/heading";
 import TestimonialSlider from "../sliders/testimonial-slider";
+import utils from "@/_styles/partials/utils/utils.module.scss";
 
-const Testimonials = async () => {
-  const fetchData = async () => {
-    try {
-      const q = query(testimonialsCollectionRef, orderBy("timestamp", "desc"));
-      const testimonialsData = await getDocs(q);
+const Testimonials = () => {
+  const { testimonials, isLoading } = useContext(TestimonialsContext);
 
-      const sortedTestimonials = testimonialsData.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
+  if (isLoading) {
+    return (
+      <section className="testimonials-section">
+        <Heading sectionHeading cssClasses="testimonials-section__heading">
+          Testimonials
+        </Heading>
+        <div className={utils.spinnerWhite}></div>
+      </section>
+    );
+  }
 
-      return sortedTestimonials;
-    } catch (error) {
-      console.error("Error fetching testimonials:", error);
-      return [];
-    }
-  };
-
-  const testimonialData = await fetchData();
-
-  if (!testimonialData || testimonialData.length === 0) {
+  if (!testimonials || testimonials.length === 0) {
     return (
       <section className="testimonials-section">
         <Heading sectionHeading cssClasses="testimonials-section__heading">
@@ -40,7 +36,7 @@ const Testimonials = async () => {
       <Heading sectionHeading cssClasses="testimonials-section__heading">
         Testimonials
       </Heading>
-      <TestimonialSlider testimonialData={testimonialData} />
+      <TestimonialSlider testimonialData={testimonials} />
     </section>
   );
 };

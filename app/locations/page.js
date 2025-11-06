@@ -11,8 +11,6 @@ export const metadata = {
   },
 };
 
-export const revalidate = 3600;
-
 const Locations = () => {
   return (
     <main>

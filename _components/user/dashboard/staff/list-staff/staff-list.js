@@ -66,7 +66,7 @@ const StaffList = () => {
         ) : (
           <ul className="admin-staff__list">
             {staff.map((member, index) => (
-              <li key={member.id} className="admin-staff__list__item">
+              <li key={`${member.id}-${member.timestamp}`} className="admin-staff__list__item">
                 {editingStaffId === member.id ? (
                   <StaffEditForm
                     staff={getStaffToEdit()}

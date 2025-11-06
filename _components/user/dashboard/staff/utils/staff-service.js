@@ -93,6 +93,7 @@ export const updateStaffMember = async (staffId, staffData, oldImageUrl) => {
     await updateDoc(doc(db, "staff", staffId), {
       name: staffData.name,
       bio: staffData.bio,
+      timestamp: new Date().getTime(),
     });
 
     // Handle image updates

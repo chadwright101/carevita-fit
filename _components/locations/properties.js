@@ -1,42 +1,14 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { getDocs } from "firebase/firestore";
-
 import { LocationsContext } from "@/_context/locations-context";
 import SingleProperty from "./single-property";
-import { locationsCollectionRef } from "@/_firebase/firebase";
 import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const Properties = () => {
-  const { selectedCities, isLoading } = useContext(LocationsContext);
-  const [locations, setLocations] = useState([]);
+  const { locations, selectedCities, isLoading } = useContext(LocationsContext);
   const [filteredLocations, setFilteredLocations] = useState([]);
 
-  useEffect(() => {
-    const fetchLocations = async () => {
-      try {
-        console.log("Attempting to fetch locations from Firestore...");
-        const querySnapshot = await getDocs(locationsCollectionRef);
-        const locationsPayload = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        const sortedLocations = locationsPayload.sort((a, b) => {
-          return (b.timestamp || 0) - (a.timestamp || 0);
-        });
-
-        setLocations(sortedLocations);
-      } catch (error) {
-        console.error("Error fetching locations:", error);
-      }
-    };
-
-    fetchLocations();
-  }, []);
-
-  // Filter locations based on selected cities
   useEffect(() => {
     if (locations.length > 0 && Object.keys(selectedCities).length > 0) {
       const filtered = locations.filter((location) => {

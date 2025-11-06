@@ -7,30 +7,38 @@ import { locationsCollectionRef } from "@/_firebase/firebase";
 export const LocationsContext = createContext();
 
 export const LocationsProvider = ({ children }) => {
+  const [locations, setLocations] = useState([]);
   const [availableCities, setAvailableCities] = useState([]);
   const [selectedCities, setSelectedCities] = useState({});
   const [showClearFilter, setShowClearFilter] = useState(false);
   const [enquireNowLocation, setEnquireNowLocation] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch all unique cities from Firestore
   useEffect(() => {
-    const fetchCities = async () => {
+    const fetchLocations = async () => {
       try {
         const querySnapshot = await getDocs(locationsCollectionRef);
-        const cities = new Set();
+        const locationsPayload = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
 
-        querySnapshot.docs.forEach((doc) => {
-          const city = doc.data().city;
-          if (city) {
-            cities.add(city);
+        const sortedLocations = locationsPayload.sort((a, b) => {
+          return (b.timestamp || 0) - (a.timestamp || 0);
+        });
+
+        setLocations(sortedLocations);
+
+        const cities = new Set();
+        sortedLocations.forEach((location) => {
+          if (location.city) {
+            cities.add(location.city);
           }
         });
 
         const uniqueCities = Array.from(cities).sort();
         setAvailableCities(uniqueCities);
 
-        // Initialize all cities as selected (shown)
         const initialSelectedState = {};
         uniqueCities.forEach((city) => {
           initialSelectedState[city] = true;
@@ -39,12 +47,12 @@ export const LocationsProvider = ({ children }) => {
         setSelectedCities(initialSelectedState);
         setIsLoading(false);
       } catch (error) {
-        console.error("Error fetching cities:", error);
+        console.error("Error fetching locations:", error);
         setIsLoading(false);
       }
     };
 
-    fetchCities();
+    fetchLocations();
   }, []);
 
   // Function to toggle a specific city's visibility
@@ -84,6 +92,7 @@ export const LocationsProvider = ({ children }) => {
   return (
     <LocationsContext.Provider
       value={{
+        locations,
         availableCities,
         selectedCities,
         isLoading,

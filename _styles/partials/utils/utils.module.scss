@@ -94,6 +94,31 @@
   animation-delay: 0.5s;
 }
 
+.spinnerWhite {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin: 0.5rem auto;
+}
+
+.spinnerWhite::before,
+.spinnerWhite::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 3px solid transparent;
+  border-top-color: variables.$white;
+  animation: spin 1s linear infinite;
+}
+
+.spinnerWhite::after {
+  animation-delay: 0.5s;
+}
+
 @keyframes spin {
   from {
     transform: rotate(0deg);

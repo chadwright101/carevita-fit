@@ -7,7 +7,7 @@ const nextConfig = {
   },
   images: {
     deviceSizes: [400, 800, 1400],
-    minimumCacheTTL: 1800,
+    minimumCacheTTL: 86400,
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [

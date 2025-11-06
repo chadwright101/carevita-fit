@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { AuthProvider } from "../_context/auth-context";
 import { LocationsProvider } from "@/_context/locations-context";
+import { TestimonialsProvider } from "@/_context/testimonials-context";
+import { StaffProvider } from "@/_context/staff-context";
 import Footer from "../_components/navigation/footer";
 import Header from "../_components/navigation/header";
 
@@ -28,11 +30,15 @@ function LayoutContent({ children }) {
   return (
     <AuthProvider>
       <LocationsProvider>
-        <Header />
-        <div className="layout__outer">
-          <div className="layout__inner">{children}</div>
-        </div>
-        <Footer />
+        <TestimonialsProvider>
+          <StaffProvider>
+            <Header />
+            <div className="layout__outer">
+              <div className="layout__inner">{children}</div>
+            </div>
+            <Footer />
+          </StaffProvider>
+        </TestimonialsProvider>
       </LocationsProvider>
     </AuthProvider>
   );

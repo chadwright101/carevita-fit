@@ -20,7 +20,7 @@ export default function Login() {
   const [error, setError] = useState(null);
   const [revealPassword, setRevealPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [validateRecaptcha, setValidateRecaptcha] = useState(false);
+  const [validateRecaptcha, setValidateRecaptcha] = useState(true);
   const router = useRouter();
 
   const handleLogin = async (e) => {
