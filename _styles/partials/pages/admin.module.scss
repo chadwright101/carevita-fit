@@ -902,44 +902,84 @@
         }
       }
 
-      &__image {
-        width: 300px;
-        height: 300px;
-        img {
+      &__image-container {
+        position: relative;
+
+        &__delete,
+        &__arrow,
+        &__edit {
+          position: absolute;
+          z-index: 10;
+          padding: 0.5rem;
+          margin: -0.5rem;
+
+          @include media.media("tabletLarge") {
+            padding: 0;
+            margin: 0;
+          }
+
+          img {
+            background-color: variables.$blue;
+            width: 2.5rem;
+            height: auto;
+            padding: 0.1rem;
+
+            @include media.media("tabletLarge") {
+              padding: 0;
+              width: 2rem;
+
+              &:hover {
+                background-color: variables.$lightBlue;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        &__delete {
+          right: 1rem;
+          top: 1rem;
+        }
+
+        &__edit {
+          right: 4.5rem;
+          top: 1rem;
+
+          @include media.media("tabletLarge") {
+            right: 3.75rem;
+          }
+
+          img {
+            padding: 6px;
+            width: 31px;
+
+            @include media.media("tabletLarge") {
+              padding: 4px;
+              width: 24px;
+            }
+          }
+        }
+
+        &__arrow {
+          right: 8rem;
+          top: 1rem;
+
+          @include media.media("tabletLarge") {
+            right: 6.5rem;
+          }
+
+          img {
+            transform: rotate(-90deg);
+          }
+        }
+
+        > img {
+          width: 300px;
+          height: 300px;
           object-fit: cover;
         }
       }
 
-      &__buttons {
-        display: grid;
-        gap: 1rem;
-        width: 100%;
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      &__buttons-first {
-        display: grid;
-        gap: 1rem;
-        width: 100%;
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      button {
-        margin-top: 1rem;
-        padding: 0.5rem 1rem;
-        background-color: variables.$blue;
-        color: variables.$white;
-        font-size: variables.$paragraph;
-
-        @include media.media("tablet") {
-          cursor: pointer;
-          &:hover {
-            background-color: variables.$lightBlue;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-            transition-duration: 300ms;
-          }
-        }
-      }
     }
   }
 }
