@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "../_context/auth-context";
 import { LocationsProvider } from "@/_context/locations-context";
 import { TestimonialsProvider } from "@/_context/testimonials-context";
@@ -37,6 +38,7 @@ function LayoutContent({ children }) {
               <div className="layout__inner">{children}</div>
             </div>
             <Footer />
+            <ToastContainer />
           </StaffProvider>
         </TestimonialsProvider>
       </LocationsProvider>

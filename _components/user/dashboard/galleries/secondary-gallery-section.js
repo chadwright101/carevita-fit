@@ -10,10 +10,10 @@ import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const SecondaryGallerySection = () => {
   const {
-    imageInfo,
-    setImageInfo,
+    secondaryImageInfo,
+    setSecondaryImageInfo,
+    galleryVersion,
     file,
-    reloadImages,
     fileInputRef,
     handleFileChange,
     uploadImage,
@@ -25,20 +25,20 @@ const SecondaryGallerySection = () => {
 
   const getSecondaryGalleryImages = useCallback(async () => {
     const newImageInfo = await getGalleryImages(secondaryGalleryStorageRef);
-    setImageInfo(newImageInfo);
-  }, [getGalleryImages, setImageInfo]);
+    setSecondaryImageInfo(newImageInfo);
+  }, [getGalleryImages, setSecondaryImageInfo]);
 
   useEffect(() => {
     getSecondaryGalleryImages();
-  }, [reloadImages, getSecondaryGalleryImages]);
+  }, [galleryVersion.secondary, getSecondaryGalleryImages]);
 
   return (
     <section className="admin-gallery">
       {isLoading ? (
         <div className={utils.spinner}></div>
-      ) : imageInfo.length !== 0 ? (
+      ) : secondaryImageInfo.length !== 0 ? (
         <ul className="admin-gallery__list">
-          {imageInfo.map(({ url, filename, timestamp }, index) => (
+          {secondaryImageInfo.map(({ url, filename, timestamp }, index) => (
             <li key={index} className="admin-gallery__list__item">
               <div
                 className="nav-point"
@@ -102,7 +102,7 @@ const SecondaryGallerySection = () => {
         </p>
       )}
 
-      {imageInfo.length < 25 && (
+      {secondaryImageInfo.length < 25 && (
         <form className="admin-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input

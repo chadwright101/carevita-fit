@@ -1,31 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { onSnapshot } from "firebase/firestore";
-import { locationsCollectionRef } from "@/_firebase/firebase";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext, useState } from "react";
 import LocationItem from "./location-item";
 import LocationEditForm from "./location-edit-form";
+import { LocationsContext } from "@/_context/locations-context";
 
 const LocationList = () => {
-  const [locations, setLocations] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { locations, isLoading } = useContext(LocationsContext);
   const [editingLocationId, setEditingLocationId] = useState(null);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(locationsCollectionRef, (snapshot) => {
-      const locationsData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      locationsData.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-      setLocations(locationsData);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleEdit = (locationId) => {
     setEditingLocationId(locationId);
@@ -45,7 +27,7 @@ const LocationList = () => {
 
   return (
     <section className="admin-locations__cities">
-      {loading ? (
+      {isLoading ? (
         <p>Loading locations...</p>
       ) : locations.length === 0 ? (
         <p>No locations added yet.</p>
@@ -74,8 +56,6 @@ const LocationList = () => {
           ))}
         </ul>
       )}
-
-      <ToastContainer />
     </section>
   );
 };

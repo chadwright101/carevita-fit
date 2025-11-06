@@ -4,12 +4,12 @@ import { doc, deleteDoc, updateDoc, addDoc } from "firebase/firestore";
 import { db, staffCollectionRef, staffStorageRef } from "@/_firebase/firebase";
 import {
   ref,
-  deleteObject,
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
 import { toast } from "react-toastify";
 import { toastProps } from "@/_lib/ToastProps";
+import { deleteImageFromStorage } from "@/_utils/firebase-storage-helpers";
 
 export const addStaffMember = async (staffData) => {
   try {
@@ -161,36 +161,5 @@ export const moveStaffToTop = async (staffId) => {
     console.error("Error updating staff order:", error);
     toast.error("Failed to reorder staff. Please try again.", toastProps);
     return false;
-  }
-};
-
-// Helper function to delete image from storage
-const deleteImageFromStorage = async (imageUrl) => {
-  try {
-    // Check if URL is valid
-    if (!imageUrl || !imageUrl.includes("firebasestorage.googleapis.com")) {
-      console.warn("Invalid image URL format:", imageUrl);
-      return;
-    }
-
-    // Extract the path from the URL
-    const fullPath = imageUrl.split(
-      "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
-    )[1];
-
-    if (fullPath) {
-      // Decode the URL-encoded path and remove query parameters
-      const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-
-      // Create a direct reference to the file in storage
-      // We use a direct reference to storage root to avoid path duplication
-      const imageRef = ref(storage, decodedPath);
-
-      // Delete the file
-      await deleteObject(imageRef);
-    }
-  } catch (error) {
-    console.error("Error deleting image:", error);
-    throw error;
   }
 };

@@ -4,12 +4,12 @@ import { doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db, storage } from "@/_firebase/firebase";
 import {
   ref,
-  deleteObject,
   uploadBytes,
   getDownloadURL,
 } from "firebase/storage";
 import { toast } from "react-toastify";
 import { toastProps } from "@/_lib/ToastProps";
+import { deleteImageFromStorage } from "@/_utils/firebase-storage-helpers";
 
 export const deleteLocation = async (locationId, image) => {
   const confirmDelete = window.confirm(
@@ -23,14 +23,7 @@ export const deleteLocation = async (locationId, image) => {
 
     if (image) {
       try {
-        const fullPath = image.split(
-          "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
-        )[1];
-        if (fullPath) {
-          const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-          const imageRef = ref(storage, decodedPath);
-          await deleteObject(imageRef);
-        }
+        await deleteImageFromStorage(image);
       } catch (error) {
         console.error("Error deleting image:", error);
       }
@@ -99,21 +92,5 @@ export const moveLocationToTop = async (locationId) => {
     console.error("Error updating location order:", error);
     toast.error("Failed to reorder location. Please try again.", toastProps);
     return false;
-  }
-};
-
-const deleteImageFromStorage = async (imageUrl) => {
-  try {
-    const fullPath = imageUrl.split(
-      "firebasestorage.googleapis.com/v0/b/carevita-fit.appspot.com/o/"
-    )[1];
-    if (fullPath) {
-      const decodedPath = decodeURIComponent(fullPath.split("?")[0]);
-      const imageRef = ref(storage, decodedPath);
-      await deleteObject(imageRef);
-    }
-  } catch (error) {
-    console.error("Error deleting image:", error);
-    throw error;
   }
 };

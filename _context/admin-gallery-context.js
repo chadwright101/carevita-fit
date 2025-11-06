@@ -12,15 +12,16 @@ import {
   getMetadata,
 } from "firebase/storage";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { toastProps } from "@/_lib/ToastProps";
 
 export const AdminGalleryContext = createContext();
 
 export const AdminGalleryProvider = ({ children }) => {
-  const [imageInfo, setImageInfo] = useState([]);
+  const [mainImageInfo, setMainImageInfo] = useState([]);
+  const [secondaryImageInfo, setSecondaryImageInfo] = useState([]);
   const [file, setFile] = useState(null);
-  const [reloadImages, setReloadImages] = useState(false);
+  const [galleryVersion, setGalleryVersion] = useState({ main: 0, secondary: 0 });
   const [isLoading, setIsLoading] = useState(false);
   const fileInputRef = useRef(null);
 
@@ -51,7 +52,7 @@ export const AdminGalleryProvider = ({ children }) => {
 
       img.src = URL.createObjectURL(selectedFile);
     },
-    [setFile]
+    []
   );
 
   const uploadImage = useCallback(
@@ -61,7 +62,6 @@ export const AdminGalleryProvider = ({ children }) => {
 
         const fileName = `${Date.now()}_${file.name}`;
         const fileRef = ref(storageRef, fileName);
-        setReloadImages(true);
 
         toast.info("Adding new image...", toastProps);
 
@@ -78,6 +78,18 @@ export const AdminGalleryProvider = ({ children }) => {
           ...toastProps,
           delay: 3000,
         });
+
+        setGalleryVersion(prev => ({
+          ...prev,
+          [galleryName]: prev[galleryName] + 1
+        }));
+
+        const element = document.getElementById(
+          `${galleryName}-gallery-image-0`
+        );
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
       } catch (error) {
         console.error("Upload Error:", error);
         toast.error(
@@ -89,19 +101,9 @@ export const AdminGalleryProvider = ({ children }) => {
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
         }
-
-        setTimeout(() => {
-          const element = document.getElementById(
-            `${galleryName}-gallery-image-0`
-          );
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-          setReloadImages(false);
-        }, 4500);
       }
     },
-    [file, fileInputRef, setReloadImages]
+    [file, fileInputRef]
   );
 
   const updateImageTimestamp = useCallback(
@@ -109,7 +111,6 @@ export const AdminGalleryProvider = ({ children }) => {
       try {
         const imageRef = ref(storageRef, filename);
         toast.info("Moving image...", toastProps);
-        setReloadImages(true);
 
         const updatedMetadata = {
           customMetadata: {
@@ -123,25 +124,27 @@ export const AdminGalleryProvider = ({ children }) => {
           ...toastProps,
           delay: 2000,
         });
+
+        setGalleryVersion(prev => ({
+          ...prev,
+          [galleryName]: prev[galleryName] + 1
+        }));
+
+        const element = document.getElementById(
+          `${galleryName}-gallery-image-0`
+        );
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
       } catch (error) {
         console.error("Timestamp Update Error:", error);
         toast.error(
           "Error! Image could not be moved. Please try again and contact the developer if the problem persists.",
           toastProps
         );
-      } finally {
-        setTimeout(() => {
-          const element = document.getElementById(
-            `${galleryName}-gallery-image-0`
-          );
-          if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-          setReloadImages(false);
-        }, 1500);
       }
     },
-    [setReloadImages]
+    []
   );
 
   const removeImage = useCallback(
@@ -173,24 +176,19 @@ export const AdminGalleryProvider = ({ children }) => {
         }
 
         if (fileExists) {
-          setReloadImages(true);
           await deleteObject(fileRef);
 
           toast.success("Success! Image deleted.", {
             ...toastProps,
             delay: 2000,
           });
-        }
-      } catch (error) {
-        console.error("Deletion Error:", error);
-        toast.error(
-          "Error! Image could not be deleted. Please try again and contact the developer if the problem persists.",
-          toastProps
-        );
-      } finally {
-        //Always
-        if (index !== undefined) {
-          setTimeout(() => {
+
+          setGalleryVersion(prev => ({
+            ...prev,
+            [galleryName]: prev[galleryName] + 1
+          }));
+
+          if (index !== undefined) {
             let elementId = `${galleryName}-gallery-image-${
               index === 0 ? "0" : index - 1
             }`;
@@ -198,12 +196,17 @@ export const AdminGalleryProvider = ({ children }) => {
             if (element) {
               element.scrollIntoView({ behavior: "smooth" });
             }
-          }, 1500);
+          }
         }
-        setReloadImages(false);
+      } catch (error) {
+        console.error("Deletion Error:", error);
+        toast.error(
+          "Error! Image could not be deleted. Please try again and contact the developer if the problem persists.",
+          toastProps
+        );
       }
     },
-    [setReloadImages]
+    []
   );
 
   const getGalleryImages = useCallback(async (storageRef) => {
@@ -229,17 +232,17 @@ export const AdminGalleryProvider = ({ children }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [setIsLoading]);
+  }, []);
 
   return (
     <AdminGalleryContext.Provider
       value={{
-        imageInfo,
-        setImageInfo,
+        mainImageInfo,
+        setMainImageInfo,
+        secondaryImageInfo,
+        setSecondaryImageInfo,
+        galleryVersion,
         file,
-        setFile,
-        reloadImages,
-        setReloadImages,
         isLoading,
         fileInputRef,
         handleFileChange,
@@ -250,7 +253,6 @@ export const AdminGalleryProvider = ({ children }) => {
       }}
     >
       {children}
-      <ToastContainer />
     </AdminGalleryContext.Provider>
   );
 };

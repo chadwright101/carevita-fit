@@ -1,8 +1,14 @@
 "use client";
 
 import { createContext, useState, useEffect } from "react";
-import { getDocs, orderBy, query } from "firebase/firestore";
+import { onSnapshot, orderBy, query } from "firebase/firestore";
 import { testimonialsCollectionRef } from "@/_firebase/firebase";
+import {
+  addTestimonial,
+  updateTestimonial,
+  deleteTestimonial,
+  updateTestimonialTimestamp,
+} from "@/_components/user/dashboard/testimonials/utils/testimonials-service";
 
 export const TestimonialsContext = createContext();
 
@@ -12,30 +18,49 @@ export const TestimonialsProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const q = query(testimonialsCollectionRef, orderBy("timestamp", "desc"));
-        const testimonialsData = await getDocs(q);
+    setIsLoading(true);
 
-        const sortedTestimonials = testimonialsData.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }));
+    const q = query(testimonialsCollectionRef, orderBy("timestamp", "desc"));
 
-        setTestimonials(sortedTestimonials);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching testimonials:", error);
+    const unsubscribe = onSnapshot(
+      q,
+      (snapshot) => {
+        try {
+          const updatedTestimonials = snapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }));
+          setTestimonials(updatedTestimonials);
+          setError(null);
+        } catch (error) {
+          console.error("Error processing testimonials:", error);
+          setError(error);
+        } finally {
+          setIsLoading(false);
+        }
+      },
+      (error) => {
+        console.error("Error listening to testimonials:", error);
         setError(error);
         setIsLoading(false);
       }
-    };
+    );
 
-    fetchTestimonials();
+    return () => unsubscribe();
   }, []);
 
   return (
-    <TestimonialsContext.Provider value={{ testimonials, isLoading, error }}>
+    <TestimonialsContext.Provider
+      value={{
+        testimonials,
+        isLoading,
+        error,
+        addTestimonial,
+        updateTestimonial,
+        deleteTestimonial,
+        updateTestimonialTimestamp,
+      }}
+    >
       {children}
     </TestimonialsContext.Provider>
   );

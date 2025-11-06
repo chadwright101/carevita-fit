@@ -1,35 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { onSnapshot } from "firebase/firestore";
-import { staffCollectionRef } from "@/_firebase/firebase";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useContext, useState } from "react";
 import StaffItem from "./staff-item";
 import StaffEditForm from "../edit-staff/edit-staff-form";
 import AddStaffForm from "../add-staff/add-staff-form";
+import { StaffContext } from "@/_context/staff-context";
 
 const StaffList = () => {
-  const [staff, setStaff] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { staff, isLoading } = useContext(StaffContext);
   const [editingStaffId, setEditingStaffId] = useState(null);
   const [showAddForm, setShowAddForm] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = onSnapshot(staffCollectionRef, (snapshot) => {
-      const staffData = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      staffData.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-
-      setStaff(staffData);
-      setLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   const handleEdit = (staffId) => {
     setEditingStaffId(staffId);
@@ -59,7 +39,7 @@ const StaffList = () => {
 
       {showAddForm && <AddStaffForm />}
       <div>
-        {loading ? (
+        {isLoading ? (
           <p>Loading staff...</p>
         ) : staff.length === 0 ? (
           <p>No staff members added yet.</p>
@@ -86,8 +66,6 @@ const StaffList = () => {
           </ul>
         )}
       </div>
-
-      <ToastContainer />
     </section>
   );
 };

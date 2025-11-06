@@ -9,10 +9,10 @@ import utils from "@/_styles/partials/utils/utils.module.scss";
 
 const MainGallerySection = () => {
   const {
-    imageInfo,
-    setImageInfo,
+    mainImageInfo,
+    setMainImageInfo,
+    galleryVersion,
     file,
-    reloadImages,
     fileInputRef,
     handleFileChange,
     uploadImage,
@@ -24,20 +24,20 @@ const MainGallerySection = () => {
 
   const getMainGalleryImages = useCallback(async () => {
     const newImageInfo = await getGalleryImages(mainGalleryStorageRef);
-    setImageInfo(newImageInfo);
-  }, [getGalleryImages, setImageInfo]);
+    setMainImageInfo(newImageInfo);
+  }, [getGalleryImages, setMainImageInfo]);
 
   useEffect(() => {
     getMainGalleryImages();
-  }, [reloadImages, getMainGalleryImages]);
+  }, [galleryVersion.main, getMainGalleryImages]);
 
   return (
     <section className="admin-gallery">
       {isLoading ? (
         <div className={utils.spinner}></div>
-      ) : imageInfo.length !== 0 ? (
+      ) : mainImageInfo.length !== 0 ? (
         <ul className="admin-gallery__list">
-          {imageInfo.map(({ url, filename, timestamp }, index) => (
+          {mainImageInfo.map(({ url, filename, timestamp }, index) => (
             <li key={index} className="admin-gallery__list__item">
               <div
                 className="nav-point"
@@ -96,7 +96,7 @@ const MainGallerySection = () => {
         </p>
       )}
 
-      {imageInfo.length < 6 && (
+      {mainImageInfo.length < 6 && (
         <form className="admin-gallery__form">
           <label htmlFor="upload">Upload new image:</label>
           <input
