@@ -16,6 +16,7 @@ const SingleProperty = ({ propertyData, eager }) => {
     image,
     description,
     staffMember,
+    timestamp,
   } = propertyData;
 
   const [instructorData, setInstructorData] = useState(null);
@@ -66,6 +67,7 @@ const SingleProperty = ({ propertyData, eager }) => {
           eager={eager}
           smallest={95}
           desktopSmall={50}
+          timestamp={timestamp}
         />
       </div>
       <div className="property-component__description">
@@ -80,6 +82,7 @@ const SingleProperty = ({ propertyData, eager }) => {
                 eager={eager}
                 smallest={30}
                 tabletLarge={30}
+                timestamp={instructorData.timestamp}
               />
             </Link>
           </div>

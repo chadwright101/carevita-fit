@@ -52,7 +52,7 @@ const MeetTheTeam = () => {
         <ul className="team-section__list">
           {instructors
             .filter(({ bio }) => bio && bio.trim() !== "")
-            .map(({ name, image, bio, id }) => (
+            .map(({ name, image, bio, id, timestamp }) => (
               <li className="team-section__list-item" key={id}>
                 <div className="nav-point" id={name.toLowerCase()}></div>
                 <ImageContainer
@@ -65,6 +65,7 @@ const MeetTheTeam = () => {
                   desktopSmall={40}
                   desktop={30}
                   cssClasses="team-section__image"
+                  timestamp={timestamp}
                 />
                 <h4>{name}</h4>
                 <p>{bio}</p>
