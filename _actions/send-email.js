@@ -6,8 +6,6 @@ import { emailTemplateHtml } from "../_lib/EmailTemplateHtml";
 import express from "express";
 import rateLimit from "express-rate-limit";
 
-import { sanitize } from "isomorphic-dompurify";
-
 const app = express();
 
 const formLimiter = rateLimit({
@@ -24,11 +22,18 @@ export async function sendEmail(formData) {
 
   try {
     if (honey === null) {
-      const name = sanitize(formData.get("name"));
-      const phone = sanitize(formData.get("phone"));
-      const property = sanitize(formData.get("property"));
-      const email = sanitize(formData.get("email"));
-      const message = sanitize(formData.get("message"));
+      const name = formData.get("name");
+      const phone = formData.get("phone");
+      const property = formData.get("property");
+      const email = formData.get("email");
+      const message = formData.get("message");
+
+      if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS || !process.env.SMTP_SEND_FROM || !process.env.SMTP_SEND_TO) {
+        return {
+          success: false,
+          error: "Email service is not properly configured. Please try again later."
+        };
+      }
 
       const emailHtmlContent = emailTemplateHtml({
         name,
@@ -57,11 +62,20 @@ export async function sendEmail(formData) {
       };
 
       await transporter.sendMail(mailOptions);
+      return { success: true };
     } else {
       console.error("Invalid form submission due to non-empty honeypot field");
+      return {
+        success: false,
+        error: "Form submission failed validation. Please try again."
+      };
     }
   } catch (error) {
     console.error(error);
+    return {
+      success: false,
+      error: "Failed to send email. Please try again later."
+    };
   }
 }
 

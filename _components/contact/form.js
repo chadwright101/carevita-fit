@@ -14,6 +14,7 @@ const Form = () => {
   const [submissionStartTime, setSubmissionStartTime] = useState();
   const [validateRecaptcha, setValidateRecaptcha] = useState(false);
   const [showEmailSubmitted, setShowEmailSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const ref = useRef(null);
 
   useEffect(() => {
@@ -72,10 +73,15 @@ const Form = () => {
             ref={ref}
             className="contact-form-container__form"
             action={async (formData) => {
-              await sendEmail(formData);
-              ref.current.reset();
-              setShowEmailSubmitted(true);
-              setShowMessage(false);
+              const result = await sendEmail(formData);
+              if (result.success) {
+                ref.current.reset();
+                setShowEmailSubmitted(true);
+                setShowMessage(false);
+                setErrorMessage(null);
+              } else {
+                setErrorMessage(result.error);
+              }
             }}
           >
             <input type="text" name="_honey" className="hidden" />
@@ -91,6 +97,11 @@ const Form = () => {
                 minLength="2"
               />
             </div>
+            {errorMessage && (
+              <div style={{ color: "#e74c3c", marginBottom: "1rem" }}>
+                {errorMessage}
+              </div>
+            )}
             {showMessage && validateRecaptcha && (
               <>
                 <div className="contact-form-container__form__group">
